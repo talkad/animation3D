@@ -1,0 +1,14 @@
+# Target labels
+ glfw-download
+# Source files and their labels
+C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/glfw/CMakeFiles/glfw-download
+C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/glfw/CMakeFiles/7958b1678dce13b96726359ff525b1c9/glfw-download.rule
+C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/glfw/CMakeFiles/cfc240ab4c5f837b0b61262ae9c04707/glfw-download-complete.rule
+C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/glfw/CMakeFiles/6985db69ee710001e0eacec562154a4c/glfw-download-build.rule
+C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/glfw/CMakeFiles/6985db69ee710001e0eacec562154a4c/glfw-download-configure.rule
+C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/glfw/CMakeFiles/6985db69ee710001e0eacec562154a4c/glfw-download-download.rule
+C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/glfw/CMakeFiles/6985db69ee710001e0eacec562154a4c/glfw-download-install.rule
+C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/glfw/CMakeFiles/6985db69ee710001e0eacec562154a4c/glfw-download-mkdir.rule
+C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/glfw/CMakeFiles/6985db69ee710001e0eacec562154a4c/glfw-download-patch.rule
+C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/glfw/CMakeFiles/6985db69ee710001e0eacec562154a4c/glfw-download-test.rule
+C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/glfw/CMakeFiles/6985db69ee710001e0eacec562154a4c/glfw-download-update.rule

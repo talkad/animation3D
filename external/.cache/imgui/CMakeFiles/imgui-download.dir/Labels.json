@@ -1,0 +1,46 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/imgui/CMakeFiles/imgui-download"
+		},
+		{
+			"file" : "C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/imgui/CMakeFiles/081aa4dc07f26a21c9f5e7de61220dac/imgui-download.rule"
+		},
+		{
+			"file" : "C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/imgui/CMakeFiles/a7d952d46d5253dc9c2febc1593e85ff/imgui-download-complete.rule"
+		},
+		{
+			"file" : "C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/imgui/CMakeFiles/c2d29e01b314fb5843f55475a940bbe2/imgui-download-build.rule"
+		},
+		{
+			"file" : "C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/imgui/CMakeFiles/c2d29e01b314fb5843f55475a940bbe2/imgui-download-configure.rule"
+		},
+		{
+			"file" : "C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/imgui/CMakeFiles/c2d29e01b314fb5843f55475a940bbe2/imgui-download-download.rule"
+		},
+		{
+			"file" : "C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/imgui/CMakeFiles/c2d29e01b314fb5843f55475a940bbe2/imgui-download-install.rule"
+		},
+		{
+			"file" : "C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/imgui/CMakeFiles/c2d29e01b314fb5843f55475a940bbe2/imgui-download-mkdir.rule"
+		},
+		{
+			"file" : "C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/imgui/CMakeFiles/c2d29e01b314fb5843f55475a940bbe2/imgui-download-patch.rule"
+		},
+		{
+			"file" : "C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/imgui/CMakeFiles/c2d29e01b314fb5843f55475a940bbe2/imgui-download-test.rule"
+		},
+		{
+			"file" : "C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/imgui/CMakeFiles/c2d29e01b314fb5843f55475a940bbe2/imgui-download-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"imgui-download"
+		],
+		"name" : "imgui-download"
+	}
+}

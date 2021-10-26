@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\tal74\animation\EngineForAnimationCourse\external\.cache\glfw\CMakeFiles\6985db69ee710001e0eacec562154a4c\glfw-download-mkdir.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\tal74\animation\EngineForAnimationCourse\external\.cache\glfw\CMakeFiles\6985db69ee710001e0eacec562154a4c\glfw-download-download.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\tal74\animation\EngineForAnimationCourse\external\.cache\glfw\CMakeFiles\6985db69ee710001e0eacec562154a4c\glfw-download-update.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\tal74\animation\EngineForAnimationCourse\external\.cache\glfw\CMakeFiles\6985db69ee710001e0eacec562154a4c\glfw-download-patch.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\tal74\animation\EngineForAnimationCourse\external\.cache\glfw\CMakeFiles\6985db69ee710001e0eacec562154a4c\glfw-download-configure.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\tal74\animation\EngineForAnimationCourse\external\.cache\glfw\CMakeFiles\6985db69ee710001e0eacec562154a4c\glfw-download-build.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\tal74\animation\EngineForAnimationCourse\external\.cache\glfw\CMakeFiles\6985db69ee710001e0eacec562154a4c\glfw-download-install.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\tal74\animation\EngineForAnimationCourse\external\.cache\glfw\CMakeFiles\6985db69ee710001e0eacec562154a4c\glfw-download-test.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\tal74\animation\EngineForAnimationCourse\external\.cache\glfw\CMakeFiles\cfc240ab4c5f837b0b61262ae9c04707\glfw-download-complete.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\tal74\animation\EngineForAnimationCourse\external\.cache\glfw\CMakeFiles\7958b1678dce13b96726359ff525b1c9\glfw-download.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\tal74\animation\EngineForAnimationCourse\external\.cache\glfw\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Users\tal74\animation\EngineForAnimationCourse\external\.cache\glfw\CMakeFiles\glfw-download" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{E9BECDA0-3BC6-377F-88E7-80DB54937A83}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

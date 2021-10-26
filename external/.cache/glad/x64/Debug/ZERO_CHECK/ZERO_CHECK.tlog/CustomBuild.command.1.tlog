@@ -1,0 +1,10 @@
+^C:\USERS\TAL74\ANIMATION\ENGINEFORANIMATIONCOURSE\EXTERNAL\.CACHE\GLAD\CMAKEFILES\4A0A73B66E18298634473320B158EC92\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/glad -BC:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/glad --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/glad/glad-download.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

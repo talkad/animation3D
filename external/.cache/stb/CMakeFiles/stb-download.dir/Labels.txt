@@ -1,0 +1,14 @@
+# Target labels
+ stb-download
+# Source files and their labels
+C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/stb/CMakeFiles/stb-download
+C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/stb/CMakeFiles/30825bd07bf38df1a34def3c8bba8457/stb-download.rule
+C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/stb/CMakeFiles/0a8a01f5dda2c3bb552eb3c3cddff7fc/stb-download-complete.rule
+C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/stb/CMakeFiles/6d6502d37d455f57f76564c039a49105/stb-download-build.rule
+C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/stb/CMakeFiles/6d6502d37d455f57f76564c039a49105/stb-download-configure.rule
+C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/stb/CMakeFiles/6d6502d37d455f57f76564c039a49105/stb-download-download.rule
+C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/stb/CMakeFiles/6d6502d37d455f57f76564c039a49105/stb-download-install.rule
+C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/stb/CMakeFiles/6d6502d37d455f57f76564c039a49105/stb-download-mkdir.rule
+C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/stb/CMakeFiles/6d6502d37d455f57f76564c039a49105/stb-download-patch.rule
+C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/stb/CMakeFiles/6d6502d37d455f57f76564c039a49105/stb-download-test.rule
+C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/stb/CMakeFiles/6d6502d37d455f57f76564c039a49105/stb-download-update.rule

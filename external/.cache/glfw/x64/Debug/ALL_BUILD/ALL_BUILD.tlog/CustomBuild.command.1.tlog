@@ -1,0 +1,10 @@
+^C:\USERS\TAL74\ANIMATION\ENGINEFORANIMATIONCOURSE\EXTERNAL\.CACHE\GLFW\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/glfw -BC:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/glfw --check-stamp-file C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/glfw/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

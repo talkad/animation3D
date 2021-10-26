@@ -1,0 +1,14 @@
+# Target labels
+ libigl-imgui-download
+# Source files and their labels
+C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/libigl-imgui/CMakeFiles/libigl-imgui-download
+C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/libigl-imgui/CMakeFiles/04b0f56309bb20ef01cbf718ec49a5f1/libigl-imgui-download.rule
+C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/libigl-imgui/CMakeFiles/09c8ce3a12f7afa2219b44a0e8b2c010/libigl-imgui-download-complete.rule
+C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/libigl-imgui/CMakeFiles/b79594ad5c98c490fb87fa555072abc3/libigl-imgui-download-build.rule
+C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/libigl-imgui/CMakeFiles/b79594ad5c98c490fb87fa555072abc3/libigl-imgui-download-configure.rule
+C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/libigl-imgui/CMakeFiles/b79594ad5c98c490fb87fa555072abc3/libigl-imgui-download-download.rule
+C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/libigl-imgui/CMakeFiles/b79594ad5c98c490fb87fa555072abc3/libigl-imgui-download-install.rule
+C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/libigl-imgui/CMakeFiles/b79594ad5c98c490fb87fa555072abc3/libigl-imgui-download-mkdir.rule
+C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/libigl-imgui/CMakeFiles/b79594ad5c98c490fb87fa555072abc3/libigl-imgui-download-patch.rule
+C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/libigl-imgui/CMakeFiles/b79594ad5c98c490fb87fa555072abc3/libigl-imgui-download-test.rule
+C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/libigl-imgui/CMakeFiles/b79594ad5c98c490fb87fa555072abc3/libigl-imgui-download-update.rule

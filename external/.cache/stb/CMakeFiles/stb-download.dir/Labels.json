@@ -1,0 +1,46 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/stb/CMakeFiles/stb-download"
+		},
+		{
+			"file" : "C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/stb/CMakeFiles/30825bd07bf38df1a34def3c8bba8457/stb-download.rule"
+		},
+		{
+			"file" : "C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/stb/CMakeFiles/0a8a01f5dda2c3bb552eb3c3cddff7fc/stb-download-complete.rule"
+		},
+		{
+			"file" : "C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/stb/CMakeFiles/6d6502d37d455f57f76564c039a49105/stb-download-build.rule"
+		},
+		{
+			"file" : "C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/stb/CMakeFiles/6d6502d37d455f57f76564c039a49105/stb-download-configure.rule"
+		},
+		{
+			"file" : "C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/stb/CMakeFiles/6d6502d37d455f57f76564c039a49105/stb-download-download.rule"
+		},
+		{
+			"file" : "C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/stb/CMakeFiles/6d6502d37d455f57f76564c039a49105/stb-download-install.rule"
+		},
+		{
+			"file" : "C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/stb/CMakeFiles/6d6502d37d455f57f76564c039a49105/stb-download-mkdir.rule"
+		},
+		{
+			"file" : "C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/stb/CMakeFiles/6d6502d37d455f57f76564c039a49105/stb-download-patch.rule"
+		},
+		{
+			"file" : "C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/stb/CMakeFiles/6d6502d37d455f57f76564c039a49105/stb-download-test.rule"
+		},
+		{
+			"file" : "C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/stb/CMakeFiles/6d6502d37d455f57f76564c039a49105/stb-download-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"stb-download"
+		],
+		"name" : "stb-download"
+	}
+}

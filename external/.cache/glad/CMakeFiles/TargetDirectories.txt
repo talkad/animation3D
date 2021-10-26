@@ -1,0 +1,3 @@
+C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/glad/CMakeFiles/glad-download.dir
+C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/glad/CMakeFiles/ALL_BUILD.dir
+C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/glad/CMakeFiles/ZERO_CHECK.dir

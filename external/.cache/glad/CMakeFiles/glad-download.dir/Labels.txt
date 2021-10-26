@@ -1,0 +1,14 @@
+# Target labels
+ glad-download
+# Source files and their labels
+C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/glad/CMakeFiles/glad-download
+C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/glad/CMakeFiles/4a0a73b66e18298634473320b158ec92/glad-download.rule
+C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/glad/CMakeFiles/fe404dcd4e8f93d2b14eb82d7abe0bd1/glad-download-complete.rule
+C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/glad/CMakeFiles/2bc36ce3f7433b59e3549322f464155c/glad-download-build.rule
+C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/glad/CMakeFiles/2bc36ce3f7433b59e3549322f464155c/glad-download-configure.rule
+C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/glad/CMakeFiles/2bc36ce3f7433b59e3549322f464155c/glad-download-download.rule
+C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/glad/CMakeFiles/2bc36ce3f7433b59e3549322f464155c/glad-download-install.rule
+C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/glad/CMakeFiles/2bc36ce3f7433b59e3549322f464155c/glad-download-mkdir.rule
+C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/glad/CMakeFiles/2bc36ce3f7433b59e3549322f464155c/glad-download-patch.rule
+C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/glad/CMakeFiles/2bc36ce3f7433b59e3549322f464155c/glad-download-test.rule
+C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/glad/CMakeFiles/2bc36ce3f7433b59e3549322f464155c/glad-download-update.rule
