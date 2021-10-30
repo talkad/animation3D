@@ -29,15 +29,16 @@ void SandBox::Init(const std::string &config)
 		{
 			std::cout << "openning " << item_name << std::endl;
 			load_mesh_from_file(item_name);
-			
+
 			parents.push_back(-1);
 			data().add_points(Eigen::RowVector3d(0, 0, 0), Eigen::RowVector3d(0, 0, 1));
 			data().show_overlay_depth = false;
 			data().point_size = 10;
 			data().line_width = 2;
 			data().set_visible(false, 1);
+			data().SetCenterOfRotaion(Eigen::Vector3d(1, 0, 0));
 
-			
+
 		}
 		nameFileout.close();
 	}

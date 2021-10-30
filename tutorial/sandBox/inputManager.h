@@ -99,6 +99,7 @@ void glfw_window_size(GLFWwindow* window, int width, int height)
 
 static void glfw_key_callback(GLFWwindow* window, int key, int scancode, int action, int modifier)
 {
+	Eigen::Vector3d tmp;
 	Renderer* rndr = (Renderer*) glfwGetWindowUserPointer(window);
 	SandBox* scn = (SandBox*)rndr->GetScene();
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
@@ -107,6 +108,13 @@ static void glfw_key_callback(GLFWwindow* window, int key, int scancode, int act
 	else if(action == GLFW_PRESS || action == GLFW_REPEAT)
 		switch (key)
 		{
+		case GLFW_KEY_C:
+		{
+			tmp = (scn->MakeTransd().inverse() * Eigen::Vector4d(0, 0, 0, 1)).head<3>();
+			scn->data().SetCenterOfRotaion(tmp);
+			break;
+		}
+
 		case 'A':
 		case 'a':
 		{
