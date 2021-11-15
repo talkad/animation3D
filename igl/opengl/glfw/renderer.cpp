@@ -165,8 +165,8 @@ void Renderer::MouseProcessing(int button)
 		else
 		{
 
-			scn->data().MyRotate(Eigen::Vector3d(1, 0, 0), -yrel / 180.0);
-			scn->data().MyRotate(Eigen::Vector3d(0, 1, 0), -xrel / 180.0);
+			scn->data().RotateInSystem(Eigen::Vector3d(1, 0, 0), yrel / 180.0);
+			scn->data().RotateInSystem(Eigen::Vector3d(0, 1, 0), xrel / 180.0);
 
 		}
 	}
@@ -186,8 +186,8 @@ void Renderer::MouseProcessing(int button)
 		}
 		else
 		{
-			scn->MyRotate(Eigen::Vector3d(1, 0, 0), -yrel / 180.0);
-			scn->MyRotate(Eigen::Vector3d(0, 1, 0), -xrel / 180.0);
+			scn->MyRotate(Eigen::Vector3d(1, 0, 0), yrel / 100.0);
+			scn->MyRotate(Eigen::Vector3d(0, 1, 0), xrel / 100.0);
 
 			/*scn->MyRotate(scn->MakeTransd().block<3, 3>(0, 0));
 			scn->MyRotate(scn->MakeTransd().block<3, 3>(0, 0));*/

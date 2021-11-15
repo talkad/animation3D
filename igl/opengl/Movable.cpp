@@ -54,6 +54,13 @@ void Movable::MyScale(Eigen::Vector3d amt)
 	Tin.scale(amt);
 }
 
+void Movable::RotateInSystem(Eigen::Vector3d rotAxis, double angle)
+{
+	Tout.rotate(Eigen::AngleAxisd(angle, Tout.rotation().transpose() *
+		rotAxis.normalized())); //we will multiply the vector with the rotate matrix
+
+}
+
 
 
 

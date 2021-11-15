@@ -35,7 +35,7 @@ static void glfw_mouse_press(GLFWwindow* window, int button, int action, int mod
 		  }
 	  }
 	  scn->selected_data_index = savedIndx;
-	  scn->data().set_colors(Eigen::RowVector3d(0.1, 0.1, 0.9));
+	  scn->data().set_colors(Eigen::RowVector3d(0.2, 0.7, 0.8));
 	  if (lastIndx != savedIndx)
 		  scn->data_list[lastIndx].set_colors(Eigen::RowVector3d(255.0 / 255.0, 228.0 / 255.0, 58.0 / 255.0));
 
