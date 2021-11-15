@@ -14,7 +14,7 @@ Movable::Movable(const Movable& mov)
 
 Eigen::Matrix4f Movable::MakeTransScale()
 {
-	return (Tout.matrix()*Tin.matrix()).cast<float>();
+	return (Tout.matrix() * Tin.matrix()).cast<float>();
 }
 
 Eigen::Matrix4d Movable::MakeTransScaled()
@@ -32,8 +32,8 @@ Eigen::Matrix4d Movable::MakeTransd()
 
 void Movable::MyTranslate(Eigen::Vector3d amt, bool preRotation)
 {
-	
-	if(preRotation)
+
+	if (preRotation)
 		Tout.pretranslate(amt);
 	else
 		Tout.translate(amt);
@@ -52,6 +52,18 @@ void Movable::MyRotate(const Eigen::Matrix3d& rot)
 void Movable::MyScale(Eigen::Vector3d amt)
 {
 	Tin.scale(amt);
+}
+
+void Movable::SetCenterOfRotation(Eigen::Vector3d amt)
+{
+	Tout.pretranslate(amt);
+	Tin.pretranslate(-amt);
+
+}
+
+void Movable::MyTranslateInSystem(Eigen::Matrix3d rot, Eigen::Vector3d amt)
+{
+	Tout.pretranslate(rot.transpose() * amt);
 }
 
 void Movable::RotateInSystem(Eigen::Vector3d rotAxis, double angle)
