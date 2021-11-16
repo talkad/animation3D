@@ -29,12 +29,15 @@
 // See this thread for a more detailed discussion:
 // https://github.com/libigl/libigl/pull/1029
 //
+
+
 namespace igl
 {
 
 // TODO: write documentation
 namespace opengl
 {
+    typedef std::set<std::pair<double, int> > PriorityQueue;
 
 // Forward declaration
 //class ViewerCore;
@@ -148,6 +151,15 @@ public:
 
   // Copy visualization options from one viewport to another
   //IGL_INLINE void copy_options(const ViewerCore &from, const ViewerCore &to);
+
+  // variables for edge_flaps
+  Eigen::MatrixXi E;    // edges <index of source vertex, index of destination vertex>
+  Eigen::VectorXi EMAP; // connects faces to edges
+  Eigen::MatrixXi EF;   // connects edges to faces
+  Eigen::MatrixXi EI;   // connects edge to vertex index in triangle (0,1,2)
+  PriorityQueue* Q;     //  priority queue containing cost for every edge
+  Eigen::MatrixXd C;    //  position of the new vertex after collapsing the corresponding edge (in model coordinates).
+
 
   Eigen::MatrixXd V; // Vertices of the current mesh (#V x 3)
   Eigen::MatrixXi F; // Faces of the mesh (#F x 3)

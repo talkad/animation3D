@@ -105,9 +105,9 @@ namespace glfw
   }
 
   IGL_INLINE bool Viewer::load_mesh_from_file(
-      const std::string & mesh_file_name_string)
+      const std::string &mesh_file_name_string)
   {
-
+    // to do init viewer 
     // Create new data slot and set to selected
     if(!(data().F.rows() == 0  && data().V.rows() == 0))
     {
