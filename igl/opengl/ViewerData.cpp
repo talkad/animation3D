@@ -17,6 +17,7 @@
 #include <iostream>
 //#include "external/stb/igl_stb_image.h"
 
+
 IGL_INLINE igl::opengl::ViewerData::ViewerData()
 : dirty(MeshGL::DIRTY_ALL),
   show_faces(true),

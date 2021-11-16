@@ -59,6 +59,7 @@ namespace glfw
     virtual ~Viewer();
     // Mesh IO
     IGL_INLINE bool load_mesh_from_file(const std::string & mesh_file_name);
+    IGL_INLINE bool init_mesh();
     IGL_INLINE bool save_mesh_to_file(const std::string & mesh_file_name);
    
     // Scene IO

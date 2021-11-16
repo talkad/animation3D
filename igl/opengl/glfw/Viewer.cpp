@@ -42,6 +42,11 @@
 #include <igl/unproject.h>
 #include <igl/serialize.h>
 
+
+#include <igl/edge_flaps.h>
+#include <igl/shortest_edge_and_midpoint.h>
+
+
 // Internal global variables used for glfw event handling
 //static igl::opengl::glfw::Viewer * __viewer;
 static double highdpi = 1;
@@ -55,6 +60,8 @@ namespace opengl
 {
 namespace glfw
 {
+
+  typedef std::set<std::pair<double, int> > PriorityQueue;
 
   void Viewer::Init(const std::string config)
   {
@@ -107,7 +114,6 @@ namespace glfw
   IGL_INLINE bool Viewer::load_mesh_from_file(
       const std::string &mesh_file_name_string)
   {
-    // to do init viewer 
     // Create new data slot and set to selected
     if(!(data().F.rows() == 0  && data().V.rows() == 0))
     {
@@ -176,12 +182,57 @@ namespace glfw
       data().grid_texture();
     }
     
-
     //for (unsigned int i = 0; i<plugins.size(); ++i)
     //  if (plugins[i]->post_load())
     //    return true;
 
+    data().V_clone = data().V;
+    data().F_clone = data().F;
+    init_mesh(); // initiationg the data structure
+
     return true;
+  }
+
+  IGL_INLINE bool Viewer::init_mesh()
+  {
+      Eigen::MatrixXi F = data().F_clone;
+      Eigen::MatrixXd V = data().V_clone;
+      Eigen::VectorXi EMAP;
+      Eigen::MatrixXi E, EF, EI;
+      Eigen::MatrixXd C;
+      PriorityQueue* Q = new PriorityQueue();
+
+      std::vector<PriorityQueue::iterator >* Q_iterator = new std::vector<PriorityQueue::iterator>;
+      int edge_col_num = 0;
+      edge_flaps(F, E, EMAP, EF, EI); 
+      Q_iterator->resize(E.rows());
+
+      C.resize(E.rows(), V.cols());
+      Eigen::VectorXd costs(E.rows());
+      Q->clear();
+
+      for (int e = 0; e < E.rows(); e++)
+      {
+          double cost = e;
+          Eigen::RowVectorXd p(1, 3);
+
+          shortest_edge_and_midpoint(e, V, F, E, EMAP, EF, EI, cost, p);
+
+          C.row(e) = p;
+          (*Q_iterator)[e] = Q->insert(std::pair<double, int>(cost, e)).first;
+      }
+
+      data().edge_col_num = edge_col_num;
+      data().E = E;
+      data().EF = EF;
+      data().EI = EI;
+      data().EMAP = EMAP;
+      data().Q = Q;
+      data().Q_iterator = Q_iterator;
+      data().C = C;
+      data().set_mesh(V, F);
+
+      return true;
   }
 
   IGL_INLINE bool Viewer::save_mesh_to_file(

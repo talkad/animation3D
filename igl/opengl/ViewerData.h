@@ -37,7 +37,6 @@ namespace igl
 // TODO: write documentation
 namespace opengl
 {
-    typedef std::set<std::pair<double, int> > PriorityQueue;
 
 // Forward declaration
 //class ViewerCore;
@@ -45,6 +44,9 @@ namespace opengl
 class ViewerData : public Movable
 {
 public:
+
+  typedef std::set<std::pair<double, int> > PriorityQueue;
+
   ViewerData();
   
   // Empty all fields
@@ -160,9 +162,12 @@ public:
   PriorityQueue* Q;     //  priority queue containing cost for every edge
   Eigen::MatrixXd C;    //  position of the new vertex after collapsing the corresponding edge (in model coordinates).
 
+  int edge_col_num;     // num of edges collapased by the decimation algorithm
+  std::vector<PriorityQueue::iterator >* Q_iterator;  // iterate over the edges
 
-  Eigen::MatrixXd V; // Vertices of the current mesh (#V x 3)
-  Eigen::MatrixXi F; // Faces of the mesh (#F x 3)
+
+  Eigen::MatrixXd V, V_clone; // Vertices of the current mesh (#V x 3)
+  Eigen::MatrixXi F, F_clone; // Faces of the mesh (#F x 3)
 
   // Per face attributes
   Eigen::MatrixXd F_normals; // One normal per face
