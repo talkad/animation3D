@@ -16,7 +16,7 @@
 //#include <Eigen/Core>
 #include <memory>
 #include <vector>
-
+#include <set>
 
 // Alec: This is a mesh class containing a variety of data types (normals,
 // overlays, material colors, etc.)
@@ -46,6 +46,10 @@ class ViewerData : public Movable
 public:
 
   typedef std::set<std::pair<double, int> > PriorityQueue;
+
+  IGL_INLINE bool init_mesh();
+
+  IGL_INLINE void Simplification(int num_of_faces);
 
   ViewerData();
   

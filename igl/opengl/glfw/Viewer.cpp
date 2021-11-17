@@ -188,11 +188,12 @@ namespace glfw
 
     data().V_clone = data().V;
     data().F_clone = data().F;
-    init_mesh(); // initiationg the data structure
+    data().init_mesh();      // initiationg the data structure
 
     return true;
   }
 
+  /*
   IGL_INLINE bool Viewer::init_mesh()
   {
       Eigen::MatrixXi F = data().F_clone;
@@ -211,15 +212,15 @@ namespace glfw
       Eigen::VectorXd costs(E.rows());
       Q->clear();
 
-      for (int e = 0; e < E.rows(); e++)
+      for (int i = 0; i < E.rows(); i++)
       {
-          double cost = e;
+          double cost = i;  // we need it?
           Eigen::RowVectorXd p(1, 3);
 
-          shortest_edge_and_midpoint(e, V, F, E, EMAP, EF, EI, cost, p);
+          shortest_edge_and_midpoint(i, V, F, E, EMAP, EF, EI, cost, p);
 
-          C.row(e) = p;
-          (*Q_iterator)[e] = Q->insert(std::pair<double, int>(cost, e)).first;
+          C.row(i) = p;
+          (*Q_iterator)[i] = Q->insert(std::pair<double, int>(cost, i)).first;
       }
 
       data().edge_col_num = edge_col_num;
@@ -234,6 +235,7 @@ namespace glfw
 
       return true;
   }
+  */
 
   IGL_INLINE bool Viewer::save_mesh_to_file(
       const std::string & mesh_file_name_string)

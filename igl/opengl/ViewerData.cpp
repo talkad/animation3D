@@ -18,6 +18,72 @@
 //#include "external/stb/igl_stb_image.h"
 
 
+#include <igl/edge_flaps.h>
+#include <igl/shortest_edge_and_midpoint.h>
+#include <igl/collapse_edge.h>
+
+
+IGL_INLINE bool igl::opengl::ViewerData::init_mesh()
+{
+    F_clone = F;
+    V_clone = V;
+    Q = new PriorityQueue;
+    Q_iterator = new std::vector<PriorityQueue::iterator>;
+    int edge_col_num = 0;
+
+    edge_flaps(F, E, EMAP, EF, EI);
+    Q_iterator->resize(E.rows());
+
+    C.resize(E.rows(), V.cols());
+    Eigen::VectorXd costs(E.rows());
+    Q->clear();
+
+    for (int i = 0; i < E.rows(); i++)
+    {
+        double cost = i;  // we need it?
+        Eigen::RowVectorXd p(1, 3);
+
+        shortest_edge_and_midpoint(i, V, F, E, EMAP, EF, EI, cost, p);
+
+        C.row(i) = p;
+        (*Q_iterator)[i] = Q->insert(std::pair<double, int>(cost, i)).first;
+    }
+
+    set_mesh(V, F);
+
+    return true;
+}
+
+
+IGL_INLINE void igl::opengl::ViewerData::Simplification(int num_of_faces) {
+
+    //f. Prints the number of the collapse edge, its cost and the position of the new vertex ollowing
+
+    bool is_collapsed = false;
+
+    for (int j = 0; j < num_of_faces; j++)
+    {
+        if (!collapse_edge(shortest_edge_and_midpoint, V, F, E, EMAP, EF, EI, *Q, *Q_iterator, C))
+        {
+            break;
+        }
+
+        is_collapsed = true;
+        edge_col_num++;
+    }
+
+    if (is_collapsed)
+    {
+        Eigen::MatrixXd new_V = V;
+        Eigen::MatrixXi new_F = F;
+
+        clear();
+        set_mesh(new_V, new_F);
+        set_face_based(true);
+        dirty = 157;
+    }
+}
+
 IGL_INLINE igl::opengl::ViewerData::ViewerData()
 : dirty(MeshGL::DIRTY_ALL),
   show_faces(true),
