@@ -51,8 +51,39 @@ public:
 
   IGL_INLINE void Simplification(int num_of_faces);
 
-  IGL_INLINE void Q_error_vertex();
+  IGL_INLINE void Quadratic_error_vertex();
 
+  IGL_INLINE bool igl::opengl::ViewerData::new_collapse_edge(
+      const std::function<void(
+          const int,
+          const Eigen::MatrixXd&,
+          const Eigen::MatrixXi&,
+          const Eigen::MatrixXi&,
+          const Eigen::VectorXi&,
+          const Eigen::MatrixXi&,
+          const Eigen::MatrixXi&,
+          double&,
+          Eigen::RowVectorXd&)>& cost_and_placement,
+      Eigen::MatrixXd& V,
+      Eigen::MatrixXi& F,
+      Eigen::MatrixXi& E,
+      Eigen::VectorXi& EMAP,
+      Eigen::MatrixXi& EF,
+      Eigen::MatrixXi& EI,
+      std::set<std::pair<double, int> >& Q,
+      std::vector<std::set<std::pair<double, int> >::iterator >& Qit,
+      Eigen::MatrixXd& C);
+
+  IGL_INLINE void igl::opengl::ViewerData::new_cost_and_placement(
+      const int e,
+      const Eigen::MatrixXd& V,
+      const Eigen::MatrixXi& /*F*/,
+      const Eigen::MatrixXi& E,
+      const Eigen::VectorXi& /*EMAP*/,
+      const Eigen::MatrixXi& /*EF*/,
+      const Eigen::MatrixXi& /*EI*/,
+      double& cost,
+      Eigen::RowVectorXd& p);
 
   ViewerData();
   

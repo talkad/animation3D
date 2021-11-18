@@ -27,8 +27,8 @@ IGL_INLINE bool igl::opengl::ViewerData::init_mesh()
 {
     F_clone = F;
     V_clone = V;
-    Q = new PriorityQueue;
-    Q_iterator = new std::vector<PriorityQueue::iterator>;
+    Q = new PriorityQueue();
+    Q_iterator = new std::vector<PriorityQueue::iterator>();
     edge_col_num = 0;
 
     edge_flaps(F, E, EMAP, EF, EI);
@@ -40,7 +40,7 @@ IGL_INLINE bool igl::opengl::ViewerData::init_mesh()
 
     for (int i = 0; i < E.rows(); i++)
     {
-        double cost = i;  // we need it?
+        double cost = 0;
         Eigen::RowVectorXd p(1, 3);
 
         shortest_edge_and_midpoint(i, V, F, E, EMAP, EF, EI, cost, p);
@@ -63,7 +63,7 @@ IGL_INLINE void igl::opengl::ViewerData::Simplification(int num_of_faces) {
 
     for (int j = 0; j < num_of_faces; j++)
     {
-        if (!collapse_edge(shortest_edge_and_midpoint, V, F, E, EMAP, EF, EI, *Q, *Q_iterator, C))
+        if (!new_collapse_edge(new_cost_and_placement, V, F, E, EMAP, EF, EI, *Q, *Q_iterator, C))
         {
             break;
         }
@@ -85,7 +85,7 @@ IGL_INLINE void igl::opengl::ViewerData::Simplification(int num_of_faces) {
 }
 
 
-IGL_INLINE void igl::opengl::ViewerData::Q_error_vertex() {
+IGL_INLINE void igl::opengl::ViewerData::Quadratic_error_vertex() {
 
     Eigen::MatrixXd V = V_clone;
     Eigen::MatrixXi F = F_clone;
@@ -97,7 +97,7 @@ IGL_INLINE void igl::opengl::ViewerData::Q_error_vertex() {
     for (int vi = 0; vi < V.rows(); vi++) {
 
         std::vector<int> faces;
-        Q_error[vi] = Eigen::Matrix4d::Zero();//initializing Quads with 0 matrix before giving values
+        Q_error[vi] = Eigen::Matrix4d::Zero(); //initializing quadratic error for each vertex with zero
 
         for (int fi = 0; fi < VF[vi].size(); fi++) {
             Eigen::Vector3d norm = F_normals.row(VF[vi][fi]).normalized();
@@ -114,6 +114,46 @@ IGL_INLINE void igl::opengl::ViewerData::Q_error_vertex() {
             Q_error[vi] += Kp;
         }
     }
+}
+
+IGL_INLINE void igl::opengl::ViewerData::new_cost_and_placement(
+    const int e,
+    const Eigen::MatrixXd& V,
+    const Eigen::MatrixXi& F,
+    const Eigen::MatrixXi& E,
+    const Eigen::VectorXi& EMAP,
+    const Eigen::MatrixXi& EF,
+    const Eigen::MatrixXi& EI,
+    double& cost,
+    Eigen::RowVectorXd& p)
+{
+    //cost = (V.row(E(e, 0)) - V.row(E(e, 1))).norm();
+    //p = 0.5 * (V.row(E(e, 0)) + V.row(E(e, 1)));
+}
+
+IGL_INLINE bool igl::opengl::ViewerData::new_collapse_edge(
+    const std::function<void(
+        const int,
+        const Eigen::MatrixXd&,
+        const Eigen::MatrixXi&,
+        const Eigen::MatrixXi&,
+        const Eigen::VectorXi&,
+        const Eigen::MatrixXi&,
+        const Eigen::MatrixXi&,
+        double&,
+        Eigen::RowVectorXd&)>& cost_and_placement,
+    Eigen::MatrixXd& V,
+    Eigen::MatrixXi& F,
+    Eigen::MatrixXi& E,
+    Eigen::VectorXi& EMAP,
+    Eigen::MatrixXi& EF,
+    Eigen::MatrixXi& EI,
+    std::set<std::pair<double, int> >& Q,
+    std::vector<std::set<std::pair<double, int> >::iterator >& Qit,
+    Eigen::MatrixXd& C)
+{
+
+    return true;
 }
 
 
