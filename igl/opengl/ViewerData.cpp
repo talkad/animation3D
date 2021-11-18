@@ -17,10 +17,10 @@
 #include <iostream>
 //#include "external/stb/igl_stb_image.h"
 
-
 #include <igl/edge_flaps.h>
 #include <igl/shortest_edge_and_midpoint.h>
 #include <igl/collapse_edge.h>
+#include <igl\vertex_triangle_adjacency.h>
 
 
 IGL_INLINE bool igl::opengl::ViewerData::init_mesh()
@@ -29,7 +29,7 @@ IGL_INLINE bool igl::opengl::ViewerData::init_mesh()
     V_clone = V;
     Q = new PriorityQueue;
     Q_iterator = new std::vector<PriorityQueue::iterator>;
-    int edge_col_num = 0;
+    edge_col_num = 0;
 
     edge_flaps(F, E, EMAP, EF, EI);
     Q_iterator->resize(E.rows());
@@ -80,9 +80,42 @@ IGL_INLINE void igl::opengl::ViewerData::Simplification(int num_of_faces) {
         clear();
         set_mesh(new_V, new_F);
         set_face_based(true);
-        dirty = 157;
+        dirty = 157; //this line prevents texture coordinates update
     }
 }
+
+
+IGL_INLINE void igl::opengl::ViewerData::Q_error_vertex() {
+
+    Eigen::MatrixXd V = V_clone;
+    Eigen::MatrixXi F = F_clone;
+    std::vector<std::vector<int> > VF;
+    std::vector<std::vector<int> > VFi;
+
+    igl::vertex_triangle_adjacency(V, F, VF, VFi);
+
+    for (int vi = 0; vi < V.rows(); vi++) {
+
+        std::vector<int> faces;
+        Q_error[vi] = Eigen::Matrix4d::Zero();//initializing Quads with 0 matrix before giving values
+
+        for (int fi = 0; fi < VF[vi].size(); fi++) {
+            Eigen::Vector3d norm = F_normals.row(VF[vi][fi]).normalized();
+            double d = V.row(vi) * norm;
+            double a = norm[0], b = norm[1], c = norm[2];
+            d *= -1;
+
+            Eigen::Matrix4d Kp;
+            Kp.row(0) = Eigen::Vector4d(a * a, a * b, a * c, a * d);
+            Kp.row(1) = Eigen::Vector4d(a * b, b * b, b * c, b * d);
+            Kp.row(2) = Eigen::Vector4d(a * c, b * c, c * c, c * d);
+            Kp.row(3) = Eigen::Vector4d(a * d, d * b, d * c, d * d);
+
+            Q_error[vi] += Kp;
+        }
+    }
+}
+
 
 IGL_INLINE igl::opengl::ViewerData::ViewerData()
 : dirty(MeshGL::DIRTY_ALL),

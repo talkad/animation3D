@@ -51,6 +51,9 @@ public:
 
   IGL_INLINE void Simplification(int num_of_faces);
 
+  IGL_INLINE void Q_error_vertex();
+
+
   ViewerData();
   
   // Empty all fields
@@ -169,9 +172,10 @@ public:
   int edge_col_num;     // num of edges collapased by the decimation algorithm
   std::vector<PriorityQueue::iterator >* Q_iterator;  // iterate over the edges
 
-
   Eigen::MatrixXd V, V_clone; // Vertices of the current mesh (#V x 3)
   Eigen::MatrixXi F, F_clone; // Faces of the mesh (#F x 3)
+
+  std::vector <Eigen::Matrix4d> Q_error;  // compute the error for each 
 
   // Per face attributes
   Eigen::MatrixXd F_normals; // One normal per face
