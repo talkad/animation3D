@@ -206,7 +206,7 @@ public:
   Eigen::MatrixXd V, V_clone; // Vertices of the current mesh (#V x 3)
   Eigen::MatrixXi F, F_clone; // Faces of the mesh (#F x 3)
 
-  std::vector <Eigen::Matrix4d> Q_error;  // compute the error for each 
+  std::vector <Eigen::Matrix4d> Q_vertex_error;  // compute the error for each vertex
 
   // Per face attributes
   Eigen::MatrixXd F_normals; // One normal per face

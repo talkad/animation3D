@@ -31,6 +31,8 @@ IGL_INLINE bool igl::opengl::ViewerData::init_mesh()
     Q_iterator = new std::vector<PriorityQueue::iterator>();
     edge_col_num = 0;
 
+    double cost = 0;
+
     edge_flaps(F, E, EMAP, EF, EI);
     Q_iterator->resize(E.rows());
 
@@ -40,7 +42,6 @@ IGL_INLINE bool igl::opengl::ViewerData::init_mesh()
 
     for (int e_id = 0; e_id < E.rows(); e_id++)
     {
-        double cost = 0;
         Eigen::RowVectorXd p(1, 3);
 
         new_cost_and_placement(e_id, V, F, E, EMAP, EF, EI, cost, p);
@@ -97,7 +98,7 @@ IGL_INLINE void igl::opengl::ViewerData::Quadratic_error_vertex() {
     for (int vi = 0; vi < V.rows(); vi++) {
 
         std::vector<int> faces;
-        Q_error[vi] = Eigen::Matrix4d::Zero(); //initializing quadratic error for each vertex with zero
+        Q_vertex_error[vi] = Eigen::Matrix4d::Zero(); //initializing quadratic error for each vertex with zero
 
         for (int fi = 0; fi < VF[vi].size(); fi++) {
             Eigen::Vector3d norm = F_normals.row(VF[vi][fi]).normalized();
@@ -111,7 +112,7 @@ IGL_INLINE void igl::opengl::ViewerData::Quadratic_error_vertex() {
             Kp.row(2) = Eigen::Vector4d(a * c, b * c, c * c, c * d);
             Kp.row(3) = Eigen::Vector4d(a * d, d * b, d * c, d * d);
 
-            Q_error[vi] += Kp;
+            Q_vertex_error[vi] += Kp;
         }
     }
 }
@@ -127,8 +128,33 @@ IGL_INLINE void igl::opengl::ViewerData::new_cost_and_placement(
     double& cost,
     Eigen::RowVectorXd& p)
 {
-    //cost = (V.row(E(e, 0)) - V.row(E(e, 1))).norm();
-    //p = 0.5 * (V.row(E(e, 0)) + V.row(E(e, 1)));
+    int vertex1_id = E(e, 0);
+    int vertex2_id = E(e, 1);
+
+    Eigen::Matrix4d Q = Q_vertex_error[vertex1_id] + Q_vertex_error[vertex2_id];  //Q = Q1 + Q2
+
+    Eigen::Matrix4d Q_grad = Q;
+    Q_grad.row(3) = Eigen::Vector4d(0, 0, 0, 1);   // The bottom row of the matrix is empty because v¯ is an homogeneous vector
+
+    bool is_invertable;
+    Eigen::Vector4d::Scalar det;
+    double threshold;
+    Q_grad.computeInverseAndDetWithCheck(Q_grad, det, is_invertable, threshold);
+
+    if (is_invertable) {
+        Eigen::Vector4d v_hat;
+
+        v_hat = Q_grad * (Eigen::Vector4d(0, 0, 0, 1));
+        p[0] = v_hat[0], p[1] = v_hat[1], p[2] = v_hat[2];
+
+        cost = v_hat.transpose() * Q * v_hat;
+    }
+    else {
+        p = 0.5 * (V.row(vertex1_id) + V.row(vertex2_id));
+        /*v_hat[0] = p[0], v_hat[1] = p[1], v_hat[2] = p[2], v_hat[3] = 1;*/
+
+        cost = (V.row(vertex1_id) - V.row(vertex2_id)).norm();
+    }
 }
 
 IGL_INLINE bool igl::opengl::ViewerData::new_collapse_edge(
