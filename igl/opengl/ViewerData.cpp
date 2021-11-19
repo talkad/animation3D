@@ -38,15 +38,15 @@ IGL_INLINE bool igl::opengl::ViewerData::init_mesh()
     Eigen::VectorXd costs(E.rows());
     Q->clear();
 
-    for (int i = 0; i < E.rows(); i++)
+    for (int e_id = 0; e_id < E.rows(); e_id++)
     {
         double cost = 0;
         Eigen::RowVectorXd p(1, 3);
 
-        shortest_edge_and_midpoint(i, V, F, E, EMAP, EF, EI, cost, p);
+        new_cost_and_placement(e_id, V, F, E, EMAP, EF, EI, cost, p);
 
-        C.row(i) = p;
-        (*Q_iterator)[i] = Q->insert(std::pair<double, int>(cost, i)).first;
+        C.row(e_id) = p;
+        (*Q_iterator)[e_id] = Q->insert(std::pair<double, int>(cost, e_id)).first;
     }
 
     set_mesh(V, F);
