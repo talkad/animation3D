@@ -64,7 +64,7 @@ IGL_INLINE void igl::opengl::ViewerData::Simplification(int num_of_faces) {
 
     for (int j = 0; j < num_of_faces; j++)
     {
-        if (!new_collapse_edge(new_cost_and_placement, V, F, E, EMAP, EF, EI, *Q, *Q_iterator, C))
+        if (!new_collapse_edge(V, F, E, EMAP, EF, EI, *Q, *Q_iterator, C))
         {
             break;
         }
@@ -118,20 +118,20 @@ IGL_INLINE void igl::opengl::ViewerData::Quadratic_error_vertex() {
 }
 
 IGL_INLINE void igl::opengl::ViewerData::new_cost_and_placement(
-    const int e,
-    const Eigen::MatrixXd& V,
-    const Eigen::MatrixXi& F,
-    const Eigen::MatrixXi& E,
-    const Eigen::VectorXi& EMAP,
-    const Eigen::MatrixXi& EF,
-    const Eigen::MatrixXi& EI,
+    int e,
+    Eigen::MatrixXd& V,
+    Eigen::MatrixXi& /*F*/,
+    Eigen::MatrixXi& E,
+    Eigen::VectorXi& /*EMAP*/,
+    Eigen::MatrixXi& /*EF*/,
+    Eigen::MatrixXi& /*EI*/,
     double& cost,
     Eigen::RowVectorXd& p)
 {
     int vertex1_id = E(e, 0);
     int vertex2_id = E(e, 1);
 
-    Eigen::Matrix4d Q = Q_vertex_error[vertex1_id] + Q_vertex_error[vertex2_id];  //Q = Q1 + Q2
+    Eigen::Matrix4d Q = Q_vertex_error[vertex1_id] + Q_vertex_error[vertex2_id]; 
 
     Eigen::Matrix4d Q_grad = Q;
     Q_grad.row(3) = Eigen::Vector4d(0, 0, 0, 1);   // The bottom row of the matrix is empty because v¯ is an homogeneous vector
@@ -149,6 +149,7 @@ IGL_INLINE void igl::opengl::ViewerData::new_cost_and_placement(
 
         cost = v_hat.transpose() * Q * v_hat;
     }
+    // find the optimak vertex along the segment between the vertices ?
     else {
         p = 0.5 * (V.row(vertex1_id) + V.row(vertex2_id));
         /*v_hat[0] = p[0], v_hat[1] = p[1], v_hat[2] = p[2], v_hat[3] = 1;*/
@@ -158,16 +159,6 @@ IGL_INLINE void igl::opengl::ViewerData::new_cost_and_placement(
 }
 
 IGL_INLINE bool igl::opengl::ViewerData::new_collapse_edge(
-    const std::function<void(
-        const int,
-        const Eigen::MatrixXd&,
-        const Eigen::MatrixXi&,
-        const Eigen::MatrixXi&,
-        const Eigen::VectorXi&,
-        const Eigen::MatrixXi&,
-        const Eigen::MatrixXi&,
-        double&,
-        Eigen::RowVectorXd&)>& cost_and_placement,
     Eigen::MatrixXd& V,
     Eigen::MatrixXi& F,
     Eigen::MatrixXi& E,
@@ -178,6 +169,44 @@ IGL_INLINE bool igl::opengl::ViewerData::new_collapse_edge(
     std::vector<std::set<std::pair<double, int> >::iterator >& Qit,
     Eigen::MatrixXd& C)
 {
+    if (Q.empty()) // gurad - check if there is an edge to collapse
+        return false;
+
+    std::pair<double, int> edge = *(Q.begin()); // pop the next edge to collapse
+
+    double cost = 0;
+    Eigen::RowVectorXd new_p = Eigen::RowVectorXd::Zero(3);
+    new_cost_and_placement(edge.second, V, F, E, EMAP, EF, EI, cost, new_p);
+
+    C.row(edge.second) = new_p;  // add the new vertex to C
+
+    // update F and E and use edgeflaps
+    E.resize(E.rows() - 1, E.cols()); // update this matrix by deleting the edge
+    F.resize(F.rows() - 1, F.cols()); // the same for F
+
+    set_mesh(V, F);
+
+    // iterate over EI and update the coresponding costs
+
+
+
+    /*
+    1. Compute the Q matrices for all the initial vertices.
+        2. Select all valid pairs.
+
+        3. Compute the optimal contraction target v¯ for each valid pair
+        (v1, v2).The error v¯T(Q1 + Q2)v¯ of this target vertex becomes
+        the cost of contracting that pair.
+
+        4. Place all the pairs in a heap keyed on cost with the minimum
+        cost pair at the top.
+
+        5. Iteratively remove the pair(v1, v2) of least cost from the heap,
+        contract this pair, and 
+        
+        
+        update the costs of all valid pairs involving v1.
+*/
 
     return true;
 }

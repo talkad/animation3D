@@ -193,50 +193,6 @@ namespace glfw
     return true;
   }
 
-  /*
-  IGL_INLINE bool Viewer::init_mesh()
-  {
-      Eigen::MatrixXi F = data().F_clone;
-      Eigen::MatrixXd V = data().V_clone;
-      Eigen::VectorXi EMAP;
-      Eigen::MatrixXi E, EF, EI;
-      Eigen::MatrixXd C;
-      PriorityQueue* Q = new PriorityQueue();
-
-      std::vector<PriorityQueue::iterator >* Q_iterator = new std::vector<PriorityQueue::iterator>;
-      int edge_col_num = 0;
-      edge_flaps(F, E, EMAP, EF, EI); 
-      Q_iterator->resize(E.rows());
-
-      C.resize(E.rows(), V.cols());
-      Eigen::VectorXd costs(E.rows());
-      Q->clear();
-
-      for (int i = 0; i < E.rows(); i++)
-      {
-          double cost = i;  // we need it?
-          Eigen::RowVectorXd p(1, 3);
-
-          shortest_edge_and_midpoint(i, V, F, E, EMAP, EF, EI, cost, p);
-
-          C.row(i) = p;
-          (*Q_iterator)[i] = Q->insert(std::pair<double, int>(cost, i)).first;
-      }
-
-      data().edge_col_num = edge_col_num;
-      data().E = E;
-      data().EF = EF;
-      data().EI = EI;
-      data().EMAP = EMAP;
-      data().Q = Q;
-      data().Q_iterator = Q_iterator;
-      data().C = C;
-      data().set_mesh(V, F);
-
-      return true;
-  }
-  */
-
   IGL_INLINE bool Viewer::save_mesh_to_file(
       const std::string & mesh_file_name_string)
   {
