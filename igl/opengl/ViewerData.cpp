@@ -149,13 +149,45 @@ IGL_INLINE void igl::opengl::ViewerData::new_cost_and_placement(
 
         cost = v_hat.transpose() * Q * v_hat;
     }
-    // find the optimak vertex along the segment between the vertices ?
+    // find the optimal vertex along the segment between the vertices
+    else { 
+        int num_of_segment = 9;
+
+        Eigen::VectorXd base_vertex = V.row(vertex1_id);
+        Eigen::VectorXd current_p = base_vertex;
+        double currenct_cost = current_p.transpose() * Q * current_p;  // doesnt sure about this type definition
+
+        Eigen::VectorXd opt_p = current_p;  
+        double min_cost = currenct_cost;
+
+        double d_x = (V.row(vertex2_id)[0] - V.row(vertex1_id)[0]) / num_of_segment;
+        double d_y = (V.row(vertex2_id)[1] - V.row(vertex1_id)[1]) / num_of_segment;
+        double d_z = (V.row(vertex2_id)[2] - V.row(vertex1_id)[2]) / num_of_segment;
+
+
+        for (int i = 1; i <= num_of_segment + 1; i++) {
+            current_p = Eigen::VectorXd(base_vertex[0] + d_x, base_vertex[1] + d_y, base_vertex[2] + d_z, base_vertex[4]);
+            currenct_cost = current_p.transpose() * Q * current_p;
+
+            if (currenct_cost < min_cost) {
+                min_cost = currenct_cost;
+                opt_p = current_p;
+            }
+        }
+
+        p[0] = opt_p[0], p[1] = opt_p[1], p[2] = opt_p[2];
+        cost = min_cost;
+    }
+
+    /* naive approach
+    
     else {
         p = 0.5 * (V.row(vertex1_id) + V.row(vertex2_id));
-        /*v_hat[0] = p[0], v_hat[1] = p[1], v_hat[2] = p[2], v_hat[3] = 1;*/
+        // v_hat[0] = p[0], v_hat[1] = p[1], v_hat[2] = p[2], v_hat[3] = 1;
 
         cost = (V.row(vertex1_id) - V.row(vertex2_id)).norm();
     }
+    */
 }
 
 IGL_INLINE bool igl::opengl::ViewerData::new_collapse_edge(
