@@ -169,7 +169,7 @@ IGL_INLINE void igl::opengl::ViewerData::new_cost_and_placement(
         double d_z = (v2[2] - v1[2]) / num_of_segment;
 
         for (int i = 1; i <= num_of_segment + 1; i++) {
-            current_p = Eigen::Vector4d(base_vertex[0] + d_x, base_vertex[1] + d_y, base_vertex[2] + d_z, 1);
+            current_p = Eigen::Vector4d(base_vertex[0] + d_x * i, base_vertex[1] + d_y * i, base_vertex[2] + d_z * i, 1);
             currenct_cost = current_p.transpose() * Q * current_p;
 
             if (currenct_cost < min_cost) {
@@ -238,10 +238,7 @@ IGL_INLINE bool igl::opengl::ViewerData::new_collapse_edge(
         cost pair at the top.
 
         5. Iteratively remove the pair(v1, v2) of least cost from the heap,
-        contract this pair, and 
-        
-        
-        update the costs of all valid pairs involving v1.
+        contract this pair, and update the costs of all valid pairs involving v1.
 */
 
     return true;
