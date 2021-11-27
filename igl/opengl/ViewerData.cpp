@@ -30,6 +30,7 @@ IGL_INLINE bool igl::opengl::ViewerData::init_mesh()
     Q = new PriorityQueue();
     Q_iterator = new std::vector<PriorityQueue::iterator>();
     edge_col_num = 0;
+    Q_vertex_error.resize(V.rows());
 
     double cost = 0;
 
@@ -153,20 +154,22 @@ IGL_INLINE void igl::opengl::ViewerData::new_cost_and_placement(
     else { 
         int num_of_segment = 9;
 
-        Eigen::VectorXd base_vertex = V.row(vertex1_id);
-        Eigen::VectorXd current_p = base_vertex;
-        double currenct_cost = current_p.transpose() * Q * current_p;  // doesnt sure about this type definition
+        Eigen::Vector3d v1 = V.row(vertex1_id);
+        Eigen::Vector3d v2 = V.row(vertex2_id);
 
-        Eigen::VectorXd opt_p = current_p;  
+        Eigen::Vector3d base_vertex = v1;
+        Eigen::Vector4d current_p = Eigen::Vector4d(base_vertex[0], base_vertex[1], base_vertex[2], 1);
+        double currenct_cost = current_p.transpose() * Q * current_p; 
+
+        Eigen::Vector4d opt_p = current_p;  
         double min_cost = currenct_cost;
 
-        double d_x = (V.row(vertex2_id)[0] - V.row(vertex1_id)[0]) / num_of_segment;
-        double d_y = (V.row(vertex2_id)[1] - V.row(vertex1_id)[1]) / num_of_segment;
-        double d_z = (V.row(vertex2_id)[2] - V.row(vertex1_id)[2]) / num_of_segment;
-
+        double d_x = (v2[0] - v1[0]) / num_of_segment;
+        double d_y = (v2[1] - v1[1]) / num_of_segment;
+        double d_z = (v2[2] - v1[2]) / num_of_segment;
 
         for (int i = 1; i <= num_of_segment + 1; i++) {
-            current_p = Eigen::VectorXd(base_vertex[0] + d_x, base_vertex[1] + d_y, base_vertex[2] + d_z, base_vertex[4]);
+            current_p = Eigen::Vector4d(base_vertex[0] + d_x, base_vertex[1] + d_y, base_vertex[2] + d_z, 1);
             currenct_cost = current_p.transpose() * Q * current_p;
 
             if (currenct_cost < min_cost) {
@@ -179,15 +182,15 @@ IGL_INLINE void igl::opengl::ViewerData::new_cost_and_placement(
         cost = min_cost;
     }
 
-    /* naive approach
-    
-    else {
-        p = 0.5 * (V.row(vertex1_id) + V.row(vertex2_id));
-        // v_hat[0] = p[0], v_hat[1] = p[1], v_hat[2] = p[2], v_hat[3] = 1;
+    ///* naive approach
+    //
+    //else {
+    //    p = 0.5 * (V.row(vertex1_id) + V.row(vertex2_id));
+    //    // v_hat[0] = p[0], v_hat[1] = p[1], v_hat[2] = p[2], v_hat[3] = 1;
 
-        cost = (V.row(vertex1_id) - V.row(vertex2_id)).norm();
-    }
-    */
+    //    cost = (V.row(vertex1_id) - V.row(vertex2_id)).norm();
+    //}
+    //*/
 }
 
 IGL_INLINE bool igl::opengl::ViewerData::new_collapse_edge(
@@ -201,6 +204,7 @@ IGL_INLINE bool igl::opengl::ViewerData::new_collapse_edge(
     std::vector<std::set<std::pair<double, int> >::iterator >& Qit,
     Eigen::MatrixXd& C)
 {
+    // use is_collapse
     if (Q.empty()) // gurad - check if there is an edge to collapse
         return false;
 
