@@ -62,6 +62,7 @@ IGL_INLINE void igl::opengl::ViewerData::Simplification(int num_of_faces) {
     //f. Prints the number of the collapse edge, its cost and the position of the new vertex ollowing
 
     bool is_collapsed = false;
+    int currenct_col_num = 0;
 
     for (int j = 0; j < num_of_faces; j++)
     {
@@ -72,6 +73,7 @@ IGL_INLINE void igl::opengl::ViewerData::Simplification(int num_of_faces) {
 
         is_collapsed = true;
         edge_col_num++;
+        currenct_col_num++;
     }
 
     if (is_collapsed)
@@ -83,6 +85,8 @@ IGL_INLINE void igl::opengl::ViewerData::Simplification(int num_of_faces) {
         set_mesh(new_V, new_F);
         set_face_based(true);
         dirty = 157; //this line prevents texture coordinates update
+
+        std::cout << "num of total collapsed edges: " << edge_col_num << " | num of currenct collapsed edges: " << currenct_col_num <<std::endl;
     }
 }
 
