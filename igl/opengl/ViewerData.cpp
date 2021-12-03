@@ -20,6 +20,7 @@
 #include <igl/edge_flaps.h>
 #include <igl/shortest_edge_and_midpoint.h>
 #include <igl/collapse_edge.h>
+#include <igl/circulation.h>
 #include <igl\vertex_triangle_adjacency.h>
 
 
@@ -41,6 +42,8 @@ IGL_INLINE bool igl::opengl::ViewerData::init_mesh()
 
     double cost = 0;
     Eigen::RowVectorXd p = Eigen::RowVectorXd::Zero(3);;
+    
+    Quadratic_error_vertex(); // initiate vertices quadratic errors
 
     for (int e_id = 0; e_id < E.rows(); e_id++)
     {
@@ -58,7 +61,6 @@ IGL_INLINE bool igl::opengl::ViewerData::init_mesh()
 
 IGL_INLINE void igl::opengl::ViewerData::Simplification(int num_of_faces) {
 
-    //f. Prints the number of the collapse edge, its cost and the position of the new vertex ollowing
 
     bool is_collapsed = false;
     int currenct_col_num = 0;
@@ -77,12 +79,16 @@ IGL_INLINE void igl::opengl::ViewerData::Simplification(int num_of_faces) {
 
     if (is_collapsed)
     {
+        Eigen::MatrixXd new_V = V;
+        Eigen::MatrixXi new_F = F;
+
         clear();
-        set_mesh(V, F);
+        set_mesh(new_V, new_F);
         set_face_based(true);
         dirty = 157; //this line prevents texture coordinates update
     }
-
+    
+    //std::cout << "xxxxxxxxxxxxxxxxxxxxx " << Q->size() << std::endl;
     std::cout << "num of total collapsed edges: " << edge_col_num << " | num of currenct collapsed edges: " << currenct_col_num << std::endl;
 }
 
@@ -98,6 +104,8 @@ IGL_INLINE Eigen::Matrix4d igl::opengl::ViewerData::calc_Kp(int vertex_index, in
     Kp.row(1) = Eigen::Vector4d(a * b, b * b, b * c, b * d);
     Kp.row(2) = Eigen::Vector4d(a * c, b * c, c * c, c * d);
     Kp.row(3) = Eigen::Vector4d(a * d, d * b, d * c, d * d);
+
+    return Kp;
 }
 
 IGL_INLINE void igl::opengl::ViewerData::Quadratic_error_vertex() {
@@ -116,6 +124,7 @@ IGL_INLINE void igl::opengl::ViewerData::Quadratic_error_vertex() {
         for (int fi = 0; fi < VF[vi].size(); fi++) {
             Q_vertex_error[vi] += calc_Kp(vi, VF[vi][fi]);
         }
+
     }
 }
 
@@ -148,8 +157,8 @@ IGL_INLINE void igl::opengl::ViewerData::new_cost_and_placement(
 
         v_hat = Q_grad * (Eigen::Vector4d(0, 0, 0, 1));
         p[0] = v_hat[0], p[1] = v_hat[1], p[2] = v_hat[2];
-
         cost = v_hat.transpose() * Q * v_hat;
+
     }
     // find the optimal vertex along the segment between the vertices
     else { 
@@ -205,43 +214,57 @@ IGL_INLINE bool igl::opengl::ViewerData::new_collapse_edge(
     std::vector<std::set<std::pair<double, int> >::iterator >& Qit,
     Eigen::MatrixXd& C)
 {
-    // use is_collapse
-    if (Q.empty()) // gurad - check if there is an edge to collapse
-        return false;
+    std::pair<double, int> edge;
+    if (Q.empty() || (edge = *(Q.begin())).first == std::numeric_limits<double>::infinity()) // Guard - check if there is an edge to collapse
+        return false;                                                                        // If exists and has finite cost - a. Takes out the loewst cost edge from queue. 
 
-    std::pair<double, int> edge = *(Q.begin()); // pop the next edge to collapse
+    std::cout << "bbbbbbbbb cost" << edge.first << std::endl;
 
+    Q.erase(Q.begin()); // b. Deletes edge
+    Qit[edge.second] = Q.end();
+
+    int vertex1_idx = E.row(edge.second)[0],
+        vertex2_idx = E.row(edge.second)[1],
+        e1, e2, f1, f2;
     double cost = 0;
     Eigen::RowVectorXd new_p = Eigen::RowVectorXd::Zero(3);
-    new_cost_and_placement(edge.second, V, F, E, EMAP, EF, EI, cost, new_p);
+    std::vector<int> nf = circulation(edge.second, true, EMAP, EF, EI), opposite_nf = circulation(edge.second, false, EMAP, EF, EI);
 
-    C.row(edge.second) = new_p;  // add the new vertex to C
+    nf.insert(nf.begin(), opposite_nf.begin(), opposite_nf.end());
 
-    // update F and E and use edgeflaps
-    E.resize(E.rows() - 1, E.cols()); // update this matrix by deleting the edge
-    F.resize(F.rows() - 1, F.cols()); // the same for F
+    // Steps c and d are performed in igl function collapse_edge
+    if (igl::collapse_edge(edge.second, C.row(edge.second), V, F, E, EMAP, EF, EI, e1, e2, f1, f2)) {
+        Q_vertex_error[vertex1_idx] = Q_vertex_error[vertex2_idx] =
+            Q_vertex_error[vertex1_idx] + Q_vertex_error[vertex2_idx]; // e. Updates new vertex edges errors
 
-    set_mesh(V, F);
+        Q.erase(Qit[e1]);
+        Q.erase(Qit[e2]);
+        Qit[e1] = Q.end();
+        Qit[e2] = Q.end();
 
-    // iterate over EI and update the coresponding costs
+        for (auto face : nf) {
+            if (F(face, 0) != IGL_COLLAPSE_EDGE_NULL ||
+                F(face, 1) != IGL_COLLAPSE_EDGE_NULL ||
+                F(face, 2) != IGL_COLLAPSE_EDGE_NULL)
+            {
+                for (int v = 0; v < 3; ++v) {
+                    const int ei = EMAP(v * F.rows() + face);
+                    Q.erase(Qit[ei]);
+                    new_cost_and_placement(edge.second, V, F, E, EMAP, EF, EI, cost, new_p);
+                    Qit[ei] = Q.insert(std::pair<double, int>(cost, ei)).first;
+                    C.row(ei) = new_p;
+                }
+            }
+        }
 
+        std::cout << "edge " << edge.second << " cost = " << cost << ", new v position (" << new_p[0] << ","
+            << new_p[1] << "," << new_p[2] << ")" << std::endl;
 
-
-    /*
-    1. Compute the Q matrices for all the initial vertices.
-        2. Select all valid pairs.
-
-        3. Compute the optimal contraction target v¯ for each valid pair
-        (v1, v2).The error v¯T(Q1 + Q2)v¯ of this target vertex becomes
-        the cost of contracting that pair.
-
-        4. Place all the pairs in a heap keyed on cost with the minimum
-        cost pair at the top.
-
-        5. Iteratively remove the pair(v1, v2) of least cost from the heap,
-        contract this pair, and update the costs of all valid pairs involving v1.
-*/
-
+    }
+    else {
+        edge.first = std::numeric_limits<double>::infinity();
+        Qit[edge.second] = Q.insert(edge).first;
+    }
     return true;
 }
 
