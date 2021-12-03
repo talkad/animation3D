@@ -31,20 +31,19 @@ IGL_INLINE bool igl::opengl::ViewerData::init_mesh()
     Q_iterator = new std::vector<PriorityQueue::iterator>();
     edge_col_num = 0;
     Q_vertex_error.resize(V.rows());
+    edge_flaps(F, E, EMAP, EF, EI); // fill in mappings between vertex and faces
 
-    double cost = 0;
-
-    edge_flaps(F, E, EMAP, EF, EI);
     Q_iterator->resize(E.rows());
 
     C.resize(E.rows(), V.cols());
     Eigen::VectorXd costs(E.rows());
     Q->clear();
 
+    double cost = 0;
+    Eigen::RowVectorXd p = Eigen::RowVectorXd::Zero(3);;
+
     for (int e_id = 0; e_id < E.rows(); e_id++)
     {
-        Eigen::RowVectorXd p(1, 3);
-
         new_cost_and_placement(e_id, V, F, E, EMAP, EF, EI, cost, p);
 
         C.row(e_id) = p;
@@ -78,18 +77,28 @@ IGL_INLINE void igl::opengl::ViewerData::Simplification(int num_of_faces) {
 
     if (is_collapsed)
     {
-        Eigen::MatrixXd new_V = V;
-        Eigen::MatrixXi new_F = F;
-
         clear();
-        set_mesh(new_V, new_F);
+        set_mesh(V, F);
         set_face_based(true);
         dirty = 157; //this line prevents texture coordinates update
-
-        std::cout << "num of total collapsed edges: " << edge_col_num << " | num of currenct collapsed edges: " << currenct_col_num <<std::endl;
     }
+
+    std::cout << "num of total collapsed edges: " << edge_col_num << " | num of currenct collapsed edges: " << currenct_col_num << std::endl;
 }
 
+// calc Kp according to the article
+IGL_INLINE Eigen::Matrix4d igl::opengl::ViewerData::calc_Kp(int vertex_index, int face_index) {
+    Eigen::Vector3d norm = F_normals.row(face_index).normalized();
+    double d = V.row(vertex_index) * norm;
+    double a = norm[0], b = norm[1], c = norm[2];
+    d *= -1;
+
+    Eigen::Matrix4d Kp;
+    Kp.row(0) = Eigen::Vector4d(a * a, a * b, a * c, a * d);
+    Kp.row(1) = Eigen::Vector4d(a * b, b * b, b * c, b * d);
+    Kp.row(2) = Eigen::Vector4d(a * c, b * c, c * c, c * d);
+    Kp.row(3) = Eigen::Vector4d(a * d, d * b, d * c, d * d);
+}
 
 IGL_INLINE void igl::opengl::ViewerData::Quadratic_error_vertex() {
 
@@ -98,26 +107,14 @@ IGL_INLINE void igl::opengl::ViewerData::Quadratic_error_vertex() {
     std::vector<std::vector<int> > VF;
     std::vector<std::vector<int> > VFi;
 
-    igl::vertex_triangle_adjacency(V, F, VF, VFi);
+    igl::vertex_triangle_adjacency(V, F, VF, VFi);    // constructs the vertex-face topology of a given mesh
 
     for (int vi = 0; vi < V.rows(); vi++) {
 
-        std::vector<int> faces;
-        Q_vertex_error[vi] = Eigen::Matrix4d::Zero(); //initializing quadratic error for each vertex with zero
+        Q_vertex_error[vi] = Eigen::Matrix4d::Zero(); // initializing quadratic error for each vertex with zero
 
         for (int fi = 0; fi < VF[vi].size(); fi++) {
-            Eigen::Vector3d norm = F_normals.row(VF[vi][fi]).normalized();
-            double d = V.row(vi) * norm;
-            double a = norm[0], b = norm[1], c = norm[2];
-            d *= -1;
-
-            Eigen::Matrix4d Kp;
-            Kp.row(0) = Eigen::Vector4d(a * a, a * b, a * c, a * d);
-            Kp.row(1) = Eigen::Vector4d(a * b, b * b, b * c, b * d);
-            Kp.row(2) = Eigen::Vector4d(a * c, b * c, c * c, c * d);
-            Kp.row(3) = Eigen::Vector4d(a * d, d * b, d * c, d * d);
-
-            Q_vertex_error[vi] += Kp;
+            Q_vertex_error[vi] += calc_Kp(vi, VF[vi][fi]);
         }
     }
 }

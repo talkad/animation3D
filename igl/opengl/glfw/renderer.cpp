@@ -186,8 +186,8 @@ void Renderer::MouseProcessing(int button)
 		}
 		else
 		{
-			scn->MyRotate(Eigen::Vector3d(1, 0, 0), yrel / 180.0);
-			scn->MyRotate(Eigen::Vector3d(0, 1, 0), xrel / 180.0);
+			scn->RotateInSystem(Eigen::Vector3d(1, 0, 0), yrel / 180.0);
+			scn->RotateInSystem(Eigen::Vector3d(0, 1, 0), xrel / 180.0);
 		}
 	}
 }

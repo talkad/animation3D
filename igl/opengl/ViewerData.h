@@ -51,6 +51,8 @@ public:
 
   IGL_INLINE void Simplification(int num_of_faces);
 
+  IGL_INLINE Eigen::Matrix4d calc_Kp(int vi, int fi);
+
   IGL_INLINE void Quadratic_error_vertex();
 
   IGL_INLINE bool igl::opengl::ViewerData::new_collapse_edge(
