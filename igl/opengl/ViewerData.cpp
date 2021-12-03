@@ -26,24 +26,23 @@
 
 IGL_INLINE bool igl::opengl::ViewerData::init_mesh()
 {
-    F_clone = F;
-    V_clone = V;
+    F = F_clone;
+    V = V_clone;
     Q = new PriorityQueue();
     Q_iterator = new std::vector<PriorityQueue::iterator>();
     edge_col_num = 0;
-    Q_vertex_error.resize(V.rows());
     edge_flaps(F, E, EMAP, EF, EI); // fill in mappings between vertex and faces
 
     Q_iterator->resize(E.rows());
 
     C.resize(E.rows(), V.cols());
-    Eigen::VectorXd costs(E.rows());
     Q->clear();
+    
+    Q_vertex_error.resize(V.rows());
+    Quadratic_error_vertex(); // initiate vertices quadratic errors
 
     double cost = 0;
-    Eigen::RowVectorXd p = Eigen::RowVectorXd::Zero(3);;
-    
-    Quadratic_error_vertex(); // initiate vertices quadratic errors
+    Eigen::Vector3d p = Eigen::Vector3d::Zero(3);;
 
     for (int e_id = 0; e_id < E.rows(); e_id++)
     {
@@ -68,6 +67,7 @@ IGL_INLINE void igl::opengl::ViewerData::Simplification(int num_of_faces) {
     for (int j = 0; j < num_of_faces; j++)
     {
         if (!new_collapse_edge(V, F, E, EMAP, EF, EI, *Q, *Q_iterator, C))
+        //if (!new_collapse_edge(V, F))
         {
             break;
         }
@@ -88,7 +88,6 @@ IGL_INLINE void igl::opengl::ViewerData::Simplification(int num_of_faces) {
         dirty = 157; //this line prevents texture coordinates update
     }
     
-    //std::cout << "xxxxxxxxxxxxxxxxxxxxx " << Q->size() << std::endl;
     std::cout << "num of total collapsed edges: " << edge_col_num << " | num of currenct collapsed edges: " << currenct_col_num << std::endl;
 }
 
@@ -122,6 +121,7 @@ IGL_INLINE void igl::opengl::ViewerData::Quadratic_error_vertex() {
         Q_vertex_error[vi] = Eigen::Matrix4d::Zero(); // initializing quadratic error for each vertex with zero
 
         for (int fi = 0; fi < VF[vi].size(); fi++) {
+
             Q_vertex_error[vi] += calc_Kp(vi, VF[vi][fi]);
         }
 
@@ -137,7 +137,7 @@ IGL_INLINE void igl::opengl::ViewerData::new_cost_and_placement(
     Eigen::MatrixXi& /*EF*/,
     Eigen::MatrixXi& /*EI*/,
     double& cost,
-    Eigen::RowVectorXd& p)
+    Eigen::Vector3d& p)
 {
     int vertex1_id = E(e, 0);
     int vertex2_id = E(e, 1);
@@ -218,8 +218,6 @@ IGL_INLINE bool igl::opengl::ViewerData::new_collapse_edge(
     if (Q.empty() || (edge = *(Q.begin())).first == std::numeric_limits<double>::infinity()) // Guard - check if there is an edge to collapse
         return false;                                                                        // If exists and has finite cost - a. Takes out the loewst cost edge from queue. 
 
-    std::cout << "bbbbbbbbb cost" << edge.first << std::endl;
-
     Q.erase(Q.begin()); // b. Deletes edge
     Qit[edge.second] = Q.end();
 
@@ -227,8 +225,9 @@ IGL_INLINE bool igl::opengl::ViewerData::new_collapse_edge(
         vertex2_idx = E.row(edge.second)[1],
         e1, e2, f1, f2;
     double cost = 0;
-    Eigen::RowVectorXd new_p = Eigen::RowVectorXd::Zero(3);
-    std::vector<int> nf = circulation(edge.second, true, EMAP, EF, EI), opposite_nf = circulation(edge.second, false, EMAP, EF, EI);
+    Eigen::Vector3d new_p = Eigen::Vector3d::Zero(3);
+    std::vector<int> nf = circulation(edge.second, true, EMAP, EF, EI);
+    std::vector<int> opposite_nf = circulation(edge.second, false, EMAP, EF, EI);
 
     nf.insert(nf.begin(), opposite_nf.begin(), opposite_nf.end());
 
@@ -248,9 +247,9 @@ IGL_INLINE bool igl::opengl::ViewerData::new_collapse_edge(
                 F(face, 2) != IGL_COLLAPSE_EDGE_NULL)
             {
                 for (int v = 0; v < 3; ++v) {
-                    const int ei = EMAP(v * F.rows() + face);
+                    int ei = EMAP(v * F.rows() + face);
                     Q.erase(Qit[ei]);
-                    new_cost_and_placement(edge.second, V, F, E, EMAP, EF, EI, cost, new_p);
+                    new_cost_and_placement(ei, V, F, E, EMAP, EF, EI, cost, new_p);
                     Qit[ei] = Q.insert(std::pair<double, int>(cost, ei)).first;
                     C.row(ei) = new_p;
                 }
@@ -267,7 +266,6 @@ IGL_INLINE bool igl::opengl::ViewerData::new_collapse_edge(
     }
     return true;
 }
-
 
 IGL_INLINE igl::opengl::ViewerData::ViewerData()
 : dirty(MeshGL::DIRTY_ALL),
@@ -702,9 +700,6 @@ IGL_INLINE void igl::opengl::ViewerData::image_texture(const std::string fileNam
 		dirty |= MeshGL::DIRTY_TEXTURE;
 	else
 		std::cout<<"can't open texture file"<<std::endl;
-
-
-
 }
 
 IGL_INLINE void igl::opengl::ViewerData::grid_texture()

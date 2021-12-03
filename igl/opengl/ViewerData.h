@@ -75,7 +75,7 @@ public:
        Eigen::MatrixXi& /*EF*/,
        Eigen::MatrixXi& /*EI*/,
       double& cost,
-      Eigen::RowVectorXd& p);
+      Eigen::Vector3d& p);
 
   ViewerData();
   
