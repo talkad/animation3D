@@ -67,7 +67,6 @@ IGL_INLINE void igl::opengl::ViewerData::Simplification(int num_of_faces) {
     for (int j = 0; j < num_of_faces; j++)
     {
         if (!new_collapse_edge(V, F, E, EMAP, EF, EI, *Q, *Q_iterator, C))
-        //if (!new_collapse_edge(V, F))
         {
             break;
         }
