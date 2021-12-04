@@ -13,7 +13,9 @@ SandBox::SandBox()
 }
 
 void SandBox::Init(const std::string &config)
-{
+{	
+	int sign = 1;
+
 	std::string item_name;
 	std::ifstream nameFileout;
 	doubleVariable = 0;
@@ -37,8 +39,12 @@ void SandBox::Init(const std::string &config)
 			data().line_width = 2;
 			data().set_visible(false, 1);
 
-			
+			// set new location
+			data().MyTranslate(Eigen::Vector3d(1.5 * sign, 0, 0), true);
+			sign *= -1;
+
 		}
+
 		nameFileout.close();
 	}
 	MyTranslate(Eigen::Vector3d(0, 0, -1), true);
