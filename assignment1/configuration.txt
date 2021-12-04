@@ -1,2 +1,2 @@
-C:\Users\ipism\source\repos\animation3D\tutorial\data\cube.obj
-C:\Users\ipism\source\repos\animation3D\tutorial\data\sphere.obj
+C:\Users\tal74\animation\EngineForAnimationCourse\tutorial\data\cube.obj
+C:\Users\tal74\animation\EngineForAnimationCourse\tutorial\data\sphere.obj

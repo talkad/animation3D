@@ -1,10 +1,7 @@
-# Directories
 build
 cmake
 externals
 tutorial/data
 tutorial/textures
-assignment1/configuration.txt
-assignment1/sandBox_bin.exe
-
-# Files
+assignment1
+.vs
