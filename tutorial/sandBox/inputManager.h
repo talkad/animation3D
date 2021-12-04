@@ -158,27 +158,26 @@ static void glfw_key_callback(GLFWwindow* window, int key, int scancode, int act
 			break;
 		case 'w':
 		case 'W':
-			rndr->TranslateCamera(Eigen::Vector3f(0, 0, 0.03f));
+			scn->data().update_direction('w');
 			break;
 		case 's':
 		case 'S':
-			rndr->TranslateCamera(Eigen::Vector3f(0, 0, -0.03f));
+			scn->data().update_direction('s');
 			break;
 		case GLFW_KEY_UP:
-			rndr->TranslateCamera(Eigen::Vector3f(0, 0.01f,0));
+			scn->data().update_direction(GLFW_KEY_UP);
 			break;
 		case GLFW_KEY_DOWN:
-			rndr->TranslateCamera(Eigen::Vector3f(0, -0.01f,0));
-
+			scn->data().update_direction(GLFW_KEY_DOWN);
 			break;
 		case GLFW_KEY_LEFT:
-				rndr->TranslateCamera(Eigen::Vector3f(-0.01f, 0,0));
+			scn->data().update_direction(GLFW_KEY_LEFT);
 			break;
 		case GLFW_KEY_RIGHT:
-			rndr->TranslateCamera(Eigen::Vector3f(0.01f, 0, 0));
+			scn->data().update_direction(GLFW_KEY_RIGHT);
 			break;
 		case ' ':
-
+			scn->data().update_direction(' ');
 			break;
 		
 		default: 

@@ -41,8 +41,11 @@ void SandBox::Init(const std::string &config)
 
 			// set new location
 			data().MyTranslate(Eigen::Vector3d(1.5 * sign, 0, 0), true);
-			sign *= -1;
+			if (sign == 1) {
+				data().update_direction(263); // move left
+			}
 
+			sign *= -1;
 		}
 
 		nameFileout.close();

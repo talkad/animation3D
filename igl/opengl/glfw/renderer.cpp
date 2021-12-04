@@ -70,6 +70,8 @@ IGL_INLINE void Renderer::draw(GLFWwindow* window)
 		int indx = 0;
 		for (auto& mesh : scn->data_list)
 		{
+			// move objects every frame
+			mesh.move();
 
 			if (mesh.is_visible & core.id)
 			{// for kinematic chain change scn->MakeTrans to parent matrix

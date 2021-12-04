@@ -38,6 +38,36 @@ IGL_INLINE igl::opengl::ViewerData::ViewerData()
   clear();
 };
 
+IGL_INLINE void igl::opengl::ViewerData::update_direction(int dir) {
+    direction = dir;
+}
+
+IGL_INLINE void igl::opengl::ViewerData::move() {
+    double step = 0.01;
+
+    switch (direction) {
+    case 'w': // in
+        MyTranslate(Eigen::Vector3d(0, 0, -step), true);
+        break;
+    case 's': // out
+        MyTranslate(Eigen::Vector3d(0, 0, step), true);
+        break;
+    case 265: // up
+        MyTranslate(Eigen::Vector3d(0, step, 0), true);
+        break;
+    case 264: // down
+        MyTranslate(Eigen::Vector3d(0, -step, 0), true);
+        break;
+    case 263: // left
+        MyTranslate(Eigen::Vector3d(-step, 0, 0), true);
+        break;
+    case 262: // right
+        MyTranslate(Eigen::Vector3d(step, 0, 0), true);
+        break;
+    default: break;
+    }
+}
+
 IGL_INLINE void igl::opengl::ViewerData::set_face_based(bool newvalue)
 {
   if (face_based != newvalue)

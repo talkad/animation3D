@@ -44,6 +44,12 @@ class ViewerData : public Movable
 public:
   ViewerData();
   
+  // update the moving direction of the object
+  IGL_INLINE void update_direction(int dir);
+
+  // move the object according to the chosen direction
+  IGL_INLINE void move();
+
   // Empty all fields
   IGL_INLINE void clear();
 
@@ -151,6 +157,8 @@ public:
 
   Eigen::MatrixXd V; // Vertices of the current mesh (#V x 3)
   Eigen::MatrixXi F; // Faces of the mesh (#F x 3)
+
+  int direction;
 
   // Per face attributes
   Eigen::MatrixXd F_normals; // One normal per face
