@@ -17,6 +17,289 @@
 #include <iostream>
 //#include "external/stb/igl_stb_image.h"
 
+#include <igl/edge_flaps.h>
+#include <igl/shortest_edge_and_midpoint.h>
+#include <igl/collapse_edge.h>
+#include <igl/circulation.h>
+#include <igl\vertex_triangle_adjacency.h>
+
+
+IGL_INLINE bool igl::opengl::ViewerData::init_mesh()
+{
+    F = F_clone;
+    V = V_clone;
+    Q = new PriorityQueue();
+    Q_iterator = new std::vector<PriorityQueue::iterator>();
+    edge_col_num = 0;
+    edge_flaps(F, E, EMAP, EF, EI); // fill in mappings between vertex and faces
+
+    Q_iterator->resize(E.rows());
+
+    C.resize(E.rows(), V.cols());
+    Q->clear();
+    
+    Q_vertex_error.resize(V.rows());
+    Quadratic_error_vertex(); // initiate vertices quadratic errors
+
+    double cost = 0;
+    Eigen::Vector3d p = Eigen::Vector3d::Zero(3);;
+
+    for (int e_id = 0; e_id < E.rows(); e_id++)
+    {
+        new_cost_and_placement(e_id, V, F, E, EMAP, EF, EI, cost, p);
+
+        C.row(e_id) = p;
+        (*Q_iterator)[e_id] = Q->insert(std::pair<double, int>(cost, e_id)).first;
+    }
+
+    set_mesh(V, F);
+
+    return true;
+}
+
+
+IGL_INLINE void igl::opengl::ViewerData::IGL_Simplification(int num_of_faces) {
+
+
+    bool is_collapsed = false;
+    int currenct_col_num = 0;
+
+    for (int j = 0; j < num_of_faces; j++)
+    {
+        if (!collapse_edge(shortest_edge_and_midpoint, V, F, E, EMAP, EF, EI, *Q, *Q_iterator, C))
+        {
+            break;
+        }
+
+        is_collapsed = true;
+        edge_col_num++;
+        currenct_col_num++;
+    }
+
+    if (is_collapsed)
+    {
+        Eigen::MatrixXd new_V = V;
+        Eigen::MatrixXi new_F = F;
+
+        clear();
+        set_mesh(new_V, new_F);
+        set_face_based(true);
+        dirty = 157; //this line prevents texture coordinates update
+    }
+
+    std::cout << "num of total collapsed edges: " << edge_col_num << " | num of currenct collapsed edges: " << currenct_col_num << std::endl;
+}
+
+
+
+IGL_INLINE void igl::opengl::ViewerData::Simplification(int num_of_faces) {
+
+
+    bool is_collapsed = false;
+    int currenct_col_num = 0;
+
+    for (int j = 0; j < num_of_faces; j++)
+    {
+        if (!new_collapse_edge(V, F, E, EMAP, EF, EI, *Q, *Q_iterator, C))
+        {
+            break;
+        }
+
+        is_collapsed = true;
+        edge_col_num++;
+        currenct_col_num++;
+    }
+
+    if (is_collapsed)
+    {
+        Eigen::MatrixXd new_V = V;
+        Eigen::MatrixXi new_F = F;
+
+        clear();
+        set_mesh(new_V, new_F);
+        set_face_based(true);
+        dirty = 157; //this line prevents texture coordinates update
+    }
+    
+    std::cout << "num of total collapsed edges: " << edge_col_num << " | num of currenct collapsed edges: " << currenct_col_num << std::endl;
+}
+
+// calc Kp according to the article
+IGL_INLINE Eigen::Matrix4d igl::opengl::ViewerData::calc_Kp(int vertex_index, int face_index) {
+    Eigen::Vector3d norm = F_normals.row(face_index).normalized();
+    double d = V.row(vertex_index) * norm;
+    double a = norm[0], b = norm[1], c = norm[2];
+    d *= -1;
+
+    Eigen::Matrix4d Kp;
+    Kp.row(0) = Eigen::Vector4d(a * a, a * b, a * c, a * d);
+    Kp.row(1) = Eigen::Vector4d(a * b, b * b, b * c, b * d);
+    Kp.row(2) = Eigen::Vector4d(a * c, b * c, c * c, c * d);
+    Kp.row(3) = Eigen::Vector4d(a * d, d * b, d * c, d * d);
+
+    return Kp;
+}
+
+IGL_INLINE void igl::opengl::ViewerData::Quadratic_error_vertex() {
+
+    Eigen::MatrixXd V = V_clone;
+    Eigen::MatrixXi F = F_clone;
+    std::vector<std::vector<int> > VF;
+    std::vector<std::vector<int> > VFi;
+
+    igl::vertex_triangle_adjacency(V, F, VF, VFi);    // constructs the vertex-face topology of a given mesh
+
+    for (int vi = 0; vi < V.rows(); vi++) {
+
+        Q_vertex_error[vi] = Eigen::Matrix4d::Zero(); // initializing quadratic error for each vertex with zero
+
+        for (int fi = 0; fi < VF[vi].size(); fi++) {
+
+            Q_vertex_error[vi] += calc_Kp(vi, VF[vi][fi]);
+        }
+
+    }
+}
+
+IGL_INLINE void igl::opengl::ViewerData::new_cost_and_placement(
+    int e,
+    Eigen::MatrixXd& V,
+    Eigen::MatrixXi& /*F*/,
+    Eigen::MatrixXi& E,
+    Eigen::VectorXi& /*EMAP*/,
+    Eigen::MatrixXi& /*EF*/,
+    Eigen::MatrixXi& /*EI*/,
+    double& cost,
+    Eigen::Vector3d& p)
+{
+    int vertex1_id = E(e, 0);
+    int vertex2_id = E(e, 1);
+
+    Eigen::Matrix4d Q = Q_vertex_error[vertex1_id] + Q_vertex_error[vertex2_id]; 
+
+    Eigen::Matrix4d Q_grad = Q;
+    Q_grad.row(3) = Eigen::Vector4d(0, 0, 0, 1);   // The bottom row of the matrix is empty because v¯ is an homogeneous vector
+
+    bool is_invertable;
+    Eigen::Vector4d::Scalar det;
+    double threshold;
+    Q_grad.computeInverseAndDetWithCheck(Q_grad, det, is_invertable, threshold);
+
+    if (is_invertable) {
+        Eigen::Vector4d v_hat;
+
+        v_hat = Q_grad * (Eigen::Vector4d(0, 0, 0, 1));
+        p[0] = v_hat[0], p[1] = v_hat[1], p[2] = v_hat[2];
+        cost = v_hat.transpose() * Q * v_hat;
+
+    }
+    // find the optimal vertex along the segment between the vertices
+    else { 
+        int num_of_segment = 9;
+
+        Eigen::Vector3d v1 = V.row(vertex1_id);
+        Eigen::Vector3d v2 = V.row(vertex2_id);
+
+        Eigen::Vector3d base_vertex = v1;
+        Eigen::Vector4d current_p = Eigen::Vector4d(base_vertex[0], base_vertex[1], base_vertex[2], 1);
+        double currenct_cost = current_p.transpose() * Q * current_p; 
+
+        Eigen::Vector4d opt_p = current_p;  
+        double min_cost = currenct_cost;
+
+        double d_x = (v2[0] - v1[0]) / num_of_segment;
+        double d_y = (v2[1] - v1[1]) / num_of_segment;
+        double d_z = (v2[2] - v1[2]) / num_of_segment;
+
+        for (int i = 1; i <= num_of_segment + 1; i++) {
+            current_p = Eigen::Vector4d(base_vertex[0] + d_x * i, base_vertex[1] + d_y * i, base_vertex[2] + d_z * i, 1);
+            currenct_cost = current_p.transpose() * Q * current_p;
+
+            if (currenct_cost < min_cost) {
+                min_cost = currenct_cost;
+                opt_p = current_p;
+            }
+        }
+
+        p[0] = opt_p[0], p[1] = opt_p[1], p[2] = opt_p[2];
+        cost = min_cost;
+    }
+
+    ///* naive approach
+    //
+    //else {
+    //    p = 0.5 * (V.row(vertex1_id) + V.row(vertex2_id));
+    //    // v_hat[0] = p[0], v_hat[1] = p[1], v_hat[2] = p[2], v_hat[3] = 1;
+
+    //    cost = (V.row(vertex1_id) - V.row(vertex2_id)).norm();
+    //}
+    //*/
+}
+
+IGL_INLINE bool igl::opengl::ViewerData::new_collapse_edge(
+    Eigen::MatrixXd& V,
+    Eigen::MatrixXi& F,
+    Eigen::MatrixXi& E,
+    Eigen::VectorXi& EMAP,
+    Eigen::MatrixXi& EF,
+    Eigen::MatrixXi& EI,
+    std::set<std::pair<double, int> >& Q,
+    std::vector<std::set<std::pair<double, int> >::iterator >& Qit,
+    Eigen::MatrixXd& C)
+{
+    std::pair<double, int> edge;
+    if (Q.empty() || (edge = *(Q.begin())).first == std::numeric_limits<double>::infinity()) // Guard - check if there is an edge to collapse
+        return false;                                                                        // If exists and has finite cost - a. Takes out the loewst cost edge from queue. 
+
+    Q.erase(Q.begin()); // b. Deletes edge
+    Qit[edge.second] = Q.end();
+
+    int vertex1_idx = E.row(edge.second)[0],
+        vertex2_idx = E.row(edge.second)[1],
+        e1, e2, f1, f2;
+    double cost = 0;
+    Eigen::Vector3d new_p = Eigen::Vector3d::Zero(3);
+    std::vector<int> nf = circulation(edge.second, true, EMAP, EF, EI);
+    std::vector<int> opposite_nf = circulation(edge.second, false, EMAP, EF, EI);
+
+    nf.insert(nf.begin(), opposite_nf.begin(), opposite_nf.end());
+
+    // Steps c and d are performed in igl function collapse_edge
+    if (igl::collapse_edge(edge.second, C.row(edge.second), V, F, E, EMAP, EF, EI, e1, e2, f1, f2)) {
+        Q_vertex_error[vertex1_idx] = Q_vertex_error[vertex2_idx] =
+            Q_vertex_error[vertex1_idx] + Q_vertex_error[vertex2_idx]; // e. Updates new vertex edges errors
+
+        Q.erase(Qit[e1]);
+        Q.erase(Qit[e2]);
+        Qit[e1] = Q.end();
+        Qit[e2] = Q.end();
+
+        for (auto face : nf) {
+            if (F(face, 0) != IGL_COLLAPSE_EDGE_NULL ||
+                F(face, 1) != IGL_COLLAPSE_EDGE_NULL ||
+                F(face, 2) != IGL_COLLAPSE_EDGE_NULL)
+            {
+                for (int v = 0; v < 3; ++v) {
+                    int ei = EMAP(v * F.rows() + face);
+                    Q.erase(Qit[ei]);
+                    new_cost_and_placement(ei, V, F, E, EMAP, EF, EI, cost, new_p);
+                    Qit[ei] = Q.insert(std::pair<double, int>(cost, ei)).first;
+                    C.row(ei) = new_p;
+                }
+            }
+        }
+
+        std::cout << "edge " << edge.second << " cost = " << cost << ", new v position (" << new_p[0] << ","
+            << new_p[1] << "," << new_p[2] << ")" << std::endl;
+
+    }
+    else {
+        edge.first = std::numeric_limits<double>::infinity();
+        Qit[edge.second] = Q.insert(edge).first;
+    }
+    return true;
+}
+
 IGL_INLINE igl::opengl::ViewerData::ViewerData()
 : dirty(MeshGL::DIRTY_ALL),
   show_faces(true),
@@ -450,9 +733,6 @@ IGL_INLINE void igl::opengl::ViewerData::image_texture(const std::string fileNam
 		dirty |= MeshGL::DIRTY_TEXTURE;
 	else
 		std::cout<<"can't open texture file"<<std::endl;
-
-
-
 }
 
 IGL_INLINE void igl::opengl::ViewerData::grid_texture()

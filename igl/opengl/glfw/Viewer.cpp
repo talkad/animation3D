@@ -42,6 +42,11 @@
 #include <igl/unproject.h>
 #include <igl/serialize.h>
 
+
+#include <igl/edge_flaps.h>
+#include <igl/shortest_edge_and_midpoint.h>
+
+
 // Internal global variables used for glfw event handling
 //static igl::opengl::glfw::Viewer * __viewer;
 static double highdpi = 1;
@@ -55,6 +60,8 @@ namespace opengl
 {
 namespace glfw
 {
+
+  typedef std::set<std::pair<double, int> > PriorityQueue;
 
   void Viewer::Init(const std::string config)
   {
@@ -105,9 +112,8 @@ namespace glfw
   }
 
   IGL_INLINE bool Viewer::load_mesh_from_file(
-      const std::string & mesh_file_name_string)
+      const std::string &mesh_file_name_string)
   {
-
     // Create new data slot and set to selected
     if(!(data().F.rows() == 0  && data().V.rows() == 0))
     {
@@ -176,10 +182,13 @@ namespace glfw
       data().grid_texture();
     }
     
-
     //for (unsigned int i = 0; i<plugins.size(); ++i)
     //  if (plugins[i]->post_load())
     //    return true;
+
+    data().V_clone = data().V;
+    data().F_clone = data().F;
+    data().init_mesh();      // initiationg the data structure
 
     return true;
   }

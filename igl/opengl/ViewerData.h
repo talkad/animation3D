@@ -16,7 +16,7 @@
 //#include <Eigen/Core>
 #include <memory>
 #include <vector>
-
+#include <set>
 
 // Alec: This is a mesh class containing a variety of data types (normals,
 // overlays, material colors, etc.)
@@ -29,6 +29,8 @@
 // See this thread for a more detailed discussion:
 // https://github.com/libigl/libigl/pull/1029
 //
+
+
 namespace igl
 {
 
@@ -42,6 +44,41 @@ namespace opengl
 class ViewerData : public Movable
 {
 public:
+
+  typedef std::set<std::pair<double, int> > PriorityQueue;
+
+  IGL_INLINE bool init_mesh();
+
+  IGL_INLINE void IGL_Simplification(int num_of_faces);
+
+  IGL_INLINE void Simplification(int num_of_faces);
+
+  IGL_INLINE Eigen::Matrix4d calc_Kp(int vi, int fi);
+
+  IGL_INLINE void Quadratic_error_vertex();
+
+  IGL_INLINE bool igl::opengl::ViewerData::new_collapse_edge(
+      Eigen::MatrixXd& V,
+      Eigen::MatrixXi& F,
+      Eigen::MatrixXi& E,
+      Eigen::VectorXi& EMAP,
+      Eigen::MatrixXi& EF,
+      Eigen::MatrixXi& EI,
+      std::set<std::pair<double, int> >& Q,
+      std::vector<std::set<std::pair<double, int> >::iterator >& Qit,
+      Eigen::MatrixXd& C);
+
+  IGL_INLINE void igl::opengl::ViewerData::new_cost_and_placement(
+       int e,
+       Eigen::MatrixXd& V,
+       Eigen::MatrixXi& /*F*/,
+       Eigen::MatrixXi& E,
+       Eigen::VectorXi& /*EMAP*/,
+       Eigen::MatrixXi& /*EF*/,
+       Eigen::MatrixXi& /*EI*/,
+      double& cost,
+      Eigen::Vector3d& p);
+
   ViewerData();
   
   // Empty all fields
@@ -149,8 +186,21 @@ public:
   // Copy visualization options from one viewport to another
   //IGL_INLINE void copy_options(const ViewerCore &from, const ViewerCore &to);
 
-  Eigen::MatrixXd V; // Vertices of the current mesh (#V x 3)
-  Eigen::MatrixXi F; // Faces of the mesh (#F x 3)
+  // variables for edge_flaps
+  Eigen::MatrixXi E;    // edges <index of source vertex, index of destination vertex>
+  Eigen::VectorXi EMAP; // connects faces to edges
+  Eigen::MatrixXi EF;   // connects edges to faces
+  Eigen::MatrixXi EI;   // connects edge to vertex index in triangle (0,1,2)
+  PriorityQueue* Q;     //  priority queue containing cost for every edge
+  Eigen::MatrixXd C;    //  position of the new vertex after collapsing the corresponding edge (in model coordinates).
+
+  int edge_col_num;     // num of edges collapased by the decimation algorithm
+  std::vector<PriorityQueue::iterator >* Q_iterator;  // iterate over the edges
+
+  Eigen::MatrixXd V, V_clone; // Vertices of the current mesh (#V x 3)
+  Eigen::MatrixXi F, F_clone; // Faces of the mesh (#F x 3)
+
+  std::vector <Eigen::Matrix4d> Q_vertex_error;  // compute the error for each vertex
 
   // Per face attributes
   Eigen::MatrixXd F_normals; // One normal per face

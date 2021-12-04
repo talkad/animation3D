@@ -158,18 +158,14 @@ void Renderer::MouseProcessing(int button)
 			double xToMove = -(double)xrel / core().viewport[3] * (z + 2 * near) * (far) / (far + 2 * near) * 2.0 * tanf(angle / 360 * M_PI) / (core().camera_zoom * core().camera_base_zoom);
 			double yToMove = (double)yrel / core().viewport[3] * (z + 2 * near) * (far) / (far + 2 * near) * 2.0 * tanf(angle / 360 * M_PI) / (core().camera_zoom * core().camera_base_zoom);
 
-			scn->data().MyTranslate(Eigen::Vector3d(xToMove, 0, 0), true);
-			scn->data().MyTranslate(Eigen::Vector3d(0, yToMove, 0), true);
+			scn->data().MyTranslateInSystem(scn->GetRotation(), Eigen::Vector3d(xToMove, 0, 0));
+			scn->data().MyTranslateInSystem(scn->GetRotation(), Eigen::Vector3d(0, yToMove, 0));
 			scn->WhenTranslate();
 		}
 		else
 		{
-			scn->data().MyRotate(Eigen::Vector3d(1, 0, 0), (-yrel / 180));
-			scn->data().MyRotate(Eigen::Vector3d(0, 1, 0), (-xrel / 180));
-
-			//scn->data().MyRotate(scn->data().MakeTransd().block<3,3>(0, 0));
-
-			//scn->data().MyRotate(scn->data().MakeTransd().block<3, 3>(0, 0));
+			scn->data().RotateInSystem(Eigen::Vector3d(1, 0, 0), yrel / 180.0);
+			scn->data().RotateInSystem(Eigen::Vector3d(0, 1, 0), xrel / 180.0);
 
 		}
 	}
@@ -183,18 +179,15 @@ void Renderer::MouseProcessing(int button)
 
 			double xToMove = -(double)xrel / core().viewport[3] * far / z * near * 2.0f * tanf(angle / 360 * M_PI) / (core().camera_zoom * core().camera_base_zoom);
 			double yToMove = (double)yrel / core().viewport[3] * far / z * near * 2.0f * tanf(angle / 360 * M_PI) / (core().camera_zoom * core().camera_base_zoom);
-			scn->MyTranslate(Eigen::Vector3d(xToMove, 0, 0), false);
-			scn->MyTranslate(Eigen::Vector3d(0, yToMove, 0), false);
+
+			scn->MyTranslate(Eigen::Vector3d(xToMove, 0, 0), true);
+			scn->MyTranslate(Eigen::Vector3d(0, yToMove, 0), true);
 
 		}
 		else
 		{
-			scn->MyRotate(Eigen::Vector3d(1, 0, 0), (-yrel / 180));
-			scn->MyRotate(Eigen::Vector3d(0, 1, 0), (-xrel / 180));
-
-			//scn->MyRotate(scn->MakeTransd().block<3, 3>(0, 0));
-			//scn->MyRotate(scn->MakeTransd().block<3, 3>(0, 0));
-
+			scn->RotateInSystem(Eigen::Vector3d(1, 0, 0), yrel / 180.0);
+			scn->RotateInSystem(Eigen::Vector3d(0, 1, 0), xrel / 180.0);
 		}
 	}
 }

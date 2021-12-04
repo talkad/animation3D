@@ -1,4 +1,7 @@
-# Directories
 build
-
-# Files
+cmake
+externals
+tutorial/data
+tutorial/textures
+assignment1
+.vs
