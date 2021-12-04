@@ -67,7 +67,8 @@ namespace glfw
     selected_data_index(0),
     next_data_id(1),
 	isPicked(false),
-	isActive(false)
+	isActive(false),
+    isCollide(false)
   {
     data_list.front().id = 0;
 
@@ -102,6 +103,15 @@ namespace glfw
 
   IGL_INLINE Viewer::~Viewer()
   {
+  }
+
+  // check if two object in data_list are collided
+  // assume there are exactly two objects
+  IGL_INLINE bool Viewer::check_collision() {
+      if(!isCollide)
+          isCollide = data_list[0].kd_tree.m_box.intersects(data_list[1].kd_tree.m_box);
+
+      return isCollide;
   }
 
   IGL_INLINE bool Viewer::load_mesh_from_file(
@@ -180,6 +190,8 @@ namespace glfw
     //for (unsigned int i = 0; i<plugins.size(); ++i)
     //  if (plugins[i]->post_load())
     //    return true;
+
+    data().init(); // initiate object fields
 
     return true;
   }

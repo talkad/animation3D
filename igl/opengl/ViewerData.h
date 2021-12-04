@@ -9,6 +9,7 @@
 #define IGL_VIEWERDATA_H
 
 #include "../igl_inline.h"
+#include <igl/AABB.h>
 #include "MeshGL.h"
 #include <cassert>
 #include <cstdint>
@@ -44,11 +45,17 @@ class ViewerData : public Movable
 public:
   ViewerData();
   
+  // initiate object fields
+  IGL_INLINE void init();
+
   // update the moving direction of the object
   IGL_INLINE void update_direction(int dir);
 
   // move the object according to the chosen direction
   IGL_INLINE void move();
+ 
+  // move the object according to the chosen direction
+  IGL_INLINE void drawAlignedBox(Eigen::AlignedBox<double, 3>);
 
   // Empty all fields
   IGL_INLINE void clear();
@@ -159,6 +166,7 @@ public:
   Eigen::MatrixXi F; // Faces of the mesh (#F x 3)
 
   int direction;
+  igl::AABB<Eigen::MatrixXd, 3> kd_tree;
 
   // Per face attributes
   Eigen::MatrixXd F_normals; // One normal per face

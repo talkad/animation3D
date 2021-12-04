@@ -65,16 +65,23 @@ IGL_INLINE void Renderer::draw(GLFWwindow* window)
 		menu->pre_draw();
 		menu->callback_draw_viewer_menu();
 	}
+
 	for (auto& core : core_list)
 	{
 		int indx = 0;
 		for (auto& mesh : scn->data_list)
 		{
-			// move objects every frame
-			mesh.move();
+			// as long as there is no collision - move objects every frame
+			if (!scn->isCollide) {
+				mesh.move();
+			}
 
 			if (mesh.is_visible & core.id)
 			{// for kinematic chain change scn->MakeTrans to parent matrix
+				
+				
+				Eigen::AlignedBox<double, 3> alignedBox = mesh.kd_tree.m_box;
+				mesh.drawAlignedBox(alignedBox);
 
 				core.draw(scn->MakeTransScale() * scn->CalcParentsTrans(indx).cast<float>(), mesh);
 			}
