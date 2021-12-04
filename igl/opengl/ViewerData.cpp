@@ -58,6 +58,40 @@ IGL_INLINE bool igl::opengl::ViewerData::init_mesh()
 }
 
 
+IGL_INLINE void igl::opengl::ViewerData::IGL_Simplification(int num_of_faces) {
+
+
+    bool is_collapsed = false;
+    int currenct_col_num = 0;
+
+    for (int j = 0; j < num_of_faces; j++)
+    {
+        if (!collapse_edge(shortest_edge_and_midpoint, V, F, E, EMAP, EF, EI, *Q, *Q_iterator, C))
+        {
+            break;
+        }
+
+        is_collapsed = true;
+        edge_col_num++;
+        currenct_col_num++;
+    }
+
+    if (is_collapsed)
+    {
+        Eigen::MatrixXd new_V = V;
+        Eigen::MatrixXi new_F = F;
+
+        clear();
+        set_mesh(new_V, new_F);
+        set_face_based(true);
+        dirty = 157; //this line prevents texture coordinates update
+    }
+
+    std::cout << "num of total collapsed edges: " << edge_col_num << " | num of currenct collapsed edges: " << currenct_col_num << std::endl;
+}
+
+
+
 IGL_INLINE void igl::opengl::ViewerData::Simplification(int num_of_faces) {
 
 

@@ -180,6 +180,10 @@ static void glfw_key_callback(GLFWwindow* window, int key, int scancode, int act
 		case ' ':
 			scn->data().Simplification(std::ceil(0.05 * scn->data().Q->size()));
 			break;
+		case 'c':
+		case 'C':
+			scn->data().IGL_Simplification(std::ceil(0.05 * scn->data().Q->size()));
+			break;
 		
 		default: 
 			Eigen::Vector3f shift;

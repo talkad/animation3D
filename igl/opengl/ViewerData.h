@@ -49,6 +49,8 @@ public:
 
   IGL_INLINE bool init_mesh();
 
+  IGL_INLINE void IGL_Simplification(int num_of_faces);
+
   IGL_INLINE void Simplification(int num_of_faces);
 
   IGL_INLINE Eigen::Matrix4d calc_Kp(int vi, int fi);
