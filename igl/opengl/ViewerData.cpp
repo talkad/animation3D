@@ -357,7 +357,7 @@ IGL_INLINE void igl::opengl::ViewerData::set_mesh(
       Eigen::Vector3d(GOLD_AMBIENT[0], GOLD_AMBIENT[1], GOLD_AMBIENT[2]),
       Eigen::Vector3d(GOLD_DIFFUSE[0], GOLD_DIFFUSE[1], GOLD_DIFFUSE[2]),
       Eigen::Vector3d(GOLD_SPECULAR[0], GOLD_SPECULAR[1], GOLD_SPECULAR[2]));
-	image_texture("C:/Users/tal74/animation/EngineForAnimationCourse/tutorial/textures/snake1.png");
+	image_texture("C:/Users/ipism/source/repos/animation3D/tutorial/textures/snake1.png");
 //    grid_texture();
   }
   else

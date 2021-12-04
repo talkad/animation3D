@@ -1,0 +1,162 @@
+^C:\USERS\IPISM\SOURCE\REPOS\ANIMATION3D\EXTERNAL\.CACHE\LIBIGL-IMGUI\CMAKEFILES\FCAD87FE09CAAD48407E781AE5E341E0\LIBIGL-IMGUI-DOWNLOAD-MKDIR.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ipism/source/repos/animation3D/cmake/../external/libigl-imgui
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ipism/source/repos/animation3D/build/libigl-imgui-build
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ipism/source/repos/animation3D/external/.cache/libigl-imgui/libigl-imgui-download-prefix
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ipism/source/repos/animation3D/external/.cache/libigl-imgui/libigl-imgui-download-prefix/tmp
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ipism/source/repos/animation3D/external/.cache/libigl-imgui/libigl-imgui-download-prefix/src/libigl-imgui-download-stamp/Debug
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ipism/source/repos/animation3D/external/.cache/libigl-imgui/libigl-imgui-download-prefix/src
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ipism/source/repos/animation3D/external/.cache/libigl-imgui/libigl-imgui-download-prefix/src/libigl-imgui-download-stamp
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/libigl-imgui/libigl-imgui-download-prefix/src/libigl-imgui-download-stamp/Debug/libigl-imgui-download-mkdir
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\IPISM\SOURCE\REPOS\ANIMATION3D\EXTERNAL\.CACHE\LIBIGL-IMGUI\CMAKEFILES\FCAD87FE09CAAD48407E781AE5E341E0\LIBIGL-IMGUI-DOWNLOAD-DOWNLOAD.RULE
+setlocal
+cd C:\Users\ipism\source\repos\animation3D\external
+if %errorlevel% neq 0 goto :cmEnd
+C:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -P C:/Users/ipism/source/repos/animation3D/external/.cache/libigl-imgui/libigl-imgui-download-prefix/tmp/libigl-imgui-download-gitclone.cmake
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/libigl-imgui/libigl-imgui-download-prefix/src/libigl-imgui-download-stamp/Debug/libigl-imgui-download-download
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\IPISM\SOURCE\REPOS\ANIMATION3D\EXTERNAL\.CACHE\LIBIGL-IMGUI\CMAKEFILES\FCAD87FE09CAAD48407E781AE5E341E0\LIBIGL-IMGUI-DOWNLOAD-UPDATE.RULE
+setlocal
+cd C:\Users\ipism\source\repos\animation3D\external\libigl-imgui
+if %errorlevel% neq 0 goto :cmEnd
+C:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -P C:/Users/ipism/source/repos/animation3D/external/.cache/libigl-imgui/libigl-imgui-download-prefix/tmp/libigl-imgui-download-gitupdate.cmake
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\IPISM\SOURCE\REPOS\ANIMATION3D\EXTERNAL\.CACHE\LIBIGL-IMGUI\CMAKEFILES\FCAD87FE09CAAD48407E781AE5E341E0\LIBIGL-IMGUI-DOWNLOAD-PATCH.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E echo_append
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/libigl-imgui/libigl-imgui-download-prefix/src/libigl-imgui-download-stamp/Debug/libigl-imgui-download-patch
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\IPISM\SOURCE\REPOS\ANIMATION3D\EXTERNAL\.CACHE\LIBIGL-IMGUI\CMAKEFILES\FCAD87FE09CAAD48407E781AE5E341E0\LIBIGL-IMGUI-DOWNLOAD-CONFIGURE.RULE
+setlocal
+cd C:\Users\ipism\source\repos\animation3D\build\libigl-imgui-build
+if %errorlevel% neq 0 goto :cmEnd
+C:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E echo_append
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/libigl-imgui/libigl-imgui-download-prefix/src/libigl-imgui-download-stamp/Debug/libigl-imgui-download-configure
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\IPISM\SOURCE\REPOS\ANIMATION3D\EXTERNAL\.CACHE\LIBIGL-IMGUI\CMAKEFILES\FCAD87FE09CAAD48407E781AE5E341E0\LIBIGL-IMGUI-DOWNLOAD-BUILD.RULE
+setlocal
+cd C:\Users\ipism\source\repos\animation3D\build\libigl-imgui-build
+if %errorlevel% neq 0 goto :cmEnd
+C:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E echo_append
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/libigl-imgui/libigl-imgui-download-prefix/src/libigl-imgui-download-stamp/Debug/libigl-imgui-download-build
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\IPISM\SOURCE\REPOS\ANIMATION3D\EXTERNAL\.CACHE\LIBIGL-IMGUI\CMAKEFILES\FCAD87FE09CAAD48407E781AE5E341E0\LIBIGL-IMGUI-DOWNLOAD-INSTALL.RULE
+setlocal
+cd C:\Users\ipism\source\repos\animation3D\build\libigl-imgui-build
+if %errorlevel% neq 0 goto :cmEnd
+C:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E echo_append
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/libigl-imgui/libigl-imgui-download-prefix/src/libigl-imgui-download-stamp/Debug/libigl-imgui-download-install
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\IPISM\SOURCE\REPOS\ANIMATION3D\EXTERNAL\.CACHE\LIBIGL-IMGUI\CMAKEFILES\FCAD87FE09CAAD48407E781AE5E341E0\LIBIGL-IMGUI-DOWNLOAD-TEST.RULE
+setlocal
+cd C:\Users\ipism\source\repos\animation3D\build\libigl-imgui-build
+if %errorlevel% neq 0 goto :cmEnd
+C:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E echo_append
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/libigl-imgui/libigl-imgui-download-prefix/src/libigl-imgui-download-stamp/Debug/libigl-imgui-download-test
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\IPISM\SOURCE\REPOS\ANIMATION3D\EXTERNAL\.CACHE\LIBIGL-IMGUI\CMAKEFILES\E4CB8E753B884C319227F12F8236FF56\LIBIGL-IMGUI-DOWNLOAD-COMPLETE.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ipism/source/repos/animation3D/external/.cache/libigl-imgui/CMakeFiles/Debug
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/libigl-imgui/CMakeFiles/Debug/libigl-imgui-download-complete
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/libigl-imgui/libigl-imgui-download-prefix/src/libigl-imgui-download-stamp/Debug/libigl-imgui-download-done
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\IPISM\SOURCE\REPOS\ANIMATION3D\EXTERNAL\.CACHE\LIBIGL-IMGUI\CMAKEFILES\6E1721AFB2B649243C28248589145777\LIBIGL-IMGUI-DOWNLOAD.RULE
+setlocal
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\IPISM\SOURCE\REPOS\ANIMATION3D\EXTERNAL\.CACHE\LIBIGL-IMGUI\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/ipism/source/repos/animation3D/external/.cache/libigl-imgui -BC:/Users/ipism/source/repos/animation3D/external/.cache/libigl-imgui --check-stamp-file C:/Users/ipism/source/repos/animation3D/external/.cache/libigl-imgui/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
