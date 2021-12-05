@@ -74,19 +74,16 @@ IGL_INLINE void Renderer::draw(GLFWwindow* window)
 			scn->check_collision();
 			std::cout << scn->isCollide << std::endl;
 			// as long as there is no collision - move objects every frame
+
 			if (!scn->isCollide) {
 				mesh.move();
 			}
 
 			if (mesh.is_visible & core.id)
 			{// for kinematic chain change scn->MakeTrans to parent matrix
-				
-				
-				Eigen::AlignedBox<double, 3> alignedBox = mesh.kd_tree.m_box;
-				mesh.drawAlignedBox(alignedBox);
-
 				core.draw(scn->MakeTransScale() * scn->CalcParentsTrans(indx).cast<float>(), mesh);
 			}
+
 			indx++;
 		}
 

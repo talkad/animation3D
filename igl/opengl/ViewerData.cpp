@@ -52,21 +52,27 @@ IGL_INLINE void igl::opengl::ViewerData::move() {
     switch (direction) {
     case 'w': // in
         MyTranslate(Eigen::Vector3d(0, 0, -step), true);
+        kd_tree.m_box.translate(Eigen::Vector3d(0, 0, -step));
         break;
     case 's': // out
         MyTranslate(Eigen::Vector3d(0, 0, step), true);
+        kd_tree.m_box.translate(Eigen::Vector3d(0, 0, step));
         break;
     case 265: // up
         MyTranslate(Eigen::Vector3d(0, step, 0), true);
+        kd_tree.m_box.translate(Eigen::Vector3d(0, step, 0));
         break;
     case 264: // down
         MyTranslate(Eigen::Vector3d(0, -step, 0), true);
+        kd_tree.m_box.translate(Eigen::Vector3d(0, -step, 0));
         break;
     case 263: // left
         MyTranslate(Eigen::Vector3d(-step, 0, 0), true);
+        kd_tree.m_box.translate(Eigen::Vector3d(-step, 0, 0));
         break;
     case 262: // right
         MyTranslate(Eigen::Vector3d(step, 0, 0), true);
+        kd_tree.m_box.translate(Eigen::Vector3d(step, 0, 0));
         break;
     default: break;
     }

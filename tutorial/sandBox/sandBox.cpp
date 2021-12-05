@@ -41,6 +41,12 @@ void SandBox::Init(const std::string &config)
 
 			// set new location
 			data().MyTranslate(Eigen::Vector3d(1.5 * sign, 0, 0), true);
+
+			Eigen::AlignedBox<double, 3> alignedBox = data().kd_tree.m_box;
+			data().drawAlignedBox(alignedBox);
+
+			data().kd_tree.m_box.translate(Eigen::Vector3d(1.5 * sign, 0, 0));
+
 			if (sign == 1) {
 				data().update_direction(263); // move left
 			}
