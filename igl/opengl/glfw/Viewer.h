@@ -68,7 +68,7 @@ namespace glfw
     IGL_INLINE bool save_scene(std::string fname);
 
     // check if two object in data_list are collided
-    IGL_INLINE bool check_collision();
+    IGL_INLINE void check_collision();
 
     // Draw everything
    // IGL_INLINE void draw();

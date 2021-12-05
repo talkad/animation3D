@@ -107,11 +107,9 @@ namespace glfw
 
   // check if two object in data_list are collided
   // assume there are exactly two objects
-  IGL_INLINE bool Viewer::check_collision() {
+  IGL_INLINE void Viewer::check_collision() {
       if(!isCollide)
           isCollide = data_list[0].kd_tree.m_box.intersects(data_list[1].kd_tree.m_box);
-
-      return isCollide;
   }
 
   IGL_INLINE bool Viewer::load_mesh_from_file(

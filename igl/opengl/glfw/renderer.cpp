@@ -71,6 +71,8 @@ IGL_INLINE void Renderer::draw(GLFWwindow* window)
 		int indx = 0;
 		for (auto& mesh : scn->data_list)
 		{
+			scn->check_collision();
+			std::cout << scn->isCollide << std::endl;
 			// as long as there is no collision - move objects every frame
 			if (!scn->isCollide) {
 				mesh.move();
