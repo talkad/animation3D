@@ -105,11 +105,163 @@ namespace glfw
   {
   }
 
+  IGL_INLINE bool Viewer::boxes_collide(Eigen::AlignedBox<double, 3> firstbox, Eigen::AlignedBox<double, 3> secondbox) {
+      double a0 = firstbox.sizes()[0] / 2, a1 = firstbox.sizes()[1] / 2, a2 = firstbox.sizes()[2] / 2,
+             b0 = secondbox.sizes()[0] / 2, b1 = secondbox.sizes()[1] / 2, b2 = secondbox.sizes()[2] / 2,
+             R0, R1, R;
+      Eigen::Matrix3d A, B, C;
+      Eigen::Vector3d D;
+      Eigen::RowVector3d A0 = data_list[0].GetRotation() * Eigen::Vector3d(1, 0, 0),
+                         A1 = data_list[0].GetRotation() * Eigen::Vector3d(0, 1, 0),
+                         A2 = data_list[0].GetRotation() * Eigen::Vector3d(0, 0, 1),
+                         B0 = data_list[1].GetRotation() * Eigen::Vector3d(1, 0, 0),
+                         B1 = data_list[1].GetRotation() * Eigen::Vector3d(0, 1, 0),
+                         B2 = data_list[1].GetRotation() * Eigen::Vector3d(0, 0, 1);
+      A << Eigen::RowVector3d(A0[0], A1[0], A2[0]), Eigen::RowVector3d(A0[1], A1[1], A2[1]), Eigen::RowVector3d(A0[2], A1[2], A2[2]);
+      B << Eigen::RowVector3d(B0[0], B1[0], B2[0]), Eigen::RowVector3d(B0[1], B1[1], B2[1]), Eigen::RowVector3d(B0[2], B1[2], B2[2]);
+      C = A.transpose() * B;
+      D = secondbox.center() - firstbox.center();
+
+      //Table case 1
+      R0 = a0;
+      R1 = (b0 * abs(C(0, 0))) + (b1 * abs(C(0, 1))) + (b2 * abs(C(0, 2)));
+      R = abs(A0.dot(D));
+
+      if (R > R0 + R1) return false;
+
+      //Table case 2
+      R0 = a1;
+      R1 = (b0 * abs(C(1, 0))) + (b1 * abs(C(1, 1))) + (b2 * abs(C(1, 2)));
+      R = abs(A1.dot(D));
+
+      if (R > R0 + R1) return false;
+
+      //Table case 3
+      R0 = a2;
+      R1 = (b0 * abs(C(2, 0))) + (b1 * abs(C(2, 1))) + (b2 * abs(C(2, 2)));
+      R = abs(A2.dot(D));
+
+      if (R > R0 + R1) return false;
+
+      //Table case 4
+      R0 = (a0 * abs(C(0, 0))) + (a1 * abs(C(1, 0))) + (a2 * abs(C(2, 0)));
+      R1 = b0;
+      R = abs(B0.dot(D));
+
+      if (R > R0 + R1) return false;
+
+      //Table case 5
+      R0 = (a0 * abs(C(0, 1))) + (a1 * abs(C(1, 1))) + (a2 * abs(C(2, 1)));
+      R1 = b1;
+      R = abs(B1.dot(D));
+
+      if (R > R0 + R1) return false;
+
+      //Table case 6
+      R0 = (a0 * abs(C(0, 2))) + (a1 * abs(C(1, 2))) + (a2 * abs(C(2, 2)));
+      R1 = b2;
+      R = abs(B2.dot(D));
+
+      if (R > R0 + R1) return false;
+
+      //Table case 7
+      R0 = (a1 * abs(C(2, 0))) + (a2 * abs(C(1, 0)));
+      R1 = (b1 * abs(C(0, 2))) + (b2 * abs(C(0, 1)));
+      R = abs((C(1, 0) * A2).dot(D) - (C(2, 0) * A1).dot(D));
+
+      if (R > R0 + R1) return false;
+
+      //Table case 8
+      R0 = (a1 * abs(C(2, 1))) + (a2 * abs(C(1, 1)));
+      R1 = (b0 * abs(C(0, 2))) + (b2 * abs(C(0, 0)));
+      R = abs((C(1, 1) * A2).dot(D) - (C(2, 1) * A1).dot(D));
+
+      if (R > R0 + R1) return false;
+
+      //Table case 9
+      R0 = (a1 * abs(C(2, 2))) + (a2 * abs(C(1, 2)));
+      R1 = (b0 * abs(C(0, 1))) + (b1 * abs(C(0, 0)));
+      R = abs((C(1, 2) * A2).dot(D) - (C(2, 2) * A1).dot(D));
+
+      if (R > R0 + R1) return false;
+
+      //Table case 10
+      R0 = (a0 * abs(C(2, 0))) + (a2 * abs(C(0, 0)));
+      R1 = (b1 * abs(C(1, 2))) + (b2 * abs(C(1, 1)));
+      R = abs((C(2, 0) * A0).dot(D) - (C(0, 0) * A2).dot(D));
+
+      if (R > R0 + R1) return false;
+
+      //Table case 11
+      R0 = (a0 * abs(C(2, 1))) + (a2 * abs(C(0, 1)));
+      R1 = (b0 * abs(C(1, 2))) + (b2 * abs(C(1, 0)));
+      R = abs((C(2, 1) * A0).dot(D) - (C(0, 1) * A2).dot(D));
+
+      if (R > R0 + R1) return false;
+
+      //Table case 12
+      R0 = (a0 * abs(C(2, 2))) + (a2 * abs(C(0, 2)));
+      R1 = (b0 * abs(C(1, 1))) + (b1 * abs(C(1, 0)));
+      R = abs((C(2, 2) * A0).dot(D) - (C(0, 2) * A2).dot(D));
+
+      if (R > R0 + R1) return false;
+
+      //Table case 13
+      R0 = (a0 * abs(C(1, 0))) + (a1 * abs(C(0, 0)));
+      R1 = (b1 * abs(C(2, 2))) + (b2 * abs(C(2, 1)));
+      R = abs((C(0, 0) * A1).dot(D) - (C(1, 0) * A0).dot(D));
+
+      if (R > R0 + R1) return false;
+
+      //Table case 14
+      R0 = (a0 * abs(C(1, 1))) + (a1 * abs(C(0, 1)));
+      R1 = (b0 * abs(C(2, 2))) + (b2 * abs(C(2, 0)));
+      R = abs((C(0, 1) * A1).dot(D) - (C(1, 1) * A0).dot(D));
+
+      if (R > R0 + R1) return false;
+
+      //Table case 15
+      R0 = (a0 * abs(C(1, 2))) + (a1 * abs(C(0, 2)));
+      R1 = (b0 * abs(C(2, 1))) + (b1 * abs(C(2, 0)));
+      R = abs((C(0, 2) * A1).dot(D) - (C(1, 2) * A0).dot(D));
+
+      if (R > R0 + R1) return false;
+
+      return true;
+  }
+
+  IGL_INLINE bool Viewer::treeNodesCollide(const AABB<Eigen::MatrixXd, 3>& firstObjNode, const AABB<Eigen::MatrixXd, 3>& secondObjNode) {
+      if (boxes_collide(firstObjNode.m_box, secondObjNode.m_box)) {
+          if(firstObjNode.is_leaf() && secondObjNode.is_leaf())
+              return true;
+          else {
+              if (firstObjNode.is_leaf()) {
+                  if (secondObjNode.m_left)
+                      return treeNodesCollide(firstObjNode, *secondObjNode.m_left);
+                  if (secondObjNode.m_right)
+                      return treeNodesCollide(firstObjNode, *secondObjNode.m_right);
+              }
+              else if (secondObjNode.is_leaf()) {
+                  if (firstObjNode.m_left)
+                      return treeNodesCollide(*firstObjNode.m_left, secondObjNode);
+                  if (firstObjNode.m_right)
+                      return treeNodesCollide(*firstObjNode.m_left, secondObjNode);
+              }
+              else
+                  return treeNodesCollide(*firstObjNode.m_left, *secondObjNode.m_left) ||
+                         treeNodesCollide(*firstObjNode.m_left, *secondObjNode.m_right) ||
+                         treeNodesCollide(*firstObjNode.m_right, *secondObjNode.m_left) ||
+                         treeNodesCollide(*firstObjNode.m_right, *secondObjNode.m_right);
+          }
+      }
+      return false;
+  }
+
   // check if two object in data_list are collided
   // assume there are exactly two objects
   IGL_INLINE void Viewer::check_collision() {
       if(!isCollide)
-          isCollide = data_list[0].kd_tree.m_box.intersects(data_list[1].kd_tree.m_box);
+          isCollide = treeNodesCollide(data_list[0].kd_tree, data_list[1].kd_tree);
   }
 
   IGL_INLINE bool Viewer::load_mesh_from_file(
