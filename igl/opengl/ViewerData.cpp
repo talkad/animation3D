@@ -311,15 +311,90 @@ IGL_INLINE igl::opengl::ViewerData::ViewerData()
   show_faceid(false),
   show_texture(false),
   point_size(30),
-  line_width(0.5f),
+  line_width(2),
   line_color(0,0,0,1),
   label_color(0,0,0.04,1),
   shininess(35.0f),
   id(-1),
-  is_visible(1)
+  is_visible(1),
+  direction(' ')
 {
   clear();
 };
+
+IGL_INLINE void igl::opengl::ViewerData::init() {
+    kd_tree.init(V, F);
+}
+
+IGL_INLINE void igl::opengl::ViewerData::update_direction(int dir) {
+    direction = dir;
+}
+
+IGL_INLINE void igl::opengl::ViewerData::move() {
+    double step = 0.015;
+
+    switch (direction) {
+    case 'w': // in
+        MyTranslateInSystem(GetRotation(), Eigen::Vector3d(0, 0, -step));
+        break;
+    case 's': // out
+        MyTranslateInSystem(GetRotation(), Eigen::Vector3d(0, 0, step));
+        break;
+    case 265: // up
+        MyTranslateInSystem(GetRotation(), Eigen::Vector3d(0, step, 0));
+        break;
+    case 264: // down
+        MyTranslateInSystem(GetRotation(), Eigen::Vector3d(0, -step, 0));
+        break;
+    case 263: // left
+        MyTranslateInSystem(GetRotation(), Eigen::Vector3d(-step, 0, 0));
+        break;
+    case 262: // right
+        MyTranslateInSystem(GetRotation(), Eigen::Vector3d(step, 0, 0));
+        break;
+    default: break;
+    }
+}
+
+IGL_INLINE void igl::opengl::ViewerData::drawAlignedBox(Eigen::AlignedBox<double, 3>& alignedBox, Eigen::RowVector3d& color) {
+    Eigen::MatrixXd V_box(8, 3); // Corners of the bounding box
+    Eigen::MatrixXi E_box(12, 2); // Edges of the bounding box
+    E_box <<
+        0, 1,
+        0, 2,
+        2, 3,
+        3, 1,
+        4, 5,
+        4, 6,
+        6, 7,
+        7, 5,
+        0, 4,
+        1, 5,
+        2, 6,
+        7, 3;
+
+        V_box.row(0) = alignedBox.corner(alignedBox.BottomRightCeil);
+        V_box.row(1) = alignedBox.corner(alignedBox.BottomRightFloor);
+        V_box.row(2) = alignedBox.corner(alignedBox.BottomLeftCeil);
+        V_box.row(3) = alignedBox.corner(alignedBox.BottomLeftFloor);
+        V_box.row(4) = alignedBox.corner(alignedBox.TopRightCeil);
+        V_box.row(5) = alignedBox.corner(alignedBox.TopRightFloor);
+        V_box.row(6) = alignedBox.corner(alignedBox.TopLeftCeil);
+        V_box.row(7) = alignedBox.corner(alignedBox.TopLeftFloor);
+
+        // Plot the corners of the bounding box as points
+        add_points(V_box, color);
+
+        // Plot the edges of the bounding box
+        for (unsigned i = 0; i < E_box.rows(); ++i)
+            add_edges
+            (
+                V_box.row(E_box(i, 0)),
+                V_box.row(E_box(i, 1)),
+                color
+            );
+
+}
 
 IGL_INLINE void igl::opengl::ViewerData::set_face_based(bool newvalue)
 {

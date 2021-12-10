@@ -119,6 +119,7 @@ bool Display::launch_rendering(bool loop)
 	renderer->post_resize(window, windowWidth, windowHeight);
 	for(int i=0;i< renderer->GetScene()->data_list.size();i++)
 		renderer->core().toggle(renderer->GetScene()->data_list[i].show_lines);
+	
 	while (!glfwWindowShouldClose(window))
 	{
 
@@ -154,6 +155,7 @@ bool Display::launch_rendering(bool loop)
 		}
 #endif
 	}
+
 	return EXIT_SUCCESS;
 }
 

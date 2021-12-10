@@ -65,6 +65,7 @@ IGL_INLINE void Renderer::draw(GLFWwindow* window)
 		menu->pre_draw();
 		menu->callback_draw_viewer_menu();
 	}
+
 	for (auto& core : core_list)
 	{
 		int indx = 0;
@@ -73,9 +74,9 @@ IGL_INLINE void Renderer::draw(GLFWwindow* window)
 
 			if (mesh.is_visible & core.id)
 			{// for kinematic chain change scn->MakeTrans to parent matrix
-
 				core.draw(scn->MakeTransScale() * scn->CalcParentsTrans(indx).cast<float>(), mesh);
 			}
+
 			indx++;
 		}
 
@@ -186,8 +187,8 @@ void Renderer::MouseProcessing(int button)
 		}
 		else
 		{
-			scn->RotateInSystem(Eigen::Vector3d(1, 0, 0), yrel / 180.0);
-			scn->RotateInSystem(Eigen::Vector3d(0, 1, 0), xrel / 180.0);
+			scn->MyRotate(Eigen::Vector3d(1, 0, 0), yrel / 180.0);
+			scn->MyRotate(Eigen::Vector3d(0, 1, 0), xrel / 180.0);
 		}
 	}
 }

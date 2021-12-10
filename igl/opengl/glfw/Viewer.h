@@ -59,7 +59,6 @@ namespace glfw
     virtual ~Viewer();
     // Mesh IO
     IGL_INLINE bool load_mesh_from_file(const std::string & mesh_file_name);
-    IGL_INLINE bool init_mesh();
     IGL_INLINE bool save_mesh_to_file(const std::string & mesh_file_name);
    
     // Scene IO
@@ -67,6 +66,17 @@ namespace glfw
     IGL_INLINE bool load_scene(std::string fname);
     IGL_INLINE bool save_scene();
     IGL_INLINE bool save_scene(std::string fname);
+
+    IGL_INLINE void toggle_move();
+    IGL_INLINE void init_scene();
+
+    IGL_INLINE bool boxes_collide(Eigen::AlignedBox<double, 3>&, Eigen::AlignedBox<double, 3>&);
+
+    IGL_INLINE bool treeNodesCollide(AABB<Eigen::MatrixXd, 3>&, AABB<Eigen::MatrixXd, 3>&);
+
+    // check if two object in data_list are collided
+    IGL_INLINE void check_collision();
+
     // Draw everything
    // IGL_INLINE void draw();
     // OpenGL context resize
@@ -140,6 +150,8 @@ public:
     int next_data_id;
 	bool isPicked;
 	bool isActive;
+
+    bool isCollide;
 
     
 

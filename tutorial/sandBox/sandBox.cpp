@@ -13,7 +13,8 @@ SandBox::SandBox()
 }
 
 void SandBox::Init(const std::string &config)
-{
+{	
+
 	std::string item_name;
 	std::ifstream nameFileout;
 	doubleVariable = 0;
@@ -40,9 +41,9 @@ void SandBox::Init(const std::string &config)
 
 
 		}
+
 		nameFileout.close();
 	}
-	MyTranslate(Eigen::Vector3d(0, 0, -1), true);
 	
 	data().set_colors(Eigen::RowVector3d(0.9, 0.1, 0.1));
 
@@ -55,11 +56,15 @@ SandBox::~SandBox()
 
 void SandBox::Animate()
 {
+	double step = 0.01;
+
 	if (isActive)
 	{
-		
-		
-		
+		check_collision();
+		for (auto& obj : data_list)
+		{
+			obj.move();
+		}
 	}
 }
 

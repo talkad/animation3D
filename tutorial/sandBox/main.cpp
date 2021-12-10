@@ -12,7 +12,8 @@ int main(int argc, char *argv[])
   
   igl::opengl::glfw::imgui::ImGuiMenu* menu = new igl::opengl::glfw::imgui::ImGuiMenu();
   viewer.Init("configuration.txt");
-  
+  viewer.init_scene();
+
   Init(*disp, menu);
   renderer.init(&viewer,2,menu);
   

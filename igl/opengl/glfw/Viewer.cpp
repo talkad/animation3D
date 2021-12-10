@@ -42,11 +42,6 @@
 #include <igl/unproject.h>
 #include <igl/serialize.h>
 
-
-#include <igl/edge_flaps.h>
-#include <igl/shortest_edge_and_midpoint.h>
-
-
 // Internal global variables used for glfw event handling
 //static igl::opengl::glfw::Viewer * __viewer;
 static double highdpi = 1;
@@ -61,8 +56,6 @@ namespace opengl
 namespace glfw
 {
 
-  typedef std::set<std::pair<double, int> > PriorityQueue;
-
   void Viewer::Init(const std::string config)
   {
 	  
@@ -74,7 +67,8 @@ namespace glfw
     selected_data_index(0),
     next_data_id(1),
 	isPicked(false),
-	isActive(false)
+	isActive(false),
+    isCollide(false)
   {
     data_list.front().id = 0;
 
@@ -111,9 +105,179 @@ namespace glfw
   {
   }
 
+  IGL_INLINE bool Viewer::boxes_collide(Eigen::AlignedBox<double, 3>& firstbox, Eigen::AlignedBox<double, 3>& secondbox) {
+      double a0 = firstbox.sizes()[0] / 2, a1 = firstbox.sizes()[1] / 2, a2 = firstbox.sizes()[2] / 2,
+             b0 = secondbox.sizes()[0] / 2, b1 = secondbox.sizes()[1] / 2, b2 = secondbox.sizes()[2] / 2,
+             R0, R1, R;
+      Eigen::Matrix3d A, B, C;
+      Eigen::Vector3d D, C0, C1;
+      Eigen::RowVector3d A0 = data_list[0].GetRotation() * Eigen::Vector3d(1, 0, 0),
+                         A1 = data_list[0].GetRotation() * Eigen::Vector3d(0, 1, 0),
+                         A2 = data_list[0].GetRotation() * Eigen::Vector3d(0, 0, 1),
+                         B0 = data_list[1].GetRotation() * Eigen::Vector3d(1, 0, 0),
+                         B1 = data_list[1].GetRotation() * Eigen::Vector3d(0, 1, 0),
+                         B2 = data_list[1].GetRotation() * Eigen::Vector3d(0, 0, 1);
+      A << Eigen::RowVector3d(A0[0], A1[0], A2[0]), Eigen::RowVector3d(A0[1], A1[1], A2[1]), Eigen::RowVector3d(A0[2], A1[2], A2[2]);
+      B << Eigen::RowVector3d(B0[0], B1[0], B2[0]), Eigen::RowVector3d(B0[1], B1[1], B2[1]), Eigen::RowVector3d(B0[2], B1[2], B2[2]);
+      C = A.transpose() * B;
+
+      Eigen::Vector4f C0_4cord = data_list[0].MakeTransScale() * Eigen::Vector4f(firstbox.center()[0], firstbox.center()[1], firstbox.center()[2], 1);
+      Eigen::Vector4f C1_4cord = data_list[1].MakeTransScale() * Eigen::Vector4f(secondbox.center()[0], secondbox.center()[1], secondbox.center()[2], 1);
+     
+      C0 = Eigen::Vector3d(C0_4cord[0], C0_4cord[1], C0_4cord[2]);
+      C1 = Eigen::Vector3d(C1_4cord[0], C1_4cord[1], C1_4cord[2]);
+
+      D = C1 - C0;
+
+      //Table case 1
+      R0 = a0;
+      R1 = (b0 * abs(C(0, 0))) + (b1 * abs(C(0, 1))) + (b2 * abs(C(0, 2)));
+      R = abs(A0.dot(D));
+
+      if (R > R0 + R1) return false;
+
+      //Table case 2
+      R0 = a1;
+      R1 = (b0 * abs(C(1, 0))) + (b1 * abs(C(1, 1))) + (b2 * abs(C(1, 2)));
+      R = abs(A1.dot(D));
+
+      if (R > R0 + R1) return false;
+
+      //Table case 3
+      R0 = a2;
+      R1 = (b0 * abs(C(2, 0))) + (b1 * abs(C(2, 1))) + (b2 * abs(C(2, 2)));
+      R = abs(A2.dot(D));
+
+      if (R > R0 + R1) return false;
+
+      //Table case 4
+      R0 = (a0 * abs(C(0, 0))) + (a1 * abs(C(1, 0))) + (a2 * abs(C(2, 0)));
+      R1 = b0;
+      R = abs(B0.dot(D));
+
+      if (R > R0 + R1) return false;
+
+      //Table case 5
+      R0 = (a0 * abs(C(0, 1))) + (a1 * abs(C(1, 1))) + (a2 * abs(C(2, 1)));
+      R1 = b1;
+      R = abs(B1.dot(D));
+
+      if (R > R0 + R1) return false;
+
+      //Table case 6
+      R0 = (a0 * abs(C(0, 2))) + (a1 * abs(C(1, 2))) + (a2 * abs(C(2, 2)));
+      R1 = b2;
+      R = abs(B2.dot(D));
+
+      if (R > R0 + R1) return false;
+
+      //Table case 7
+      R0 = (a1 * abs(C(2, 0))) + (a2 * abs(C(1, 0)));
+      R1 = (b1 * abs(C(0, 2))) + (b2 * abs(C(0, 1)));
+      R = abs((C(1, 0) * A2).dot(D) - (C(2, 0) * A1).dot(D));
+
+      if (R > R0 + R1) return false;
+
+      //Table case 8
+      R0 = (a1 * abs(C(2, 1))) + (a2 * abs(C(1, 1)));
+      R1 = (b0 * abs(C(0, 2))) + (b2 * abs(C(0, 0)));
+      R = abs((C(1, 1) * A2).dot(D) - (C(2, 1) * A1).dot(D));
+
+      if (R > R0 + R1) return false;
+
+      //Table case 9
+      R0 = (a1 * abs(C(2, 2))) + (a2 * abs(C(1, 2)));
+      R1 = (b0 * abs(C(0, 1))) + (b1 * abs(C(0, 0)));
+      R = abs((C(1, 2) * A2).dot(D) - (C(2, 2) * A1).dot(D));
+
+      if (R > R0 + R1) return false;
+
+      //Table case 10
+      R0 = (a0 * abs(C(2, 0))) + (a2 * abs(C(0, 0)));
+      R1 = (b1 * abs(C(1, 2))) + (b2 * abs(C(1, 1)));
+      R = abs((C(2, 0) * A0).dot(D) - (C(0, 0) * A2).dot(D));
+
+      if (R > R0 + R1) return false;
+
+      //Table case 11
+      R0 = (a0 * abs(C(2, 1))) + (a2 * abs(C(0, 1)));
+      R1 = (b0 * abs(C(1, 2))) + (b2 * abs(C(1, 0)));
+      R = abs((C(2, 1) * A0).dot(D) - (C(0, 1) * A2).dot(D));
+
+      if (R > R0 + R1) return false;
+
+      //Table case 12
+      R0 = (a0 * abs(C(2, 2))) + (a2 * abs(C(0, 2)));
+      R1 = (b0 * abs(C(1, 1))) + (b1 * abs(C(1, 0)));
+      R = abs((C(2, 2) * A0).dot(D) - (C(0, 2) * A2).dot(D));
+
+      if (R > R0 + R1) return false;
+
+      //Table case 13
+      R0 = (a0 * abs(C(1, 0))) + (a1 * abs(C(0, 0)));
+      R1 = (b1 * abs(C(2, 2))) + (b2 * abs(C(2, 1)));
+      R = abs((C(0, 0) * A1).dot(D) - (C(1, 0) * A0).dot(D));
+
+      if (R > R0 + R1) return false;
+
+      //Table case 14
+      R0 = (a0 * abs(C(1, 1))) + (a1 * abs(C(0, 1)));
+      R1 = (b0 * abs(C(2, 2))) + (b2 * abs(C(2, 0)));
+      R = abs((C(0, 1) * A1).dot(D) - (C(1, 1) * A0).dot(D));
+
+      if (R > R0 + R1) return false;
+
+      //Table case 15
+      R0 = (a0 * abs(C(1, 2))) + (a1 * abs(C(0, 2)));
+      R1 = (b0 * abs(C(2, 1))) + (b1 * abs(C(2, 0)));
+      R = abs((C(0, 2) * A1).dot(D) - (C(1, 2) * A0).dot(D));
+
+      if (R > R0 + R1) return false;
+
+      return true;
+  }
+
+  IGL_INLINE bool Viewer::treeNodesCollide(AABB<Eigen::MatrixXd, 3>& firstObjNode, AABB<Eigen::MatrixXd, 3>& secondObjNode) {
+      if (boxes_collide(firstObjNode.m_box, secondObjNode.m_box)) {
+          if (firstObjNode.is_leaf() && secondObjNode.is_leaf()) {
+              data_list[0].drawAlignedBox(firstObjNode.m_box, Eigen::RowVector3d(1, 0, 0));
+              data_list[1].drawAlignedBox(secondObjNode.m_box, Eigen::RowVector3d(1, 0, 0));
+              return true;
+          }
+          else {
+              if (firstObjNode.is_leaf()) {
+                  if (secondObjNode.m_left)
+                      return treeNodesCollide(firstObjNode, *secondObjNode.m_left);
+                  if (secondObjNode.m_right)
+                      return treeNodesCollide(firstObjNode, *secondObjNode.m_right);
+              }
+              else if (secondObjNode.is_leaf()) {
+                  if (firstObjNode.m_left)
+                      return treeNodesCollide(*firstObjNode.m_left, secondObjNode);
+                  if (firstObjNode.m_right)
+                      return treeNodesCollide(*firstObjNode.m_right, secondObjNode);
+              }
+              else
+                  return treeNodesCollide(*firstObjNode.m_left, *secondObjNode.m_left) ||
+                         treeNodesCollide(*firstObjNode.m_left, *secondObjNode.m_right) ||
+                         treeNodesCollide(*firstObjNode.m_right, *secondObjNode.m_left) ||
+                         treeNodesCollide(*firstObjNode.m_right, *secondObjNode.m_right);
+          }
+      }
+      return false;
+  }
+
+  // check if two object in data_list are collided
+  // assume there are exactly two objects
+  IGL_INLINE void Viewer::check_collision() {
+      if(treeNodesCollide(data_list[0].kd_tree, data_list[1].kd_tree))
+          isActive = false;
+  }
+
   IGL_INLINE bool Viewer::load_mesh_from_file(
-      const std::string &mesh_file_name_string)
+      const std::string & mesh_file_name_string)
   {
+
     // Create new data slot and set to selected
     if(!(data().F.rows() == 0  && data().V.rows() == 0))
     {
@@ -182,13 +346,12 @@ namespace glfw
       data().grid_texture();
     }
     
+
     //for (unsigned int i = 0; i<plugins.size(); ++i)
     //  if (plugins[i]->post_load())
     //    return true;
 
-    data().V_clone = data().V;
-    data().F_clone = data().F;
-    data().init_mesh();      // initiationg the data structure
+    data().init(); // initiate object fields
 
     return true;
   }
@@ -266,6 +429,36 @@ namespace glfw
     igl::serialize(data(),"Data",fname.c_str());
 
     return true;
+  }
+
+  IGL_INLINE void Viewer::toggle_move()
+  {
+      isActive = !isActive;
+  }
+
+  IGL_INLINE void Viewer::init_scene()
+  {
+
+      int sign = 1;
+
+      MyTranslate(Eigen::Vector3d(0, 0, -2), true);
+
+
+      for (auto& obj : data_list) {
+
+          obj.MyTranslate(Eigen::Vector3d(sign, 0, 0), true);
+
+          obj.kd_tree.init(obj.V, obj.F);
+          igl::AABB<Eigen::MatrixXd, 3> tree_first = obj.kd_tree;
+          Eigen::AlignedBox<double, 3> box_first = tree_first.m_box;
+          obj.drawAlignedBox(box_first, Eigen::RowVector3d(0, 0, 1));
+
+          sign *= -1;
+      }
+
+      data_list[0].direction = 263; // move left
+      data_list[1].direction = 265; // move left
+
   }
 
   IGL_INLINE void Viewer::open_dialog_load_mesh()

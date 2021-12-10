@@ -1,2 +1,7 @@
+<<<<<<< HEAD
 C:/Dev/EngineForAnimationCourse/tutorial/data/cube.obj
 C:/Dev/EngineForAnimationCourse/tutorial/data/sphere.obj
+=======
+C:/Users/ipism/source/repos/animation3D/tutorial/data/sphere.obj
+C:/Users/ipism/source/repos/animation3D/tutorial/data/cube.obj
+>>>>>>> assignment2
