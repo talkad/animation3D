@@ -78,7 +78,7 @@ IGL_INLINE void igl::opengl::ViewerData::move() {
     }
 }
 
-IGL_INLINE void igl::opengl::ViewerData::drawAlignedBox(Eigen::AlignedBox<double, 3> alignedBox) {
+IGL_INLINE void igl::opengl::ViewerData::drawAlignedBox(Eigen::AlignedBox<double, 3>& alignedBox) {
     Eigen::MatrixXd V_box(8, 3); // Corners of the bounding box
     Eigen::MatrixXi E_box(12, 2); // Edges of the bounding box
     E_box <<

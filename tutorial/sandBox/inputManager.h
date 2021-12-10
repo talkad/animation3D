@@ -164,6 +164,10 @@ static void glfw_key_callback(GLFWwindow* window, int key, int scancode, int act
 		case 'S':
 			scn->data().update_direction('s');
 			break;
+		case 'r':
+		case 'R':
+			scn->toggle_move();
+			break;
 		case GLFW_KEY_UP:
 			scn->data().update_direction(GLFW_KEY_UP);
 			break;

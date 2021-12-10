@@ -55,7 +55,7 @@ public:
   IGL_INLINE void move();
  
   // move the object according to the chosen direction
-  IGL_INLINE void drawAlignedBox(Eigen::AlignedBox<double, 3>);
+  IGL_INLINE void drawAlignedBox(Eigen::AlignedBox<double, 3>&);
 
   // Empty all fields
   IGL_INLINE void clear();
