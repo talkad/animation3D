@@ -68,6 +68,7 @@ namespace glfw
     IGL_INLINE bool save_scene(std::string fname);
 
     IGL_INLINE void toggle_move();
+    IGL_INLINE void init_scene();
 
     IGL_INLINE bool boxes_collide(Eigen::AlignedBox<double, 3>&, Eigen::AlignedBox<double, 3>&);
 

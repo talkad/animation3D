@@ -33,7 +33,8 @@ IGL_INLINE igl::opengl::ViewerData::ViewerData()
   label_color(0,0,0.04,1),
   shininess(35.0f),
   id(-1),
-  is_visible(1)
+  is_visible(1),
+  direction(' ')
 {
   clear();
 };
@@ -47,38 +48,32 @@ IGL_INLINE void igl::opengl::ViewerData::update_direction(int dir) {
 }
 
 IGL_INLINE void igl::opengl::ViewerData::move() {
-    double step = 0.01;
+    double step = 0.015;
 
     switch (direction) {
     case 'w': // in
-        MyTranslate(Eigen::Vector3d(0, 0, -step), true);
-        kd_tree.m_box.translate(Eigen::Vector3d(0, 0, -step));
+        MyTranslateInSystem(GetRotation(), Eigen::Vector3d(0, 0, -step));
         break;
     case 's': // out
-        MyTranslate(Eigen::Vector3d(0, 0, step), true);
-        kd_tree.m_box.translate(Eigen::Vector3d(0, 0, step));
+        MyTranslateInSystem(GetRotation(), Eigen::Vector3d(0, 0, step));
         break;
     case 265: // up
-        MyTranslate(Eigen::Vector3d(0, step, 0), true);
-        kd_tree.m_box.translate(Eigen::Vector3d(0, step, 0));
+        MyTranslateInSystem(GetRotation(), Eigen::Vector3d(0, step, 0));
         break;
     case 264: // down
-        MyTranslate(Eigen::Vector3d(0, -step, 0), true);
-        kd_tree.m_box.translate(Eigen::Vector3d(0, -step, 0));
+        MyTranslateInSystem(GetRotation(), Eigen::Vector3d(0, -step, 0));
         break;
     case 263: // left
-        MyTranslate(Eigen::Vector3d(-step, 0, 0), true);
-        kd_tree.m_box.translate(Eigen::Vector3d(-step, 0, 0));
+        MyTranslateInSystem(GetRotation(), Eigen::Vector3d(-step, 0, 0));
         break;
     case 262: // right
-        MyTranslate(Eigen::Vector3d(step, 0, 0), true);
-        kd_tree.m_box.translate(Eigen::Vector3d(step, 0, 0));
+        MyTranslateInSystem(GetRotation(), Eigen::Vector3d(step, 0, 0));
         break;
     default: break;
     }
 }
 
-IGL_INLINE void igl::opengl::ViewerData::drawAlignedBox(Eigen::AlignedBox<double, 3>& alignedBox) {
+IGL_INLINE void igl::opengl::ViewerData::drawAlignedBox(Eigen::AlignedBox<double, 3>& alignedBox, Eigen::RowVector3d& color) {
     Eigen::MatrixXd V_box(8, 3); // Corners of the bounding box
     Eigen::MatrixXi E_box(12, 2); // Edges of the bounding box
     E_box <<
@@ -105,7 +100,7 @@ IGL_INLINE void igl::opengl::ViewerData::drawAlignedBox(Eigen::AlignedBox<double
         V_box.row(7) = alignedBox.corner(alignedBox.TopLeftFloor);
 
         // Plot the corners of the bounding box as points
-        add_points(V_box, Eigen::RowVector3d(1, 0, 0));
+        add_points(V_box, color);
 
         // Plot the edges of the bounding box
         for (unsigned i = 0; i < E_box.rows(); ++i)
@@ -113,7 +108,7 @@ IGL_INLINE void igl::opengl::ViewerData::drawAlignedBox(Eigen::AlignedBox<double
             (
                 V_box.row(E_box(i, 0)),
                 V_box.row(E_box(i, 1)),
-                Eigen::RowVector3d(1, 0, 0)
+                color
             );
 
 }
@@ -154,7 +149,7 @@ IGL_INLINE void igl::opengl::ViewerData::set_mesh(
       Eigen::Vector3d(GOLD_AMBIENT[0], GOLD_AMBIENT[1], GOLD_AMBIENT[2]),
       Eigen::Vector3d(GOLD_DIFFUSE[0], GOLD_DIFFUSE[1], GOLD_DIFFUSE[2]),
       Eigen::Vector3d(GOLD_SPECULAR[0], GOLD_SPECULAR[1], GOLD_SPECULAR[2]));
-	image_texture("C:/Users/ipism/source/repos/animation3D/tutorial/textures/snake1.png");
+	image_texture("C:/Users/tal74/animation/EngineForAnimationCourse/tutorial/textures/snake1.png");
 //    grid_texture();
   }
   else

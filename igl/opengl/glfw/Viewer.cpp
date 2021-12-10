@@ -240,8 +240,8 @@ namespace glfw
   IGL_INLINE bool Viewer::treeNodesCollide(AABB<Eigen::MatrixXd, 3>& firstObjNode, AABB<Eigen::MatrixXd, 3>& secondObjNode) {
       if (boxes_collide(firstObjNode.m_box, secondObjNode.m_box)) {
           if (firstObjNode.is_leaf() && secondObjNode.is_leaf()) {
-              data_list[0].drawAlignedBox(firstObjNode.m_box);
-              data_list[1].drawAlignedBox(secondObjNode.m_box);
+              data_list[0].drawAlignedBox(firstObjNode.m_box, Eigen::RowVector3d(1, 0, 0));
+              data_list[1].drawAlignedBox(secondObjNode.m_box, Eigen::RowVector3d(1, 0, 0));
               return true;
           }
           else {
@@ -434,6 +434,31 @@ namespace glfw
   IGL_INLINE void Viewer::toggle_move()
   {
       isActive = !isActive;
+  }
+
+  IGL_INLINE void Viewer::init_scene()
+  {
+
+      int sign = 1;
+
+      MyTranslate(Eigen::Vector3d(0, 0, -2), true);
+
+
+      for (auto& obj : data_list) {
+
+          obj.MyTranslate(Eigen::Vector3d(sign, 0, 0), true);
+
+          obj.kd_tree.init(obj.V, obj.F);
+          igl::AABB<Eigen::MatrixXd, 3> tree_first = obj.kd_tree;
+          Eigen::AlignedBox<double, 3> box_first = tree_first.m_box;
+          obj.drawAlignedBox(box_first, Eigen::RowVector3d(0, 0, 1));
+
+          sign *= -1;
+      }
+
+      data_list[0].direction = 263; // move left
+      data_list[1].direction = 265; // move left
+
   }
 
   IGL_INLINE void Viewer::open_dialog_load_mesh()

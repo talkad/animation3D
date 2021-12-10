@@ -14,7 +14,6 @@ SandBox::SandBox()
 
 void SandBox::Init(const std::string &config)
 {	
-	int sign = 1;
 
 	std::string item_name;
 	std::ifstream nameFileout;
@@ -39,24 +38,10 @@ void SandBox::Init(const std::string &config)
 			data().line_width = 2;
 			data().set_visible(false, 1);
 
-			// set new location
-			data().MyTranslate(Eigen::Vector3d(1.5 * sign, 0, 0), true);
-
-			Eigen::AlignedBox<double, 3> alignedBox = data().kd_tree.m_box;
-			data().drawAlignedBox(alignedBox);
-
-			data().kd_tree.m_box.translate(Eigen::Vector3d(1.5 * sign, 0, 0));
-
-			if (sign == 1) {
-				data().update_direction(263); // move left
-			}
-
-			sign *= -1;
 		}
 
 		nameFileout.close();
 	}
-	MyTranslate(Eigen::Vector3d(0, 0, -1), true);
 	
 	data().set_colors(Eigen::RowVector3d(0.9, 0.1, 0.1));
 
@@ -69,11 +54,15 @@ SandBox::~SandBox()
 
 void SandBox::Animate()
 {
+	double step = 0.01;
+
 	if (isActive)
 	{
-		
-		
-		
+		check_collision();
+		for (auto& obj : data_list)
+		{
+			obj.move();
+		}
 	}
 }
 

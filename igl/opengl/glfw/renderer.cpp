@@ -71,12 +71,6 @@ IGL_INLINE void Renderer::draw(GLFWwindow* window)
 		int indx = 0;
 		for (auto& mesh : scn->data_list)
 		{
-			// as long as there is no collision - move objects every frame
-
-			if (scn->isActive) {
-				scn->check_collision();
-				mesh.move();
-			}
 
 			if (mesh.is_visible & core.id)
 			{// for kinematic chain change scn->MakeTrans to parent matrix
