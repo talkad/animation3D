@@ -111,7 +111,7 @@ static void glfw_key_callback(GLFWwindow* window, int key, int scancode, int act
 		case GLFW_KEY_C:
 		{
 			tmp = (scn->MakeTransd().inverse() * Eigen::Vector4d(0, 0, 0, 1)).head<3>();
-			scn->data().SetCenterOfRotaion(tmp);
+			//scn->data().SetCenterOfRotaion(tmp);
 			break;
 		}
 
@@ -192,10 +192,10 @@ static void glfw_key_callback(GLFWwindow* window, int key, int scancode, int act
 			scn->data().update_direction(' ');
 			//scn->data().Simplification(std::ceil(0.05 * scn->data().Q->size()));
 			break;
-		case 'c':
-		case 'C':
-			scn->data().IGL_Simplification(std::ceil(0.05 * scn->data().Q->size()));
-			break;
+		//case 'c':
+		//case 'C':
+		//	scn->data().IGL_Simplification(std::ceil(0.05 * scn->data().Q->size()));
+		//	break;
 		
 		default: 
 			Eigen::Vector3f shift;
