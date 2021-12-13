@@ -67,7 +67,8 @@ namespace glfw
     selected_data_index(0),
     next_data_id(1),
 	isPicked(false),
-	isActive(false)
+	isActive(false),
+    tip(Eigen::RowVector3d(0, 0, 1))
   {
     data_list.front().id = 0;
 
@@ -175,11 +176,19 @@ namespace glfw
     {
       data().grid_texture();
     }
-    
+
 
     //for (unsigned int i = 0; i<plugins.size(); ++i)
     //  if (plugins[i]->post_load())
     //    return true;
+
+    if(mesh_file_name_string != "C:/Users/tal74/animation/EngineForAnimationCourse/tutorial/data/sphere.obj") {
+        data().MyTranslateInSystem(data().GetRotation(), tip);
+        data().kd_tree.init(data().V, data().F);
+        data().drawAlignedBox(data().kd_tree.m_box);
+        tip = Eigen::RowVector3d(tip[0], tip[1], tip[2] + 0.8);
+    }
+
 
     return true;
   }
@@ -261,12 +270,12 @@ namespace glfw
 
   IGL_INLINE void Viewer::open_dialog_load_mesh()
   {
-    std::string fname = igl::file_dialog_open();
+  /*  std::string fname = igl::file_dialog_open();
 
     if (fname.length() == 0)
-      return;
+      return;*/
     
-    this->load_mesh_from_file(fname.c_str());
+    this->load_mesh_from_file("C:/Users/tal74/animation/EngineForAnimationCourse/tutorial/data/zcylinder.obj");
   }
 
   IGL_INLINE void Viewer::open_dialog_save_mesh()

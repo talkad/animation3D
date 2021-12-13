@@ -8,6 +8,7 @@
 #ifndef IGL_VIEWERDATA_H
 #define IGL_VIEWERDATA_H
 
+#include <igl/AABB.h>
 #include "../igl_inline.h"
 #include "MeshGL.h"
 #include <cassert>
@@ -56,6 +57,8 @@ public:
   IGL_INLINE void set_normals(const Eigen::MatrixXd& N);
 
   IGL_INLINE void set_visible(bool value, unsigned int core_id = 1);
+
+  IGL_INLINE void igl::opengl::ViewerData::drawAlignedBox(Eigen::AlignedBox<double, 3>& alignedBox);
 
   // Set the color of the mesh
   //
@@ -151,6 +154,8 @@ public:
 
   Eigen::MatrixXd V; // Vertices of the current mesh (#V x 3)
   Eigen::MatrixXi F; // Faces of the mesh (#F x 3)
+
+  igl::AABB<Eigen::MatrixXd, 3> kd_tree; //aligned box
 
   // Per face attributes
   Eigen::MatrixXd F_normals; // One normal per face

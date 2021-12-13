@@ -139,7 +139,8 @@ public:
     int next_data_id;
 	bool isPicked;
 	bool isActive;
-
+    Eigen::RowVector3d tip;
+ 
     
 
     // List of registered plugins
