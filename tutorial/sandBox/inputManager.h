@@ -156,6 +156,18 @@ static void glfw_key_callback(GLFWwindow* window, int key, int scancode, int act
 			std::cout << "destination: (" << scn->destination.transpose() << ")" << std::endl;
 			break;
 		}
+		case 'P':
+		case 'p':
+		{
+			int idx = scn->selected_data_index;
+			Eigen::Matrix3d mat = idx == -1 ?
+				scn->MakeTransd().block(0, 0, 3, 3) :
+				scn->data().MakeTransd().block(0, 0, 3, 3);
+
+			std::cout << "rotation of " << idx << ": " << std::endl;
+			std::cout << mat << std::endl;
+			break;
+		}
 		case '[':
 		case ']':
 		{
@@ -177,20 +189,41 @@ static void glfw_key_callback(GLFWwindow* window, int key, int scancode, int act
 			rndr->TranslateCamera(Eigen::Vector3f(0, 0, -0.03f));
 			break;
 		case GLFW_KEY_UP:
-			rndr->TranslateCamera(Eigen::Vector3f(0, 0.01f,0));
+			if (scn->selected_data_index != -1)
+				scn->data().MyRotate(Eigen::Vector3d(1, 0, 0), 0.1);
+			else
+				scn->MyRotate(Eigen::Vector3d(1, 0, 0), 0.1);
+
+			//rndr->TranslateCamera(Eigen::Vector3f(0, 0.01f,0));
 			break;
 		case GLFW_KEY_DOWN:
-			rndr->TranslateCamera(Eigen::Vector3f(0, -0.01f,0));
+			if (scn->selected_data_index != -1)
+				scn->data().MyRotate(Eigen::Vector3d(1, 0, 0), -0.1);
+			else
+				scn->MyRotate(Eigen::Vector3d(1, 0, 0), -0.1);
+
+			//rndr->TranslateCamera(Eigen::Vector3f(0, -0.01f,0));
 
 			break;
 		case GLFW_KEY_LEFT:
-				rndr->TranslateCamera(Eigen::Vector3f(-0.01f, 0,0));
+			if (scn->selected_data_index != -1)
+				scn->data().MyRotate(Eigen::Vector3d(0, 1, 0), -0.1);
+			else
+				scn->MyRotate(Eigen::Vector3d(0, 1, 0), -0.1);
+
+				//rndr->TranslateCamera(Eigen::Vector3f(-0.01f, 0,0));
 			break;
 		case GLFW_KEY_RIGHT:
-			rndr->TranslateCamera(Eigen::Vector3f(0.01f, 0, 0));
+			if (scn->selected_data_index != -1)
+				scn->data().MyRotate(Eigen::Vector3d(0, 1, 0), 0.1);
+			else
+				scn->MyRotate(Eigen::Vector3d(0, 1, 0), 0.1);
+
+			//rndr->TranslateCamera(Eigen::Vector3f(0.01f, 0, 0));
 			break;
 		case ' ':
-
+			// toggle ik solver aniimation
+			scn->ikAnimation = !scn->ikAnimation;
 			break;
 		
 		default: 

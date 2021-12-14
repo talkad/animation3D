@@ -144,6 +144,7 @@ public:
     Eigen::Vector3d destination;
 
     int link_num;
+    bool ikAnimation;
 
 
     // List of registered plugins

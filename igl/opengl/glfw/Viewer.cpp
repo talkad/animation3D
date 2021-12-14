@@ -70,7 +70,8 @@ namespace glfw
 	isActive(false),
     tip(Eigen::Vector4d(0, 0, 0, 0)),
     link_num(0),
-    destination(Eigen::Vector3d(5,0,0))
+    destination(Eigen::Vector3d(5,0,0)),
+    ikAnimation(false)
   {
     data_list.front().id = 0;
 
