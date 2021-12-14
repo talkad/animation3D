@@ -106,6 +106,208 @@ namespace glfw
   {
   }
 
+  IGL_INLINE Eigen::Matrix4d Viewer::MakeParentTrans(int mesh_id) {
+      if (parents[mesh_id] == -1 || parents[mesh_id] == mesh_id)
+          return Eigen::Transform<double, 3, Eigen::Affine>::Identity().matrix();
+      Eigen::Matrix4d t = data_list[parents[mesh_id]].MakeTransd();
+      Eigen::Matrix4d tp = MakeParentTrans(parents[mesh_id]);
+      return MakeParentTrans(parents[mesh_id]) * data_list[parents[mesh_id]].MakeTransd();
+  }
+
+  IGL_INLINE Eigen::Matrix3d Viewer::GetParentsRotationInverse(int index) {
+
+      Eigen::Matrix3d parentsInverse = data(index).GetRotation().inverse();
+      int i = parents[index];
+      while (i != -1)
+      {
+          parentsInverse = parentsInverse * data(i).GetRotation().inverse();
+          i = parents[i];
+      }
+
+      return parentsInverse;
+  }
+
+  IGL_INLINE void Viewer::ik() {
+      int iSphere = 0;
+      int iFirstLink = 1;
+      int iLastLink = data_list.size() - 1;
+
+      Eigen::Vector3d d = data(iSphere).MakeTransd().block(0, 1, 3, 3).col(2);
+      Eigen::Vector3d arm_base = data(iFirstLink).MakeTransd().block(0, 1, 3, 3).col(2);
+      double link_size = 1.6;
+      double num_of_links = link_num;
+      if ((d - arm_base).norm() > link_size * num_of_links) {
+          ikAnimation = false;
+          std::cout << "cannot reach" << std::endl;
+          return;
+      }
+      int i = iLastLink;
+      while (i != -1 || i > iLastLink)
+      {
+          //iking = false;
+          Eigen::Vector4d rCenter(data(i).GetCenterOfRotation()[0], data(i).GetCenterOfRotation()[1], data(i).GetCenterOfRotation()[2], 1);
+          Eigen::Vector4d r4 = MakeParentTrans(i) * data(i).MakeTransd() * rCenter;
+          Eigen::Vector3d r = r4.head<3>();
+
+          Eigen::Vector4d eCenter(data(iLastLink).GetCenterOfRotation()[0], data(iLastLink).GetCenterOfRotation()[1] + 1.6, data(iLastLink).GetCenterOfRotation()[2], 1);
+          Eigen::Vector4d e4 = MakeParentTrans(iLastLink) * data(iLastLink).MakeTransd() * eCenter;
+          Eigen::Vector3d e = e4.head<3>();
+
+          Eigen::Vector3d rd = d - r;
+          Eigen::Vector3d re = e - r;
+
+          double distance = (d - e).norm();
+
+          if (distance < 0.1) {
+              std::cout << "distance: " << distance << std::endl;
+              ikAnimation = false;
+              fin_rotate();
+              return;
+          }
+
+          Eigen::Vector3d rotation_axis = GetParentsRotationInverse(i) * re.cross(rd).normalized();
+          double dot = rd.normalized().dot(re.normalized());
+          if (dot > 1)
+              dot = 1;
+          if (dot < -1)
+              dot = -1;
+          double angle = distance < 1 ? acosf(dot) : acosf(dot) / 10;
+          //float angle = acosf(dot);
+
+          //--------------bonus------------------------- 
+          int parent_i = parents[i];
+          if (parent_i != -1) {
+              //update the vector re
+              data(i).MyRotate(rotation_axis, angle);
+              eCenter = Eigen::Vector4d(data(iLastLink).GetCenterOfRotation()[0], data(iLastLink).GetCenterOfRotation()[1] + 1.6, data(iLastLink).GetCenterOfRotation()[2], 1);
+              e4 = MakeParentTrans(iLastLink) * data(iLastLink).MakeTransd() * eCenter;
+              e = e4.head<3>();
+              re = e - r;
+              //get parent vector
+              Eigen::Vector4d parent_rCenter(data(parent_i).GetCenterOfRotation()[0], data(parent_i).GetCenterOfRotation()[1], data(parent_i).GetCenterOfRotation()[2], 1);
+              Eigen::Vector4d parent_r4 = MakeParentTrans(parent_i) * data(parent_i).MakeTransd() * parent_rCenter;
+              Eigen::Vector3d parent_r = parent_r4.head<3>();
+              Eigen::Vector3d parent_vec = parent_r - r;
+
+              //find angle
+              double parent_dot = parent_vec.normalized().dot(re.normalized());
+              if (parent_dot > 1)
+                  parent_dot = 1;
+              if (parent_dot < -1)
+                  parent_dot = -1;
+              double parent_angle = acosf(parent_dot);
+              double deg2rad = 0.017453292;
+
+              //constrain
+              double constrain = 30 * deg2rad;
+              double fix = 0;
+              if (parent_angle < constrain) {
+                  fix = constrain - parent_angle;
+              }
+              data(i).MyRotate(rotation_axis, -angle); //rollback
+              angle -= fix;
+          }
+          //--------------bonus-------------------------
+          //float angle = acosf(dot);
+          data(i).MyRotate(rotation_axis, angle);
+
+
+          /*Eigen::Vector3f X(1, 0, 0);
+          Eigen::Vector3f Y(0, 1, 0);
+          Eigen::Matrix3f S;
+          S << 0, -rotation_axis[1], rotation_axis[2],
+              rotation_axis[1], 0, -rotation_axis[0],
+              -rotation_axis[2], rotation_axis[0], 0;
+          Eigen::Matrix3f I = Eigen::Matrix3f::Identity();
+          Eigen::Matrix3f R = I + sinf(angle) * S + (1 - cosf(angle)) * S * S;
+          float r00 = R.row(0)[0];
+          float r01 = R.row(0)[1];
+          float r02 = R.row(0)[2];
+          float r10 = R.row(1)[0];
+          float r11 = R.row(1)[1];
+          float r12 = R.row(1)[2];
+          float r20 = R.row(2)[0];
+          float r21 = R.row(2)[1];
+          float r22 = R.row(2)[2];
+          float angleY0;
+          float angleX;
+          float angleY1;
+          //YXY
+          if (r11 < 1) {
+              if (r11 > - 1) {
+                  angleX = acosf(r11);
+                  angleY0 = atan2f(r01, r21);
+                  angleY1 = atan2f(r10, -r12);
+              }
+              else { //r11 = -1
+                  angleX = acosf(-1);
+                  angleY0 = -atan2f(r02, r00);
+                  angleY1 = 0;
+              }
+          }
+          else {//r11 = 1
+              angleX = 0;
+              angleY0 = atan2f(r02, r00);
+              angleY1 = 0;
+          }
+          data(i).MyRotate(Y, angleY0, false);
+          data(i).MyRotate(X, angleX);
+          data(i).MyRotate(Y, angleY1, false);*/
+
+          i = parents[i];
+      }
+  }
+
+  IGL_INLINE void Viewer::fin_rotate()
+  {
+      Eigen::Vector3d Z(0, 0, 1);
+      Eigen::Matrix3d prev_z = Eigen::Matrix3d::Identity();
+      Eigen::Matrix3d new_z = Eigen::Matrix3d::Identity();
+      for (int i = 1; i <= data_list.size() - 1; i++) {
+
+          Eigen::Matrix3d R = data(i).GetRotation();
+
+          double r00 = R.row(0)[0];  // ux
+          double r01 = R.row(0)[1];  // uy
+          double r02 = R.row(0)[2];  // uz
+          double r10 = R.row(1)[0];  // vx
+          double r11 = R.row(1)[1];  // vy
+          double r12 = R.row(1)[2];  // vz
+          double r20 = R.row(2)[0];  // wx
+          double r21 = R.row(2)[1];  // wy
+          double r22 = R.row(2)[2];  // wz
+
+          double angleZ0;
+          double angleY;
+          double angleZ1;
+          // y -> z, x -> y , z -> x
+          //ZYZ
+          if (r12 < 1) {
+              if (r12 > -1) {
+                  angleY = acosf(r12);
+                  angleZ0 = atan2f(r02, r22);
+                  angleZ1 = atan2f(r11, -r10);
+              }
+              else {
+                  angleY = acosf(-1);
+                  angleZ0 = -atan2f(r00, r01);
+                  angleZ1 = 0;
+              }
+          }
+          else {
+              angleY = 0;
+              angleZ0 = atan2f(r00, r01);
+              angleZ1 = 0;
+          }
+
+          data(i).MyRotate(Z, -angleZ1);
+          if (i != data_list.size() - 1)
+              data(i + 1).MyRotate(Z, angleZ1);
+      }
+  }
+
+
+
   IGL_INLINE bool Viewer::load_mesh_from_file(
       const std::string & mesh_file_name_string)
   {

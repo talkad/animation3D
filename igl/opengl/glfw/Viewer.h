@@ -117,6 +117,11 @@ namespace glfw
     //
     IGL_INLINE bool erase_mesh(const size_t index);
 
+    IGL_INLINE void Viewer::ik();
+    IGL_INLINE void Viewer::fin_rotate();
+    IGL_INLINE Eigen::Matrix4d Viewer::MakeParentTrans(int mesh_id);
+    IGL_INLINE Eigen::Matrix3d Viewer::GetParentsRotationInverse(int index);
+
     // Retrieve mesh index from its unique identifier
     // Returns 0 if not found
     IGL_INLINE size_t mesh_index(const int id) const;
