@@ -58,7 +58,7 @@ public:
 
   IGL_INLINE void set_visible(bool value, unsigned int core_id = 1);
 
-  IGL_INLINE void igl::opengl::ViewerData::drawAlignedBox(Eigen::AlignedBox<double, 3>& alignedBox);
+  IGL_INLINE void igl::opengl::ViewerData::drawAxis(Eigen::AlignedBox<double, 3>& alignedBox);
 
   // Set the color of the mesh
   //
@@ -207,6 +207,8 @@ public:
 
   // Invert mesh normals
   bool invert_normals;
+
+  // bool show_overlay;
 
   // Visualization options
   // Each option is a binary mask specifying on which viewport each option is set.

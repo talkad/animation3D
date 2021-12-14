@@ -39,8 +39,9 @@ IGL_INLINE igl::opengl::ViewerData::ViewerData()
 };
 
 
-IGL_INLINE void igl::opengl::ViewerData::drawAlignedBox(Eigen::AlignedBox<double, 3>& alignedBox) {
+IGL_INLINE void igl::opengl::ViewerData::drawAxis(Eigen::AlignedBox<double, 3>& alignedBox) {
     line_width = 3.0f;
+    point_size = 15;
 
     Eigen::MatrixXd V_box(8, 3); // Corners of the bounding box
     Eigen::MatrixXd V_boxz(2, 3); // Corners of the bounding box
@@ -59,6 +60,8 @@ IGL_INLINE void igl::opengl::ViewerData::drawAlignedBox(Eigen::AlignedBox<double
     V_boxz.row(0) = (V_box.row(0) + V_box.row(2) + V_box.row(4) + V_box.row(6)) / 4;
     V_boxz.row(1) = (V_box.row(1) + V_box.row(3) + V_box.row(5) + V_box.row(7)) / 4;
 
+    add_points(V_boxz, Eigen::RowVector3d(0, 0, 0));
+
     V_boxy.row(0) = (V_box.row(0) + V_box.row(1) + V_box.row(2) + V_box.row(3)) / 4;
     V_boxy.row(1) = (V_box.row(4) + V_box.row(5) + V_box.row(6) + V_box.row(7)) / 4;
 
@@ -67,22 +70,22 @@ IGL_INLINE void igl::opengl::ViewerData::drawAlignedBox(Eigen::AlignedBox<double
 
     add_edges
     (
-        V_boxz.row(0),
-        V_boxz.row(1),
+        V_boxz.row(0)*1.5,
+        V_boxz.row(1)*1.5,
         Eigen::RowVector3d(0, 0, 1)
     );
 
     add_edges
     (
-        V_boxy.row(0),
-        V_boxy.row(1),
+        V_boxy.row(0)*2,
+        V_boxy.row(1)*2,
         Eigen::RowVector3d(0, 1, 0)
     );
 
     add_edges
     (
-        V_boxx.row(0),
-        V_boxx.row(1),
+        V_boxx.row(0)*2,
+        V_boxx.row(1)*2,
         Eigen::RowVector3d(1, 0, 0)
     );
 
