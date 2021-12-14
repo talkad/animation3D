@@ -184,7 +184,7 @@ namespace glfw
     //    return true;
 
     if(mesh_file_name_string != "C:/Users/tal74/animation/EngineForAnimationCourse/tutorial/data/sphere.obj") {
-        data().MyTranslateInSystem(data().GetRotation(), Eigen::RowVector3d(0, 0, 1.5));
+        data().MyTranslateInSystem(data().GetRotation(), Eigen::RowVector3d(0, 0, 1.6));
         data().kd_tree.init(data().V, data().F);
         data().drawAxis(data().kd_tree.m_box);
         data().SetCenterOfRotation(Eigen::RowVector3d(0, 0, -0.8));

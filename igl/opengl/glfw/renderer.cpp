@@ -158,8 +158,15 @@ void Renderer::MouseProcessing(int button)
 			double xToMove = -(double)xrel / core().viewport[3] * (z + 2 * near) * (far) / (far + 2 * near) * 2.0 * tanf(angle / 360 * M_PI) / (core().camera_zoom * core().camera_base_zoom);
 			double yToMove = (double)yrel / core().viewport[3] * (z + 2 * near) * (far) / (far + 2 * near) * 2.0 * tanf(angle / 360 * M_PI) / (core().camera_zoom * core().camera_base_zoom);
 
-			scn->data_list[0].MyTranslateInSystem(scn->GetRotation(), Eigen::Vector3d(xToMove, 0, 0));
-			scn->data_list[0].MyTranslateInSystem(scn->GetRotation(), Eigen::Vector3d(0, yToMove, 0));
+			if (scn->selected_data_index == 0) {
+				scn->data().MyTranslateInSystem(scn->GetRotation(), Eigen::Vector3d(xToMove, 0, 0));
+				scn->data().MyTranslateInSystem(scn->GetRotation(), Eigen::Vector3d(0, yToMove, 0));
+			}
+			else {
+				scn->data_list[1].MyTranslateInSystem(scn->GetRotation(), Eigen::Vector3d(xToMove, 0, 0));
+				scn->data_list[1].MyTranslateInSystem(scn->GetRotation(), Eigen::Vector3d(0, yToMove, 0));
+			}
+
 			scn->WhenTranslate();
 		}
 		else
