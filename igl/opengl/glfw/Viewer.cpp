@@ -68,7 +68,8 @@ namespace glfw
     next_data_id(1),
 	isPicked(false),
 	isActive(false),
-    tip(Eigen::RowVector3d(5, 0, 1.5))
+    tip(Eigen::RowVector3d(5, 0, 1.5)),
+    link_num(0)
   {
     data_list.front().id = 0;
 
@@ -181,38 +182,13 @@ namespace glfw
     //    return true;
 
     if(mesh_file_name_string != "C:/Users/tal74/animation/EngineForAnimationCourse/tutorial/data/sphere.obj") {
-
         data().MyTranslateInSystem(data().GetRotation(), Eigen::RowVector3d(0, 0, 1.5));
         data().kd_tree.init(data().V, data().F);
         data().drawAxis(data().kd_tree.m_box);
         data().SetCenterOfRotation(Eigen::RowVector3d(0, 0, -0.8));
 
-        // naive approach
-        //tip = Eigen::RowVector3d(tip[0], tip[1], tip[2] + 1.6);
-
-
-        //Eigen::AlignedBox<double, 3> alignedBox = data().kd_tree.m_box;
-
-        //std::cout << "current tip: " << tip << std::endl;
-        //tip = (alignedBox.corner(alignedBox.BottomRightCeil) + alignedBox.corner(alignedBox.BottomLeftCeil) + 
-        //    alignedBox.corner(alignedBox.TopRightCeil) + alignedBox.corner(alignedBox.TopLeftCeil)) / 4;
-        //tip = tip + Eigen::RowVector3d(5, 0, 1.5);
-        //std::cout << "updated tip: " << tip << std::endl;
-
-
-        //Eigen::MatrixXd V_box(8, 3); // Corners of the bounding box
-
-        ////V_box.row(0) = alignedBox.corner(alignedBox.BottomRightCeil);
-        ////V_box.row(2) = alignedBox.corner(alignedBox.BottomLeftCeil);
-        ////V_box.row(4) = alignedBox.corner(alignedBox.TopRightCeil);
-        ////V_box.row(6) = alignedBox.corner(alignedBox.TopLeftCeil);
-        //V_box.row(7) = (alignedBox.corner(alignedBox.BottomRightCeil) + alignedBox.corner(alignedBox.BottomLeftCeil) +
-        //    alignedBox.corner(alignedBox.TopRightCeil) + alignedBox.corner(alignedBox.TopLeftCeil)) / 4;
-
-        //std::cout << "updated tip: " << (alignedBox.corner(alignedBox.BottomRightCeil) + alignedBox.corner(alignedBox.BottomLeftCeil) +
-        //    alignedBox.corner(alignedBox.TopRightCeil) + alignedBox.corner(alignedBox.TopLeftCeil)) / 4 << std::endl;
-
-        //data().add_points(V_box, Eigen::RowVector3d(1, 0, 1));
+        link_num++;
+        std::cout << "tip: " << tip << std::endl;
     }
 
 
@@ -296,10 +272,6 @@ namespace glfw
 
   IGL_INLINE void Viewer::open_dialog_load_mesh()
   {
-  /*  std::string fname = igl::file_dialog_open();
-
-    if (fname.length() == 0)
-      return;*/
     this->load_mesh_from_file("C:/Users/tal74/animation/EngineForAnimationCourse/tutorial/data/zcylinder.obj");
   }
 

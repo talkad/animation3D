@@ -140,8 +140,9 @@ public:
 	bool isPicked;
 	bool isActive;
     Eigen::RowVector3d tip;
- 
-    
+
+    int link_num;
+
 
     // List of registered plugins
 //    std::vector<ViewerPlugin*> plugins;
