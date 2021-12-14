@@ -141,7 +141,19 @@ static void glfw_key_callback(GLFWwindow* window, int key, int scancode, int act
 		case 'T':
 		case 't':
 		{
-			rndr->core().toggle(scn->data().show_faces);
+			int lastLinkidx = scn->link_num;
+			scn->tip = scn->CalcParentsTrans(lastLinkidx) *
+				scn->data(lastLinkidx).MakeTransd() *
+				Eigen::Vector4d(scn->data(lastLinkidx).V.colwise().mean()[0], scn->data(lastLinkidx).V.colwise().maxCoeff()[1], scn->data(lastLinkidx).V.colwise().mean()[2], 1);
+
+			std::cout << "tip: (" << scn->tip.head(3).transpose() << ")" << std::endl;
+			break;
+		}
+		case 'D':
+		case 'd':
+		{
+			scn->destination = scn->data(0).MakeTransd().col(3).head(3);
+			std::cout << "destination: (" << scn->destination.transpose() << ")" << std::endl;
 			break;
 		}
 		case '[':

@@ -122,6 +122,7 @@ namespace glfw
     IGL_INLINE size_t mesh_index(const int id) const;
 
 	Eigen::Matrix4d CalcParentsTrans(int indx);
+
 	inline bool SetAnimation() { return isActive = !isActive; }
 public:
     //////////////////////
@@ -139,7 +140,8 @@ public:
     int next_data_id;
 	bool isPicked;
 	bool isActive;
-    Eigen::RowVector3d tip;
+    Eigen::Vector4d tip;
+    Eigen::Vector3d destination;
 
     int link_num;
 

@@ -68,8 +68,9 @@ namespace glfw
     next_data_id(1),
 	isPicked(false),
 	isActive(false),
-    tip(Eigen::RowVector3d(5, 0, 1.5)),
-    link_num(0)
+    tip(Eigen::Vector4d(0, 0, 0, 0)),
+    link_num(0),
+    destination(Eigen::Vector3d(5,0,0))
   {
     data_list.front().id = 0;
 
@@ -187,8 +188,12 @@ namespace glfw
         data().drawAxis(data().kd_tree.m_box);
         data().SetCenterOfRotation(Eigen::RowVector3d(0, 0, -0.8));
 
+        int lastLinkidx = link_num;
+        tip = CalcParentsTrans(lastLinkidx) *
+            data(lastLinkidx).MakeTransd() *
+            Eigen::Vector4d(data(lastLinkidx).V.colwise().mean()[0], data(lastLinkidx).V.colwise().maxCoeff()[1], data(lastLinkidx).V.colwise().mean()[2], 1);
+        
         link_num++;
-        std::cout << "tip: " << tip << std::endl;
     }
 
 
@@ -355,6 +360,7 @@ namespace glfw
     }
     return 0;
   }
+
 
   Eigen::Matrix4d Viewer::CalcParentsTrans(int indx) 
   {
