@@ -133,6 +133,12 @@ static void glfw_key_callback(GLFWwindow* window, int key, int scancode, int act
 			rndr->core().toggle(scn->data().show_lines);
 			break;
 		}
+		case 'E':
+		case 'e':
+		{
+			rndr->core().toggle(scn->data().show_overlay);
+			break;
+		}
 		case 'O':
 		case 'o':
 		{
