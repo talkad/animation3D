@@ -385,7 +385,7 @@ namespace glfw
     //  if (plugins[i]->post_load())
     //    return true;
 
-    if(mesh_file_name_string != "C:/Users/tal74/animation/EngineForAnimationCourse/tutorial/data/sphere.obj") {
+    if(mesh_file_name_string != "C:/Users/tal74/animation/animation3D/tutorial/data/sphere.obj") {
         data().MyTranslateInSystem(data().GetRotation(), Eigen::RowVector3d(0, 0, 1.6));
         data().kd_tree.init(data().V, data().F);
         data().drawAxis(data().kd_tree.m_box);
@@ -480,7 +480,7 @@ namespace glfw
 
   IGL_INLINE void Viewer::open_dialog_load_mesh()
   {
-    this->load_mesh_from_file("C:/Users/tal74/animation/EngineForAnimationCourse/tutorial/data/zcylinder.obj");
+    this->load_mesh_from_file("C:/Users/tal74/animation/animation3D/tutorial/data/zcylinder.obj");
   }
 
   IGL_INLINE void Viewer::open_dialog_save_mesh()

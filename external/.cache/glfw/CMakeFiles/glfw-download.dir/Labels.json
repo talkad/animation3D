@@ -2,37 +2,37 @@
 	"sources" : 
 	[
 		{
-			"file" : "C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/glfw/CMakeFiles/glfw-download"
+			"file" : "C:/Users/tal74/animation/animation3D/external/.cache/glfw/CMakeFiles/glfw-download"
 		},
 		{
-			"file" : "C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/glfw/CMakeFiles/7958b1678dce13b96726359ff525b1c9/glfw-download.rule"
+			"file" : "C:/Users/tal74/animation/animation3D/external/.cache/glfw/CMakeFiles/964b88fbbe24ae4054d05e1d7aa793d0/glfw-download.rule"
 		},
 		{
-			"file" : "C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/glfw/CMakeFiles/cfc240ab4c5f837b0b61262ae9c04707/glfw-download-complete.rule"
+			"file" : "C:/Users/tal74/animation/animation3D/external/.cache/glfw/CMakeFiles/a7325aac1e89ec5d5eb7dc3ad9fa79c7/glfw-download-complete.rule"
 		},
 		{
-			"file" : "C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/glfw/CMakeFiles/6985db69ee710001e0eacec562154a4c/glfw-download-build.rule"
+			"file" : "C:/Users/tal74/animation/animation3D/external/.cache/glfw/CMakeFiles/cc651d4d44842314ca2f4a02e07094b5/glfw-download-build.rule"
 		},
 		{
-			"file" : "C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/glfw/CMakeFiles/6985db69ee710001e0eacec562154a4c/glfw-download-configure.rule"
+			"file" : "C:/Users/tal74/animation/animation3D/external/.cache/glfw/CMakeFiles/cc651d4d44842314ca2f4a02e07094b5/glfw-download-configure.rule"
 		},
 		{
-			"file" : "C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/glfw/CMakeFiles/6985db69ee710001e0eacec562154a4c/glfw-download-download.rule"
+			"file" : "C:/Users/tal74/animation/animation3D/external/.cache/glfw/CMakeFiles/cc651d4d44842314ca2f4a02e07094b5/glfw-download-download.rule"
 		},
 		{
-			"file" : "C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/glfw/CMakeFiles/6985db69ee710001e0eacec562154a4c/glfw-download-install.rule"
+			"file" : "C:/Users/tal74/animation/animation3D/external/.cache/glfw/CMakeFiles/cc651d4d44842314ca2f4a02e07094b5/glfw-download-install.rule"
 		},
 		{
-			"file" : "C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/glfw/CMakeFiles/6985db69ee710001e0eacec562154a4c/glfw-download-mkdir.rule"
+			"file" : "C:/Users/tal74/animation/animation3D/external/.cache/glfw/CMakeFiles/cc651d4d44842314ca2f4a02e07094b5/glfw-download-mkdir.rule"
 		},
 		{
-			"file" : "C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/glfw/CMakeFiles/6985db69ee710001e0eacec562154a4c/glfw-download-patch.rule"
+			"file" : "C:/Users/tal74/animation/animation3D/external/.cache/glfw/CMakeFiles/cc651d4d44842314ca2f4a02e07094b5/glfw-download-patch.rule"
 		},
 		{
-			"file" : "C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/glfw/CMakeFiles/6985db69ee710001e0eacec562154a4c/glfw-download-test.rule"
+			"file" : "C:/Users/tal74/animation/animation3D/external/.cache/glfw/CMakeFiles/cc651d4d44842314ca2f4a02e07094b5/glfw-download-test.rule"
 		},
 		{
-			"file" : "C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/glfw/CMakeFiles/6985db69ee710001e0eacec562154a4c/glfw-download-update.rule"
+			"file" : "C:/Users/tal74/animation/animation3D/external/.cache/glfw/CMakeFiles/cc651d4d44842314ca2f4a02e07094b5/glfw-download-update.rule"
 		}
 	],
 	"target" : 

@@ -1,44 +1,44 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <CustomBuild Include="C:\Users\tal74\animation\EngineForAnimationCourse\external\.cache\libigl-imgui\CMakeFiles\b79594ad5c98c490fb87fa555072abc3\libigl-imgui-download-mkdir.rule">
+    <CustomBuild Include="C:\Users\tal74\animation\animation3D\external\.cache\libigl-imgui\CMakeFiles\7ea5e4800b09d666b2eacead50495e93\libigl-imgui-download-mkdir.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\tal74\animation\EngineForAnimationCourse\external\.cache\libigl-imgui\CMakeFiles\b79594ad5c98c490fb87fa555072abc3\libigl-imgui-download-download.rule">
+    <CustomBuild Include="C:\Users\tal74\animation\animation3D\external\.cache\libigl-imgui\CMakeFiles\7ea5e4800b09d666b2eacead50495e93\libigl-imgui-download-download.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\tal74\animation\EngineForAnimationCourse\external\.cache\libigl-imgui\CMakeFiles\b79594ad5c98c490fb87fa555072abc3\libigl-imgui-download-update.rule">
+    <CustomBuild Include="C:\Users\tal74\animation\animation3D\external\.cache\libigl-imgui\CMakeFiles\7ea5e4800b09d666b2eacead50495e93\libigl-imgui-download-update.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\tal74\animation\EngineForAnimationCourse\external\.cache\libigl-imgui\CMakeFiles\b79594ad5c98c490fb87fa555072abc3\libigl-imgui-download-patch.rule">
+    <CustomBuild Include="C:\Users\tal74\animation\animation3D\external\.cache\libigl-imgui\CMakeFiles\7ea5e4800b09d666b2eacead50495e93\libigl-imgui-download-patch.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\tal74\animation\EngineForAnimationCourse\external\.cache\libigl-imgui\CMakeFiles\b79594ad5c98c490fb87fa555072abc3\libigl-imgui-download-configure.rule">
+    <CustomBuild Include="C:\Users\tal74\animation\animation3D\external\.cache\libigl-imgui\CMakeFiles\7ea5e4800b09d666b2eacead50495e93\libigl-imgui-download-configure.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\tal74\animation\EngineForAnimationCourse\external\.cache\libigl-imgui\CMakeFiles\b79594ad5c98c490fb87fa555072abc3\libigl-imgui-download-build.rule">
+    <CustomBuild Include="C:\Users\tal74\animation\animation3D\external\.cache\libigl-imgui\CMakeFiles\7ea5e4800b09d666b2eacead50495e93\libigl-imgui-download-build.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\tal74\animation\EngineForAnimationCourse\external\.cache\libigl-imgui\CMakeFiles\b79594ad5c98c490fb87fa555072abc3\libigl-imgui-download-install.rule">
+    <CustomBuild Include="C:\Users\tal74\animation\animation3D\external\.cache\libigl-imgui\CMakeFiles\7ea5e4800b09d666b2eacead50495e93\libigl-imgui-download-install.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\tal74\animation\EngineForAnimationCourse\external\.cache\libigl-imgui\CMakeFiles\b79594ad5c98c490fb87fa555072abc3\libigl-imgui-download-test.rule">
+    <CustomBuild Include="C:\Users\tal74\animation\animation3D\external\.cache\libigl-imgui\CMakeFiles\7ea5e4800b09d666b2eacead50495e93\libigl-imgui-download-test.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\tal74\animation\EngineForAnimationCourse\external\.cache\libigl-imgui\CMakeFiles\09c8ce3a12f7afa2219b44a0e8b2c010\libigl-imgui-download-complete.rule">
+    <CustomBuild Include="C:\Users\tal74\animation\animation3D\external\.cache\libigl-imgui\CMakeFiles\946d18cdfe4b92529adb4ae9f8f60b2f\libigl-imgui-download-complete.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\tal74\animation\EngineForAnimationCourse\external\.cache\libigl-imgui\CMakeFiles\04b0f56309bb20ef01cbf718ec49a5f1\libigl-imgui-download.rule">
+    <CustomBuild Include="C:\Users\tal74\animation\animation3D\external\.cache\libigl-imgui\CMakeFiles\a85f9670d01ecb9b3f2462b966958abb\libigl-imgui-download.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\tal74\animation\EngineForAnimationCourse\external\.cache\libigl-imgui\CMakeLists.txt" />
+    <CustomBuild Include="C:\Users\tal74\animation\animation3D\external\.cache\libigl-imgui\CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="C:\Users\tal74\animation\EngineForAnimationCourse\external\.cache\libigl-imgui\CMakeFiles\libigl-imgui-download" />
+    <None Include="C:\Users\tal74\animation\animation3D\external\.cache\libigl-imgui\CMakeFiles\libigl-imgui-download" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="CMake Rules">
-      <UniqueIdentifier>{55D9D3E0-F813-321B-B8C7-7354FD43479F}</UniqueIdentifier>
+      <UniqueIdentifier>{78C2C4FC-4A7D-3F72-B524-78620A3EDE9F}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
