@@ -70,14 +70,18 @@ static void glfw_mouse_press(GLFWwindow* window, int button, int action, int mod
 	 }
 }
 
-static void glfw_mouse_scroll(GLFWwindow* window, double x, double y)
-{
-	Renderer* rndr = (Renderer*)glfwGetWindowUserPointer(window);
-	if(rndr->IsPicked())
-		rndr->GetScene()->data().MyScale(Eigen::Vector3d(1 + y * 0.01,1 + y * 0.01,1+y*0.01));
-	else
-		rndr->GetScene()->MyTranslate(Eigen::Vector3d(0,0, - y * 0.03),true);
-}
+ static void glfw_mouse_scroll(GLFWwindow* window, double x, double y)
+ {
+	 Renderer* rndr = (Renderer*)glfwGetWindowUserPointer(window);
+	 if (rndr->IsPicked())
+		 if (rndr->GetScene()->selected_data_index == 0)
+			rndr->GetScene()->data().MyTranslateInSystem(rndr->GetScene()->GetRotation(), Eigen::Vector3d(0, 0, y));
+		 else
+			rndr->GetScene()->data_list[1].MyTranslateInSystem(rndr->GetScene()->GetRotation(), Eigen::Vector3d(0, 0, y));
+	 //rndr->GetScene()->data_list[1].MyScale(Eigen::Vector3d(1 + y * 0.01,1 + y * 0.01,1+y*0.01));
+	 else
+		 rndr->GetScene()->MyTranslate(Eigen::Vector3d(0, 0, -y * 0.03), true);
+ }
 
 void glfw_window_size(GLFWwindow* window, int width, int height)
 {
@@ -230,7 +234,24 @@ static void glfw_key_callback(GLFWwindow* window, int key, int scancode, int act
 			break;
 		case ' ':
 			// toggle ik solver aniimation
-			scn->ikAnimation = !scn->ikAnimation;
+			if (scn->data_list.size() > 1) {
+				Eigen::Vector4d root = scn->data_list[1].MakeTransd() * Eigen::Vector4d(0, 0, -scn->link_length / 2, 1);
+				Eigen::Vector4d ball = scn->data_list[0].MakeTransd() * Eigen::Vector4d(0, 0, 0, 1);
+
+				double dist = (root - ball).norm();
+
+				if (scn->link_num * scn->link_length >= dist)
+					scn->SetAnimation();
+				else {
+					std::cout << "cannot reach" << std::endl;
+					scn->isActive = false;
+				}
+			}
+			else {
+				std::cout << "cannot reach" << std::endl;
+				scn->isActive = false;
+			}
+
 			break;
 		
 		default: 

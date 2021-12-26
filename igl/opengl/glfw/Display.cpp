@@ -127,8 +127,6 @@ bool Display::launch_rendering(bool loop)
 		renderer->draw(window);
 		glfwSwapBuffers(window);
 
-		if (renderer->GetScene()->ikAnimation)
-			renderer->GetScene()->ik();
 
 		if (renderer->core().is_animating || frame_counter++ < num_extra_frames)
 		{//motion

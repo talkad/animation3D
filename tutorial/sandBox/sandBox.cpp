@@ -15,7 +15,7 @@ SandBox::SandBox()
 void SandBox::Init(const std::string &config)
 {
 
-	load_mesh_from_file("C:/Users/tal74/animation/animation3D/tutorial/data/sphere.obj");
+	load_mesh_from_file("C:/Users/ipism/source/repos/animation3D/tutorial/data/sphere.obj");
 
 	Eigen::RowVector3d center(5, 0, 0);
 	parents.push_back(-1);
@@ -40,11 +40,8 @@ SandBox::~SandBox()
 void SandBox::Animate()
 {
 	if (isActive)
-	{
-		
-		
-		
-	}
+		animateCCD();
+
 }
 
 
