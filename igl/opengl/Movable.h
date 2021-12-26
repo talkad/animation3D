@@ -14,7 +14,7 @@ public:
 	Eigen::Matrix4d MakeTransScaled();
 	void MyTranslate(Eigen::Vector3d amt, bool preRotation);
 	void MyRotate(Eigen::Vector3d rotAxis, double angle);
-	void MyRotate(const Eigen::Matrix3d &rot);
+	void MyRotate(const Eigen::Matrix3d& rot);
 	void MyScale(Eigen::Vector3d amt);
 
 	void SetCenterOfRotation(Eigen::Vector3d amt);
@@ -23,13 +23,12 @@ public:
 
 	void RotateInSystem(Eigen::Vector3d rotAxis, double angle);
 
-	Eigen::Matrix3d GetRotation() const{ return Tout.rotation().matrix(); }
+	Eigen::Matrix3d GetRotation() const { return Tout.rotation().matrix(); }
 
 	Eigen::Vector3d Movable::GetCenterOfRotation();
 
-
 	virtual ~Movable() {}
-private:
-	Eigen::Affine3d Tout,Tin;
-};
 
+private:
+	Eigen::Affine3d Tout, Tin;
+};

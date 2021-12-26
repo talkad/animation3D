@@ -40,11 +40,8 @@ SandBox::~SandBox()
 void SandBox::Animate()
 {
 	if (isActive)
-	{
-		
-		
-		
-	}
+		animateCCD();
+
 }
 
 

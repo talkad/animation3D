@@ -117,16 +117,20 @@ namespace glfw
     //
     IGL_INLINE bool erase_mesh(const size_t index);
 
-    IGL_INLINE void Viewer::ik();
-    IGL_INLINE void Viewer::fin_rotate();
-    IGL_INLINE Eigen::Matrix4d Viewer::MakeParentTrans(int mesh_id);
-    IGL_INLINE Eigen::Matrix3d Viewer::GetParentsRotationInverse(int index);
-
     // Retrieve mesh index from its unique identifier
     // Returns 0 if not found
     IGL_INLINE size_t mesh_index(const int id) const;
 
 	Eigen::Matrix4d CalcParentsTrans(int indx);
+
+
+    void animateCCD();
+
+    Eigen::Matrix4d CalcParentsTranslation(int index);
+
+    Eigen::Matrix3d CalcParentsInverseRotation(int index);
+
+
 
 	inline bool SetAnimation() { return isActive = !isActive; }
 public:
@@ -150,6 +154,7 @@ public:
 
     int link_num;
     bool ikAnimation;
+    double link_length;
 
 
     // List of registered plugins
