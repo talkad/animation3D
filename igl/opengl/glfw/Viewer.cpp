@@ -382,6 +382,10 @@ namespace igl
                     CalcParentsTranslation(index - 1) * data_list[index - 1].MakeTransd();
             }
 
+            IGL_INLINE Eigen::Vector3d Viewer::calcJointPos(int jointPos)
+            {
+                return (CalcParentsTranslation(jointPos) * data_list[jointPos].MakeTransd() * Eigen::Vector4d(0, 0, ((jointPos == link_num) ? 1 : -1) * link_length / 2, 1)).head(3);
+            }
 
             IGL_INLINE Eigen::Matrix3d Viewer::CalcParentsInverseRotation(int index) {
                 Eigen::Matrix3d rot = data(index).GetRotation().inverse();
@@ -394,29 +398,72 @@ namespace igl
 
 
             IGL_INLINE void Viewer::animateCCD() {
-                Eigen::Vector4d ball = data_list[0].MakeTransd() * Eigen::Vector4d(0, 0, 0, 1), 
-                                E, R, RE, RD;
-                Eigen::Vector3d cross;
+                Eigen::Vector3d ball = (data_list[0].MakeTransd() * Eigen::Vector4d(0, 0, 0, 1)).head(3),
+                                E, R, RE, RD, cross;
                 double dist = 0.0;
 
                 for (int i = link_num; i > 0; --i) {
-                    E = CalcParentsTranslation(link_num) * data_list[link_num].MakeTransd() * Eigen::Vector4d(0, 0, link_length/2, 1);
+                    E = (CalcParentsTranslation(link_num) * data_list[link_num].MakeTransd() * Eigen::Vector4d(0, 0, link_length / 2, 1)).head(3);
                     dist = (E - ball).norm();
 
-                    R = CalcParentsTranslation(i) * data_list[i].MakeTransd() * Eigen::Vector4d(0, 0, -link_length / 2, 1);
+                    R = (CalcParentsTranslation(i) * data_list[i].MakeTransd() * Eigen::Vector4d(0, 0, -link_length / 2, 1)).head(3);
                     RE = E - R;
                     RD = ball - R;
 
                     double dot_product = RD.normalized().dot(RE.normalized());
-                    double alpha = acos(dot_product>1? 1: dot_product<-1? -1: dot_product);
+                    double alpha = acos(dot_product > 1 ? 1 : dot_product < -1 ? -1 : dot_product);
 
-                    cross = Eigen::Vector3d(RE[0], RE[1], RE[2]).cross(Eigen::Vector3d(RD[0], RD[1], RD[2])).normalized();
+                    cross = RE.cross(RD).normalized();
                     cross = CalcParentsInverseRotation(i) * cross;
                     data_list[i].MyRotate(cross, alpha / 30);
                 }
 
                 if (dist < 0.1) 
                     isActive = false;
+            }
+
+            void Viewer::animateFABRIK()
+            {
+                std::vector<Eigen::Vector3d> joints, new_joints_forward, new_joints_backward;
+                for (int i = 1; i <= link_num; ++i)
+                    joints.push_back(calcJointPos(i));
+                Eigen::Vector3d ball = (data_list[0].MakeTransd() * Eigen::Vector4d(0, 0, 0, 1)).head(3),
+                    E, R, RE, RD, cross;
+                double dist;
+                new_joints_forward.push_back(ball);
+
+                for (int i = link_num - 1; i > 0; --i) {
+                    double r = (joints[i] - new_joints_forward.back()).norm(),
+                           lambda = link_length / r;
+                    new_joints_forward.push_back((1 - lambda) * new_joints_forward.back() + lambda * joints[i]);
+                }
+
+                std::reverse(new_joints_forward.begin(), new_joints_forward.end());
+
+                new_joints_backward.push_back(joints.at(0));
+
+                for (int i = 1; i < link_num; ++i) {
+                    double r = (new_joints_backward.back() - new_joints_forward.at(i)).norm(),
+                        lambda = link_length / r;
+                    new_joints_backward.push_back((1 - lambda) * new_joints_backward.back() + lambda * new_joints_forward.at(i));
+                }
+
+                for (int i = 0; i < new_joints_backward.size() - 1; ++i) {
+                    RE = joints[i + 1] - joints[i];
+                    RD = new_joints_backward[i + 1] - joints[i];
+                    double dot_product = RD.normalized().dot(RE.normalized());
+                    double alpha = acos(dot_product > 1 ? 1 : dot_product < -1 ? -1 : dot_product);
+
+                    cross = RE.cross(RD).normalized();
+                    cross = CalcParentsInverseRotation(i) * cross;
+                    data_list[i + 1].MyRotate(cross, alpha / 30);
+                }
+
+                dist = (new_joints_backward.at(link_num - 1) - ball).norm();
+                std::cout << (new_joints_backward.at(link_num - 1)) << std::endl;
+                if (dist < 0.1)
+                    isActive = false;
+
             }
             
         } // end namespace

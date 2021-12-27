@@ -123,12 +123,15 @@ namespace glfw
 
 	Eigen::Matrix4d CalcParentsTrans(int indx);
 
+    IGL_INLINE Eigen::Vector3d calcJointPos(int);
 
     void animateCCD();
 
-    Eigen::Matrix4d CalcParentsTranslation(int index);
+    void animateFABRIK();
 
-    Eigen::Matrix3d CalcParentsInverseRotation(int index);
+    IGL_INLINE Eigen::Matrix4d CalcParentsTranslation(int index);
+
+    IGL_INLINE Eigen::Matrix3d CalcParentsInverseRotation(int index);
 
 
 
