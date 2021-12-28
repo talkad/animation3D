@@ -65,7 +65,6 @@ IGL_INLINE void Renderer::draw(GLFWwindow* window)
 		menu->pre_draw();
 		menu->callback_draw_viewer_menu();
 	}
-
 	for (auto& core : core_list)
 	{
 		int indx = 0;
@@ -74,9 +73,9 @@ IGL_INLINE void Renderer::draw(GLFWwindow* window)
 
 			if (mesh.is_visible & core.id)
 			{// for kinematic chain change scn->MakeTrans to parent matrix
+
 				core.draw(scn->MakeTransScale() * scn->CalcParentsTrans(indx).cast<float>(), mesh);
 			}
-
 			indx++;
 		}
 
@@ -159,8 +158,15 @@ void Renderer::MouseProcessing(int button)
 			double xToMove = -(double)xrel / core().viewport[3] * (z + 2 * near) * (far) / (far + 2 * near) * 2.0 * tanf(angle / 360 * M_PI) / (core().camera_zoom * core().camera_base_zoom);
 			double yToMove = (double)yrel / core().viewport[3] * (z + 2 * near) * (far) / (far + 2 * near) * 2.0 * tanf(angle / 360 * M_PI) / (core().camera_zoom * core().camera_base_zoom);
 
-			scn->data().MyTranslateInSystem(scn->GetRotation(), Eigen::Vector3d(xToMove, 0, 0));
-			scn->data().MyTranslateInSystem(scn->GetRotation(), Eigen::Vector3d(0, yToMove, 0));
+			if (scn->selected_data_index == 0) {
+				scn->data().MyTranslateInSystem(scn->GetRotation(), Eigen::Vector3d(xToMove, 0, 0));
+				scn->data().MyTranslateInSystem(scn->GetRotation(), Eigen::Vector3d(0, yToMove, 0));
+			}
+			else {
+				scn->data_list[1].MyTranslateInSystem(scn->GetRotation(), Eigen::Vector3d(xToMove, 0, 0));
+				scn->data_list[1].MyTranslateInSystem(scn->GetRotation(), Eigen::Vector3d(0, yToMove, 0));
+			}
+
 			scn->WhenTranslate();
 		}
 		else
@@ -214,7 +220,7 @@ Renderer::~Renderer()
 }
 
 double Renderer::Picking(double newx, double newy)
-{
+{	
 	int fid;
 	//Eigen::MatrixXd C = Eigen::MatrixXd::Constant(scn->data().F.rows(), 3, 1);
 	Eigen::Vector3f bc;
@@ -353,22 +359,3 @@ IGL_INLINE int Renderer::append_core(Eigen::Vector4f viewport, bool append_empty
 	selected_core_index = core_list.size() - 1;
 	return core_list.back().id;
 }
-
-//IGL_INLINE void Viewer::select_hovered_core()
-//{
-//	int width_window, height_window = 800;
-//   glfwGetFramebufferSize(window, &width_window, &height_window);
-//	for (int i = 0; i < core_list.size(); i++)
-//	{
-//		Eigen::Vector4f viewport = core_list[i].viewport;
-
-//		if ((current_mouse_x > viewport[0]) &&
-//			(current_mouse_x < viewport[0] + viewport[2]) &&
-//			((height_window - current_mouse_y) > viewport[1]) &&
-//			((height_window - current_mouse_y) < viewport[1] + viewport[3]))
-//		{
-//			selected_core_index = i;
-//			break;
-//		}
-//	}
-//}

@@ -1,2 +1,0 @@
-C:\Users\tal74\animation\EngineForAnimationCourse\tutorial\data\cube.obj
-C:\Users\tal74\animation\EngineForAnimationCourse\tutorial\data\sphere.obj

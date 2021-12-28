@@ -1,6 +1,6 @@
-^C:\USERS\TAL74\ANIMATION\ENGINEFORANIMATIONCOURSE\EXTERNAL\.CACHE\IMGUI\CMAKEFILES\081AA4DC07F26A21C9F5E7DE61220DAC\GENERATE.STAMP.RULE
+^C:\USERS\TAL74\ANIMATION\ANIMATION3D\EXTERNAL\.CACHE\IMGUI\CMAKEFILES\17B7EE378F9D76E343DE6F956F2B605A\GENERATE.STAMP.RULE
 setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/imgui -BC:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/imgui --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/imgui/imgui-download.sln
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/tal74/animation/animation3D/external/.cache/imgui -BC:/Users/tal74/animation/animation3D/external/.cache/imgui --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/tal74/animation/animation3D/external/.cache/imgui/imgui-download.sln
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone

@@ -2,13 +2,13 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>C:\Users\tal74\animation\EngineForAnimationCourse\external\.cache\eigen\x64\Debug\ZERO_CHECK</FullPath>
+      <FullPath>C:\Users\tal74\animation\animation3D\external\.cache\eigen\x64\Debug\ZERO_CHECK</FullPath>
     </ProjectOutput>
     <ProjectOutput>
-      <FullPath>C:\Users\tal74\animation\EngineForAnimationCourse\external\.cache\eigen\x64\Debug\eigen-download</FullPath>
+      <FullPath>C:\Users\tal74\animation\animation3D\external\.cache\eigen\x64\Debug\eigen-download</FullPath>
     </ProjectOutput>
     <ProjectOutput>
-      <FullPath>C:\Users\tal74\animation\EngineForAnimationCourse\external\.cache\eigen\x64\Debug\ALL_BUILD</FullPath>
+      <FullPath>C:\Users\tal74\animation\animation3D\external\.cache\eigen\x64\Debug\ALL_BUILD</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />

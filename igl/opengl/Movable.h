@@ -25,7 +25,10 @@ public:
 
 	Eigen::Matrix3d GetRotation() const { return Tout.rotation().matrix(); }
 
+	Eigen::Vector3d Movable::GetCenterOfRotation();
+
 	virtual ~Movable() {}
+
 private:
 	Eigen::Affine3d Tout, Tin;
 };

@@ -2,6 +2,7 @@
 #include "igl/opengl/glfw/Display.h"
 #include "igl/opengl/glfw/Renderer.h"
 #include "sandBox.h"
+#include "igl/look_at.h"
 //#include <igl/opengl/glfw/imgui/ImGuiMenu.h>
 //#include <igl/opengl/glfw/imgui/ImGuiHelpers.h>
 //#include <../imgui/imgui.h>
@@ -69,14 +70,18 @@ static void glfw_mouse_press(GLFWwindow* window, int button, int action, int mod
 	 }
 }
 
-static void glfw_mouse_scroll(GLFWwindow* window, double x, double y)
-{
-	Renderer* rndr = (Renderer*)glfwGetWindowUserPointer(window);
-	if(rndr->IsPicked())
-		rndr->GetScene()->data().MyScale(Eigen::Vector3d(1 + y * 0.01,1 + y * 0.01,1+y*0.01));
-	else
-		rndr->GetScene()->MyTranslate(Eigen::Vector3d(0,0, - y * 0.03),true);
-}
+ static void glfw_mouse_scroll(GLFWwindow* window, double x, double y)
+ {
+	 Renderer* rndr = (Renderer*)glfwGetWindowUserPointer(window);
+	 if (rndr->IsPicked())
+		 if (rndr->GetScene()->selected_data_index == 0)
+			rndr->GetScene()->data().MyTranslateInSystem(rndr->GetScene()->GetRotation(), Eigen::Vector3d(0, 0, y));
+		 else
+			rndr->GetScene()->data_list[1].MyTranslateInSystem(rndr->GetScene()->GetRotation(), Eigen::Vector3d(0, 0, y));
+	 //rndr->GetScene()->data_list[1].MyScale(Eigen::Vector3d(1 + y * 0.01,1 + y * 0.01,1+y*0.01));
+	 else
+		 rndr->GetScene()->MyTranslate(Eigen::Vector3d(0, 0, -y * 0.03), true);
+ }
 
 void glfw_window_size(GLFWwindow* window, int width, int height)
 {
@@ -99,7 +104,6 @@ void glfw_window_size(GLFWwindow* window, int width, int height)
 
 static void glfw_key_callback(GLFWwindow* window, int key, int scancode, int action, int modifier)
 {
-	Eigen::Vector3d tmp;
 	Renderer* rndr = (Renderer*) glfwGetWindowUserPointer(window);
 	SandBox* scn = (SandBox*)rndr->GetScene();
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
@@ -108,13 +112,6 @@ static void glfw_key_callback(GLFWwindow* window, int key, int scancode, int act
 	else if(action == GLFW_PRESS || action == GLFW_REPEAT)
 		switch (key)
 		{
-		case GLFW_KEY_C:
-		{
-			tmp = (scn->MakeTransd().inverse() * Eigen::Vector4d(0, 0, 0, 1)).head<3>();
-			//scn->data().SetCenterOfRotaion(tmp);
-			break;
-		}
-
 		case 'A':
 		case 'a':
 		{
@@ -140,6 +137,12 @@ static void glfw_key_callback(GLFWwindow* window, int key, int scancode, int act
 			rndr->core().toggle(scn->data().show_lines);
 			break;
 		}
+		case 'E':
+		case 'e':
+		{
+			rndr->core().toggle(scn->data().show_overlay);
+			break;
+		}
 		case 'O':
 		case 'o':
 		{
@@ -149,7 +152,41 @@ static void glfw_key_callback(GLFWwindow* window, int key, int scancode, int act
 		case 'T':
 		case 't':
 		{
-			rndr->core().toggle(scn->data().show_faces);
+			if(scn->link_num > 0)
+				std::cout << "tip: (" << scn->calcJointPos(scn->link_num + 1) << ")\n" << std::endl;
+			break;
+		}
+		case 'D':
+		case 'd':
+		{
+			if (scn->link_num > 0) {
+				scn->destination = scn->data(0).MakeTransd().col(3).head(3);
+				std::cout << "destination: (" << scn->destination.transpose() << ")\n" << std::endl;
+			}
+			break;
+		}
+		case 'P':
+		case 'p':
+		{
+			int idx = scn->selected_data_index;
+			Eigen::Matrix3d mat = idx == -1 ?
+				scn->MakeTransd().block(0, 0, 3, 3) :
+				scn->data().MakeTransd().block(0, 0, 3, 3);
+
+			std::cout << "rotation of link " << idx << ":\n" << std::endl;
+			std::cout << mat << "\n" <<std::endl;
+			break;
+		}
+		case 'C':
+		case 'c':
+		{
+			scn->isCCD = !scn->isCCD;
+
+			if (scn->isCCD)
+				std::cout << "CCD activated\n" << std::endl;
+			else
+				std::cout << "FABRIK activated\n"  << std::endl;
+
 			break;
 		}
 		case '[':
@@ -166,36 +203,66 @@ static void glfw_key_callback(GLFWwindow* window, int key, int scancode, int act
 			break;
 		case 'w':
 		case 'W':
-			scn->data().update_direction('w');
+			rndr->TranslateCamera(Eigen::Vector3f(0, 0, 0.03f));
 			break;
 		case 's':
 		case 'S':
-			scn->data().update_direction('s');
-			break;
-		case 'r':
-		case 'R':
-			scn->toggle_move();
+			rndr->TranslateCamera(Eigen::Vector3f(0, 0, -0.03f));
 			break;
 		case GLFW_KEY_UP:
-			scn->data().update_direction(GLFW_KEY_UP);
+			if (scn->selected_data_index != -1)
+				scn->data().MyRotate(Eigen::Vector3d(1, 0, 0), 0.1);
+			else
+				scn->MyRotate(Eigen::Vector3d(1, 0, 0), 0.1);
+
+			//rndr->TranslateCamera(Eigen::Vector3f(0, 0.01f,0));
 			break;
 		case GLFW_KEY_DOWN:
-			scn->data().update_direction(GLFW_KEY_DOWN);
+			if (scn->selected_data_index != -1)
+				scn->data().MyRotate(Eigen::Vector3d(1, 0, 0), -0.1);
+			else
+				scn->MyRotate(Eigen::Vector3d(1, 0, 0), -0.1);
+
+			//rndr->TranslateCamera(Eigen::Vector3f(0, -0.01f,0));
+
 			break;
 		case GLFW_KEY_LEFT:
-			scn->data().update_direction(GLFW_KEY_LEFT);
+			if (scn->selected_data_index != -1)
+				scn->data().MyRotate(Eigen::Vector3d(0, 0, 1), -0.1);
+			else
+				scn->MyRotate(Eigen::Vector3d(0, 0, 1), -0.1);
+
+				//rndr->TranslateCamera(Eigen::Vector3f(-0.01f, 0,0));
 			break;
 		case GLFW_KEY_RIGHT:
-			scn->data().update_direction(GLFW_KEY_RIGHT);
+			if (scn->selected_data_index != -1)
+				scn->data().MyRotate(Eigen::Vector3d(0, 0, 1), 0.1);
+			else
+				scn->MyRotate(Eigen::Vector3d(0, 0, 1), 0.1);
+
+			//rndr->TranslateCamera(Eigen::Vector3f(0.01f, 0, 0));
 			break;
 		case ' ':
-			scn->data().update_direction(' ');
-			//scn->data().Simplification(std::ceil(0.05 * scn->data().Q->size()));
+			// toggle ik solver aniimation
+			if (scn->data_list.size() > 1) {
+				Eigen::Vector4d root = scn->data_list[1].MakeTransd() * Eigen::Vector4d(0, 0, -scn->link_length / 2, 1);
+				Eigen::Vector4d ball = scn->data_list[0].MakeTransd() * Eigen::Vector4d(0, 0, 0, 1);
+
+				double dist = (root - ball).norm();
+
+				if (scn->link_num * scn->link_length >= dist)
+					scn->SetAnimation();
+				else {
+					std::cout << "cannot reach" << std::endl;
+					scn->isActive = false;
+				}
+			}
+			else {
+				std::cout << "cannot reach" << std::endl;
+				scn->isActive = false;
+			}
+
 			break;
-		//case 'c':
-		//case 'C':
-		//	scn->data().IGL_Simplification(std::ceil(0.05 * scn->data().Q->size()));
-		//	break;
 		
 		default: 
 			Eigen::Vector3f shift;
@@ -222,6 +289,3 @@ void Init(Display& display, igl::opengl::glfw::imgui::ImGuiMenu *menu)
 	display.AddResizeCallBack(glfw_window_size);
 	menu->init(&display);
 }
-
-
-

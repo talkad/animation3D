@@ -236,6 +236,13 @@ IGL_INLINE void ImGuiMenu::draw_viewer_menu(igl::opengl::glfw::Viewer *viewer, s
           viewer->data_list.back().set_visible(true, 2);
           viewer->data_list.back().show_faces = 3;
           viewer->selected_data_index = savedIndx;
+
+          int last_index = viewer->data_list.size() - 1;
+          //std::cout << "patents size " << viewer->parents.size() << std::endl;
+          //std::cout << "patents[" << last_index << "] = " << last_index - 1 << std::endl;
+
+          if(last_index > 1)
+            viewer->parents[last_index] = last_index - 1;
       }
     }
     ImGui::SameLine(0, p);
@@ -295,6 +302,11 @@ IGL_INLINE void ImGuiMenu::draw_viewer_menu(igl::opengl::glfw::Viewer *viewer, s
     {
       viewer->data().dirty |= igl::opengl::MeshGL::DIRTY_NORMAL;
     }
+    //if (ImGui::Checkbox("Show overlay", &(viewer->data().show_overlay)))
+    //{
+    //    viewer->data().drawAxis(viewer->data().kd_tree.m_box);
+    //    viewer->data().dirty = MeshGL::DIRTY_ALL;
+    //}
     make_checkbox("Show overlay", viewer->data().show_overlay);
     make_checkbox("Show overlay depth", viewer->data().show_overlay_depth);
     

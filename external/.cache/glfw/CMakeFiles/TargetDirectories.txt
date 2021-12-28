@@ -1,3 +1,3 @@
-C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/glfw/CMakeFiles/glfw-download.dir
-C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/glfw/CMakeFiles/ALL_BUILD.dir
-C:/Users/tal74/animation/EngineForAnimationCourse/external/.cache/glfw/CMakeFiles/ZERO_CHECK.dir
+C:/Users/tal74/animation/animation3D/external/.cache/glfw/CMakeFiles/glfw-download.dir
+C:/Users/tal74/animation/animation3D/external/.cache/glfw/CMakeFiles/ALL_BUILD.dir
+C:/Users/tal74/animation/animation3D/external/.cache/glfw/CMakeFiles/ZERO_CHECK.dir
