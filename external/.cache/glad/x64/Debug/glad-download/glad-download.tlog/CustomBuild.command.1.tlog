@@ -1,20 +1,20 @@
-^C:\USERS\TAL74\ANIMATION\ANIMATION3D\EXTERNAL\.CACHE\GLAD\CMAKEFILES\B715352730993B4828EF8B807BAB5B75\GLAD-DOWNLOAD-MKDIR.RULE
+^C:\USERS\IPISM\SOURCE\REPOS\ANIMATION3D\EXTERNAL\.CACHE\GLAD\CMAKEFILES\F34C458230DFD87D4D98EE17914B7273\GLAD-DOWNLOAD-MKDIR.RULE
 setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/animation/animation3D/cmake/../external/glad
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ipism/source/repos/animation3D/cmake/../external/glad
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/animation/animation3D/build/glad-build
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ipism/source/repos/animation3D/build/glad-build
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/animation/animation3D/external/.cache/glad/glad-download-prefix
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ipism/source/repos/animation3D/external/.cache/glad/glad-download-prefix
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/animation/animation3D/external/.cache/glad/glad-download-prefix/tmp
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ipism/source/repos/animation3D/external/.cache/glad/glad-download-prefix/tmp
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/animation/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/Debug
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ipism/source/repos/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/Debug
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/animation/animation3D/external/.cache/glad/glad-download-prefix/src
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ipism/source/repos/animation3D/external/.cache/glad/glad-download-prefix/src
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/animation/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ipism/source/repos/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/animation/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/Debug/glad-download-mkdir
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/Debug/glad-download-mkdir
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
@@ -22,15 +22,15 @@ endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd
-^C:\USERS\TAL74\ANIMATION\ANIMATION3D\EXTERNAL\.CACHE\GLAD\CMAKEFILES\B715352730993B4828EF8B807BAB5B75\GLAD-DOWNLOAD-DOWNLOAD.RULE
+^C:\USERS\IPISM\SOURCE\REPOS\ANIMATION3D\EXTERNAL\.CACHE\GLAD\CMAKEFILES\F34C458230DFD87D4D98EE17914B7273\GLAD-DOWNLOAD-DOWNLOAD.RULE
 setlocal
-cd C:\Users\tal74\animation\animation3D\external
+cd C:\Users\ipism\source\repos\animation3D\external
 if %errorlevel% neq 0 goto :cmEnd
 C:
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -P C:/Users/tal74/animation/animation3D/external/.cache/glad/glad-download-prefix/tmp/glad-download-gitclone.cmake
+"C:\Program Files\CMake\bin\cmake.exe" -P C:/Users/ipism/source/repos/animation3D/external/.cache/glad/glad-download-prefix/tmp/glad-download-gitclone.cmake
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/animation/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/Debug/glad-download-download
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/Debug/glad-download-download
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
@@ -38,13 +38,13 @@ endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd
-^C:\USERS\TAL74\ANIMATION\ANIMATION3D\EXTERNAL\.CACHE\GLAD\CMAKEFILES\B715352730993B4828EF8B807BAB5B75\GLAD-DOWNLOAD-UPDATE.RULE
+^C:\USERS\IPISM\SOURCE\REPOS\ANIMATION3D\EXTERNAL\.CACHE\GLAD\CMAKEFILES\F34C458230DFD87D4D98EE17914B7273\GLAD-DOWNLOAD-UPDATE.RULE
 setlocal
-cd C:\Users\tal74\animation\animation3D\external\glad
+cd C:\Users\ipism\source\repos\animation3D\external\glad
 if %errorlevel% neq 0 goto :cmEnd
 C:
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -P C:/Users/tal74/animation/animation3D/external/.cache/glad/glad-download-prefix/tmp/glad-download-gitupdate.cmake
+"C:\Program Files\CMake\bin\cmake.exe" -P C:/Users/ipism/source/repos/animation3D/external/.cache/glad/glad-download-prefix/tmp/glad-download-gitupdate.cmake
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
@@ -52,11 +52,11 @@ endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd
-^C:\USERS\TAL74\ANIMATION\ANIMATION3D\EXTERNAL\.CACHE\GLAD\CMAKEFILES\B715352730993B4828EF8B807BAB5B75\GLAD-DOWNLOAD-PATCH.RULE
+^C:\USERS\IPISM\SOURCE\REPOS\ANIMATION3D\EXTERNAL\.CACHE\GLAD\CMAKEFILES\F34C458230DFD87D4D98EE17914B7273\GLAD-DOWNLOAD-PATCH.RULE
 setlocal
 "C:\Program Files\CMake\bin\cmake.exe" -E echo_append
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/animation/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/Debug/glad-download-patch
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/Debug/glad-download-patch
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
@@ -64,31 +64,15 @@ endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd
-^C:\USERS\TAL74\ANIMATION\ANIMATION3D\EXTERNAL\.CACHE\GLAD\CMAKEFILES\B715352730993B4828EF8B807BAB5B75\GLAD-DOWNLOAD-CONFIGURE.RULE
+^C:\USERS\IPISM\SOURCE\REPOS\ANIMATION3D\EXTERNAL\.CACHE\GLAD\CMAKEFILES\F34C458230DFD87D4D98EE17914B7273\GLAD-DOWNLOAD-CONFIGURE.RULE
 setlocal
-cd C:\Users\tal74\animation\animation3D\build\glad-build
-if %errorlevel% neq 0 goto :cmEnd
-C:
-if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E echo_append
-if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/animation/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/Debug/glad-download-configure
-if %errorlevel% neq 0 goto :cmEnd
-:cmEnd
-endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
-:cmErrorLevel
-exit /b %1
-:cmDone
-if %errorlevel% neq 0 goto :VCEnd
-^C:\USERS\TAL74\ANIMATION\ANIMATION3D\EXTERNAL\.CACHE\GLAD\CMAKEFILES\B715352730993B4828EF8B807BAB5B75\GLAD-DOWNLOAD-BUILD.RULE
-setlocal
-cd C:\Users\tal74\animation\animation3D\build\glad-build
+cd C:\Users\ipism\source\repos\animation3D\build\glad-build
 if %errorlevel% neq 0 goto :cmEnd
 C:
 if %errorlevel% neq 0 goto :cmEnd
 "C:\Program Files\CMake\bin\cmake.exe" -E echo_append
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/animation/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/Debug/glad-download-build
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/Debug/glad-download-configure
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
@@ -96,15 +80,15 @@ endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd
-^C:\USERS\TAL74\ANIMATION\ANIMATION3D\EXTERNAL\.CACHE\GLAD\CMAKEFILES\B715352730993B4828EF8B807BAB5B75\GLAD-DOWNLOAD-INSTALL.RULE
+^C:\USERS\IPISM\SOURCE\REPOS\ANIMATION3D\EXTERNAL\.CACHE\GLAD\CMAKEFILES\F34C458230DFD87D4D98EE17914B7273\GLAD-DOWNLOAD-BUILD.RULE
 setlocal
-cd C:\Users\tal74\animation\animation3D\build\glad-build
+cd C:\Users\ipism\source\repos\animation3D\build\glad-build
 if %errorlevel% neq 0 goto :cmEnd
 C:
 if %errorlevel% neq 0 goto :cmEnd
 "C:\Program Files\CMake\bin\cmake.exe" -E echo_append
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/animation/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/Debug/glad-download-install
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/Debug/glad-download-build
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
@@ -112,15 +96,15 @@ endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd
-^C:\USERS\TAL74\ANIMATION\ANIMATION3D\EXTERNAL\.CACHE\GLAD\CMAKEFILES\B715352730993B4828EF8B807BAB5B75\GLAD-DOWNLOAD-TEST.RULE
+^C:\USERS\IPISM\SOURCE\REPOS\ANIMATION3D\EXTERNAL\.CACHE\GLAD\CMAKEFILES\F34C458230DFD87D4D98EE17914B7273\GLAD-DOWNLOAD-INSTALL.RULE
 setlocal
-cd C:\Users\tal74\animation\animation3D\build\glad-build
+cd C:\Users\ipism\source\repos\animation3D\build\glad-build
 if %errorlevel% neq 0 goto :cmEnd
 C:
 if %errorlevel% neq 0 goto :cmEnd
 "C:\Program Files\CMake\bin\cmake.exe" -E echo_append
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/animation/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/Debug/glad-download-test
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/Debug/glad-download-install
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
@@ -128,13 +112,15 @@ endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd
-^C:\USERS\TAL74\ANIMATION\ANIMATION3D\EXTERNAL\.CACHE\GLAD\CMAKEFILES\7B08617D09FF13D7F7A049EEB6B4D37E\GLAD-DOWNLOAD-COMPLETE.RULE
+^C:\USERS\IPISM\SOURCE\REPOS\ANIMATION3D\EXTERNAL\.CACHE\GLAD\CMAKEFILES\F34C458230DFD87D4D98EE17914B7273\GLAD-DOWNLOAD-TEST.RULE
 setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/animation/animation3D/external/.cache/glad/CMakeFiles/Debug
+cd C:\Users\ipism\source\repos\animation3D\build\glad-build
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/animation/animation3D/external/.cache/glad/CMakeFiles/Debug/glad-download-complete
+C:
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/animation/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/Debug/glad-download-done
+"C:\Program Files\CMake\bin\cmake.exe" -E echo_append
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/Debug/glad-download-test
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
@@ -142,7 +128,21 @@ endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd
-^C:\USERS\TAL74\ANIMATION\ANIMATION3D\EXTERNAL\.CACHE\GLAD\CMAKEFILES\DB57B9AAD805AE4308E02E2C33ACC827\GLAD-DOWNLOAD.RULE
+^C:\USERS\IPISM\SOURCE\REPOS\ANIMATION3D\EXTERNAL\.CACHE\GLAD\CMAKEFILES\50540721B6FE031A21897DDB1C25A947\GLAD-DOWNLOAD-COMPLETE.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ipism/source/repos/animation3D/external/.cache/glad/CMakeFiles/Debug
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/glad/CMakeFiles/Debug/glad-download-complete
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/Debug/glad-download-done
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\IPISM\SOURCE\REPOS\ANIMATION3D\EXTERNAL\.CACHE\GLAD\CMAKEFILES\FE5E443C3EFF9D60318EB6C9BD7D03EF\GLAD-DOWNLOAD.RULE
 setlocal
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
@@ -150,9 +150,9 @@ endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd
-^C:\USERS\TAL74\ANIMATION\ANIMATION3D\EXTERNAL\.CACHE\GLAD\CMAKELISTS.TXT
+^C:\USERS\IPISM\SOURCE\REPOS\ANIMATION3D\EXTERNAL\.CACHE\GLAD\CMAKELISTS.TXT
 setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/tal74/animation/animation3D/external/.cache/glad -BC:/Users/tal74/animation/animation3D/external/.cache/glad --check-stamp-file C:/Users/tal74/animation/animation3D/external/.cache/glad/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/ipism/source/repos/animation3D/external/.cache/glad -BC:/Users/ipism/source/repos/animation3D/external/.cache/glad --check-stamp-file C:/Users/ipism/source/repos/animation3D/external/.cache/glad/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone

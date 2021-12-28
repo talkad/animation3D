@@ -1,6 +1,6 @@
-^C:\USERS\TAL74\ANIMATION\ANIMATION3D\EXTERNAL\.CACHE\STB\CMAKEFILES\06F1A75B9B8A94CB57EF3F32469BD3F8\GENERATE.STAMP.RULE
+^C:\USERS\IPISM\SOURCE\REPOS\ANIMATION3D\EXTERNAL\.CACHE\STB\CMAKEFILES\724C2688DC417FAFBCB82F3186F191A2\GENERATE.STAMP.RULE
 setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/tal74/animation/animation3D/external/.cache/stb -BC:/Users/tal74/animation/animation3D/external/.cache/stb --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/tal74/animation/animation3D/external/.cache/stb/stb-download.sln
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/ipism/source/repos/animation3D/external/.cache/stb -BC:/Users/ipism/source/repos/animation3D/external/.cache/stb --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/ipism/source/repos/animation3D/external/.cache/stb/stb-download.sln
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone

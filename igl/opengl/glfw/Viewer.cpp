@@ -74,7 +74,8 @@ namespace igl
                 ikAnimation(false),
                 link_length(1.6),
                 isCCD(false),
-                current_picked(-1)
+                current_picked(-1),
+                delta(0.1)
             {
                 data_list.front().id = 0;
 
@@ -423,41 +424,42 @@ namespace igl
                     data_list[i].MyRotate(cross, alpha / 30);
                 }
 
-                if (dist < 0.1) {
+                if (dist < delta) {
                     fixAxis();
                     isActive = false;
                 }
             }
 
+
             void Viewer::animateFABRIK()
             {
-
                 std::vector<Eigen::Vector3d> joints, new_joints;
 
-                for (int i = 0; i <= link_num; i++) {
+                for (int i = 0; i <= link_num; i++)
                     joints.push_back(calcJointPos(i + 1));
-                }
+                
                 new_joints = joints;
 
                 Eigen::Vector3d ball = (data_list[0].MakeTransd() * Eigen::Vector4d(0, 0, 0, 1)).head(3),
                     b = new_joints[0],
                     E, R, RE, RD, cross;
 
-                double dist = (new_joints[new_joints.size() - 1] - ball).norm();
+                double dist = (new_joints[new_joints.size() - 1] - ball).norm(),
+                       r, lambda;
 
                 //forward
                 new_joints[new_joints.size() - 1] = ball;
                 for (int i = link_num - 1; i > 0; --i) {
-                    double r = (new_joints[i + 1] - new_joints[i]).norm(),
-                        lambda = link_length / r;
+                    r = (new_joints[i + 1] - new_joints[i]).norm(),
+                    lambda = link_length / r;
                     new_joints[i] = (1 - lambda) * new_joints[i + 1] + lambda * new_joints[i];
                 }
 
                 //backword
                 new_joints[0] = b;
                 for (int i = 0; i < link_num; ++i) {
-                    double r = (new_joints[i + 1] - new_joints[i]).norm(),
-                        lambda = link_length / r;
+                    r = (new_joints[i + 1] - new_joints[i]).norm(),
+                    lambda = link_length / r;
                     new_joints[i + 1] = (1 - lambda) * new_joints[i] + lambda * new_joints[i + 1];
                 }
 
@@ -473,26 +475,24 @@ namespace igl
                     data_list[i + 1].MyRotate(cross, alpha / 30);
                 }
 
-                if (dist < 0.1) {
+                if (dist < delta) {
                     fixAxis();
                     isActive = false;
                 }
 
             }
 
+
             void Viewer::fixAxis() {
                 for (int i = 1; i < data_list.size(); ++i) {
-                    Eigen::Matrix3d rotation_matatrix = data_list[i].GetRotation();
-                    Eigen::Vector3d euler_angle = rotation_matatrix.eulerAngles(2, 0, 2);
+                    Eigen::Matrix3d rotation_matrix = data_list[i].GetRotation();
+                    Eigen::Vector3d euler_angle = rotation_matrix.eulerAngles(2, 0, 2);
                     double rotZ = euler_angle[2];
-                    data_list[i].MyRotate(Eigen::Vector3d(0, 0, 1), -rotZ);
-                    if (i != link_num) {
-                        data_list[i + 1].RotateInSystem(Eigen::Vector3d(0, 0, 1), rotZ);
-                    }
+                    data_list[i].MyRotate(Eigen::Vector3d::UnitZ(), -rotZ);
+                    if (i != link_num) 
+                        data_list[i + 1].RotateInSystem(Eigen::Vector3d::UnitZ(), rotZ);
                 }
             }
-
-
         } // end namespace
     } // end namespace
 }

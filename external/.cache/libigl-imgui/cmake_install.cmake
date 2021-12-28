@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/tal74/animation/animation3D/external/.cache/libigl-imgui
+# Install script for directory: C:/Users/ipism/source/repos/animation3D/external/.cache/libigl-imgui
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -40,5 +40,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/Users/tal74/animation/animation3D/external/.cache/libigl-imgui/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "C:/Users/ipism/source/repos/animation3D/external/.cache/libigl-imgui/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
