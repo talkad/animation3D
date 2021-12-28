@@ -72,7 +72,8 @@ namespace igl
                 link_num(0),
                 destination(Eigen::Vector3d(5, 0, 0)),
                 ikAnimation(false),
-                link_length(1.6)
+                link_length(1.6),
+                isCCD(false)
             {
                 data_list.front().id = 0;
 
@@ -386,20 +387,8 @@ namespace igl
 
             IGL_INLINE Eigen::Vector3d Viewer::calcJointPos(int jointPos)
             {
-                //index must start from 1 and above
-                Eigen::Vector4d tipvec;
-                int lastindex = data_list.size();// last index of last link, we have linknum+1 points == data_list.size()
-                if (jointPos == lastindex)// if its last index of last link link
-                {
-                    tipvec = CalcParentsTranslation(data_list.size() - 1) * data_list[data_list.size() - 1].MakeTransd() * Eigen::Vector4d(0, 0, 0.8, 1);
-                }
-                else// other index of links
-                {
-                    tipvec = CalcParentsTranslation(jointPos) * data_list[jointPos].MakeTransd() * Eigen::Vector4d(0, 0, -0.8, 1);
-                }
-                return Eigen::Vector3d(tipvec[0], tipvec[1], tipvec[2]);
-
-                //return (CalcParentsTranslation(jointPos) * data_list[jointPos].MakeTransd() * Eigen::Vector4d(0, 0, ((jointPos == link_num) ? 1 : -1) * link_length / 2, 1)).head(3);
+                return (jointPos == data_list.size())? (CalcParentsTranslation(link_num) * data_list[link_num].MakeTransd() * Eigen::Vector4d(0, 0, link_length / 2, 1)).head(3) : 
+                                                        (CalcParentsTranslation(jointPos) * data_list[jointPos].MakeTransd() * Eigen::Vector4d(0, 0, -link_length / 2, 1)).head(3);
             }
 
             IGL_INLINE Eigen::Matrix3d Viewer::CalcParentsInverseRotation(int index) {
@@ -479,7 +468,7 @@ namespace igl
                     double alpha = acos(dot_product > 1 ? 1 : dot_product < -1 ? -1 : dot_product);
 
                     cross = RE.cross(RD).normalized();
-                    cross = CalcParentsInverseRotation(i) * cross;
+                    cross = CalcParentsInverseRotation(i + 1) * cross;
                     data_list[i + 1].MyRotate(cross, alpha / 30);
                 }
 
@@ -490,20 +479,18 @@ namespace igl
 
             }
 
-         
             void Viewer::fixAxis() {
-                Eigen::Vector3d zAx(0, 0, 1);
-                double adegrad;
-                for (int i = 1; i < data_list.size(); i++) {
-                    Eigen::Matrix3d rotation_mat = data_list[i].GetRotation();
-                    Eigen::Vector3d Eulerangl = rotation_mat.eulerAngles(2, 0, 2);
-                    adegrad = Eulerangl[2];
-                    data_list[i].MyRotate(zAx, -adegrad);
-                    if (i != data_list.size() - 1) {
-                        data_list[i + 1].RotateInSystem(zAx, adegrad);
+                for (int i = 1; i < data_list.size(); ++i) {
+                    Eigen::Matrix3d rotation_matatrix = data_list[i].GetRotation();
+                    Eigen::Vector3d euler_angle = rotation_matatrix.eulerAngles(2, 0, 2);
+                    double rotZ = euler_angle[2];
+                    data_list[i].MyRotate(Eigen::Vector3d(0, 0, 1), -rotZ);
+                    if (i != link_num) {
+                        data_list[i + 1].RotateInSystem(Eigen::Vector3d(0, 0, 1), rotZ);
                     }
                 }
             }
+
 
         } // end namespace
     } // end namespace

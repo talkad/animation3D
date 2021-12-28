@@ -152,19 +152,17 @@ static void glfw_key_callback(GLFWwindow* window, int key, int scancode, int act
 		case 'T':
 		case 't':
 		{
-			int lastLinkidx = scn->link_num;
-			scn->tip = scn->CalcParentsTrans(lastLinkidx) *
-				scn->data(lastLinkidx).MakeTransd() *
-				Eigen::Vector4d(scn->data(lastLinkidx).V.colwise().mean()[0], scn->data(lastLinkidx).V.colwise().maxCoeff()[1], scn->data(lastLinkidx).V.colwise().mean()[2], 1);
-
-			std::cout << "tip: (" << scn->tip.head(3).transpose() << ")" << std::endl;
+			if(scn->link_num > 0)
+				std::cout << "tip: (" << scn->calcJointPos(scn->link_num + 1) << ")\n" << std::endl;
 			break;
 		}
 		case 'D':
 		case 'd':
 		{
-			scn->destination = scn->data(0).MakeTransd().col(3).head(3);
-			std::cout << "destination: (" << scn->destination.transpose() << ")" << std::endl;
+			if (scn->link_num > 0) {
+				scn->destination = scn->data(0).MakeTransd().col(3).head(3);
+				std::cout << "destination: (" << scn->destination.transpose() << ")\n" << std::endl;
+			}
 			break;
 		}
 		case 'P':
@@ -175,8 +173,20 @@ static void glfw_key_callback(GLFWwindow* window, int key, int scancode, int act
 				scn->MakeTransd().block(0, 0, 3, 3) :
 				scn->data().MakeTransd().block(0, 0, 3, 3);
 
-			std::cout << "rotation of " << idx << ": " << std::endl;
-			std::cout << mat << std::endl;
+			std::cout << "rotation of link " << idx << ":\n" << std::endl;
+			std::cout << mat << "\n" <<std::endl;
+			break;
+		}
+		case 'C':
+		case 'c':
+		{
+			scn->isCCD = !scn->isCCD;
+
+			if (scn->isCCD)
+				std::cout << "CCD activated\n" << std::endl;
+			else
+				std::cout << "FABRIK activated\n"  << std::endl;
+
 			break;
 		}
 		case '[':
@@ -218,17 +228,17 @@ static void glfw_key_callback(GLFWwindow* window, int key, int scancode, int act
 			break;
 		case GLFW_KEY_LEFT:
 			if (scn->selected_data_index != -1)
-				scn->data().MyRotate(Eigen::Vector3d(0, 1, 0), -0.1);
+				scn->data().MyRotate(Eigen::Vector3d(0, 0, 1), -0.1);
 			else
-				scn->MyRotate(Eigen::Vector3d(0, 1, 0), -0.1);
+				scn->MyRotate(Eigen::Vector3d(0, 0, 1), -0.1);
 
 				//rndr->TranslateCamera(Eigen::Vector3f(-0.01f, 0,0));
 			break;
 		case GLFW_KEY_RIGHT:
 			if (scn->selected_data_index != -1)
-				scn->data().MyRotate(Eigen::Vector3d(0, 1, 0), 0.1);
+				scn->data().MyRotate(Eigen::Vector3d(0, 0, 1), 0.1);
 			else
-				scn->MyRotate(Eigen::Vector3d(0, 1, 0), 0.1);
+				scn->MyRotate(Eigen::Vector3d(0, 0, 1), 0.1);
 
 			//rndr->TranslateCamera(Eigen::Vector3f(0.01f, 0, 0));
 			break;

@@ -165,6 +165,8 @@ namespace igl
                 bool ikAnimation;
                 double link_length;
 
+                bool isCCD;
+
 
                 // List of registered plugins
             //    std::vector<ViewerPlugin*> plugins;

@@ -41,8 +41,11 @@ void SandBox::Animate()
 {
 
 	if (isActive) {
-		animateCCD();
-		//animateFABRIK();
+
+		if(isCCD)
+			animateCCD();
+		else
+			animateFABRIK();
 	}
 
 }
