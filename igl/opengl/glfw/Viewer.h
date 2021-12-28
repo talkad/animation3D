@@ -166,6 +166,7 @@ namespace igl
                 double link_length;
 
                 bool isCCD;
+                int current_picked;
 
 
                 // List of registered plugins

@@ -73,7 +73,8 @@ namespace igl
                 destination(Eigen::Vector3d(5, 0, 0)),
                 ikAnimation(false),
                 link_length(1.6),
-                isCCD(false)
+                isCCD(false),
+                current_picked(-1)
             {
                 data_list.front().id = 0;
 

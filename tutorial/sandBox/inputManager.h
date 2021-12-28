@@ -24,12 +24,15 @@ static void glfw_mouse_press(GLFWwindow* window, int button, int action, int mod
 	  double depth, closestZ = 1;
 	  int i = 0, savedIndx = scn->selected_data_index, lastIndx= scn->selected_data_index;
 
+	  int prev_picked = scn->current_picked;
+
 	  for (; i < scn->data_list.size(); i++)
 	  {
 		  scn->selected_data_index = i;
 		  depth = rndr->Picking(x2, y2);
 		  if (depth < 0 && (closestZ > 0 || closestZ < depth))
 		  {
+			  scn->current_picked = i;
 			  savedIndx = i;
 			  closestZ = depth;
 			  std::cout << "--- found " << depth << std::endl;
@@ -40,13 +43,15 @@ static void glfw_mouse_press(GLFWwindow* window, int button, int action, int mod
 	  if (lastIndx != savedIndx)
 		  scn->data_list[lastIndx].set_colors(Eigen::RowVector3d(255.0 / 255.0, 228.0 / 255.0, 58.0 / 255.0));
 
-	  rndr->UpdatePosition(x2, y2);
+	  if (scn->current_picked == prev_picked) {
+		  scn->current_picked = -1;
+	  }
 
+	  rndr->UpdatePosition(x2, y2);
   }
   else
   {
 	  rndr->GetScene()->isPicked = false;
-
   }
 }
 
@@ -210,7 +215,7 @@ static void glfw_key_callback(GLFWwindow* window, int key, int scancode, int act
 			rndr->TranslateCamera(Eigen::Vector3f(0, 0, -0.03f));
 			break;
 		case GLFW_KEY_UP:
-			if (scn->selected_data_index != -1)
+			if (scn->current_picked != -1)
 				scn->data().MyRotate(Eigen::Vector3d(1, 0, 0), 0.1);
 			else
 				scn->MyRotate(Eigen::Vector3d(1, 0, 0), 0.1);
@@ -218,7 +223,7 @@ static void glfw_key_callback(GLFWwindow* window, int key, int scancode, int act
 			//rndr->TranslateCamera(Eigen::Vector3f(0, 0.01f,0));
 			break;
 		case GLFW_KEY_DOWN:
-			if (scn->selected_data_index != -1)
+			if (scn->current_picked != -1)
 				scn->data().MyRotate(Eigen::Vector3d(1, 0, 0), -0.1);
 			else
 				scn->MyRotate(Eigen::Vector3d(1, 0, 0), -0.1);
@@ -226,16 +231,18 @@ static void glfw_key_callback(GLFWwindow* window, int key, int scancode, int act
 			//rndr->TranslateCamera(Eigen::Vector3f(0, -0.01f,0));
 
 			break;
+
 		case GLFW_KEY_LEFT:
-			if (scn->selected_data_index != -1)
+			if (scn->current_picked != -1)
 				scn->data().MyRotate(Eigen::Vector3d(0, 0, 1), -0.1);
 			else
 				scn->MyRotate(Eigen::Vector3d(0, 0, 1), -0.1);
 
 				//rndr->TranslateCamera(Eigen::Vector3f(-0.01f, 0,0));
 			break;
+
 		case GLFW_KEY_RIGHT:
-			if (scn->selected_data_index != -1)
+			if (scn->current_picked != -1)
 				scn->data().MyRotate(Eigen::Vector3d(0, 0, 1), 0.1);
 			else
 				scn->MyRotate(Eigen::Vector3d(0, 0, 1), 0.1);
