@@ -173,12 +173,20 @@ static void glfw_key_callback(GLFWwindow* window, int key, int scancode, int act
 		case 'P':
 		case 'p':
 		{
-			int idx = scn->selected_data_index;
-			Eigen::Matrix3d mat = idx == -1 ?
-				scn->MakeTransd().block(0, 0, 3, 3) :
-				scn->data().MakeTransd().block(0, 0, 3, 3);
+			Eigen::Matrix3d mat;
+			int idx = scn->current_picked;
 
-			std::cout << "rotation of link " << idx << ":\n" << std::endl;
+			if (scn->current_picked != -1)
+			{
+				mat = scn->data_list[idx].GetRotation();
+				std::cout << "rotation of link " << idx << ":\n" << std::endl;
+			}
+			else
+			{
+				mat = scn->GetRotation();
+				std::cout << "rotation of scene:\n" << std::endl;
+			}
+			
 			std::cout << mat << "\n" <<std::endl;
 			break;
 		}
