@@ -377,16 +377,35 @@ namespace igl
             }
 
 
+
             IGL_INLINE Eigen::Matrix4d Viewer::CalcParentsTranslation(int index) {
                 return (index <= 1) ? Eigen::Transform<double, 3, Eigen::Affine>::Identity().matrix() :
                     CalcParentsTranslation(index - 1) * data_list[index - 1].MakeTransd();
             }
 
 
+            IGL_INLINE Eigen::Vector3d Viewer::calcJointPos(int jointPos)
+            {
+                //index must start from 1 and above
+                Eigen::Vector4d tipvec;
+                int lastindex = data_list.size();// last index of last link, we have linknum+1 points == data_list.size()
+                if (jointPos == lastindex)// if its last index of last link link
+                {
+                    tipvec = CalcParentsTranslation(data_list.size() - 1) * data_list[data_list.size() - 1].MakeTransd() * Eigen::Vector4d(0, 0, 0.8, 1);
+                }
+                else// other index of links
+                {
+                    tipvec = CalcParentsTranslation(jointPos) * data_list[jointPos].MakeTransd() * Eigen::Vector4d(0, 0, -0.8, 1);
+                }
+                return Eigen::Vector3d(tipvec[0], tipvec[1], tipvec[2]);
+
+                //return (CalcParentsTranslation(jointPos) * data_list[jointPos].MakeTransd() * Eigen::Vector4d(0, 0, ((jointPos == link_num) ? 1 : -1) * link_length / 2, 1)).head(3);
+            }
+
             IGL_INLINE Eigen::Matrix3d Viewer::CalcParentsInverseRotation(int index) {
                 Eigen::Matrix3d rot = data(index).GetRotation().inverse();
 
-                for (int i = index - 1; i > 0; --i) 
+                for (int i = index - 1; i > 0; --i)
                     rot *= data(i).GetRotation().inverse();
 
                 return rot;
@@ -394,31 +413,98 @@ namespace igl
 
 
             IGL_INLINE void Viewer::animateCCD() {
-                Eigen::Vector4d ball = data_list[0].MakeTransd() * Eigen::Vector4d(0, 0, 0, 1), 
-                                E, R, RE, RD;
-                Eigen::Vector3d cross;
+                Eigen::Vector3d ball = (data_list[0].MakeTransd() * Eigen::Vector4d(0, 0, 0, 1)).head(3),
+                    E, R, RE, RD, cross;
                 double dist = 0.0;
 
                 for (int i = link_num; i > 0; --i) {
-                    E = CalcParentsTranslation(link_num) * data_list[link_num].MakeTransd() * Eigen::Vector4d(0, 0, link_length/2, 1);
+                    E = (CalcParentsTranslation(link_num) * data_list[link_num].MakeTransd() * Eigen::Vector4d(0, 0, link_length / 2, 1)).head(3);
                     dist = (E - ball).norm();
 
-                    R = CalcParentsTranslation(i) * data_list[i].MakeTransd() * Eigen::Vector4d(0, 0, -link_length / 2, 1);
+                    R = (CalcParentsTranslation(i) * data_list[i].MakeTransd() * Eigen::Vector4d(0, 0, -link_length / 2, 1)).head(3);
                     RE = E - R;
                     RD = ball - R;
 
                     double dot_product = RD.normalized().dot(RE.normalized());
-                    double alpha = acos(dot_product>1? 1: dot_product<-1? -1: dot_product);
+                    double alpha = acos(dot_product > 1 ? 1 : dot_product < -1 ? -1 : dot_product);
 
-                    cross = Eigen::Vector3d(RE[0], RE[1], RE[2]).cross(Eigen::Vector3d(RD[0], RD[1], RD[2])).normalized();
+                    cross = RE.cross(RD).normalized();
                     cross = CalcParentsInverseRotation(i) * cross;
                     data_list[i].MyRotate(cross, alpha / 30);
                 }
 
-                if (dist < 0.1) 
+                if (dist < 0.1) {
+                    fixAxis();
                     isActive = false;
+                }
             }
-            
+
+            void Viewer::animateFABRIK()
+            {
+
+                std::vector<Eigen::Vector3d> joints, new_joints;
+
+                for (int i = 0; i <= link_num; i++) {
+                    joints.push_back(calcJointPos(i + 1));
+                }
+                new_joints = joints;
+
+                Eigen::Vector3d ball = (data_list[0].MakeTransd() * Eigen::Vector4d(0, 0, 0, 1)).head(3),
+                    b = new_joints[0],
+                    E, R, RE, RD, cross;
+
+                double dist = (new_joints[new_joints.size() - 1] - ball).norm();
+
+                //forward
+                new_joints[new_joints.size() - 1] = ball;
+                for (int i = link_num - 1; i > 0; --i) {
+                    double r = (new_joints[i + 1] - new_joints[i]).norm(),
+                        lambda = link_length / r;
+                    new_joints[i] = (1 - lambda) * new_joints[i + 1] + lambda * new_joints[i];
+                }
+
+                //backword
+                new_joints[0] = b;
+                for (int i = 0; i < link_num; ++i) {
+                    double r = (new_joints[i + 1] - new_joints[i]).norm(),
+                        lambda = link_length / r;
+                    new_joints[i + 1] = (1 - lambda) * new_joints[i] + lambda * new_joints[i + 1];
+                }
+
+                // motion
+                for (int i = 0; i < new_joints.size() - 1; ++i) {
+                    RE = joints[i + 1] - joints[i];
+                    RD = new_joints[i + 1] - joints[i];
+                    double dot_product = RD.normalized().dot(RE.normalized());
+                    double alpha = acos(dot_product > 1 ? 1 : dot_product < -1 ? -1 : dot_product);
+
+                    cross = RE.cross(RD).normalized();
+                    cross = CalcParentsInverseRotation(i) * cross;
+                    data_list[i + 1].MyRotate(cross, alpha / 30);
+                }
+
+                if (dist < 0.1) {
+                    fixAxis();
+                    isActive = false;
+                }
+
+            }
+
+         
+            void Viewer::fixAxis() {
+                Eigen::Vector3d zAx(0, 0, 1);
+                double adegrad;
+                for (int i = 1; i < data_list.size(); i++) {
+                    Eigen::Matrix3d rotation_mat = data_list[i].GetRotation();
+                    Eigen::Vector3d Eulerangl = rotation_mat.eulerAngles(2, 0, 2);
+                    adegrad = Eulerangl[2];
+                    data_list[i].MyRotate(zAx, -adegrad);
+                    if (i != data_list.size() - 1) {
+                        data_list[i + 1].RotateInSystem(zAx, adegrad);
+                    }
+                }
+            }
+
         } // end namespace
     } // end namespace
 }
