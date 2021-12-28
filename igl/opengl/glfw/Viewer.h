@@ -164,7 +164,7 @@ namespace igl
                 int link_num;
                 bool ikAnimation;
                 double link_length;
-
+                double delta;
                 bool isCCD;
 
 

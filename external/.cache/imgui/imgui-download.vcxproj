@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <PreferredToolArchitecture>x64</PreferredToolArchitecture>
   </PropertyGroup>
@@ -22,7 +22,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{BDC52642-31CE-367C-88F9-FEEAE2C20190}</ProjectGuid>
+    <ProjectGuid>{30858BB7-1583-3C79-9AFA-6E19A7CF54FF}</ProjectGuid>
     <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
     <Keyword>Win32Proj</Keyword>
     <Platform>x64</Platform>
@@ -33,22 +33,22 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Utility</ConfigurationType>
     <CharacterSet>MultiByte</CharacterSet>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Utility</ConfigurationType>
     <CharacterSet>MultiByte</CharacterSet>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
     <ConfigurationType>Utility</ConfigurationType>
     <CharacterSet>MultiByte</CharacterSet>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
     <ConfigurationType>Utility</ConfigurationType>
     <CharacterSet>MultiByte</CharacterSet>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -105,24 +105,24 @@
     </Midl>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <CustomBuild Include="C:\Users\tal74\animation\animation3D\external\.cache\imgui\CMakeFiles\9972bc4d8775cc7c968769f6da8e722c\imgui-download-mkdir.rule">
+    <CustomBuild Include="C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\CMakeFiles\46c80fdb08407b889a8ba6f57af7ab3a\imgui-download-mkdir.rule">
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Creating directories for 'imgui-download'</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/animation/animation3D/cmake/../external/imgui
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ipism/source/repos/animation3D/cmake/../external/imgui
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/animation/animation3D/build/imgui-build
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ipism/source/repos/animation3D/build/imgui-build
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/animation/animation3D/external/.cache/imgui/imgui-download-prefix
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ipism/source/repos/animation3D/external/.cache/imgui/imgui-download-prefix
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/animation/animation3D/external/.cache/imgui/imgui-download-prefix/tmp
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ipism/source/repos/animation3D/external/.cache/imgui/imgui-download-prefix/tmp
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/animation/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/$(Configuration)
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ipism/source/repos/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/$(Configuration)
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/animation/animation3D/external/.cache/imgui/imgui-download-prefix/src
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ipism/source/repos/animation3D/external/.cache/imgui/imgui-download-prefix/src
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/animation/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ipism/source/repos/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/animation/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/$(Configuration)/imgui-download-mkdir
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/$(Configuration)/imgui-download-mkdir
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -131,25 +131,25 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-mkdir</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-mkdir</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Creating directories for 'imgui-download'</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/animation/animation3D/cmake/../external/imgui
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ipism/source/repos/animation3D/cmake/../external/imgui
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/animation/animation3D/build/imgui-build
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ipism/source/repos/animation3D/build/imgui-build
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/animation/animation3D/external/.cache/imgui/imgui-download-prefix
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ipism/source/repos/animation3D/external/.cache/imgui/imgui-download-prefix
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/animation/animation3D/external/.cache/imgui/imgui-download-prefix/tmp
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ipism/source/repos/animation3D/external/.cache/imgui/imgui-download-prefix/tmp
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/animation/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/$(Configuration)
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ipism/source/repos/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/$(Configuration)
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/animation/animation3D/external/.cache/imgui/imgui-download-prefix/src
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ipism/source/repos/animation3D/external/.cache/imgui/imgui-download-prefix/src
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/animation/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ipism/source/repos/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/animation/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/$(Configuration)/imgui-download-mkdir
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/$(Configuration)/imgui-download-mkdir
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -158,25 +158,25 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-mkdir</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-mkdir</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
       <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Creating directories for 'imgui-download'</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/animation/animation3D/cmake/../external/imgui
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ipism/source/repos/animation3D/cmake/../external/imgui
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/animation/animation3D/build/imgui-build
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ipism/source/repos/animation3D/build/imgui-build
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/animation/animation3D/external/.cache/imgui/imgui-download-prefix
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ipism/source/repos/animation3D/external/.cache/imgui/imgui-download-prefix
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/animation/animation3D/external/.cache/imgui/imgui-download-prefix/tmp
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ipism/source/repos/animation3D/external/.cache/imgui/imgui-download-prefix/tmp
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/animation/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/$(Configuration)
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ipism/source/repos/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/$(Configuration)
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/animation/animation3D/external/.cache/imgui/imgui-download-prefix/src
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ipism/source/repos/animation3D/external/.cache/imgui/imgui-download-prefix/src
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/animation/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ipism/source/repos/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/animation/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/$(Configuration)/imgui-download-mkdir
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/$(Configuration)/imgui-download-mkdir
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -185,25 +185,25 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-mkdir</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-mkdir</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
       <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Creating directories for 'imgui-download'</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/animation/animation3D/cmake/../external/imgui
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ipism/source/repos/animation3D/cmake/../external/imgui
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/animation/animation3D/build/imgui-build
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ipism/source/repos/animation3D/build/imgui-build
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/animation/animation3D/external/.cache/imgui/imgui-download-prefix
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ipism/source/repos/animation3D/external/.cache/imgui/imgui-download-prefix
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/animation/animation3D/external/.cache/imgui/imgui-download-prefix/tmp
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ipism/source/repos/animation3D/external/.cache/imgui/imgui-download-prefix/tmp
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/animation/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/$(Configuration)
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ipism/source/repos/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/$(Configuration)
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/animation/animation3D/external/.cache/imgui/imgui-download-prefix/src
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ipism/source/repos/animation3D/external/.cache/imgui/imgui-download-prefix/src
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/animation/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ipism/source/repos/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/animation/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/$(Configuration)/imgui-download-mkdir
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/$(Configuration)/imgui-download-mkdir
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -212,21 +212,21 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-mkdir</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-mkdir</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="C:\Users\tal74\animation\animation3D\external\.cache\imgui\CMakeFiles\9972bc4d8775cc7c968769f6da8e722c\imgui-download-download.rule">
+    <CustomBuild Include="C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\CMakeFiles\46c80fdb08407b889a8ba6f57af7ab3a\imgui-download-download.rule">
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Performing download step (git clone) for 'imgui-download'</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
-cd C:\Users\tal74\animation\animation3D\external
+cd C:\Users\ipism\source\repos\animation3D\external
 if %errorlevel% neq 0 goto :cmEnd
 C:
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -P C:/Users/tal74/animation/animation3D/external/.cache/imgui/imgui-download-prefix/tmp/imgui-download-gitclone.cmake
+"C:\Program Files\CMake\bin\cmake.exe" -P C:/Users/ipism/source/repos/animation3D/external/.cache/imgui/imgui-download-prefix/tmp/imgui-download-gitclone.cmake
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/animation/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/$(Configuration)/imgui-download-download
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/$(Configuration)/imgui-download-download
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -234,18 +234,18 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\imgui-download-gitinfo.txt;C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-mkdir;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-download</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\imgui-download-gitinfo.txt;C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-mkdir;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-download</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Performing download step (git clone) for 'imgui-download'</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
-cd C:\Users\tal74\animation\animation3D\external
+cd C:\Users\ipism\source\repos\animation3D\external
 if %errorlevel% neq 0 goto :cmEnd
 C:
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -P C:/Users/tal74/animation/animation3D/external/.cache/imgui/imgui-download-prefix/tmp/imgui-download-gitclone.cmake
+"C:\Program Files\CMake\bin\cmake.exe" -P C:/Users/ipism/source/repos/animation3D/external/.cache/imgui/imgui-download-prefix/tmp/imgui-download-gitclone.cmake
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/animation/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/$(Configuration)/imgui-download-download
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/$(Configuration)/imgui-download-download
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -253,18 +253,18 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\imgui-download-gitinfo.txt;C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-mkdir;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-download</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\imgui-download-gitinfo.txt;C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-mkdir;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-download</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
       <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Performing download step (git clone) for 'imgui-download'</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
-cd C:\Users\tal74\animation\animation3D\external
+cd C:\Users\ipism\source\repos\animation3D\external
 if %errorlevel% neq 0 goto :cmEnd
 C:
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -P C:/Users/tal74/animation/animation3D/external/.cache/imgui/imgui-download-prefix/tmp/imgui-download-gitclone.cmake
+"C:\Program Files\CMake\bin\cmake.exe" -P C:/Users/ipism/source/repos/animation3D/external/.cache/imgui/imgui-download-prefix/tmp/imgui-download-gitclone.cmake
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/animation/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/$(Configuration)/imgui-download-download
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/$(Configuration)/imgui-download-download
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -272,18 +272,18 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\imgui-download-gitinfo.txt;C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-mkdir;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-download</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\imgui-download-gitinfo.txt;C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-mkdir;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-download</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
       <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Performing download step (git clone) for 'imgui-download'</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
-cd C:\Users\tal74\animation\animation3D\external
+cd C:\Users\ipism\source\repos\animation3D\external
 if %errorlevel% neq 0 goto :cmEnd
 C:
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -P C:/Users/tal74/animation/animation3D/external/.cache/imgui/imgui-download-prefix/tmp/imgui-download-gitclone.cmake
+"C:\Program Files\CMake\bin\cmake.exe" -P C:/Users/ipism/source/repos/animation3D/external/.cache/imgui/imgui-download-prefix/tmp/imgui-download-gitclone.cmake
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/animation/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/$(Configuration)/imgui-download-download
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/$(Configuration)/imgui-download-download
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -291,20 +291,20 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\imgui-download-gitinfo.txt;C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-mkdir;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-download</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\imgui-download-gitinfo.txt;C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-mkdir;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-download</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="C:\Users\tal74\animation\animation3D\external\.cache\imgui\CMakeFiles\9972bc4d8775cc7c968769f6da8e722c\imgui-download-update.rule">
+    <CustomBuild Include="C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\CMakeFiles\46c80fdb08407b889a8ba6f57af7ab3a\imgui-download-update.rule">
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Performing update step for 'imgui-download'</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
-cd C:\Users\tal74\animation\animation3D\external\imgui
+cd C:\Users\ipism\source\repos\animation3D\external\imgui
 if %errorlevel% neq 0 goto :cmEnd
 C:
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -P C:/Users/tal74/animation/animation3D/external/.cache/imgui/imgui-download-prefix/tmp/imgui-download-gitupdate.cmake
+"C:\Program Files\CMake\bin\cmake.exe" -P C:/Users/ipism/source/repos/animation3D/external/.cache/imgui/imgui-download-prefix/tmp/imgui-download-gitupdate.cmake
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -312,17 +312,17 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-download;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-update</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-download;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-update</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
       <VerifyInputsAndOutputsExist Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</VerifyInputsAndOutputsExist>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Performing update step for 'imgui-download'</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
-cd C:\Users\tal74\animation\animation3D\external\imgui
+cd C:\Users\ipism\source\repos\animation3D\external\imgui
 if %errorlevel% neq 0 goto :cmEnd
 C:
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -P C:/Users/tal74/animation/animation3D/external/.cache/imgui/imgui-download-prefix/tmp/imgui-download-gitupdate.cmake
+"C:\Program Files\CMake\bin\cmake.exe" -P C:/Users/ipism/source/repos/animation3D/external/.cache/imgui/imgui-download-prefix/tmp/imgui-download-gitupdate.cmake
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -330,17 +330,17 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-download;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-update</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-download;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-update</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
       <VerifyInputsAndOutputsExist Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</VerifyInputsAndOutputsExist>
       <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Performing update step for 'imgui-download'</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
-cd C:\Users\tal74\animation\animation3D\external\imgui
+cd C:\Users\ipism\source\repos\animation3D\external\imgui
 if %errorlevel% neq 0 goto :cmEnd
 C:
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -P C:/Users/tal74/animation/animation3D/external/.cache/imgui/imgui-download-prefix/tmp/imgui-download-gitupdate.cmake
+"C:\Program Files\CMake\bin\cmake.exe" -P C:/Users/ipism/source/repos/animation3D/external/.cache/imgui/imgui-download-prefix/tmp/imgui-download-gitupdate.cmake
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -348,17 +348,17 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-download;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-update</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-download;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-update</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
       <VerifyInputsAndOutputsExist Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</VerifyInputsAndOutputsExist>
       <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Performing update step for 'imgui-download'</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
-cd C:\Users\tal74\animation\animation3D\external\imgui
+cd C:\Users\ipism\source\repos\animation3D\external\imgui
 if %errorlevel% neq 0 goto :cmEnd
 C:
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -P C:/Users/tal74/animation/animation3D/external/.cache/imgui/imgui-download-prefix/tmp/imgui-download-gitupdate.cmake
+"C:\Program Files\CMake\bin\cmake.exe" -P C:/Users/ipism/source/repos/animation3D/external/.cache/imgui/imgui-download-prefix/tmp/imgui-download-gitupdate.cmake
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -366,19 +366,19 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-download;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-update</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-download;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-update</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
       <VerifyInputsAndOutputsExist Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</VerifyInputsAndOutputsExist>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="C:\Users\tal74\animation\animation3D\external\.cache\imgui\CMakeFiles\9972bc4d8775cc7c968769f6da8e722c\imgui-download-patch.rule">
+    <CustomBuild Include="C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\CMakeFiles\46c80fdb08407b889a8ba6f57af7ab3a\imgui-download-patch.rule">
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">No patch step for 'imgui-download'</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
 "C:\Program Files\CMake\bin\cmake.exe" -E echo_append
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/animation/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/$(Configuration)/imgui-download-patch
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/$(Configuration)/imgui-download-patch
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -386,15 +386,15 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-update;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-patch</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-update;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-patch</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
       <VerifyInputsAndOutputsExist Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</VerifyInputsAndOutputsExist>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">No patch step for 'imgui-download'</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
 "C:\Program Files\CMake\bin\cmake.exe" -E echo_append
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/animation/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/$(Configuration)/imgui-download-patch
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/$(Configuration)/imgui-download-patch
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -402,15 +402,15 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-update;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-patch</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-update;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-patch</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
       <VerifyInputsAndOutputsExist Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</VerifyInputsAndOutputsExist>
       <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">No patch step for 'imgui-download'</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
 "C:\Program Files\CMake\bin\cmake.exe" -E echo_append
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/animation/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/$(Configuration)/imgui-download-patch
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/$(Configuration)/imgui-download-patch
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -418,15 +418,15 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-update;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-patch</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-update;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-patch</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
       <VerifyInputsAndOutputsExist Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</VerifyInputsAndOutputsExist>
       <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">No patch step for 'imgui-download'</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
 "C:\Program Files\CMake\bin\cmake.exe" -E echo_append
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/animation/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/$(Configuration)/imgui-download-patch
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/$(Configuration)/imgui-download-patch
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -434,23 +434,23 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-update;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-patch</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-update;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-patch</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
       <VerifyInputsAndOutputsExist Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</VerifyInputsAndOutputsExist>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="C:\Users\tal74\animation\animation3D\external\.cache\imgui\CMakeFiles\9972bc4d8775cc7c968769f6da8e722c\imgui-download-configure.rule">
+    <CustomBuild Include="C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\CMakeFiles\46c80fdb08407b889a8ba6f57af7ab3a\imgui-download-configure.rule">
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">No configure step for 'imgui-download'</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
-cd C:\Users\tal74\animation\animation3D\build\imgui-build
+cd C:\Users\ipism\source\repos\animation3D\build\imgui-build
 if %errorlevel% neq 0 goto :cmEnd
 C:
 if %errorlevel% neq 0 goto :cmEnd
 "C:\Program Files\CMake\bin\cmake.exe" -E echo_append
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/animation/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/$(Configuration)/imgui-download-configure
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/$(Configuration)/imgui-download-configure
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -458,18 +458,18 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\tmp\imgui-download-cfgcmd.txt;C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-patch;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-configure</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\tmp\imgui-download-cfgcmd.txt;C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-patch;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-configure</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">No configure step for 'imgui-download'</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
-cd C:\Users\tal74\animation\animation3D\build\imgui-build
+cd C:\Users\ipism\source\repos\animation3D\build\imgui-build
 if %errorlevel% neq 0 goto :cmEnd
 C:
 if %errorlevel% neq 0 goto :cmEnd
 "C:\Program Files\CMake\bin\cmake.exe" -E echo_append
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/animation/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/$(Configuration)/imgui-download-configure
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/$(Configuration)/imgui-download-configure
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -477,18 +477,18 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\tmp\imgui-download-cfgcmd.txt;C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-patch;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-configure</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\tmp\imgui-download-cfgcmd.txt;C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-patch;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-configure</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
       <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">No configure step for 'imgui-download'</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
-cd C:\Users\tal74\animation\animation3D\build\imgui-build
+cd C:\Users\ipism\source\repos\animation3D\build\imgui-build
 if %errorlevel% neq 0 goto :cmEnd
 C:
 if %errorlevel% neq 0 goto :cmEnd
 "C:\Program Files\CMake\bin\cmake.exe" -E echo_append
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/animation/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/$(Configuration)/imgui-download-configure
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/$(Configuration)/imgui-download-configure
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -496,18 +496,18 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\tmp\imgui-download-cfgcmd.txt;C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-patch;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-configure</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\tmp\imgui-download-cfgcmd.txt;C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-patch;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-configure</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
       <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">No configure step for 'imgui-download'</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
-cd C:\Users\tal74\animation\animation3D\build\imgui-build
+cd C:\Users\ipism\source\repos\animation3D\build\imgui-build
 if %errorlevel% neq 0 goto :cmEnd
 C:
 if %errorlevel% neq 0 goto :cmEnd
 "C:\Program Files\CMake\bin\cmake.exe" -E echo_append
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/animation/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/$(Configuration)/imgui-download-configure
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/$(Configuration)/imgui-download-configure
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -515,22 +515,22 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\tmp\imgui-download-cfgcmd.txt;C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-patch;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-configure</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\tmp\imgui-download-cfgcmd.txt;C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-patch;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-configure</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="C:\Users\tal74\animation\animation3D\external\.cache\imgui\CMakeFiles\9972bc4d8775cc7c968769f6da8e722c\imgui-download-build.rule">
+    <CustomBuild Include="C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\CMakeFiles\46c80fdb08407b889a8ba6f57af7ab3a\imgui-download-build.rule">
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">No build step for 'imgui-download'</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
-cd C:\Users\tal74\animation\animation3D\build\imgui-build
+cd C:\Users\ipism\source\repos\animation3D\build\imgui-build
 if %errorlevel% neq 0 goto :cmEnd
 C:
 if %errorlevel% neq 0 goto :cmEnd
 "C:\Program Files\CMake\bin\cmake.exe" -E echo_append
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/animation/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/$(Configuration)/imgui-download-build
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/$(Configuration)/imgui-download-build
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -538,18 +538,18 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-configure;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-build</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-configure;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-build</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">No build step for 'imgui-download'</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
-cd C:\Users\tal74\animation\animation3D\build\imgui-build
+cd C:\Users\ipism\source\repos\animation3D\build\imgui-build
 if %errorlevel% neq 0 goto :cmEnd
 C:
 if %errorlevel% neq 0 goto :cmEnd
 "C:\Program Files\CMake\bin\cmake.exe" -E echo_append
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/animation/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/$(Configuration)/imgui-download-build
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/$(Configuration)/imgui-download-build
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -557,18 +557,18 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-configure;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-build</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-configure;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-build</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
       <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">No build step for 'imgui-download'</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
-cd C:\Users\tal74\animation\animation3D\build\imgui-build
+cd C:\Users\ipism\source\repos\animation3D\build\imgui-build
 if %errorlevel% neq 0 goto :cmEnd
 C:
 if %errorlevel% neq 0 goto :cmEnd
 "C:\Program Files\CMake\bin\cmake.exe" -E echo_append
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/animation/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/$(Configuration)/imgui-download-build
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/$(Configuration)/imgui-download-build
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -576,18 +576,18 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-configure;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-build</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-configure;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-build</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
       <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">No build step for 'imgui-download'</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
-cd C:\Users\tal74\animation\animation3D\build\imgui-build
+cd C:\Users\ipism\source\repos\animation3D\build\imgui-build
 if %errorlevel% neq 0 goto :cmEnd
 C:
 if %errorlevel% neq 0 goto :cmEnd
 "C:\Program Files\CMake\bin\cmake.exe" -E echo_append
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/animation/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/$(Configuration)/imgui-download-build
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/$(Configuration)/imgui-download-build
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -595,22 +595,22 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-configure;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-build</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-configure;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-build</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="C:\Users\tal74\animation\animation3D\external\.cache\imgui\CMakeFiles\9972bc4d8775cc7c968769f6da8e722c\imgui-download-install.rule">
+    <CustomBuild Include="C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\CMakeFiles\46c80fdb08407b889a8ba6f57af7ab3a\imgui-download-install.rule">
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">No install step for 'imgui-download'</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
-cd C:\Users\tal74\animation\animation3D\build\imgui-build
+cd C:\Users\ipism\source\repos\animation3D\build\imgui-build
 if %errorlevel% neq 0 goto :cmEnd
 C:
 if %errorlevel% neq 0 goto :cmEnd
 "C:\Program Files\CMake\bin\cmake.exe" -E echo_append
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/animation/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/$(Configuration)/imgui-download-install
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/$(Configuration)/imgui-download-install
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -618,18 +618,18 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-build;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-install</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-build;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-install</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">No install step for 'imgui-download'</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
-cd C:\Users\tal74\animation\animation3D\build\imgui-build
+cd C:\Users\ipism\source\repos\animation3D\build\imgui-build
 if %errorlevel% neq 0 goto :cmEnd
 C:
 if %errorlevel% neq 0 goto :cmEnd
 "C:\Program Files\CMake\bin\cmake.exe" -E echo_append
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/animation/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/$(Configuration)/imgui-download-install
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/$(Configuration)/imgui-download-install
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -637,18 +637,18 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-build;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-install</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-build;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-install</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
       <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">No install step for 'imgui-download'</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
-cd C:\Users\tal74\animation\animation3D\build\imgui-build
+cd C:\Users\ipism\source\repos\animation3D\build\imgui-build
 if %errorlevel% neq 0 goto :cmEnd
 C:
 if %errorlevel% neq 0 goto :cmEnd
 "C:\Program Files\CMake\bin\cmake.exe" -E echo_append
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/animation/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/$(Configuration)/imgui-download-install
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/$(Configuration)/imgui-download-install
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -656,18 +656,18 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-build;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-install</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-build;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-install</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
       <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">No install step for 'imgui-download'</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
-cd C:\Users\tal74\animation\animation3D\build\imgui-build
+cd C:\Users\ipism\source\repos\animation3D\build\imgui-build
 if %errorlevel% neq 0 goto :cmEnd
 C:
 if %errorlevel% neq 0 goto :cmEnd
 "C:\Program Files\CMake\bin\cmake.exe" -E echo_append
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/animation/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/$(Configuration)/imgui-download-install
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/$(Configuration)/imgui-download-install
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -675,22 +675,22 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-build;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-install</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-build;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-install</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="C:\Users\tal74\animation\animation3D\external\.cache\imgui\CMakeFiles\9972bc4d8775cc7c968769f6da8e722c\imgui-download-test.rule">
+    <CustomBuild Include="C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\CMakeFiles\46c80fdb08407b889a8ba6f57af7ab3a\imgui-download-test.rule">
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">No test step for 'imgui-download'</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
-cd C:\Users\tal74\animation\animation3D\build\imgui-build
+cd C:\Users\ipism\source\repos\animation3D\build\imgui-build
 if %errorlevel% neq 0 goto :cmEnd
 C:
 if %errorlevel% neq 0 goto :cmEnd
 "C:\Program Files\CMake\bin\cmake.exe" -E echo_append
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/animation/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/$(Configuration)/imgui-download-test
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/$(Configuration)/imgui-download-test
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -698,18 +698,18 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-install;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-test</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-install;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-test</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">No test step for 'imgui-download'</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
-cd C:\Users\tal74\animation\animation3D\build\imgui-build
+cd C:\Users\ipism\source\repos\animation3D\build\imgui-build
 if %errorlevel% neq 0 goto :cmEnd
 C:
 if %errorlevel% neq 0 goto :cmEnd
 "C:\Program Files\CMake\bin\cmake.exe" -E echo_append
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/animation/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/$(Configuration)/imgui-download-test
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/$(Configuration)/imgui-download-test
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -717,18 +717,18 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-install;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-test</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-install;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-test</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
       <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">No test step for 'imgui-download'</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
-cd C:\Users\tal74\animation\animation3D\build\imgui-build
+cd C:\Users\ipism\source\repos\animation3D\build\imgui-build
 if %errorlevel% neq 0 goto :cmEnd
 C:
 if %errorlevel% neq 0 goto :cmEnd
 "C:\Program Files\CMake\bin\cmake.exe" -E echo_append
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/animation/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/$(Configuration)/imgui-download-test
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/$(Configuration)/imgui-download-test
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -736,18 +736,18 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-install;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-test</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-install;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-test</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
       <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">No test step for 'imgui-download'</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
-cd C:\Users\tal74\animation\animation3D\build\imgui-build
+cd C:\Users\ipism\source\repos\animation3D\build\imgui-build
 if %errorlevel% neq 0 goto :cmEnd
 C:
 if %errorlevel% neq 0 goto :cmEnd
 "C:\Program Files\CMake\bin\cmake.exe" -E echo_append
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/animation/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/$(Configuration)/imgui-download-test
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/$(Configuration)/imgui-download-test
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -755,20 +755,20 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-install;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-test</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-install;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-test</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="C:\Users\tal74\animation\animation3D\external\.cache\imgui\CMakeFiles\348bef5ccd8de65f731811da28a71257\imgui-download-complete.rule">
+    <CustomBuild Include="C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\CMakeFiles\a3625d7c1a79ed469b3b5916fa6ebd1d\imgui-download-complete.rule">
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Completed 'imgui-download'</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/animation/animation3D/external/.cache/imgui/CMakeFiles/$(Configuration)
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ipism/source/repos/animation3D/external/.cache/imgui/CMakeFiles/$(Configuration)
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/animation/animation3D/external/.cache/imgui/CMakeFiles/$(Configuration)/imgui-download-complete
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/imgui/CMakeFiles/$(Configuration)/imgui-download-complete
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/animation/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/$(Configuration)/imgui-download-done
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/$(Configuration)/imgui-download-done
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -776,17 +776,17 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-install;C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-mkdir;C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-download;C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-update;C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-patch;C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-configure;C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-build;C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-test;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\tal74\animation\animation3D\external\.cache\imgui\CMakeFiles\$(Configuration)\imgui-download-complete</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-install;C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-mkdir;C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-download;C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-update;C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-patch;C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-configure;C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-build;C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-test;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\CMakeFiles\$(Configuration)\imgui-download-complete</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
       <VerifyInputsAndOutputsExist Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</VerifyInputsAndOutputsExist>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Completed 'imgui-download'</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/animation/animation3D/external/.cache/imgui/CMakeFiles/$(Configuration)
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ipism/source/repos/animation3D/external/.cache/imgui/CMakeFiles/$(Configuration)
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/animation/animation3D/external/.cache/imgui/CMakeFiles/$(Configuration)/imgui-download-complete
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/imgui/CMakeFiles/$(Configuration)/imgui-download-complete
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/animation/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/$(Configuration)/imgui-download-done
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/$(Configuration)/imgui-download-done
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -794,17 +794,17 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-install;C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-mkdir;C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-download;C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-update;C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-patch;C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-configure;C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-build;C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-test;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\tal74\animation\animation3D\external\.cache\imgui\CMakeFiles\$(Configuration)\imgui-download-complete</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-install;C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-mkdir;C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-download;C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-update;C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-patch;C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-configure;C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-build;C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-test;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\CMakeFiles\$(Configuration)\imgui-download-complete</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
       <VerifyInputsAndOutputsExist Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</VerifyInputsAndOutputsExist>
       <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Completed 'imgui-download'</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/animation/animation3D/external/.cache/imgui/CMakeFiles/$(Configuration)
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ipism/source/repos/animation3D/external/.cache/imgui/CMakeFiles/$(Configuration)
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/animation/animation3D/external/.cache/imgui/CMakeFiles/$(Configuration)/imgui-download-complete
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/imgui/CMakeFiles/$(Configuration)/imgui-download-complete
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/animation/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/$(Configuration)/imgui-download-done
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/$(Configuration)/imgui-download-done
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -812,17 +812,17 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-install;C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-mkdir;C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-download;C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-update;C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-patch;C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-configure;C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-build;C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-test;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\tal74\animation\animation3D\external\.cache\imgui\CMakeFiles\$(Configuration)\imgui-download-complete</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-install;C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-mkdir;C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-download;C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-update;C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-patch;C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-configure;C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-build;C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-test;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\CMakeFiles\$(Configuration)\imgui-download-complete</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
       <VerifyInputsAndOutputsExist Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</VerifyInputsAndOutputsExist>
       <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Completed 'imgui-download'</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/animation/animation3D/external/.cache/imgui/CMakeFiles/$(Configuration)
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ipism/source/repos/animation3D/external/.cache/imgui/CMakeFiles/$(Configuration)
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/animation/animation3D/external/.cache/imgui/CMakeFiles/$(Configuration)/imgui-download-complete
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/imgui/CMakeFiles/$(Configuration)/imgui-download-complete
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/animation/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/$(Configuration)/imgui-download-done
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/$(Configuration)/imgui-download-done
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -830,14 +830,14 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-install;C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-mkdir;C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-download;C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-update;C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-patch;C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-configure;C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-build;C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-test;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\tal74\animation\animation3D\external\.cache\imgui\CMakeFiles\$(Configuration)\imgui-download-complete</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-install;C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-mkdir;C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-download;C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-update;C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-patch;C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-configure;C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-build;C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\src\imgui-download-stamp\$(Configuration)\imgui-download-test;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\CMakeFiles\$(Configuration)\imgui-download-complete</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
       <VerifyInputsAndOutputsExist Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</VerifyInputsAndOutputsExist>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="C:\Users\tal74\animation\animation3D\external\.cache\imgui\CMakeFiles\17b7ee378f9d76e343de6f956f2b605a\imgui-download.rule">
+    <CustomBuild Include="C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\CMakeFiles\31c06db0e8e0f80c8195eefd6bd030b5\imgui-download.rule">
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"></Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
 :cmEnd
@@ -846,8 +846,8 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\tal74\animation\animation3D\external\.cache\imgui\CMakeFiles\$(Configuration)\imgui-download-complete;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\tal74\animation\animation3D\external\.cache\imgui\CMakeFiles\imgui-download</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\CMakeFiles\$(Configuration)\imgui-download-complete;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\CMakeFiles\imgui-download</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
       <VerifyInputsAndOutputsExist Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</VerifyInputsAndOutputsExist>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'"></Message>
@@ -858,8 +858,8 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\tal74\animation\animation3D\external\.cache\imgui\CMakeFiles\$(Configuration)\imgui-download-complete;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\tal74\animation\animation3D\external\.cache\imgui\CMakeFiles\imgui-download</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\CMakeFiles\$(Configuration)\imgui-download-complete;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\CMakeFiles\imgui-download</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
       <VerifyInputsAndOutputsExist Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</VerifyInputsAndOutputsExist>
       <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'"></Message>
@@ -870,8 +870,8 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\tal74\animation\animation3D\external\.cache\imgui\CMakeFiles\$(Configuration)\imgui-download-complete;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\tal74\animation\animation3D\external\.cache\imgui\CMakeFiles\imgui-download</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\CMakeFiles\$(Configuration)\imgui-download-complete;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\CMakeFiles\imgui-download</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
       <VerifyInputsAndOutputsExist Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</VerifyInputsAndOutputsExist>
       <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'"></Message>
@@ -882,18 +882,18 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\tal74\animation\animation3D\external\.cache\imgui\CMakeFiles\$(Configuration)\imgui-download-complete;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\tal74\animation\animation3D\external\.cache\imgui\CMakeFiles\imgui-download</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\CMakeFiles\$(Configuration)\imgui-download-complete;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\CMakeFiles\imgui-download</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
       <VerifyInputsAndOutputsExist Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</VerifyInputsAndOutputsExist>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="C:\Users\tal74\animation\animation3D\external\.cache\imgui\CMakeLists.txt">
+    <CustomBuild Include="C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\CMakeLists.txt">
       <UseUtf8Encoding>Always</UseUtf8Encoding>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule C:/Users/tal74/animation/animation3D/external/.cache/imgui/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule C:/Users/ipism/source/repos/animation3D/external/.cache/imgui/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/tal74/animation/animation3D/external/.cache/imgui -BC:/Users/tal74/animation/animation3D/external/.cache/imgui --check-stamp-file C:/Users/tal74/animation/animation3D/external/.cache/imgui/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/ipism/source/repos/animation3D/external/.cache/imgui -BC:/Users/ipism/source/repos/animation3D/external/.cache/imgui --check-stamp-file C:/Users/ipism/source/repos/animation3D/external/.cache/imgui/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -901,12 +901,12 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeDetermineSystem.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeSystem.cmake.in;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\ExternalProject-gitupdate.cmake.in;C:\Program Files\CMake\share\cmake-3.22\Modules\ExternalProject.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindGit.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\Platform\WindowsPaths.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\RepositoryInfo.txt.in;C:\Users\tal74\animation\animation3D\external\.cache\imgui\CMakeFiles\3.22.0-rc1\CMakeSystem.cmake;C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\tmp\imgui-download-cfgcmd.txt.in;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\tal74\animation\animation3D\external\.cache\imgui\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeDetermineSystem.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeSystem.cmake.in;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\ExternalProject-gitupdate.cmake.in;C:\Program Files\CMake\share\cmake-3.22\Modules\ExternalProject.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindGit.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\Platform\WindowsPaths.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\RepositoryInfo.txt.in;C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\CMakeFiles\3.22.0\CMakeSystem.cmake;C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\tmp\imgui-download-cfgcmd.txt.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule C:/Users/tal74/animation/animation3D/external/.cache/imgui/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule C:/Users/ipism/source/repos/animation3D/external/.cache/imgui/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/tal74/animation/animation3D/external/.cache/imgui -BC:/Users/tal74/animation/animation3D/external/.cache/imgui --check-stamp-file C:/Users/tal74/animation/animation3D/external/.cache/imgui/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/ipism/source/repos/animation3D/external/.cache/imgui -BC:/Users/ipism/source/repos/animation3D/external/.cache/imgui --check-stamp-file C:/Users/ipism/source/repos/animation3D/external/.cache/imgui/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -914,12 +914,12 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeDetermineSystem.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeSystem.cmake.in;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\ExternalProject-gitupdate.cmake.in;C:\Program Files\CMake\share\cmake-3.22\Modules\ExternalProject.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindGit.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\Platform\WindowsPaths.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\RepositoryInfo.txt.in;C:\Users\tal74\animation\animation3D\external\.cache\imgui\CMakeFiles\3.22.0-rc1\CMakeSystem.cmake;C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\tmp\imgui-download-cfgcmd.txt.in;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\tal74\animation\animation3D\external\.cache\imgui\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeDetermineSystem.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeSystem.cmake.in;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\ExternalProject-gitupdate.cmake.in;C:\Program Files\CMake\share\cmake-3.22\Modules\ExternalProject.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindGit.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\Platform\WindowsPaths.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\RepositoryInfo.txt.in;C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\CMakeFiles\3.22.0\CMakeSystem.cmake;C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\tmp\imgui-download-cfgcmd.txt.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule C:/Users/tal74/animation/animation3D/external/.cache/imgui/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule C:/Users/ipism/source/repos/animation3D/external/.cache/imgui/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/tal74/animation/animation3D/external/.cache/imgui -BC:/Users/tal74/animation/animation3D/external/.cache/imgui --check-stamp-file C:/Users/tal74/animation/animation3D/external/.cache/imgui/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/ipism/source/repos/animation3D/external/.cache/imgui -BC:/Users/ipism/source/repos/animation3D/external/.cache/imgui --check-stamp-file C:/Users/ipism/source/repos/animation3D/external/.cache/imgui/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -927,12 +927,12 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeDetermineSystem.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeSystem.cmake.in;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\ExternalProject-gitupdate.cmake.in;C:\Program Files\CMake\share\cmake-3.22\Modules\ExternalProject.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindGit.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\Platform\WindowsPaths.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\RepositoryInfo.txt.in;C:\Users\tal74\animation\animation3D\external\.cache\imgui\CMakeFiles\3.22.0-rc1\CMakeSystem.cmake;C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\tmp\imgui-download-cfgcmd.txt.in;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\tal74\animation\animation3D\external\.cache\imgui\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeDetermineSystem.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeSystem.cmake.in;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\ExternalProject-gitupdate.cmake.in;C:\Program Files\CMake\share\cmake-3.22\Modules\ExternalProject.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindGit.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\Platform\WindowsPaths.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\RepositoryInfo.txt.in;C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\CMakeFiles\3.22.0\CMakeSystem.cmake;C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\tmp\imgui-download-cfgcmd.txt.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule C:/Users/tal74/animation/animation3D/external/.cache/imgui/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule C:/Users/ipism/source/repos/animation3D/external/.cache/imgui/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/tal74/animation/animation3D/external/.cache/imgui -BC:/Users/tal74/animation/animation3D/external/.cache/imgui --check-stamp-file C:/Users/tal74/animation/animation3D/external/.cache/imgui/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/ipism/source/repos/animation3D/external/.cache/imgui -BC:/Users/ipism/source/repos/animation3D/external/.cache/imgui --check-stamp-file C:/Users/ipism/source/repos/animation3D/external/.cache/imgui/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -940,18 +940,18 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeDetermineSystem.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeSystem.cmake.in;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\ExternalProject-gitupdate.cmake.in;C:\Program Files\CMake\share\cmake-3.22\Modules\ExternalProject.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindGit.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\Platform\WindowsPaths.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\RepositoryInfo.txt.in;C:\Users\tal74\animation\animation3D\external\.cache\imgui\CMakeFiles\3.22.0-rc1\CMakeSystem.cmake;C:\Users\tal74\animation\animation3D\external\.cache\imgui\imgui-download-prefix\tmp\imgui-download-cfgcmd.txt.in;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\tal74\animation\animation3D\external\.cache\imgui\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeDetermineSystem.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeSystem.cmake.in;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\ExternalProject-gitupdate.cmake.in;C:\Program Files\CMake\share\cmake-3.22\Modules\ExternalProject.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindGit.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\Platform\WindowsPaths.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\RepositoryInfo.txt.in;C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\CMakeFiles\3.22.0\CMakeSystem.cmake;C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\imgui-download-prefix\tmp\imgui-download-cfgcmd.txt.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <None Include="C:\Users\tal74\animation\animation3D\external\.cache\imgui\CMakeFiles\imgui-download">
+    <None Include="C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\CMakeFiles\imgui-download">
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="C:\Users\tal74\animation\animation3D\external\.cache\imgui\ZERO_CHECK.vcxproj">
-      <Project>{B454DD28-6E43-375D-AE59-E8D3C32842CF}</Project>
+    <ProjectReference Include="C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\ZERO_CHECK.vcxproj">
+      <Project>{E224E526-5276-37AA-BE67-C1D8419DE488}</Project>
       <Name>ZERO_CHECK</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
