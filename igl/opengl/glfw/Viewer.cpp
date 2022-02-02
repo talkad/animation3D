@@ -73,7 +73,6 @@ namespace igl
                 destination(Eigen::Vector3d(5, 0, 0)),
                 ikAnimation(false),
                 link_length(1.6),
-                isCCD(false),
                 current_picked(-1),
                 delta(0.1)
             {
@@ -187,21 +186,6 @@ namespace igl
                 //  if (plugins[i]->post_load())
                 //    return true;
 
-                if (mesh_file_name_string != "C:/Users/tal74/projects/animation/animation3D/tutorial/data/sphere.obj") {
-                    data().MyTranslateInSystem(data().GetRotation(), Eigen::RowVector3d(0, 0, 1.6));
-                    data().kd_tree.init(data().V, data().F);
-                    data().drawAxis(data().kd_tree.m_box);
-                    data().SetCenterOfRotation(Eigen::RowVector3d(0, 0, -0.8));
-
-                    int lastLinkidx = link_num;
-                    tip = CalcParentsTrans(lastLinkidx) *
-                        data(lastLinkidx).MakeTransd() *
-                        Eigen::Vector4d(data(lastLinkidx).V.colwise().mean()[0], data(lastLinkidx).V.colwise().maxCoeff()[1], data(lastLinkidx).V.colwise().mean()[2], 1);
-
-                    link_num++;
-                }
-
-
                 return true;
             }
 
@@ -282,7 +266,12 @@ namespace igl
 
             IGL_INLINE void Viewer::open_dialog_load_mesh()
             {
-                this->load_mesh_from_file("C:/Users/tal74/projects/animation/animation3D/tutorial/data/zcylinder.obj");
+                std::string fname = igl::file_dialog_open();
+
+                if (fname.length() == 0)
+                    return;
+
+                this->load_mesh_from_file(fname.c_str());
             }
 
             IGL_INLINE void Viewer::open_dialog_save_mesh()
@@ -367,6 +356,178 @@ namespace igl
             }
 
 
+            IGL_INLINE bool Viewer::boxes_collide(Eigen::AlignedBox<double, 3>& firstbox, Eigen::AlignedBox<double, 3>& secondbox) {
+                double a0 = firstbox.sizes()[0] / 2, a1 = firstbox.sizes()[1] / 2, a2 = firstbox.sizes()[2] / 2,
+                    b0 = secondbox.sizes()[0] / 2, b1 = secondbox.sizes()[1] / 2, b2 = secondbox.sizes()[2] / 2,
+                    R0, R1, R;
+                Eigen::Matrix3d A, B, C;
+                Eigen::Vector3d D, C0, C1;
+                Eigen::RowVector3d A0 = data_list[0].GetRotation() * Eigen::Vector3d(1, 0, 0),
+                    A1 = data_list[0].GetRotation() * Eigen::Vector3d(0, 1, 0),
+                    A2 = data_list[0].GetRotation() * Eigen::Vector3d(0, 0, 1),
+                    B0 = data_list[1].GetRotation() * Eigen::Vector3d(1, 0, 0),
+                    B1 = data_list[1].GetRotation() * Eigen::Vector3d(0, 1, 0),
+                    B2 = data_list[1].GetRotation() * Eigen::Vector3d(0, 0, 1);
+                A << Eigen::RowVector3d(A0[0], A1[0], A2[0]), Eigen::RowVector3d(A0[1], A1[1], A2[1]), Eigen::RowVector3d(A0[2], A1[2], A2[2]);
+                B << Eigen::RowVector3d(B0[0], B1[0], B2[0]), Eigen::RowVector3d(B0[1], B1[1], B2[1]), Eigen::RowVector3d(B0[2], B1[2], B2[2]);
+                C = A.transpose() * B;
+
+                Eigen::Vector4f C0_4cord = data_list[0].MakeTransScale() * Eigen::Vector4f(firstbox.center()[0], firstbox.center()[1], firstbox.center()[2], 1);
+                Eigen::Vector4f C1_4cord = data_list[1].MakeTransScale() * Eigen::Vector4f(secondbox.center()[0], secondbox.center()[1], secondbox.center()[2], 1);
+
+                C0 = Eigen::Vector3d(C0_4cord[0], C0_4cord[1], C0_4cord[2]);
+                C1 = Eigen::Vector3d(C1_4cord[0], C1_4cord[1], C1_4cord[2]);
+
+                D = C1 - C0;
+
+                //Table case 1
+                R0 = a0;
+                R1 = (b0 * abs(C(0, 0))) + (b1 * abs(C(0, 1))) + (b2 * abs(C(0, 2)));
+                R = abs(A0.dot(D));
+
+                if (R > R0 + R1) return false;
+
+                //Table case 2
+                R0 = a1;
+                R1 = (b0 * abs(C(1, 0))) + (b1 * abs(C(1, 1))) + (b2 * abs(C(1, 2)));
+                R = abs(A1.dot(D));
+
+                if (R > R0 + R1) return false;
+
+                //Table case 3
+                R0 = a2;
+                R1 = (b0 * abs(C(2, 0))) + (b1 * abs(C(2, 1))) + (b2 * abs(C(2, 2)));
+                R = abs(A2.dot(D));
+
+                if (R > R0 + R1) return false;
+
+                //Table case 4
+                R0 = (a0 * abs(C(0, 0))) + (a1 * abs(C(1, 0))) + (a2 * abs(C(2, 0)));
+                R1 = b0;
+                R = abs(B0.dot(D));
+
+                if (R > R0 + R1) return false;
+
+                //Table case 5
+                R0 = (a0 * abs(C(0, 1))) + (a1 * abs(C(1, 1))) + (a2 * abs(C(2, 1)));
+                R1 = b1;
+                R = abs(B1.dot(D));
+
+                if (R > R0 + R1) return false;
+
+                //Table case 6
+                R0 = (a0 * abs(C(0, 2))) + (a1 * abs(C(1, 2))) + (a2 * abs(C(2, 2)));
+                R1 = b2;
+                R = abs(B2.dot(D));
+
+                if (R > R0 + R1) return false;
+
+                //Table case 7
+                R0 = (a1 * abs(C(2, 0))) + (a2 * abs(C(1, 0)));
+                R1 = (b1 * abs(C(0, 2))) + (b2 * abs(C(0, 1)));
+                R = abs((C(1, 0) * A2).dot(D) - (C(2, 0) * A1).dot(D));
+
+                if (R > R0 + R1) return false;
+
+                //Table case 8
+                R0 = (a1 * abs(C(2, 1))) + (a2 * abs(C(1, 1)));
+                R1 = (b0 * abs(C(0, 2))) + (b2 * abs(C(0, 0)));
+                R = abs((C(1, 1) * A2).dot(D) - (C(2, 1) * A1).dot(D));
+
+                if (R > R0 + R1) return false;
+
+                //Table case 9
+                R0 = (a1 * abs(C(2, 2))) + (a2 * abs(C(1, 2)));
+                R1 = (b0 * abs(C(0, 1))) + (b1 * abs(C(0, 0)));
+                R = abs((C(1, 2) * A2).dot(D) - (C(2, 2) * A1).dot(D));
+
+                if (R > R0 + R1) return false;
+
+                //Table case 10
+                R0 = (a0 * abs(C(2, 0))) + (a2 * abs(C(0, 0)));
+                R1 = (b1 * abs(C(1, 2))) + (b2 * abs(C(1, 1)));
+                R = abs((C(2, 0) * A0).dot(D) - (C(0, 0) * A2).dot(D));
+
+                if (R > R0 + R1) return false;
+
+                //Table case 11
+                R0 = (a0 * abs(C(2, 1))) + (a2 * abs(C(0, 1)));
+                R1 = (b0 * abs(C(1, 2))) + (b2 * abs(C(1, 0)));
+                R = abs((C(2, 1) * A0).dot(D) - (C(0, 1) * A2).dot(D));
+
+                if (R > R0 + R1) return false;
+
+                //Table case 12
+                R0 = (a0 * abs(C(2, 2))) + (a2 * abs(C(0, 2)));
+                R1 = (b0 * abs(C(1, 1))) + (b1 * abs(C(1, 0)));
+                R = abs((C(2, 2) * A0).dot(D) - (C(0, 2) * A2).dot(D));
+
+                if (R > R0 + R1) return false;
+
+                //Table case 13
+                R0 = (a0 * abs(C(1, 0))) + (a1 * abs(C(0, 0)));
+                R1 = (b1 * abs(C(2, 2))) + (b2 * abs(C(2, 1)));
+                R = abs((C(0, 0) * A1).dot(D) - (C(1, 0) * A0).dot(D));
+
+                if (R > R0 + R1) return false;
+
+                //Table case 14
+                R0 = (a0 * abs(C(1, 1))) + (a1 * abs(C(0, 1)));
+                R1 = (b0 * abs(C(2, 2))) + (b2 * abs(C(2, 0)));
+                R = abs((C(0, 1) * A1).dot(D) - (C(1, 1) * A0).dot(D));
+
+                if (R > R0 + R1) return false;
+
+                //Table case 15
+                R0 = (a0 * abs(C(1, 2))) + (a1 * abs(C(0, 2)));
+                R1 = (b0 * abs(C(2, 1))) + (b1 * abs(C(2, 0)));
+                R = abs((C(0, 2) * A1).dot(D) - (C(1, 2) * A0).dot(D));
+
+                if (R > R0 + R1) return false;
+
+                return true;
+            }
+
+            IGL_INLINE bool Viewer::treeNodesCollide(AABB<Eigen::MatrixXd, 3>& firstObjNode, AABB<Eigen::MatrixXd, 3>& secondObjNode) {
+                if (boxes_collide(firstObjNode.m_box, secondObjNode.m_box)) {
+                    if (firstObjNode.is_leaf() && secondObjNode.is_leaf()) {
+                        data_list[0].drawAlignedBox(firstObjNode.m_box, Eigen::RowVector3d(1, 0, 0));
+                        data_list[1].drawAlignedBox(secondObjNode.m_box, Eigen::RowVector3d(1, 0, 0));
+                        return true;
+                    }
+                    else {
+                        if (firstObjNode.is_leaf()) {
+                            if (secondObjNode.m_left)
+                                return treeNodesCollide(firstObjNode, *secondObjNode.m_left);
+                            if (secondObjNode.m_right)
+                                return treeNodesCollide(firstObjNode, *secondObjNode.m_right);
+                        }
+                        else if (secondObjNode.is_leaf()) {
+                            if (firstObjNode.m_left)
+                                return treeNodesCollide(*firstObjNode.m_left, secondObjNode);
+                            if (firstObjNode.m_right)
+                                return treeNodesCollide(*firstObjNode.m_right, secondObjNode);
+                        }
+                        else
+                            return treeNodesCollide(*firstObjNode.m_left, *secondObjNode.m_left) ||
+                            treeNodesCollide(*firstObjNode.m_left, *secondObjNode.m_right) ||
+                            treeNodesCollide(*firstObjNode.m_right, *secondObjNode.m_left) ||
+                            treeNodesCollide(*firstObjNode.m_right, *secondObjNode.m_right);
+                    }
+                }
+                return false;
+            }
+
+            // check if two object in data_list are collided
+            // assume there are exactly two objects
+            IGL_INLINE void Viewer::check_collision() {
+                if (treeNodesCollide(data_list[0].kd_tree, data_list[1].kd_tree))
+                    isActive = false;
+            }
+
+
+
+
             Eigen::Matrix4d Viewer::CalcParentsTrans(int indx)
             {
                 Eigen::Matrix4d prevTrans = Eigen::Matrix4d::Identity();
@@ -401,35 +562,6 @@ namespace igl
 
                 return rot;
             }
-
-
-            IGL_INLINE void Viewer::animateCCD() {
-                Eigen::Vector3d ball = (data_list[0].MakeTransd() * Eigen::Vector4d(0, 0, 0, 1)).head(3),
-                    E, R, RE, RD, cross;
-                double dist = 0.0;
-
-                for (int i = link_num; i > 0; --i) {
-                    E = (CalcParentsTranslation(link_num) * data_list[link_num].MakeTransd() * Eigen::Vector4d(0, 0, link_length / 2, 1)).head(3);
-                    dist = (E - ball).norm();
-
-                    R = (CalcParentsTranslation(i) * data_list[i].MakeTransd() * Eigen::Vector4d(0, 0, -link_length / 2, 1)).head(3);
-                    RE = E - R;
-                    RD = ball - R;
-
-                    double dot_product = RD.normalized().dot(RE.normalized());
-                    double alpha = acos(dot_product > 1 ? 1 : dot_product < -1 ? -1 : dot_product);
-
-                    cross = RE.cross(RD).normalized();
-                    cross = CalcParentsInverseRotation(i) * cross;
-                    data_list[i].MyRotate(cross, alpha / 30);
-                }
-
-                if (dist < delta) {
-                    fixAxis();
-                    isActive = false;
-                }
-            }
-
 
             void Viewer::animateFABRIK()
             {

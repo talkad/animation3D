@@ -190,18 +190,6 @@ static void glfw_key_callback(GLFWwindow* window, int key, int scancode, int act
 			std::cout << mat << "\n" <<std::endl;
 			break;
 		}
-		case 'C':
-		case 'c':
-		{
-			scn->isCCD = !scn->isCCD;
-
-			if (scn->isCCD)
-				std::cout << "CCD activated\n" << std::endl;
-			else
-				std::cout << "FABRIK activated\n"  << std::endl;
-
-			break;
-		}
 		case '[':
 		case ']':
 		{

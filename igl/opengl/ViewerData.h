@@ -48,6 +48,9 @@ namespace igl
             // Empty all fields
             IGL_INLINE void clear();
 
+            // move the object according to the chosen direction
+            IGL_INLINE void drawAlignedBox(Eigen::AlignedBox<double, 3>&, Eigen::RowVector3d&);
+
             // Change the visualization mode, invalidating the cache if necessary
             IGL_INLINE void set_face_based(bool newvalue);
 

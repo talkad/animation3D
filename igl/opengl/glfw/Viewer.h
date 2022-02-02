@@ -125,8 +125,6 @@ namespace igl
 
                 IGL_INLINE Eigen::Vector3d calcJointPos(int);
 
-                void animateCCD();
-
                 void animateFABRIK();
 
                 void fixAxis();
@@ -135,6 +133,12 @@ namespace igl
 
                 IGL_INLINE Eigen::Matrix3d CalcParentsInverseRotation(int index);
 
+                IGL_INLINE bool boxes_collide(Eigen::AlignedBox<double, 3>&, Eigen::AlignedBox<double, 3>&);
+
+                IGL_INLINE bool treeNodesCollide(AABB<Eigen::MatrixXd, 3>&, AABB<Eigen::MatrixXd, 3>&);
+
+                // check if two object in data_list are collided
+                IGL_INLINE void check_collision();
 
 
                 inline bool SetAnimation() {
@@ -165,7 +169,6 @@ namespace igl
                 bool ikAnimation;
                 double link_length;
                 double delta;
-                bool isCCD;
                 int current_picked;
 
 
