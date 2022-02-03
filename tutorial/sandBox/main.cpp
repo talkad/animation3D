@@ -2,9 +2,12 @@
 #include "tutorial/sandBox/inputManager.h"
 #include "sandBox.h"
 
+#define VIEWPORT_WIDTH 1000
+#define VIEWPORT_HEIGHT 800
+
 int main(int argc, char* argv[])
 {
-	Display* disp = new Display(1200, 800, "Wellcome");
+	Display* disp = new Display(VIEWPORT_WIDTH, VIEWPORT_HEIGHT, "Animation3D - Final Project");
 	Renderer renderer;
 
 	SandBox viewer;

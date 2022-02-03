@@ -1,44 +1,44 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <CustomBuild Include="C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\CMakeFiles\46c80fdb08407b889a8ba6f57af7ab3a\imgui-download-mkdir.rule">
+    <CustomBuild Include="C:\Users\tal74\projects\animation\animation3D\external\.cache\imgui\CMakeFiles\b113b6cbeb5a90fe93ab0d94d44b4451\imgui-download-mkdir.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\CMakeFiles\46c80fdb08407b889a8ba6f57af7ab3a\imgui-download-download.rule">
+    <CustomBuild Include="C:\Users\tal74\projects\animation\animation3D\external\.cache\imgui\CMakeFiles\b113b6cbeb5a90fe93ab0d94d44b4451\imgui-download-download.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\CMakeFiles\46c80fdb08407b889a8ba6f57af7ab3a\imgui-download-update.rule">
+    <CustomBuild Include="C:\Users\tal74\projects\animation\animation3D\external\.cache\imgui\CMakeFiles\b113b6cbeb5a90fe93ab0d94d44b4451\imgui-download-update.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\CMakeFiles\46c80fdb08407b889a8ba6f57af7ab3a\imgui-download-patch.rule">
+    <CustomBuild Include="C:\Users\tal74\projects\animation\animation3D\external\.cache\imgui\CMakeFiles\b113b6cbeb5a90fe93ab0d94d44b4451\imgui-download-patch.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\CMakeFiles\46c80fdb08407b889a8ba6f57af7ab3a\imgui-download-configure.rule">
+    <CustomBuild Include="C:\Users\tal74\projects\animation\animation3D\external\.cache\imgui\CMakeFiles\b113b6cbeb5a90fe93ab0d94d44b4451\imgui-download-configure.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\CMakeFiles\46c80fdb08407b889a8ba6f57af7ab3a\imgui-download-build.rule">
+    <CustomBuild Include="C:\Users\tal74\projects\animation\animation3D\external\.cache\imgui\CMakeFiles\b113b6cbeb5a90fe93ab0d94d44b4451\imgui-download-build.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\CMakeFiles\46c80fdb08407b889a8ba6f57af7ab3a\imgui-download-install.rule">
+    <CustomBuild Include="C:\Users\tal74\projects\animation\animation3D\external\.cache\imgui\CMakeFiles\b113b6cbeb5a90fe93ab0d94d44b4451\imgui-download-install.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\CMakeFiles\46c80fdb08407b889a8ba6f57af7ab3a\imgui-download-test.rule">
+    <CustomBuild Include="C:\Users\tal74\projects\animation\animation3D\external\.cache\imgui\CMakeFiles\b113b6cbeb5a90fe93ab0d94d44b4451\imgui-download-test.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\CMakeFiles\a3625d7c1a79ed469b3b5916fa6ebd1d\imgui-download-complete.rule">
+    <CustomBuild Include="C:\Users\tal74\projects\animation\animation3D\external\.cache\imgui\CMakeFiles\9b0f177bfee95fe3aeef05b3c3df0693\imgui-download-complete.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\CMakeFiles\31c06db0e8e0f80c8195eefd6bd030b5\imgui-download.rule">
+    <CustomBuild Include="C:\Users\tal74\projects\animation\animation3D\external\.cache\imgui\CMakeFiles\26b6a076e9ef24b31c28da9618d0aba7\imgui-download.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\CMakeLists.txt" />
+    <CustomBuild Include="C:\Users\tal74\projects\animation\animation3D\external\.cache\imgui\CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="C:\Users\ipism\source\repos\animation3D\external\.cache\imgui\CMakeFiles\imgui-download" />
+    <None Include="C:\Users\tal74\projects\animation\animation3D\external\.cache\imgui\CMakeFiles\imgui-download" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="CMake Rules">
-      <UniqueIdentifier>{09F59B9F-4796-3F7D-9C3B-D677C89B106F}</UniqueIdentifier>
+      <UniqueIdentifier>{657DB9D4-A415-3407-B762-470DC8001103}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

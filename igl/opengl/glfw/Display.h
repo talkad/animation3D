@@ -23,7 +23,6 @@ public:
 
 	
 	~Display();
-	unsigned int loadCubemap(std::vector<std::string> faces);
 
 //private:
 	GLFWwindow* window;

@@ -1,44 +1,44 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <CustomBuild Include="C:\Users\ipism\source\repos\animation3D\external\.cache\glfw\CMakeFiles\4d416185b05d07f9433bc73f43a84bab\glfw-download-mkdir.rule">
+    <CustomBuild Include="C:\Users\tal74\projects\animation\animation3D\external\.cache\glfw\CMakeFiles\ff5922c5c2014a63534fa81f53df5db0\glfw-download-mkdir.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\ipism\source\repos\animation3D\external\.cache\glfw\CMakeFiles\4d416185b05d07f9433bc73f43a84bab\glfw-download-download.rule">
+    <CustomBuild Include="C:\Users\tal74\projects\animation\animation3D\external\.cache\glfw\CMakeFiles\ff5922c5c2014a63534fa81f53df5db0\glfw-download-download.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\ipism\source\repos\animation3D\external\.cache\glfw\CMakeFiles\4d416185b05d07f9433bc73f43a84bab\glfw-download-update.rule">
+    <CustomBuild Include="C:\Users\tal74\projects\animation\animation3D\external\.cache\glfw\CMakeFiles\ff5922c5c2014a63534fa81f53df5db0\glfw-download-update.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\ipism\source\repos\animation3D\external\.cache\glfw\CMakeFiles\4d416185b05d07f9433bc73f43a84bab\glfw-download-patch.rule">
+    <CustomBuild Include="C:\Users\tal74\projects\animation\animation3D\external\.cache\glfw\CMakeFiles\ff5922c5c2014a63534fa81f53df5db0\glfw-download-patch.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\ipism\source\repos\animation3D\external\.cache\glfw\CMakeFiles\4d416185b05d07f9433bc73f43a84bab\glfw-download-configure.rule">
+    <CustomBuild Include="C:\Users\tal74\projects\animation\animation3D\external\.cache\glfw\CMakeFiles\ff5922c5c2014a63534fa81f53df5db0\glfw-download-configure.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\ipism\source\repos\animation3D\external\.cache\glfw\CMakeFiles\4d416185b05d07f9433bc73f43a84bab\glfw-download-build.rule">
+    <CustomBuild Include="C:\Users\tal74\projects\animation\animation3D\external\.cache\glfw\CMakeFiles\ff5922c5c2014a63534fa81f53df5db0\glfw-download-build.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\ipism\source\repos\animation3D\external\.cache\glfw\CMakeFiles\4d416185b05d07f9433bc73f43a84bab\glfw-download-install.rule">
+    <CustomBuild Include="C:\Users\tal74\projects\animation\animation3D\external\.cache\glfw\CMakeFiles\ff5922c5c2014a63534fa81f53df5db0\glfw-download-install.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\ipism\source\repos\animation3D\external\.cache\glfw\CMakeFiles\4d416185b05d07f9433bc73f43a84bab\glfw-download-test.rule">
+    <CustomBuild Include="C:\Users\tal74\projects\animation\animation3D\external\.cache\glfw\CMakeFiles\ff5922c5c2014a63534fa81f53df5db0\glfw-download-test.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\ipism\source\repos\animation3D\external\.cache\glfw\CMakeFiles\9a2a9b313ec50a82b5d43c7c25287d4d\glfw-download-complete.rule">
+    <CustomBuild Include="C:\Users\tal74\projects\animation\animation3D\external\.cache\glfw\CMakeFiles\dad3698fac8d455ace415fe78dba2c95\glfw-download-complete.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\ipism\source\repos\animation3D\external\.cache\glfw\CMakeFiles\2729cf0198c255a0329b89f713c24c1e\glfw-download.rule">
+    <CustomBuild Include="C:\Users\tal74\projects\animation\animation3D\external\.cache\glfw\CMakeFiles\e14d094b3c0e0a8dbd7c9ace58e8a6b2\glfw-download.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\ipism\source\repos\animation3D\external\.cache\glfw\CMakeLists.txt" />
+    <CustomBuild Include="C:\Users\tal74\projects\animation\animation3D\external\.cache\glfw\CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="C:\Users\ipism\source\repos\animation3D\external\.cache\glfw\CMakeFiles\glfw-download" />
+    <None Include="C:\Users\tal74\projects\animation\animation3D\external\.cache\glfw\CMakeFiles\glfw-download" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="CMake Rules">
-      <UniqueIdentifier>{B4A97139-A506-334C-9234-30D6523DC47E}</UniqueIdentifier>
+      <UniqueIdentifier>{3603D450-FD5B-388E-8CBA-FF874CA563A5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

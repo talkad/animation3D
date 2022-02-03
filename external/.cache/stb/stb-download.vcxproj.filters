@@ -1,44 +1,44 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <CustomBuild Include="C:\Users\ipism\source\repos\animation3D\external\.cache\stb\CMakeFiles\cef1bc2b84b017613f2e41b3208b56b0\stb-download-mkdir.rule">
+    <CustomBuild Include="C:\Users\tal74\projects\animation\animation3D\external\.cache\stb\CMakeFiles\bd726330e7e8079be51f0939eda44d30\stb-download-mkdir.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\ipism\source\repos\animation3D\external\.cache\stb\CMakeFiles\cef1bc2b84b017613f2e41b3208b56b0\stb-download-download.rule">
+    <CustomBuild Include="C:\Users\tal74\projects\animation\animation3D\external\.cache\stb\CMakeFiles\bd726330e7e8079be51f0939eda44d30\stb-download-download.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\ipism\source\repos\animation3D\external\.cache\stb\CMakeFiles\cef1bc2b84b017613f2e41b3208b56b0\stb-download-update.rule">
+    <CustomBuild Include="C:\Users\tal74\projects\animation\animation3D\external\.cache\stb\CMakeFiles\bd726330e7e8079be51f0939eda44d30\stb-download-update.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\ipism\source\repos\animation3D\external\.cache\stb\CMakeFiles\cef1bc2b84b017613f2e41b3208b56b0\stb-download-patch.rule">
+    <CustomBuild Include="C:\Users\tal74\projects\animation\animation3D\external\.cache\stb\CMakeFiles\bd726330e7e8079be51f0939eda44d30\stb-download-patch.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\ipism\source\repos\animation3D\external\.cache\stb\CMakeFiles\cef1bc2b84b017613f2e41b3208b56b0\stb-download-configure.rule">
+    <CustomBuild Include="C:\Users\tal74\projects\animation\animation3D\external\.cache\stb\CMakeFiles\bd726330e7e8079be51f0939eda44d30\stb-download-configure.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\ipism\source\repos\animation3D\external\.cache\stb\CMakeFiles\cef1bc2b84b017613f2e41b3208b56b0\stb-download-build.rule">
+    <CustomBuild Include="C:\Users\tal74\projects\animation\animation3D\external\.cache\stb\CMakeFiles\bd726330e7e8079be51f0939eda44d30\stb-download-build.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\ipism\source\repos\animation3D\external\.cache\stb\CMakeFiles\cef1bc2b84b017613f2e41b3208b56b0\stb-download-install.rule">
+    <CustomBuild Include="C:\Users\tal74\projects\animation\animation3D\external\.cache\stb\CMakeFiles\bd726330e7e8079be51f0939eda44d30\stb-download-install.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\ipism\source\repos\animation3D\external\.cache\stb\CMakeFiles\cef1bc2b84b017613f2e41b3208b56b0\stb-download-test.rule">
+    <CustomBuild Include="C:\Users\tal74\projects\animation\animation3D\external\.cache\stb\CMakeFiles\bd726330e7e8079be51f0939eda44d30\stb-download-test.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\ipism\source\repos\animation3D\external\.cache\stb\CMakeFiles\bf230a862d804246baa916bcd774bc9b\stb-download-complete.rule">
+    <CustomBuild Include="C:\Users\tal74\projects\animation\animation3D\external\.cache\stb\CMakeFiles\3e3b042d298120318eb6d6ff6b3fa34c\stb-download-complete.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\ipism\source\repos\animation3D\external\.cache\stb\CMakeFiles\724c2688dc417fafbcb82f3186f191a2\stb-download.rule">
+    <CustomBuild Include="C:\Users\tal74\projects\animation\animation3D\external\.cache\stb\CMakeFiles\094e749752043788c5eea64cda90e9c5\stb-download.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\ipism\source\repos\animation3D\external\.cache\stb\CMakeLists.txt" />
+    <CustomBuild Include="C:\Users\tal74\projects\animation\animation3D\external\.cache\stb\CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="C:\Users\ipism\source\repos\animation3D\external\.cache\stb\CMakeFiles\stb-download" />
+    <None Include="C:\Users\tal74\projects\animation\animation3D\external\.cache\stb\CMakeFiles\stb-download" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="CMake Rules">
-      <UniqueIdentifier>{0BFAD5DD-B51B-358F-8755-F47AF00EF23F}</UniqueIdentifier>
+      <UniqueIdentifier>{A6713CF7-7B8D-36F7-A631-F68F8435E7F2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
