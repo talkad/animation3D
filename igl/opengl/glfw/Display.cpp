@@ -197,12 +197,12 @@ bool Display::launch_rendering(bool loop)
 	// -------------
 	vector<std::string> faces
 	{
-		FileSystem::getPath("textures/skybox/right.jpg"),
-		FileSystem::getPath("textures/skybox/left.jpg"),
-		FileSystem::getPath("textures/skybox/top.jpg"),
-		FileSystem::getPath("textures/skybox/bottom.jpg"),
-		FileSystem::getPath("textures/skybox/front.jpg"),
-		FileSystem::getPath("textures/skybox/back.jpg")
+		FileSystem::getPath("tutorial/textures/skybox/right.jpg"),
+		FileSystem::getPath("tutorial/textures/skybox/left.jpg"),
+		FileSystem::getPath("tutorial/textures/skybox/top.jpg"),
+		FileSystem::getPath("tutorial/textures/skybox/bottom.jpg"),
+		FileSystem::getPath("tutorial/textures/skybox/front.jpg"),
+		FileSystem::getPath("tutorial/textures/skybox/back.jpg")
 	};
 	unsigned int cubemapTexture = loadCubemap(faces);
 
@@ -252,13 +252,12 @@ bool Display::launch_rendering(bool loop)
 		skyboxShader.setMat4("view", view);
 		skyboxShader.setMat4("projection", projection);
 		// skybox cube
-		glBindVertexArray(skyboxVAO);
+		//glBindVertexArray(skyboxVAO);
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_CUBE_MAP, cubemapTexture);
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 		glBindVertexArray(0);
 		glDepthFunc(GL_LESS); // set depth function back to default
-
 
 		glfwSwapBuffers(window);
 
