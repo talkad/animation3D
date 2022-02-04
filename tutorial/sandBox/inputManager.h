@@ -204,11 +204,13 @@ static void glfw_key_callback(GLFWwindow* window, int key, int scancode, int act
 			break;
 		case 'w':
 		case 'W':
-			rndr->TranslateCamera(Eigen::Vector3f(0, 0, 0.03f));
+			rndr->RotateCamera(0, 0.05f);
+			//rndr->TranslateCamera(Eigen::Vector3f(0, 0, 0.03f));
 			break;
 		case 's':
 		case 'S':
-			rndr->TranslateCamera(Eigen::Vector3f(0, 0, -0.03f));
+			rndr->RotateCamera(0, -0.05f);
+			//rndr->TranslateCamera(Eigen::Vector3f(0, 0, -0.03f));
 			break;
 		case GLFW_KEY_UP:
 			if (scn->current_picked != -1)
