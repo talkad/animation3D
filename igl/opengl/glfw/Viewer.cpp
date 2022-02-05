@@ -183,10 +183,16 @@ namespace igl
                     data().grid_texture();
                 }
 
-
                 //for (unsigned int i = 0; i<plugins.size(); ++i)
                 //  if (plugins[i]->post_load())
                 //    return true;
+
+                size_t file_name_idx = mesh_file_name_string.rfind('\\');
+                std::string name = mesh_file_name_string.substr(file_name_idx + 1);
+
+                if (name == "sphere.obj") {
+                    data().toggle_movement();
+                }
 
                 return true;
             }
@@ -488,6 +494,14 @@ namespace igl
                 if (R > R0 + R1) return false;
 
                 return true;
+            }
+
+            IGL_INLINE void Viewer::move_targets()
+            {
+                for (auto& data : data_list) {
+                    if (data.is_target)
+                        data.move();
+                }
             }
 
             IGL_INLINE bool Viewer::treeNodesCollide(AABB<Eigen::MatrixXd, 3>& firstObjNode, AABB<Eigen::MatrixXd, 3>& secondObjNode) {

@@ -40,5 +40,6 @@ SandBox::~SandBox()
 void SandBox::Animate()
 {
 
+	move_targets();
 
 }

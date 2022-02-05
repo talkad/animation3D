@@ -33,8 +33,10 @@ IGL_INLINE igl::opengl::ViewerData::ViewerData()
     label_color(0, 0, 0.04, 1),
     shininess(35.0f),
     id(-1),
-    is_visible(1)
+    is_visible(1),
+    is_target(false)
 {
+    speed = Eigen::Vector3d(0, 0, 0);
     clear();
 };
 
@@ -77,6 +79,29 @@ IGL_INLINE void igl::opengl::ViewerData::drawAlignedBox(Eigen::AlignedBox<double
             color
         );
 
+}
+
+IGL_INLINE void igl::opengl::ViewerData::move()
+{
+      MyTranslateInSystem(GetRotation(), speed);
+}
+
+IGL_INLINE void igl::opengl::ViewerData::toggle_movement()
+{
+    is_target = !is_target;
+
+    // if current object is a target then init its speed vector
+    if (is_target) 
+        initiate_speed();
+}
+
+IGL_INLINE void igl::opengl::ViewerData::initiate_speed()
+{
+    double x = ((double)rand() / (RAND_MAX)) - 0.5;
+    double y = ((double)rand() / (RAND_MAX)) - 0.5;
+    double z = ((double)rand() / (RAND_MAX)) - 0.5;
+
+    speed = Eigen::Vector3d(x / 10, y / 10, z);
 }
 
 IGL_INLINE void igl::opengl::ViewerData::set_face_based(bool newvalue)

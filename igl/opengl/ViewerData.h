@@ -51,6 +51,13 @@ namespace igl
             // move the object according to the chosen direction
             IGL_INLINE void drawAlignedBox(Eigen::AlignedBox<double, 3>&, Eigen::RowVector3d&);
 
+            // change current location by speed
+            IGL_INLINE void move();
+
+            IGL_INLINE void toggle_movement();
+
+            IGL_INLINE void initiate_speed();
+
             // Change the visualization mode, invalidating the cache if necessary
             IGL_INLINE void set_face_based(bool newvalue);
 
@@ -224,6 +231,9 @@ namespace igl
             unsigned int show_lines;
             bool show_vertid; // shared across viewports for now
             bool show_faceid; // shared across viewports for now
+
+            Eigen::Vector3d speed;
+            bool is_target;
 
             // Point size / line width
             float point_size;
