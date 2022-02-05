@@ -137,6 +137,8 @@ namespace igl
 
                 IGL_INLINE void move_targets();
 
+                IGL_INLINE void generate_target();
+
                 IGL_INLINE bool treeNodesCollide(AABB<Eigen::MatrixXd, 3>&, AABB<Eigen::MatrixXd, 3>&);
 
                 // check if two object in data_list are collided
@@ -175,6 +177,8 @@ namespace igl
 
                 int snake_size;
                 bool snake_view;
+                float prev_tic;
+
                 // List of registered plugins
             //    std::vector<ViewerPlugin*> plugins;
 

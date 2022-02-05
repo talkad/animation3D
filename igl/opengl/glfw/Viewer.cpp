@@ -41,6 +41,9 @@
 #include <igl/snap_to_canonical_view_quat.h>
 #include <igl/unproject.h>
 #include <igl/serialize.h>
+#include <igl/get_seconds.h>
+#include <GLFW/glfw3.h>
+
 
 // Internal global variables used for glfw event handling
 //static igl::opengl::glfw::Viewer * __viewer;
@@ -76,7 +79,8 @@ namespace igl
                 current_picked(-1),
                 delta(0.1),
                 snake_size(1),  // currently the head will be the circle
-                snake_view(false)
+                snake_view(false),
+                prev_tic(0)
             {
                 data_list.front().id = 0;
 
@@ -187,9 +191,9 @@ namespace igl
                 //  if (plugins[i]->post_load())
                 //    return true;
 
-                size_t file_name_idx = mesh_file_name_string.rfind('\\');
+                size_t file_name_idx = mesh_file_name_string.rfind('/');
                 std::string name = mesh_file_name_string.substr(file_name_idx + 1);
-
+                std::cout << name << std::endl;
                 if (name == "sphere.obj") {
                     data().toggle_movement();
                 }
@@ -274,12 +278,14 @@ namespace igl
 
             IGL_INLINE void Viewer::open_dialog_load_mesh()
             {
-                std::string fname = igl::file_dialog_open();
+                //std::string fname = igl::file_dialog_open();
 
-                if (fname.length() == 0)
-                    return;
+                //if (fname.length() == 0)
+                //    return;
 
-                this->load_mesh_from_file(fname.c_str());
+                //this->load_mesh_from_file(fname.c_str());
+
+                load_mesh_from_file("C:/Users/tal74/projects/animation/animation3D/tutorial/data/sphere.obj");
             }
 
             IGL_INLINE void Viewer::open_dialog_save_mesh()
@@ -502,6 +508,21 @@ namespace igl
                     if (data.is_target)
                         data.move();
                 }
+            }
+
+            IGL_INLINE void Viewer::generate_target()
+            {
+                //float tic = static_cast<float>(glfwGetTime());
+                //std::cout << tic << std::endl;
+                //if (tic - prev_tic > 5) {
+                //    prev_tic = tic;
+                //    std::cout << "aaaaaaaaaaaaa" << std::endl;
+
+                //    std::this_thread::sleep_for(std::chrono::microseconds(5));
+                //    open_dialog_load_mesh();
+
+                //    //load_mesh_from_file("C:/Users/tal74/projects/animation/animation3D/tutorial/data/sphere.obj");
+                //}
             }
 
             IGL_INLINE bool Viewer::treeNodesCollide(AABB<Eigen::MatrixXd, 3>& firstObjNode, AABB<Eigen::MatrixXd, 3>& secondObjNode) {
