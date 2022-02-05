@@ -26,9 +26,11 @@
 #include <external/learnopengl/model.h>
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
-void mouse_callback(GLFWwindow* window, double xpos, double ypos);
+void mouse_callback(GLFWwindow* window, int button, int action, int modifier);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
+void mouse_move(GLFWwindow* window, double x, double y);
 void processInput(GLFWwindow* window);
+
 unsigned int loadTexture(const char* path);
 unsigned int loadCubemap(vector<std::string> faces);
 
@@ -99,8 +101,9 @@ Display::Display(int windowWidth, int windowHeight, const std::string& title)
 
 	glfwMakeContextCurrent(window);
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
-	glfwSetCursorPosCallback(window, mouse_callback);
+	glfwSetMouseButtonCallback(window, mouse_callback);
 	glfwSetScrollCallback(window, scroll_callback);
+	glfwSetCursorPosCallback(window, mouse_move);
 
 	// tell GLFW to capture our mouse
 	// glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED); xxxxxxxxxxxxxxxxxxxx
@@ -222,6 +225,7 @@ bool Display::launch_rendering(bool loop)
 		FileSystem::getPath("tutorial/textures/skybox/bottom.jpg"),
 		FileSystem::getPath("tutorial/textures/skybox/front.jpg"),
 		FileSystem::getPath("tutorial/textures/skybox/back.jpg")
+
 	};
 	unsigned int cubemapTexture = loadCubemap(faces);
 
@@ -258,34 +262,17 @@ bool Display::launch_rendering(bool loop)
 		// -----
 		processInput(window);
 
-		// render
-		// ------
-		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		//// render
+		//// ------
+		//glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+		//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		// draw scene as normal
-		glm::mat4 model = glm::mat4(1.0f);
-		glm::mat4 view = camera.GetViewMatrix();
-		glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
-
-		// draw skybox as last
-		glDepthFunc(GL_LEQUAL);  // change depth function so depth test passes when values are equal to depth buffer's content
-		skyboxShader.use();
-		view = glm::mat4(glm::mat3(camera.GetViewMatrix())); // remove translation from the view matrix
-		skyboxShader.setMat4("view", view);
-		skyboxShader.setMat4("projection", projection);
-		// skybox cube
-		glBindVertexArray(skyboxVAO);
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_CUBE_MAP, cubemapTexture);
-		glDrawArrays(GL_TRIANGLES, 0, 36);
-		glBindVertexArray(0);
-		glDepthFunc(GL_LESS); // set depth function back to default
-
-
-		//glViewport(0, 0, VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
+		//// draw scene as normal
+		//glm::mat4 model = glm::mat4(1.0f);
 		//glm::mat4 view = camera.GetViewMatrix();
 		//glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+
+		//// draw skybox as last
 		//glDepthFunc(GL_LEQUAL);  // change depth function so depth test passes when values are equal to depth buffer's content
 		//skyboxShader.use();
 		//view = glm::mat4(glm::mat3(camera.GetViewMatrix())); // remove translation from the view matrix
@@ -298,20 +285,37 @@ bool Display::launch_rendering(bool loop)
 		//glDrawArrays(GL_TRIANGLES, 0, 36);
 		//glBindVertexArray(0);
 		//glDepthFunc(GL_LESS); // set depth function back to default
-		//// draw background
-		//glViewport((VIEWPORT_WIDTH / 4) * 3, VIEWPORT_HEIGHT / 5, VIEWPORT_WIDTH / 4 * 1, VIEWPORT_HEIGHT / 5);
 
-		//glDepthFunc(GL_LEQUAL);  // change depth function so depth test passes when values are equal to depth buffer's content
-		//skyboxShader.use();
-		//skyboxShader.setMat4("view", view);
-		//skyboxShader.setMat4("projection", projection);
-		//// skybox cube
-		////glBindVertexArray(skyboxVAO);
-		//glActiveTexture(GL_TEXTURE0);
-		//glBindTexture(GL_TEXTURE_CUBE_MAP, cubemapTexture);
-		//glDrawArrays(GL_TRIANGLES, 0, 36);
-		//glBindVertexArray(0);
-		//glDepthFunc(GL_LESS); // set depth function back to default
+
+		glViewport(0, 0, VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
+		glm::mat4 view = camera.GetViewMatrix();
+		glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+		glDepthFunc(GL_LEQUAL);  // change depth function so depth test passes when values are equal to depth buffer's content
+		skyboxShader.use();
+		view = glm::mat4(glm::mat3(camera.GetViewMatrix())); // remove translation from the view matrix
+		skyboxShader.setMat4("view", view);
+		skyboxShader.setMat4("projection", projection);
+		// skybox cube
+		glBindVertexArray(skyboxVAO);
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_CUBE_MAP, cubemapTexture);
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+		glBindVertexArray(0);
+		glDepthFunc(GL_LESS); // set depth function back to default
+		// draw background
+		glViewport((VIEWPORT_WIDTH / 4) * 3, VIEWPORT_HEIGHT / 5, VIEWPORT_WIDTH / 4 * 1, VIEWPORT_HEIGHT / 5);
+
+		glDepthFunc(GL_LEQUAL);  // change depth function so depth test passes when values are equal to depth buffer's content
+		skyboxShader.use();
+		skyboxShader.setMat4("view", view);
+		skyboxShader.setMat4("projection", projection);
+		// skybox cube
+		//glBindVertexArray(skyboxVAO);
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_CUBE_MAP, cubemapTexture);
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+		glBindVertexArray(0);
+		glDepthFunc(GL_LESS); // set depth function back to default
 
 
 		// glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
@@ -380,15 +384,15 @@ void framebuffer_size_callback(GLFWwindow * window, int width, int height)
 	glViewport(0, 0, width, height);
 }
 
+
 // glfw: whenever the mouse moves, this callback is called
 // -------------------------------------------------------
-void mouse_callback(GLFWwindow * window, double xposIn, double yposIn)
+void mouse_move(GLFWwindow* window, double x, double y)
 {
-	float xpos = static_cast<float>(xposIn);
-	float ypos = static_cast<float>(yposIn);
+	Renderer* rndr = (Renderer*)glfwGetWindowUserPointer(window);
 
-	std::cout << "mouse callback (" << xpos << ", " << ypos << ")" << std::endl;
-
+	float xpos = static_cast<float>(x);
+	float ypos = static_cast<float>(y);
 	if (firstMouse)
 	{
 		lastX = xpos;
@@ -399,11 +403,84 @@ void mouse_callback(GLFWwindow * window, double xposIn, double yposIn)
 	float xoffset = xpos - lastX;
 	float yoffset = lastY - ypos; // reversed since y-coordinates go from bottom to top
 
+	std::cout << "x y are " << xoffset << ", " << yoffset << std::endl;
+
+	if (rndr->IsPicked()) {
+		rndr->UpdatePosition(x, y);
+		if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT) == GLFW_PRESS)
+		{
+			rndr->MouseProcessing(GLFW_MOUSE_BUTTON_RIGHT);
+		}
+		else if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS)
+		{
+			rndr->MouseProcessing(GLFW_MOUSE_BUTTON_LEFT);
+		}
+	}
+	else {
+		rndr->UpdatePosition(-x*2, -y*5);
+		rndr->MouseProcessing(GLFW_MOUSE_BUTTON_RIGHT);
+	}
+
+
 	lastX = xpos;
 	lastY = ypos;
 
 	camera.ProcessMouseMovement(xoffset, yoffset);
+
 }
+
+
+// glfw: whenever the mouse moves, this callback is called
+// -------------------------------------------------------
+void mouse_callback(GLFWwindow* window, int button, int action, int modifier)
+{
+	// for debugging - it is not a required functionallity of the project
+
+	Renderer* rndr = (Renderer*)glfwGetWindowUserPointer(window);
+	igl::opengl::glfw::Viewer* scn = rndr->GetScene();
+
+	if (action == GLFW_PRESS)
+	{
+		double x2, y2;
+		glfwGetCursorPos(window, &x2, &y2);
+
+
+		double depth, closestZ = 1;
+		int i = 0, savedIndx = scn->selected_data_index, lastIndx = scn->selected_data_index;
+
+		int prev_picked = scn->current_picked;
+
+		for (; i < scn->data_list.size(); i++)
+		{
+			scn->selected_data_index = i;
+			depth = rndr->Picking(x2, y2);
+			if (depth < 0 && (closestZ > 0 || closestZ < depth))
+			{
+				scn->current_picked = i;
+				savedIndx = i;
+				closestZ = depth;
+				std::cout << "--- found " << depth << std::endl;
+			}
+		}
+		scn->selected_data_index = savedIndx;
+		scn->data().set_colors(Eigen::RowVector3d(0.2, 0.7, 0.8));
+		if (lastIndx != savedIndx)
+			scn->data_list[lastIndx].set_colors(Eigen::RowVector3d(255.0 / 255.0, 228.0 / 255.0, 58.0 / 255.0));
+
+		if (scn->current_picked == prev_picked) {
+			scn->current_picked = -1;
+		}
+		rndr->UpdatePosition(x2, y2);
+
+	}
+	else
+	{
+		rndr->GetScene()->isPicked = false;
+
+	}
+
+}
+
 
 // glfw: whenever the mouse scroll wheel scrolls, this callback is called
 // ----------------------------------------------------------------------
@@ -411,13 +488,24 @@ void scroll_callback(GLFWwindow * window, double xoffset, double yoffset)
 {
 	std::cout << "scroll callback -" << yoffset  << std::endl;
 
-	camera.ProcessMouseScroll(static_cast<float>(yoffset));
+	Renderer* rndr = (Renderer*)glfwGetWindowUserPointer(window);
+	if (rndr->IsPicked())
+		if (rndr->GetScene()->selected_data_index == 0)
+			rndr->GetScene()->data().MyTranslateInSystem(rndr->GetScene()->GetRotation(), Eigen::Vector3d(0, 0, yoffset));
+		else
+			rndr->GetScene()->data_list[1].MyTranslateInSystem(rndr->GetScene()->GetRotation(), Eigen::Vector3d(0, 0, yoffset));
+	//rndr->GetScene()->data_list[1].MyScale(Eigen::Vector3d(1 + y * 0.01,1 + y * 0.01,1+y*0.01));
+	else {
+		rndr->GetScene()->MyTranslate(Eigen::Vector3d(0, 0, yoffset * 0.5), true);
+		camera.ProcessMouseScroll(static_cast<float>(yoffset * 0.5));
+	}
+
 }
 
 
 void Display::AddKeyCallBack(void(*keyCallback)(GLFWwindow*, int, int, int, int))
 {
-	glfwSetKeyCallback(window, (void(*)(GLFWwindow*, int, int, int, int))keyCallback);//{
+	glfwSetKeyCallback(window, (void(*)(GLFWwindow*, int, int, int, int))keyCallback);
 
 }
 
@@ -435,7 +523,7 @@ void Display::AddResizeCallBack(void (*windowsizefun)(GLFWwindow*, int, int))
 
 void Display::SetRenderer(void* userPointer)
 {
-
+	renderer = userPointer;
 	glfwSetWindowUserPointer(window, userPointer);
 
 }
