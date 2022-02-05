@@ -11,6 +11,7 @@ int main(int argc, char* argv[])
 	Renderer renderer;
 
 	SandBox viewer;
+	unsigned int left_view, right_view;
 
 	igl::opengl::glfw::imgui::ImGuiMenu* menu = new igl::opengl::glfw::imgui::ImGuiMenu();
 	viewer.Init("configuration.txt");

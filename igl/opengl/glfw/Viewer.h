@@ -171,7 +171,8 @@ namespace igl
                 double delta;
                 int current_picked;
 
-
+                int snake_size;
+                bool snake_view;
                 // List of registered plugins
             //    std::vector<ViewerPlugin*> plugins;
 

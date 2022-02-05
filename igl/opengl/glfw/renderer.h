@@ -105,11 +105,16 @@ public:
 	void RotateCamera(float amtX, float amtY);
 	inline bool IsPicked() { return scn->isPicked; }
 	
+	std::vector<igl::opengl::ViewerCore> core_list;
+	size_t selected_core_index;
+	
+	Eigen::Vector3f prev_camera_translation;
+	Eigen::Vector3f prev_camera_eye;
+	Eigen::Vector3f prev_camera_up;
+
 private:
 	// Stores all the viewing options
-	std::vector<igl::opengl::ViewerCore> core_list;
 	igl::opengl::glfw::Viewer* scn;
-	size_t selected_core_index;
 	int next_core_id;
 	float highdpi;
 	double xold, yold, xrel, yrel;

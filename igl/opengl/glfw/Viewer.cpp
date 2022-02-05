@@ -74,7 +74,9 @@ namespace igl
                 ikAnimation(false),
                 link_length(1.6),
                 current_picked(-1),
-                delta(0.1)
+                delta(0.1),
+                snake_size(1),  // currently the head will be the circle
+                snake_view(false)
             {
                 data_list.front().id = 0;
 

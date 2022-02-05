@@ -75,42 +75,6 @@ static void glfw_key_callback(GLFWwindow* window, int key, int scancode, int act
 			rndr->core().orthographic = !rndr->core().orthographic;
 			break;
 		}
-		case 'T':
-		case 't':
-		{
-			if(scn->link_num > 0)
-				std::cout << "tip: (" << scn->calcJointPos(scn->link_num + 1) << ")\n" << std::endl;
-			break;
-		}
-		case 'D':
-		case 'd':
-		{
-			if (scn->link_num > 0) {
-				scn->destination = scn->data(0).MakeTransd().col(3).head(3);
-				std::cout << "destination: (" << scn->destination.transpose() << ")\n" << std::endl;
-			}
-			break;
-		}
-		case 'P':
-		case 'p':
-		{
-			Eigen::Matrix3d mat;
-			int idx = scn->current_picked;
-
-			if (scn->current_picked != -1)
-			{
-				mat = scn->data_list[idx].GetRotation();
-				std::cout << "rotation of link " << idx << ":\n" << std::endl;
-			}
-			else
-			{
-				mat = scn->GetRotation();
-				std::cout << "rotation of scene:\n" << std::endl;
-			}
-			
-			std::cout << mat << "\n" <<std::endl;
-			break;
-		}
 		case '[':
 		case ']':
 		{
@@ -167,27 +131,6 @@ static void glfw_key_callback(GLFWwindow* window, int key, int scancode, int act
 				scn->MyRotate(Eigen::Vector3d(0, 0, 1), 0.1);
 
 			//rndr->TranslateCamera(Eigen::Vector3f(0.01f, 0, 0));
-			break;
-		case ' ':
-			// toggle ik solver aniimation
-			if (scn->data_list.size() > 1) {
-				Eigen::Vector4d root = scn->data_list[1].MakeTransd() * Eigen::Vector4d(0, 0, -scn->link_length / 2, 1);
-				Eigen::Vector4d ball = scn->data_list[0].MakeTransd() * Eigen::Vector4d(0, 0, 0, 1);
-
-				double dist = (root - ball).norm();
-
-				if (scn->link_num * scn->link_length >= dist)
-					scn->SetAnimation();
-				else {
-					std::cout << "cannot reach" << std::endl;
-					scn->isActive = false;
-				}
-			}
-			else {
-				std::cout << "cannot reach" << std::endl;
-				scn->isActive = false;
-			}
-
 			break;
 		
 		default: 

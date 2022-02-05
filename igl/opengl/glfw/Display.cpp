@@ -379,23 +379,23 @@ void mouse_move(GLFWwindow* window, double x, double y)
 	float xoffset = xpos - lastX;
 	float yoffset = lastY - ypos; // reversed since y-coordinates go from bottom to top
 
-	std::cout << "x y are " << xoffset << ", " << yoffset << std::endl;
+	//std::cout << "x y are " << xoffset << ", " << yoffset << std::endl;
 
-	if (rndr->IsPicked()) {
-		rndr->UpdatePosition(x, y);
-		if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT) == GLFW_PRESS)
-		{
-			rndr->MouseProcessing(GLFW_MOUSE_BUTTON_RIGHT);
-		}
-		else if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS)
-		{
-			rndr->MouseProcessing(GLFW_MOUSE_BUTTON_LEFT);
-		}
-	}
-	else {
-		rndr->UpdatePosition(-x*2, -y*5);
-		rndr->MouseProcessing(GLFW_MOUSE_BUTTON_RIGHT);
-	}
+	//if (rndr->IsPicked()) {
+	//	rndr->UpdatePosition(x, y);
+	//	if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT) == GLFW_PRESS)
+	//	{
+	//		rndr->MouseProcessing(GLFW_MOUSE_BUTTON_RIGHT);
+	//	}
+	//	else if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS)
+	//	{
+	//		rndr->MouseProcessing(GLFW_MOUSE_BUTTON_LEFT);
+	//	}
+	//}
+	//else {
+	//	rndr->UpdatePosition(-x*2, -y*5);
+	//	rndr->MouseProcessing(GLFW_MOUSE_BUTTON_RIGHT);
+	//}
 
 
 	lastX = xpos;
@@ -462,7 +462,7 @@ void mouse_callback(GLFWwindow* window, int button, int action, int modifier)
 // ----------------------------------------------------------------------
 void scroll_callback(GLFWwindow * window, double xoffset, double yoffset)
 {
-	std::cout << "scroll callback -" << yoffset  << std::endl;
+	//std::cout << "scroll callback -" << yoffset  << std::endl;
 
 	Renderer* rndr = (Renderer*)glfwGetWindowUserPointer(window);
 	if (rndr->IsPicked())

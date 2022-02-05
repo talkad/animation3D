@@ -5,6 +5,9 @@
 #include "igl/look_at.h"
 //#include <Eigen/Dense>
 
+#define VIEWPORT_WIDTH 1000
+#define VIEWPORT_HEIGHT 800
+
 Renderer::Renderer() : selected_core_index(0),
 next_core_id(2)
 {
@@ -65,29 +68,42 @@ IGL_INLINE void Renderer::draw(GLFWwindow* window)
 		menu->pre_draw();
 		menu->callback_draw_viewer_menu();
 	}
+
 	for (auto& core : core_list)
 	{
 		int indx = 0;
+
 		for (auto& mesh : scn->data_list)
-		{
 
-			if (mesh.is_visible & core.id)
-			{// for kinematic chain change scn->MakeTrans to parent matrix
+			if (mesh.is_visible & core.id) {
+				{
+					if (selected_core_index == 1) {
 
-				core.draw(scn->MakeTransScale() * scn->CalcParentsTrans(indx).cast<float>(), mesh);
+						Eigen::Matrix4d headTransMat = scn->MakeTransd() * scn->CalcParentsTrans(scn->snake_size - 1) * scn->data(scn->snake_size - 1).MakeTransd();
+						core.camera_translation = (headTransMat * Eigen::Vector4d(0, 0.8, 0.8, -1)).block(0, 0, 3, 1).cast<float>();
+						core.camera_eye = (headTransMat.block(0, 0, 3, 3) * Eigen::Vector3d(0, -1, 0)).block(0, 0, 3, 1).cast<float>();
+						core.camera_up = (headTransMat.block(0, 0, 3, 3) * Eigen::Vector3d(0, 0, -1)).block(0, 0, 3, 1).cast<float>();
+					}
+					else {
+						core.camera_translation = prev_camera_translation;
+						core.camera_eye = prev_camera_eye;
+						core.camera_up = prev_camera_up;
+					}
+
+					core.draw(scn->MakeTransScale() * scn->CalcParentsTrans(indx).cast<float>(), mesh);
+				}
 			}
-			indx++;
-		}
-
-
+		indx++;
 	}
+
 	if (menu)
 	{
 		menu->post_draw();
-
 	}
 
 }
+
+
 
 void Renderer::SetScene(igl::opengl::glfw::Viewer* viewer)
 {
@@ -105,12 +121,9 @@ IGL_INLINE void Renderer::init(igl::opengl::glfw::Viewer* viewer, int coresNum, 
 
 	if (coresNum > 1)
 	{
-		int width = core().viewport[2];
-		int height = core().viewport[3];
-
-		core().viewport = Eigen::Vector4f(0, 0, width / 4, height);
+		core().viewport = Eigen::Vector4f(0, 0, VIEWPORT_WIDTH , VIEWPORT_HEIGHT);
 		left_view = core_list[0].id;
-		right_view = append_core(Eigen::Vector4f(width / 4, 0, width * 3 / 4, height));
+		right_view = append_core(Eigen::Vector4f(VIEWPORT_WIDTH / 4, 0, VIEWPORT_WIDTH * 3 / 4, VIEWPORT_HEIGHT));
 		core_index(right_view - 1);
 		for (size_t i = 0; i < scn->data_list.size(); i++)
 		{
@@ -122,7 +135,14 @@ IGL_INLINE void Renderer::init(igl::opengl::glfw::Viewer* viewer, int coresNum, 
 		//TranslateCamera(v.cast<float>());
 
 		core_index(left_view - 1);
+
+		prev_camera_translation = core().camera_translation;
+		prev_camera_eye = core().camera_eye;
+		prev_camera_up = core().camera_up;
+
 	}
+
+	selected_core_index = 0;
 
 	if (menu)
 	{
