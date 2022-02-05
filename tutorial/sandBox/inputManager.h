@@ -289,8 +289,8 @@ static void glfw_key_callback(GLFWwindow* window, int key, int scancode, int act
 
 void Init(Display& display, igl::opengl::glfw::imgui::ImGuiMenu *menu)
 {
-	display.AddKeyCallBack(glfw_key_callback);
-	display.AddMouseCallBacks(glfw_mouse_press, glfw_mouse_scroll, glfw_mouse_move);
-	display.AddResizeCallBack(glfw_window_size);
+	//display.AddKeyCallBack(glfw_key_callback);
+	//display.AddMouseCallBacks(glfw_mouse_press, glfw_mouse_scroll, glfw_mouse_move);
+	//display.AddResizeCallBack(glfw_window_size);
 	menu->init(&display);
 }
