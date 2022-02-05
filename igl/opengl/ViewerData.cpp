@@ -17,6 +17,8 @@
 #include <iostream>
 //#include "external/stb/igl_stb_image.h"
 
+#define g 0.05
+
 IGL_INLINE igl::opengl::ViewerData::ViewerData()
     : dirty(MeshGL::DIRTY_ALL),
     show_faces(true),
@@ -34,12 +36,17 @@ IGL_INLINE igl::opengl::ViewerData::ViewerData()
     shininess(35.0f),
     id(-1),
     is_visible(1),
-    is_target(false)
+    is_target(false), 
+    is_bounce(false)
 {
     speed = Eigen::Vector3d(0, 0, 0);
     clear();
 };
 
+IGL_INLINE void igl::opengl::ViewerData::init() {
+    std::cout << "init" << std::endl;
+    kd_tree.init(V, F);
+}
 
 IGL_INLINE void igl::opengl::ViewerData::drawAlignedBox(Eigen::AlignedBox<double, 3>& alignedBox, Eigen::RowVector3d& color) {
     Eigen::MatrixXd V_box(8, 3); // Corners of the bounding box
@@ -84,15 +91,26 @@ IGL_INLINE void igl::opengl::ViewerData::drawAlignedBox(Eigen::AlignedBox<double
 IGL_INLINE void igl::opengl::ViewerData::move()
 {
       MyTranslateInSystem(GetRotation(), speed);
+
+      if (is_bounce){
+          speed -= Eigen::Vector3d(0, g, 0);
+
+          if (Tout.matrix()(1, 3) < -1)
+              speed = Eigen::Vector3d(speed(0), -speed(1), speed(2));
+      }
+
+      std::cout << "[" << Tout.matrix() << "]" << std::endl;
+      std::cout << "[" << Tout.matrix()(1,3) << "]" <<  std::endl;
 }
 
 IGL_INLINE void igl::opengl::ViewerData::toggle_movement()
 {
     is_target = !is_target;
+}
 
-    // if current object is a target then init its speed vector
-    if (is_target) 
-        initiate_speed();
+IGL_INLINE void igl::opengl::ViewerData::toggle_bounce()
+{
+    is_bounce = !is_bounce;
 }
 
 IGL_INLINE void igl::opengl::ViewerData::initiate_speed()
@@ -101,7 +119,10 @@ IGL_INLINE void igl::opengl::ViewerData::initiate_speed()
     double y = ((double)rand() / (RAND_MAX)) - 0.5;
     double z = ((double)rand() / (RAND_MAX)) - 0.5;
 
-    speed = Eigen::Vector3d(x / 10, y / 10, z);
+    if(is_bounce)
+        speed = Eigen::Vector3d(x / 10, y, z);
+    else
+        speed = Eigen::Vector3d(x / 10, y / 10, z);
 }
 
 IGL_INLINE void igl::opengl::ViewerData::set_face_based(bool newvalue)

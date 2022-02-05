@@ -193,10 +193,22 @@ namespace igl
 
                 size_t file_name_idx = mesh_file_name_string.rfind('/');
                 std::string name = mesh_file_name_string.substr(file_name_idx + 1);
-                std::cout << name << std::endl;
+
                 if (name == "sphere.obj") {
                     data().toggle_movement();
+                    data().toggle_bounce();
+
+                    if(data().is_bounce)
+                        data().set_colors(Eigen::RowVector3d(1, 0, 0));
+                    else
+                        data().set_colors(Eigen::RowVector3d(0, 1, 0));
+
+                    // if current object is a target then init its speed vector
+                    if (data().is_target)
+                        data().initiate_speed();
                 }
+
+                data().init(); // initiate object fields
 
                 return true;
             }

@@ -393,8 +393,8 @@ void mouse_move(GLFWwindow* window, double x, double y)
 	//	}
 	//}
 	//else {
-	//	rndr->UpdatePosition(-x*2, -y*5);
-	//	rndr->MouseProcessing(GLFW_MOUSE_BUTTON_RIGHT);
+		rndr->UpdatePosition(-x*2, -y*5);
+		rndr->MouseProcessing(GLFW_MOUSE_BUTTON_RIGHT);
 	//}
 
 

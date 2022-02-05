@@ -56,7 +56,11 @@ namespace igl
 
             IGL_INLINE void toggle_movement();
 
+            IGL_INLINE void toggle_bounce();
+
             IGL_INLINE void initiate_speed();
+
+            IGL_INLINE void init();
 
             // Change the visualization mode, invalidating the cache if necessary
             IGL_INLINE void set_face_based(bool newvalue);
@@ -234,6 +238,7 @@ namespace igl
 
             Eigen::Vector3d speed;
             bool is_target;
+            bool is_bounce;
 
             // Point size / line width
             float point_size;

@@ -29,6 +29,8 @@ public:
 
 	virtual ~Movable() {}
 
-private:
 	Eigen::Affine3d Tout, Tin;
+
+
+private:
 };
