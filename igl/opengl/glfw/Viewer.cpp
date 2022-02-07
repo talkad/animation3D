@@ -195,16 +195,15 @@ namespace igl
                 std::string name = mesh_file_name_string.substr(file_name_idx + 1);
 
                 if (name == "sphere.obj") {
-                    data().toggle_movement();
-                    data().toggle_bounce();
+                    data().update_movement_type(2);
 
-                    if(data().is_bounce)
+                    if(data().type == 2)
                         data().set_colors(Eigen::RowVector3d(1, 0, 0));
                     else
                         data().set_colors(Eigen::RowVector3d(0, 1, 0));
 
                     // if current object is a target then init its speed vector
-                    if (data().is_target)
+                    if (data().type > 0)
                         data().initiate_speed();
                 }
 
@@ -517,24 +516,37 @@ namespace igl
             IGL_INLINE void Viewer::move_targets()
             {
                 for (auto& data : data_list) {
-                    if (data.is_target)
+                    if (data.type > 0)
                         data.move();
                 }
             }
 
             IGL_INLINE void Viewer::generate_target()
             {
-                //float tic = static_cast<float>(glfwGetTime());
-                //std::cout << tic << std::endl;
-                //if (tic - prev_tic > 5) {
-                //    prev_tic = tic;
-                //    std::cout << "aaaaaaaaaaaaa" << std::endl;
+                float tic = static_cast<float>(glfwGetTime());
+                std::cout << tic << std::endl;
+                if (tic - prev_tic > 5) {
+                    prev_tic = tic;
 
-                //    std::this_thread::sleep_for(std::chrono::microseconds(5));
-                //    open_dialog_load_mesh();
+                    std::this_thread::sleep_for(std::chrono::microseconds(5));
 
-                //    //load_mesh_from_file("C:/Users/tal74/projects/animation/animation3D/tutorial/data/sphere.obj");
-                //}
+                    int savedIndx = selected_data_index;
+                    open_dialog_load_mesh();
+                    if (data_list.size() > parents.size())
+                    {
+                        parents.push_back(-1);
+                        data_list.back().set_visible(false, 1);
+                        data_list.back().set_visible(true, 2);
+                        data_list.back().show_faces = 3;
+                        selected_data_index = savedIndx;
+
+                        int last_index = data_list.size() - 1;
+
+                        if (last_index > 1)
+                            parents[last_index] = last_index - 1;
+                    }
+
+                }
             }
 
             IGL_INLINE bool Viewer::treeNodesCollide(AABB<Eigen::MatrixXd, 3>& firstObjNode, AABB<Eigen::MatrixXd, 3>& secondObjNode) {

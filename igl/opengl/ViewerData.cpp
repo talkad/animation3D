@@ -36,8 +36,7 @@ IGL_INLINE igl::opengl::ViewerData::ViewerData()
     shininess(35.0f),
     id(-1),
     is_visible(1),
-    is_target(false), 
-    is_bounce(false)
+    type(0)
 {
     speed = Eigen::Vector3d(0, 0, 0);
     clear();
@@ -92,25 +91,18 @@ IGL_INLINE void igl::opengl::ViewerData::move()
 {
       MyTranslateInSystem(GetRotation(), speed);
 
-      if (is_bounce){
+      if (type == 2){
           speed -= Eigen::Vector3d(0, g, 0);
 
-          if (Tout.matrix()(1, 3) < -1)
+          if (Tout.matrix()(1, 3) < -5)
               speed = Eigen::Vector3d(speed(0), -speed(1), speed(2));
       }
 
-      std::cout << "[" << Tout.matrix() << "]" << std::endl;
-      std::cout << "[" << Tout.matrix()(1,3) << "]" <<  std::endl;
 }
 
-IGL_INLINE void igl::opengl::ViewerData::toggle_movement()
+IGL_INLINE void igl::opengl::ViewerData::update_movement_type(unsigned int new_type)
 {
-    is_target = !is_target;
-}
-
-IGL_INLINE void igl::opengl::ViewerData::toggle_bounce()
-{
-    is_bounce = !is_bounce;
+    type = new_type;
 }
 
 IGL_INLINE void igl::opengl::ViewerData::initiate_speed()
@@ -119,7 +111,7 @@ IGL_INLINE void igl::opengl::ViewerData::initiate_speed()
     double y = ((double)rand() / (RAND_MAX)) - 0.5;
     double z = ((double)rand() / (RAND_MAX)) - 0.5;
 
-    if(is_bounce)
+    if(type == 2)
         speed = Eigen::Vector3d(x / 10, y, z);
     else
         speed = Eigen::Vector3d(x / 10, y / 10, z);

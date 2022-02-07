@@ -54,9 +54,7 @@ namespace igl
             // change current location by speed
             IGL_INLINE void move();
 
-            IGL_INLINE void toggle_movement();
-
-            IGL_INLINE void toggle_bounce();
+            IGL_INLINE void update_movement_type(unsigned int);
 
             IGL_INLINE void initiate_speed();
 
@@ -237,8 +235,8 @@ namespace igl
             bool show_faceid; // shared across viewports for now
 
             Eigen::Vector3d speed;
-            bool is_target;
-            bool is_bounce;
+            // 0 - none, 1- basic, 2- bouncy, 4- bezier
+            unsigned int type; 
 
             // Point size / line width
             float point_size;

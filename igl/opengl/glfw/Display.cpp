@@ -258,6 +258,8 @@ bool Display::launch_rendering(bool loop)
 		deltaTime = currentFrame - lastFrame;
 		lastFrame = currentFrame;
 
+
+
 		// input
 		// -----
 		processInput(window);
@@ -393,7 +395,7 @@ void mouse_move(GLFWwindow* window, double x, double y)
 	//	}
 	//}
 	//else {
-		rndr->UpdatePosition(-x*2, -y*5);
+		rndr->UpdatePosition(-x*3, -y*10);
 		rndr->MouseProcessing(GLFW_MOUSE_BUTTON_RIGHT);
 	//}
 
