@@ -38,7 +38,6 @@ IGL_INLINE igl::opengl::ViewerData::ViewerData()
     is_visible(1),
     type(0)
 {
-    speed = Eigen::Vector3d(0, 0, 0);
     clear();
 };
 
@@ -89,13 +88,34 @@ IGL_INLINE void igl::opengl::ViewerData::drawAlignedBox(Eigen::AlignedBox<double
 
 IGL_INLINE void igl::opengl::ViewerData::move()
 {
-      MyTranslateInSystem(GetRotation(), speed);
+    
+      if (type == 4) {
+          double vel = 0.5;
+          t += 0.05 * vel / 20;
 
+          if (t <= 1) {
+              calcT();
+              curr_pos = T * MG;
+              Eigen::Vector3f tangent = (curr_pos - last_pos).normalized();
+              LookAt(tangent);
+              SetTranslation(curr_pos);
+          }
+          else {
+              MyTranslate(final_dir * vel * 0.05, true);
+          }
+          last_pos = curr_pos;
+      }
       if (type == 2){
+          MyTranslateInSystem(GetRotation(), speed);
+
           speed -= Eigen::Vector3d(0, g, 0);
 
           if (Tout.matrix()(1, 3) < -5)
               speed = Eigen::Vector3d(speed(0), -speed(1), speed(2));
+      }
+      else {
+          MyTranslateInSystem(GetRotation(), speed);
+
       }
 
 }
@@ -105,16 +125,127 @@ IGL_INLINE void igl::opengl::ViewerData::update_movement_type(unsigned int new_t
     type = new_type;
 }
 
+IGL_INLINE void igl::opengl::ViewerData::calcT() {
+    T[0] = powf(t, 3);
+    T[1] = powf(t, 2);
+    T[2] = t;
+    //T[3] = 1;
+}
+
+IGL_INLINE void igl::opengl::ViewerData::drawCurve() {
+    //Eigen::RowVector3d color = Eigen::RowVector3d(0, 1, 0);
+    //
+    //scn->data(mesh_index).add_edges(points.row(0).cast<double>(), points.row(1).cast<double>(), color);
+    //scn->data(mesh_index).add_edges(points.row(1).cast<double>(), points.row(2).cast<double>(), color);
+    //scn->data(mesh_index).add_edges(points.row(2).cast<double>(), points.row(3).cast<double>(), color);
+    //
+    //scn->data(mesh_index).line_width = 2;
+    //scn->data(mesh_index).show_lines = false;
+    //scn->data(mesh_index).show_overlay_depth = false;
+}
+
 IGL_INLINE void igl::opengl::ViewerData::initiate_speed()
 {
     double x = ((double)rand() / (RAND_MAX)) - 0.5;
     double y = ((double)rand() / (RAND_MAX)) - 0.5;
     double z = ((double)rand() / (RAND_MAX)) - 0.5;
 
-    if(type == 2)
+    if (type == 4) {
+        srand((unsigned)time(0));
+        Eigen::Vector3d spawner_positions[4];
+        spawner_positions[0] = Eigen::Vector3d(10, 0, 10);
+        spawner_positions[1] = Eigen::Vector3d(-10, 0, 10);
+        spawner_positions[2] = Eigen::Vector3d(-10, 0, -10);
+        spawner_positions[3] = Eigen::Vector3d(10, 0, -10);
+
+        speed = Eigen::Vector3d(0, 0, 0);
+        int iSpawner = (rand() % 4);
+        double spawnerX = spawner_positions[iSpawner][0];
+        double spawnerZ = spawner_positions[iSpawner][2];
+
+        int angle = (rand() % 90) - 45;
+
+        switch (iSpawner) {
+        case 0:
+            angle += -135;		break;
+        case 1:
+            angle += -45;		break;
+        case 2:
+            angle += 45;		break;
+        case 3:
+            angle += 135;		break;
+        }
+
+        Eigen::Matrix <double, 4, 3> points = Eigen::Matrix <double, 4, 3>::Zero();
+
+        int curve = (rand() % 4);
+
+        Eigen::Vector4d p0;
+        Eigen::Vector4d p1;
+        Eigen::Vector4d p2;
+        Eigen::Vector4d p3;
+
+        switch (curve) {
+        case 0:
+            p0 = Eigen::Vector4d(0, 0, 0, 1);
+            p1 = Eigen::Vector4d(6, 10, 0, 1);
+            p2 = Eigen::Vector4d(12, -1, 0, 1);
+            p3 = Eigen::Vector4d(18, 4, 0, 1);
+            break;
+        case 1:
+            p0 = Eigen::Vector4d(0, 0, 0, 1);
+            p1 = Eigen::Vector4d(6, 3, -6, 1);
+            p2 = Eigen::Vector4d(12, 1, 6, 1);
+            p3 = Eigen::Vector4d(18, 3, -6, 1);
+            break;
+        case 2:
+            p0 = Eigen::Vector4d(0, 0, 0, 1);
+            p1 = Eigen::Vector4d(15, 2, 0, 1);
+            p2 = Eigen::Vector4d(15, 4, 15, 1);
+            p3 = Eigen::Vector4d(0, 6, 15, 1);
+            break;
+        default:
+            p0 = Eigen::Vector4d(0, 0, 0, 1);
+            p1 = Eigen::Vector4d(0, 2, 15, 1);
+            p2 = Eigen::Vector4d(15, 4, 15, 1);
+            p3 = Eigen::Vector4d(15, 6, 0, 1);
+            break;
+        }
+
+
+        double deg2rad = 0.017453292;
+        double angel_rad = angle * deg2rad;
+
+        Eigen::Matrix <double, 3, 4> trans;		//	x rotation and translation to spawner
+        trans << cosf(angel_rad), 0, -sinf(angel_rad), spawnerX,
+            0, 1, 0, 0,
+            sinf(angel_rad), 0, cosf(angel_rad), spawnerZ;
+
+        points.row(0) = trans * p0;
+        points.row(1) = trans * p1;
+        points.row(2) = trans * p2;
+        points.row(3) = trans * p3;
+
+        points = points;
+        Eigen::Matrix4d	M;					// Blending functions matrix
+        M << -1, 3, -3, 1,
+            3, -6, 3, 0,
+            -3, 3, 0, 0,
+            1, 0, 0, 0;
+
+        MG = M * points;
+        T << 0, 0, 0, 1;
+
+        t = 0;
+        final_dir = (points.row(3) - points.row(2)).normalized();
+        drawCurve();
+    }
+    if (type == 2) { 
         speed = Eigen::Vector3d(x / 10, y, z);
-    else
+    }
+    else {
         speed = Eigen::Vector3d(x / 10, y / 10, z);
+    }
 }
 
 IGL_INLINE void igl::opengl::ViewerData::set_face_based(bool newvalue)
