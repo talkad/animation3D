@@ -414,7 +414,7 @@ void mouse_callback(GLFWwindow* window, int button, int action, int modifier)
 {
 	// for debugging - it is not a required functionallity of the project
 
-	Renderer* rndr = (Renderer*)glfwGetWindowUserPointer(window);
+	/*Renderer* rndr = (Renderer*)glfwGetWindowUserPointer(window);
 	igl::opengl::glfw::Viewer* scn = rndr->GetScene();
 
 	if (action == GLFW_PRESS)
@@ -455,7 +455,7 @@ void mouse_callback(GLFWwindow* window, int button, int action, int modifier)
 	{
 		rndr->GetScene()->isPicked = false;
 
-	}
+	}*/
 
 }
 

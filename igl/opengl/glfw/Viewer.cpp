@@ -195,9 +195,11 @@ namespace igl
                 std::string name = mesh_file_name_string.substr(file_name_idx + 1);
 
                 if (name == "sphere.obj") {
-                    data().update_movement_type(2);
+                    data().update_movement_type(4);
 
-                    if(data().type == 2)
+                    if (data().type == 4)
+                        data().set_colors(Eigen::RowVector3d(0, 0, 1));
+                    else if(data().type == 2)
                         data().set_colors(Eigen::RowVector3d(1, 0, 0));
                     else
                         data().set_colors(Eigen::RowVector3d(0, 1, 0));
@@ -289,14 +291,12 @@ namespace igl
 
             IGL_INLINE void Viewer::open_dialog_load_mesh()
             {
-                //std::string fname = igl::file_dialog_open();
+                std::string fname = igl::file_dialog_open();
 
-                //if (fname.length() == 0)
-                //    return;
+                if (fname.length() == 0)
+                    return;
 
-                //this->load_mesh_from_file(fname.c_str());
-
-                load_mesh_from_file("C:/Users/tal74/projects/animation/animation3D/tutorial/data/sphere.obj");
+                this->load_mesh_from_file(fname.c_str());
             }
 
             IGL_INLINE void Viewer::open_dialog_save_mesh()
@@ -530,20 +530,21 @@ namespace igl
 
                     std::this_thread::sleep_for(std::chrono::microseconds(5));
 
-                    int savedIndx = selected_data_index;
-                    open_dialog_load_mesh();
+                    //int savedIndx = selected_data_index;
+                    load_mesh_from_file("C:/Users/tal74/projects/animation/animation3D/tutorial/data/sphere.obj");
+
                     if (data_list.size() > parents.size())
                     {
                         parents.push_back(-1);
                         data_list.back().set_visible(false, 1);
                         data_list.back().set_visible(true, 2);
                         data_list.back().show_faces = 3;
-                        selected_data_index = savedIndx;
+                        //selected_data_index = savedIndx;
 
-                        int last_index = data_list.size() - 1;
+                        //int last_index = data_list.size() - 1;
 
-                        if (last_index > 1)
-                            parents[last_index] = last_index - 1;
+                        //if (last_index > 1)
+                        //    parents[last_index] = last_index - 1;
                     }
 
                 }

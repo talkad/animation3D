@@ -91,12 +91,12 @@ IGL_INLINE void igl::opengl::ViewerData::move()
     
       if (type == 4) {
           double vel = 0.5;
-          t += 0.05 * vel / 20;
+          t += 0.05 * vel / 2;
 
           if (t <= 1) {
               calcT();
               curr_pos = T * MG;
-              Eigen::Vector3f tangent = (curr_pos - last_pos).normalized();
+              Eigen::Vector3d tangent = (curr_pos - last_pos).normalized();
               LookAt(tangent);
               SetTranslation(curr_pos);
           }
@@ -133,15 +133,15 @@ IGL_INLINE void igl::opengl::ViewerData::calcT() {
 }
 
 IGL_INLINE void igl::opengl::ViewerData::drawCurve() {
-    //Eigen::RowVector3d color = Eigen::RowVector3d(0, 1, 0);
+    Eigen::RowVector3d color = Eigen::RowVector3d(0, 1, 0);
+    
+    //add_edges(points.row(0), points.row(1), color);
+    //add_edges(points.row(1), points.row(2), color);
+    //add_edges(points.row(2), points.row(3), color);
     //
-    //scn->data(mesh_index).add_edges(points.row(0).cast<double>(), points.row(1).cast<double>(), color);
-    //scn->data(mesh_index).add_edges(points.row(1).cast<double>(), points.row(2).cast<double>(), color);
-    //scn->data(mesh_index).add_edges(points.row(2).cast<double>(), points.row(3).cast<double>(), color);
-    //
-    //scn->data(mesh_index).line_width = 2;
-    //scn->data(mesh_index).show_lines = false;
-    //scn->data(mesh_index).show_overlay_depth = false;
+    //line_width = 2;
+    //show_lines = false;
+    //show_overlay_depth = false;
 }
 
 IGL_INLINE void igl::opengl::ViewerData::initiate_speed()
@@ -163,55 +163,20 @@ IGL_INLINE void igl::opengl::ViewerData::initiate_speed()
         double spawnerX = spawner_positions[iSpawner][0];
         double spawnerZ = spawner_positions[iSpawner][2];
 
-        int angle = (rand() % 90) - 45;
-
-        switch (iSpawner) {
-        case 0:
-            angle += -135;		break;
-        case 1:
-            angle += -45;		break;
-        case 2:
-            angle += 45;		break;
-        case 3:
-            angle += 135;		break;
-        }
+        int angle = (rand() % 270) - 90;
 
         Eigen::Matrix <double, 4, 3> points = Eigen::Matrix <double, 4, 3>::Zero();
 
-        int curve = (rand() % 4);
+        Eigen::Vector4d p0 = Eigen::Vector4d(0, 0, 0, 1);
+        Eigen::Vector4d p1 = Eigen::Vector4d(0, 0, 0, 1);
+        Eigen::Vector4d p2 = Eigen::Vector4d(0, 0, 0, 1);
+        Eigen::Vector4d p3 = Eigen::Vector4d(0, 0, 0, 1);
 
-        Eigen::Vector4d p0;
-        Eigen::Vector4d p1;
-        Eigen::Vector4d p2;
-        Eigen::Vector4d p3;
-
-        switch (curve) {
-        case 0:
-            p0 = Eigen::Vector4d(0, 0, 0, 1);
-            p1 = Eigen::Vector4d(6, 10, 0, 1);
-            p2 = Eigen::Vector4d(12, -1, 0, 1);
-            p3 = Eigen::Vector4d(18, 4, 0, 1);
-            break;
-        case 1:
-            p0 = Eigen::Vector4d(0, 0, 0, 1);
-            p1 = Eigen::Vector4d(6, 3, -6, 1);
-            p2 = Eigen::Vector4d(12, 1, 6, 1);
-            p3 = Eigen::Vector4d(18, 3, -6, 1);
-            break;
-        case 2:
-            p0 = Eigen::Vector4d(0, 0, 0, 1);
-            p1 = Eigen::Vector4d(15, 2, 0, 1);
-            p2 = Eigen::Vector4d(15, 4, 15, 1);
-            p3 = Eigen::Vector4d(0, 6, 15, 1);
-            break;
-        default:
-            p0 = Eigen::Vector4d(0, 0, 0, 1);
-            p1 = Eigen::Vector4d(0, 2, 15, 1);
-            p2 = Eigen::Vector4d(15, 4, 15, 1);
-            p3 = Eigen::Vector4d(15, 6, 0, 1);
-            break;
+        for (int i = 0; i < 3; i++) {
+            p1[i] = (rand() % 20) - 5;
+            p2[i] = (rand() % 20) - 5;
+            p3[i] = (rand() % 20) - 5;
         }
-
 
         double deg2rad = 0.017453292;
         double angel_rad = angle * deg2rad;
@@ -238,7 +203,7 @@ IGL_INLINE void igl::opengl::ViewerData::initiate_speed()
 
         t = 0;
         final_dir = (points.row(3) - points.row(2)).normalized();
-        drawCurve();
+        //drawCurve();
     }
     if (type == 2) { 
         speed = Eigen::Vector3d(x / 10, y, z);
