@@ -1,12 +1,17 @@
 #include "igl/opengl/glfw/renderer.h"
 #include "tutorial/sandBox/inputManager.h"
 #include "sandBox.h"
+#include <Windows.h>
+#include <MMSystem.h>
+#pragma comment(lib, "winmm.lib")
 
 #define VIEWPORT_WIDTH 1000
 #define VIEWPORT_HEIGHT 800
 
 int main(int argc, char* argv[])
 {
+	//PlaySound(TEXT("C:/Users/tal74/projects/animation/animation3D/tutorial/sandBox/applause.wav"), NULL, SND_NODEFAULT | SND_LOOP | SND_ASYNC);
+
 	Display* disp = new Display(VIEWPORT_WIDTH, VIEWPORT_HEIGHT, "Animation3D - Final Project");
 	Renderer renderer;
 

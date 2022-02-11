@@ -16,6 +16,8 @@ void SandBox::Init(const std::string &config)
 {
 
 	load_mesh_from_file("C:/Users/tal74/projects/animation/animation3D/tutorial/data/cube.obj");
+	data().init();
+	data().drawAlignedBox(data().kd_tree.m_box, Eigen::RowVector3d(0, 1, 0));
 
 	Eigen::RowVector3d center(5, 0, 0);
 	parents.push_back(-1);
@@ -29,6 +31,8 @@ void SandBox::Init(const std::string &config)
 
 	MyTranslateInSystem(GetRotation(), Eigen::RowVector3d(0, 0, -10));
 	data().set_colors(Eigen::RowVector3d(0.9, 0.1, 0.1));
+
+	
 
 }
 

@@ -44,6 +44,7 @@ IGL_INLINE igl::opengl::ViewerData::ViewerData()
 IGL_INLINE void igl::opengl::ViewerData::init() {
     std::cout << "init" << std::endl;
     kd_tree.init(V, F);
+
 }
 
 IGL_INLINE void igl::opengl::ViewerData::drawAlignedBox(Eigen::AlignedBox<double, 3>& alignedBox, Eigen::RowVector3d& color) {
@@ -129,19 +130,19 @@ IGL_INLINE void igl::opengl::ViewerData::calcT() {
     T[0] = powf(t, 3);
     T[1] = powf(t, 2);
     T[2] = t;
-    //T[3] = 1;
+    T[3] = 1;
 }
 
 IGL_INLINE void igl::opengl::ViewerData::drawCurve() {
     Eigen::RowVector3d color = Eigen::RowVector3d(0, 1, 0);
     
-    //add_edges(points.row(0), points.row(1), color);
-    //add_edges(points.row(1), points.row(2), color);
-    //add_edges(points.row(2), points.row(3), color);
-    //
-    //line_width = 2;
-    //show_lines = false;
-    //show_overlay_depth = false;
+    add_edges(bezier_points.row(0) * 10, bezier_points.row(1) * 10, color);
+    add_edges(bezier_points.row(1) * 10, bezier_points.row(2) * 10, color);
+    add_edges(bezier_points.row(2) * 10, bezier_points.row(3) * 10, color);
+    
+    line_width = 30;
+    show_lines = true;
+    show_overlay_depth = true;
 }
 
 IGL_INLINE void igl::opengl::ViewerData::initiate_speed()
@@ -165,7 +166,7 @@ IGL_INLINE void igl::opengl::ViewerData::initiate_speed()
 
         int angle = (rand() % 270) - 90;
 
-        Eigen::Matrix <double, 4, 3> points = Eigen::Matrix <double, 4, 3>::Zero();
+        Eigen::Matrix <double, 4, 3> spline_points = Eigen::Matrix <double, 4, 3>::Zero();
 
         Eigen::Vector4d p0 = Eigen::Vector4d(0, 0, 0, 1);
         Eigen::Vector4d p1 = Eigen::Vector4d(0, 0, 0, 1);
@@ -173,9 +174,9 @@ IGL_INLINE void igl::opengl::ViewerData::initiate_speed()
         Eigen::Vector4d p3 = Eigen::Vector4d(0, 0, 0, 1);
 
         for (int i = 0; i < 3; i++) {
-            p1[i] = (rand() % 20) - 5;
-            p2[i] = (rand() % 20) - 5;
-            p3[i] = (rand() % 20) - 5;
+            p1[i] = rand() % 20 - 2;
+            p2[i] = rand() % 20 - 2;
+            p3[i] = rand() % 20 - 2;
         }
 
         double deg2rad = 0.017453292;
@@ -186,24 +187,24 @@ IGL_INLINE void igl::opengl::ViewerData::initiate_speed()
             0, 1, 0, 0,
             sinf(angel_rad), 0, cosf(angel_rad), spawnerZ;
 
-        points.row(0) = trans * p0;
-        points.row(1) = trans * p1;
-        points.row(2) = trans * p2;
-        points.row(3) = trans * p3;
+        spline_points.row(0) = trans * p0;
+        spline_points.row(1) = trans * p1;
+        spline_points.row(2) = trans * p2;
+        spline_points.row(3) = trans * p3;
 
-        points = points;
+        bezier_points = spline_points;
         Eigen::Matrix4d	M;					// Blending functions matrix
         M << -1, 3, -3, 1,
-            3, -6, 3, 0,
-            -3, 3, 0, 0,
-            1, 0, 0, 0;
+              3, -6, 3, 0,
+             -3, 3, 0, 0,
+              1, 0, 0, 0;
 
-        MG = M * points;
+        MG = M * bezier_points;
         T << 0, 0, 0, 1;
 
         t = 0;
-        final_dir = (points.row(3) - points.row(2)).normalized();
-        //drawCurve();
+        final_dir = (bezier_points.row(3) - bezier_points.row(2)).normalized();
+        drawCurve();
     }
     if (type == 2) { 
         speed = Eigen::Vector3d(x / 10, y, z);

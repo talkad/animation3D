@@ -43,6 +43,7 @@ namespace igl
             class Viewer : public Movable
             {
             public:
+
                 // UI Enumerations
                // enum class MouseButton {Left, Middle, Right};
                // enum class MouseMode { None, Rotation, Zoom, Pan, Translation} mouse_mode;
