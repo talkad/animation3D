@@ -38,6 +38,8 @@ void Movable::MyTranslate(Eigen::Vector3d amt, bool preRotation)
 	else
 		Tout.translate(amt);
 }
+
+
 //angle in radians
 void Movable::MyRotate(Eigen::Vector3d rotAxis, double angle)
 {

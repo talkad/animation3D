@@ -119,17 +119,23 @@ IGL_INLINE void igl::opengl::ViewerData::move()
       }
       if (type == 2){
           MyTranslateInSystem(GetRotation(), speed);
-
-          speed -= Eigen::Vector3d(0, g, 0);
+          
+          speed[1] -= g;
 
           if (Tout.matrix()(1, 3) < -5) {
               PlaySound(TEXT("C:/Users/tal74/projects/animation/animation3D/tutorial/sounds/ballbounce.wav"), NULL, SND_NODEFAULT | SND_ASYNC);
-              speed = Eigen::Vector3d(speed(0), -speed(1), speed(2));
+              speed[1] = -speed[1];
           }
+
+          // streching the ball
+          if (speed[1] < 0)
+              MyScale(Eigen::Vector3d(1, 1.05, 1));
+          else
+              MyScale(Eigen::Vector3d(1, 0.95, 1));
+
       }
       else {
           MyTranslateInSystem(GetRotation(), speed);
-
       }
 
 }

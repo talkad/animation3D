@@ -45,6 +45,7 @@ float lastX = (float)SCR_WIDTH / 2.0;
 float lastY = (float)SCR_HEIGHT / 2.0;
 bool firstMouse = true;
 
+
 // timing
 float deltaTime = 0.0f;
 float lastFrame = 0.0f;
@@ -235,6 +236,91 @@ bool Display::launch_rendering(bool loop)
 	skyboxShader.setInt("skybox", 0);
 
 
+	//heightmap
+
+	// configure global opengl state
+	// -----------------------------
+	glEnable(GL_DEPTH_TEST);
+
+	// build and compile our shader program
+	// ------------------------------------
+	Shader heightMapShader("../../../shaders/cpuheight.vs", "../../../shaders/cpuheight.fs");
+
+	// load and create a texture
+	// -------------------------
+	// load image, create texture and generate mipmaps
+	// The FileSystem::getPath(...) is part of the GitHub repository so we can find files on any IDE/platform; replace it with your own image path.
+	stbi_set_flip_vertically_on_load(true);
+	int width, height, nrChannels;
+	unsigned char* data = stbi_load("../../../tutorial/heightmaps/river_heightmap.png", &width, &height, &nrChannels, 0);
+	if (data)
+	{
+		std::cout << "Loaded heightmap of size " << height << " x " << width << std::endl;
+	}
+	else
+	{
+		std::cout << "Failed to load texture" << std::endl;
+	}
+
+	// set up vertex data (and buffer(s)) and configure vertex attributes
+	// ------------------------------------------------------------------
+	std::vector<float> vertices;
+	float yScale = 64.0f / 256.0f, yShift = 16.0f;
+	int rez = 1;
+	unsigned bytePerPixel = nrChannels;
+	for (int i = 0; i < height; i++)
+	{
+		for (int j = 0; j < width; j++)
+		{
+			unsigned char* pixelOffset = data + (j + width * i) * bytePerPixel;
+			unsigned char y = pixelOffset[0];
+
+			// vertex
+			vertices.push_back(-height / 2.0f + height * i / (float)height);   // vx
+			vertices.push_back((int)y * yScale - yShift);   // vy
+			vertices.push_back(-width / 2.0f + width * j / (float)width);   // vz
+		}
+	}
+	std::cout << "Loaded " << vertices.size() / 3 << " vertices" << std::endl;
+	stbi_image_free(data);
+
+	std::vector<unsigned> indices;
+	for (unsigned i = 0; i < height - 1; i += rez)
+	{
+		for (unsigned j = 0; j < width; j += rez)
+		{
+			for (unsigned k = 0; k < 2; k++)
+			{
+				indices.push_back(j + width * (i + k * rez));
+			}
+		}
+	}
+	std::cout << "Loaded " << indices.size() << " indices" << std::endl;
+
+	const int numStrips = (height - 1) / rez;
+	const int numTrisPerStrip = (width / rez) * 2 - 2;
+	std::cout << "Created lattice of " << numStrips << " strips with " << numTrisPerStrip << " triangles each" << std::endl;
+	std::cout << "Created " << numStrips * numTrisPerStrip << " triangles total" << std::endl;
+
+	// first, configure the cube's VAO (and terrainVBO + terrainIBO)
+	unsigned int terrainVAO, terrainVBO, terrainIBO;
+	glGenVertexArrays(1, &terrainVAO);
+	glBindVertexArray(terrainVAO);
+
+	glGenBuffers(1, &terrainVBO);
+	glBindBuffer(GL_ARRAY_BUFFER, terrainVBO);
+	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(float), &vertices[0], GL_STATIC_DRAW);
+
+	// position attribute
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
+
+	glGenBuffers(1, &terrainIBO);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, terrainIBO);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned), &indices[0], GL_STATIC_DRAW);
+
+	
+
 	// Rendering loop
 	const int num_extra_frames = 5;
 	int frame_counter = 0;
@@ -267,7 +353,7 @@ bool Display::launch_rendering(bool loop)
 		processInput(window);
 
 
-		//glViewport(0, 0, VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
+		glViewport(0, 0, VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
 		glm::mat4 view = camera.GetViewMatrix();
 		glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
 		glDepthFunc(GL_LEQUAL);  // change depth function so depth test passes when values are equal to depth buffer's content
@@ -285,17 +371,36 @@ bool Display::launch_rendering(bool loop)
 		// draw background
 		//glViewport((VIEWPORT_WIDTH / 4) * 3, VIEWPORT_HEIGHT / 5, VIEWPORT_WIDTH / 4 * 1, VIEWPORT_HEIGHT / 5);
 
-		glDepthFunc(GL_LEQUAL);  // change depth function so depth test passes when values are equal to depth buffer's content
-		skyboxShader.use();
-		skyboxShader.setMat4("view", view);
-		skyboxShader.setMat4("projection", projection);
-		// skybox cube
-		//glBindVertexArray(skyboxVAO);
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_CUBE_MAP, cubemapTexture);
-		glDrawArrays(GL_TRIANGLES, 0, 36);
-		glBindVertexArray(0);
-		glDepthFunc(GL_LESS); // set depth function back to default
+
+
+
+		// render
+		// ------
+		//glClearColor(0.5f, 0.1f, 0.1f, 1.0f);
+		//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+		// be sure to activate shader when setting uniforms/drawing objects
+		heightMapShader.use();
+
+		// view/projection transformations
+		heightMapShader.setMat4("projection", projection);
+		heightMapShader.setMat4("view", view);
+
+		// world transformation
+		glm::mat4 model = glm::mat4(1.0f);
+		heightMapShader.setMat4("model", model);
+
+		// render the cube
+		glBindVertexArray(terrainVAO);
+		//        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		for (unsigned strip = 0; strip < numStrips; strip++)
+		{
+			glDrawElements(GL_TRIANGLE_STRIP,   // primitive type
+				numTrisPerStrip + 2,   // number of indices to render
+				GL_UNSIGNED_INT,     // index data type
+				(void*)(sizeof(unsigned) * (numTrisPerStrip + 2) * strip)); // offset to starting index
+		}
+
 
 
 		// glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
@@ -334,6 +439,10 @@ bool Display::launch_rendering(bool loop)
 
 	glDeleteVertexArrays(1, &skyboxVAO);
 	glDeleteBuffers(1, &skyboxVBO);
+
+	glDeleteVertexArrays(1, &terrainVAO);
+	glDeleteBuffers(1, &terrainVBO);
+	glDeleteBuffers(1, &terrainIBO);
 
 	return EXIT_SUCCESS;
 }
@@ -397,15 +506,15 @@ void mouse_move(GLFWwindow* window, double x, double y)
 	//	}
 	//}
 	//else {
-		rndr->UpdatePosition(-x*3, -y*10);
-		rndr->MouseProcessing(GLFW_MOUSE_BUTTON_RIGHT);
+		//rndr->UpdatePosition(-x*3, -y*10);
+		//rndr->MouseProcessing(GLFW_MOUSE_BUTTON_RIGHT);
 	//}
 
 
 	lastX = xpos;
 	lastY = ypos;
 
-	camera.ProcessMouseMovement(xoffset, yoffset);
+	camera.ProcessMouseMovement(xoffset * 2, yoffset * 2);
 
 }
 
