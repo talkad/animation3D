@@ -81,7 +81,11 @@ namespace igl
                 snake_size(1),  // currently the head will be the circle
                 snake_view(false),
                 prev_tic(0),
-                TTL(10)
+                TTL(10),
+                level(3),  // change to zero xxxxxxxxxxxxxxxxxxxxxxx
+                score(0),
+                start_time(0),
+                target2_creation(3)
             {
                 data_list.front().id = 0;
 
@@ -186,28 +190,6 @@ namespace igl
                 if (data().V_uv.rows() == 0)
                 {
                     data().grid_texture();
-                }
-
-                //for (unsigned int i = 0; i<plugins.size(); ++i)
-                //  if (plugins[i]->post_load())
-                //    return true;
-
-                size_t file_name_idx = mesh_file_name_string.rfind('/');
-                std::string name = mesh_file_name_string.substr(file_name_idx + 1);
-
-                if (name == "sphere.obj") {
-                    data().update_movement_type(2);
-
-                    if (data().type == 4)
-                        data().set_colors(Eigen::RowVector3d(0, 0, 1));
-                    else if(data().type == 2)
-                        data().set_colors(Eigen::RowVector3d(1, 0, 0));
-                    else
-                        data().set_colors(Eigen::RowVector3d(0, 1, 0));
-
-                    // if current object is a target then init its speed vector
-                    if (data().type > 0)
-                        data().initiate_speed();
                 }
 
                 data().init(); // initiate object fields
@@ -549,7 +531,6 @@ namespace igl
 
                     std::this_thread::sleep_for(std::chrono::microseconds(5));
 
-                    //int savedIndx = selected_data_index;
                     load_mesh_from_file("C:/Users/tal74/projects/animation/animation3D/tutorial/data/sphere.obj");
 
                     if (data_list.size() > parents.size())
@@ -558,13 +539,34 @@ namespace igl
                         data_list.back().set_visible(false, 1);
                         data_list.back().set_visible(true, 2);
                         data_list.back().show_faces = 3;
-                        //selected_data_index = savedIndx;
-
-                        //int last_index = data_list.size() - 1;
-
-                        //if (last_index > 1)
-                        //    parents[last_index] = last_index - 1;
                     }
+
+                    // generate different targets according to level
+                    if (target2_creation == 0) {
+                        data().update_movement_type(4);
+                        target2_creation = 3;
+                    }
+                    else {
+                        double target_proba = (double)(rand() % 10) / 10;
+                        
+                        std::cout << target_proba << "<" << p << std::endl;
+
+                        if (target_proba < p)
+                            data().update_movement_type(1);
+                        else
+                            data().update_movement_type(2);
+
+                        target2_creation--;
+                    }
+                    
+                    if (data().type == 4)
+                        data().set_colors(Eigen::RowVector3d(0, 0, 1));
+                    else if (data().type == 2)
+                        data().set_colors(Eigen::RowVector3d(1, 0, 0));
+                    else
+                        data().set_colors(Eigen::RowVector3d(0, 1, 0));
+
+                    data().initiate_speed();
 
                 }
             }
@@ -606,8 +608,27 @@ namespace igl
                     isActive = false;
             }
 
+            // start a new level
+            IGL_INLINE void Viewer::start_level() {
+                level++;
+                score = 0;
+                start_time = static_cast<int>(glfwGetTime());
 
+                p = 1.0 / level + 0.33;
+            }
 
+            IGL_INLINE void Viewer::add_score(int type) {
+                if (type == 1) {
+                    score += 10;
+                }
+                else if (type == 2) {
+                    score -= 20;
+                }
+                else if (type == 4) {
+                    score += 25;
+                    // activate special abilities
+                }
+            }
 
             Eigen::Matrix4d Viewer::CalcParentsTrans(int indx)
             {

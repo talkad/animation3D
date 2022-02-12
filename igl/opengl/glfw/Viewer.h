@@ -147,6 +147,9 @@ namespace igl
                 // check if two object in data_list are collided
                 IGL_INLINE void check_collision();
 
+                IGL_INLINE void start_level();
+
+                IGL_INLINE void add_score(int);
 
                 inline bool SetAnimation() {
                     if (isActive)
@@ -183,6 +186,12 @@ namespace igl
                 float prev_tic;
 
                 int TTL;
+
+                int level;
+                int score;
+                int start_time;
+                double p; // probability to generate target of type 1
+                int target2_creation;
 
                 // List of registered plugins
             //    std::vector<ViewerPlugin*> plugins;

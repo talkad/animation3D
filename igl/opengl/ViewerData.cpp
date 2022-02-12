@@ -225,11 +225,26 @@ IGL_INLINE void igl::opengl::ViewerData::initiate_speed()
         final_dir = (bezier_points.row(3) - bezier_points.row(2)).normalized();
         drawCurve();
     }
-    if (type == 2) { 
-        speed = Eigen::Vector3d(x / 10, y, z);
+    if (type == 2) {
+        speed = Eigen::Vector3d(x / 2, y / 20, z / 10);
+
+        if (x > 0)
+            MyTranslateInSystem(GetRotation(), Eigen::Vector3d(-8, 0, 0));
+        else
+            MyTranslateInSystem(GetRotation(), Eigen::Vector3d(8, 0, 0));
     }
     else {
-        speed = Eigen::Vector3d(x / 10, y / 10, z);
+        speed = Eigen::Vector3d(x / 2, y / 20, z / 20);
+
+        if(x > 0)
+            MyTranslateInSystem(GetRotation(), Eigen::Vector3d(-8, 0, 0));
+        else
+            MyTranslateInSystem(GetRotation(), Eigen::Vector3d(8, 0, 0));
+
+        if(y > 0)
+            MyTranslateInSystem(GetRotation(), Eigen::Vector3d(0, -3, 0));
+        else
+            MyTranslateInSystem(GetRotation(), Eigen::Vector3d(0, 3, 0));
     }
 }
 

@@ -33,6 +33,8 @@ void SandBox::Init(const std::string &config)
 	data().set_colors(Eigen::RowVector3d(0.9, 0.1, 0.1));
 
 
+	start_level(); // remove it xxxxxxxxxxxxxxxxxxxxxxxxx
+
 }
 
 SandBox::~SandBox()
