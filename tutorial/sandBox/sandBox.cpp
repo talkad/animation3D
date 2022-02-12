@@ -32,7 +32,6 @@ void SandBox::Init(const std::string &config)
 	MyTranslateInSystem(GetRotation(), Eigen::RowVector3d(0, 0, -10));
 	data().set_colors(Eigen::RowVector3d(0.9, 0.1, 0.1));
 
-	
 
 }
 
@@ -45,5 +44,6 @@ void SandBox::Animate()
 {
 	generate_target();
 	move_targets();
+	clean_data_list();
 
 }

@@ -80,7 +80,8 @@ namespace igl
                 delta(0.1),
                 snake_size(1),  // currently the head will be the circle
                 snake_view(false),
-                prev_tic(0)
+                prev_tic(0),
+                TTL(10)
             {
                 data_list.front().id = 0;
 
@@ -195,7 +196,7 @@ namespace igl
                 std::string name = mesh_file_name_string.substr(file_name_idx + 1);
 
                 if (name == "sphere.obj") {
-                    data().update_movement_type(4);
+                    data().update_movement_type(2);
 
                     if (data().type == 4)
                         data().set_colors(Eigen::RowVector3d(0, 0, 1));
@@ -380,6 +381,24 @@ namespace igl
                 return 0;
             }
 
+            IGL_INLINE void Viewer::clean_data_list() {
+                // attempt to use erase_mesh ended up with failure
+
+                float tic = static_cast<float>(glfwGetTime());
+                for (auto& mesh : data_list) {
+                    if (mesh.type > 0 && !mesh.isTerminated && tic - mesh.creation_time > TTL) {
+                        std::cout << "delete mesh " << mesh.id << std::endl;
+
+                        /*mesh.meshgl.free();
+                        data_list.erase(data_list.begin() + mesh.id);*/
+
+                        mesh.is_visible = false;
+                        mesh.update_movement_type(0);
+                        mesh.isTerminated = true;
+                    }
+                }
+
+            }
 
             IGL_INLINE bool Viewer::boxes_collide(Eigen::AlignedBox<double, 3>& firstbox, Eigen::AlignedBox<double, 3>& secondbox) {
                 double a0 = firstbox.sizes()[0] / 2, a1 = firstbox.sizes()[1] / 2, a2 = firstbox.sizes()[2] / 2,
@@ -524,7 +543,7 @@ namespace igl
             IGL_INLINE void Viewer::generate_target()
             {
                 float tic = static_cast<float>(glfwGetTime());
-                std::cout << tic << std::endl;
+                //std::cout << tic << std::endl;
                 if (tic - prev_tic > 5) {
                     prev_tic = tic;
 

@@ -74,7 +74,7 @@ IGL_INLINE void Renderer::draw(GLFWwindow* window)
 		int indx = 0;
 
 		for (auto& mesh : scn->data_list)
-
+		{
 			if (mesh.is_visible & core.id) {
 				{
 					if (selected_core_index == 1) {
@@ -90,10 +90,12 @@ IGL_INLINE void Renderer::draw(GLFWwindow* window)
 						core.camera_up = prev_camera_up;
 					}
 
-					core.draw(scn->MakeTransScale() * scn->CalcParentsTrans(indx).cast<float>(), mesh);
+					if(!mesh.isTerminated)
+						core.draw(scn->MakeTransScale() * scn->CalcParentsTrans(indx).cast<float>(), mesh);
 				}
 			}
-		indx++;
+			indx++;
+		}
 	}
 
 	if (menu)

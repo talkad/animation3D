@@ -45,6 +45,8 @@ namespace igl
         public:
             ViewerData();
 
+            ~ViewerData();
+
             // Empty all fields
             IGL_INLINE void clear();
 
@@ -241,7 +243,9 @@ namespace igl
             Eigen::Vector3d speed;
             // 0 - none, 1- basic, 2- bouncy, 4- bezier
             unsigned int type; 
+            float creation_time;
 
+            bool isTerminated;
 
 
             double t;

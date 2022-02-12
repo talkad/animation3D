@@ -15,6 +15,11 @@
 #include "../per_vertex_normals.h"
 #include "igl/png/texture_from_png.h"
 #include <iostream>
+#include <Windows.h>
+#include <MMSystem.h>
+#pragma comment(lib, "winmm.lib")
+#include <igl/get_seconds.h>
+#include "external/glfw/include/GLFW/glfw3.h"
 //#include "external/stb/igl_stb_image.h"
 
 #define g 0.05
@@ -36,9 +41,15 @@ IGL_INLINE igl::opengl::ViewerData::ViewerData()
     shininess(35.0f),
     id(-1),
     is_visible(1),
-    type(0)
+    type(0),
+    creation_time(static_cast<float>(glfwGetTime())),
+    isTerminated(false)
 {
     clear();
+};
+
+IGL_INLINE igl::opengl::ViewerData::~ViewerData() {
+// there is no inner dynamically allocated
 };
 
 IGL_INLINE void igl::opengl::ViewerData::init() {
@@ -111,8 +122,10 @@ IGL_INLINE void igl::opengl::ViewerData::move()
 
           speed -= Eigen::Vector3d(0, g, 0);
 
-          if (Tout.matrix()(1, 3) < -5)
+          if (Tout.matrix()(1, 3) < -5) {
+              PlaySound(TEXT("C:/Users/tal74/projects/animation/animation3D/tutorial/sounds/ballbounce.wav"), NULL, SND_NODEFAULT | SND_ASYNC);
               speed = Eigen::Vector3d(speed(0), -speed(1), speed(2));
+          }
       }
       else {
           MyTranslateInSystem(GetRotation(), speed);

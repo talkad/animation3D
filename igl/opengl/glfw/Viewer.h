@@ -136,6 +136,8 @@ namespace igl
 
                 IGL_INLINE bool boxes_collide(Eigen::AlignedBox<double, 3>&, Eigen::AlignedBox<double, 3>&);
 
+                IGL_INLINE void clean_data_list();
+
                 IGL_INLINE void move_targets();
 
                 IGL_INLINE void generate_target();
@@ -179,6 +181,8 @@ namespace igl
                 int snake_size;
                 bool snake_view;
                 float prev_tic;
+
+                int TTL;
 
                 // List of registered plugins
             //    std::vector<ViewerPlugin*> plugins;
