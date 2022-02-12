@@ -115,6 +115,7 @@ namespace igl
             {
             }
 
+
             IGL_INLINE bool Viewer::load_mesh_from_file(
                 const std::string& mesh_file_name_string)
             {
@@ -524,7 +525,7 @@ namespace igl
             IGL_INLINE void Viewer::generate_target()
             {
                 float tic = static_cast<float>(glfwGetTime());
-                std::cout << tic << std::endl;
+                //std::cout << tic << std::endl;
                 if (tic - prev_tic > 5) {
                     prev_tic = tic;
 
