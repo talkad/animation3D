@@ -40,7 +40,10 @@ const unsigned int SCR_WIDTH = 1000;
 const unsigned int SCR_HEIGHT = 800;
 
 // camera
-Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
+Camera camera(glm::vec3(67.0f, 627.5f, 169.9f),
+				glm::vec3(0.0f, 1.0f, 0.0f),
+				-128.1f, -42.4f);
+//Camera camera(glm::vec3(0.0f, 10.0f, 3.0f));
 float lastX = (float)SCR_WIDTH / 2.0;
 float lastY = (float)SCR_HEIGHT / 2.0;
 bool firstMouse = true;
@@ -265,7 +268,7 @@ bool Display::launch_rendering(bool loop)
 	// set up vertex data (and buffer(s)) and configure vertex attributes
 	// ------------------------------------------------------------------
 	std::vector<float> vertices;
-	float yScale = 64.0f / 256.0f, yShift = 16.0f;
+	float yScale = 64.0f / 256.0f, yShift = 50.0f;
 	int rez = 1;
 	unsigned bytePerPixel = nrChannels;
 	for (int i = 0; i < height; i++)
@@ -353,7 +356,7 @@ bool Display::launch_rendering(bool loop)
 		processInput(window);
 
 
-		glViewport(0, 0, VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
+		//glViewport(0, 0, VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
 		glm::mat4 view = camera.GetViewMatrix();
 		glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
 		glDepthFunc(GL_LEQUAL);  // change depth function so depth test passes when values are equal to depth buffer's content
@@ -376,7 +379,7 @@ bool Display::launch_rendering(bool loop)
 
 		// render
 		// ------
-		//glClearColor(0.5f, 0.1f, 0.1f, 1.0f);
+		//glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 		//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		// be sure to activate shader when setting uniforms/drawing objects
@@ -392,7 +395,7 @@ bool Display::launch_rendering(bool loop)
 
 		// render the cube
 		glBindVertexArray(terrainVAO);
-		//        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		//         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);   // enable for wireframes
 		for (unsigned strip = 0; strip < numStrips; strip++)
 		{
 			glDrawElements(GL_TRIANGLE_STRIP,   // primitive type
