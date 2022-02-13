@@ -165,7 +165,6 @@ void SandBox::Animate()
          move_snake();
          generate_target();
          move_targets();
-
 }
 
 

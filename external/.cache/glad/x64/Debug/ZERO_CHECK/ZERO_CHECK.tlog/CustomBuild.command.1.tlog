@@ -1,6 +1,6 @@
-^C:\USERS\IPISM\SOURCE\REPOS\ANIMATION3D\EXTERNAL\.CACHE\GLAD\CMAKEFILES\FE5E443C3EFF9D60318EB6C9BD7D03EF\GENERATE.STAMP.RULE
+^C:\USERS\TAL74\PROJECTS\ANIMATION\ANIMATION3D\EXTERNAL\.CACHE\GLAD\CMAKEFILES\54869E19C32BA7C5D1EE4276F31EB51C\GENERATE.STAMP.RULE
 setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/ipism/source/repos/animation3D/external/.cache/glad -BC:/Users/ipism/source/repos/animation3D/external/.cache/glad --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/ipism/source/repos/animation3D/external/.cache/glad/glad-download.sln
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/tal74/projects/animation/animation3D/external/.cache/glad -BC:/Users/tal74/projects/animation/animation3D/external/.cache/glad --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/tal74/projects/animation/animation3D/external/.cache/glad/glad-download.sln
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
