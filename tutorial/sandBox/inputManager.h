@@ -89,50 +89,41 @@ static void glfw_key_callback(GLFWwindow* window, int key, int scancode, int act
 			break;
 		case 'w':
 		case 'W':
-			rndr->RotateCamera(0, 0.05f);
-			//rndr->TranslateCamera(Eigen::Vector3f(0, 0, 0.03f));
+			scn->direction = 'w';
 			break;
+
 		case 's':
 		case 'S':
-			rndr->RotateCamera(0, -0.05f);
-			//rndr->TranslateCamera(Eigen::Vector3f(0, 0, -0.03f));
+			scn->direction = 's';
 			break;
+
 		case GLFW_KEY_UP:
-			if (scn->current_picked != -1)
-				scn->data().MyRotate(Eigen::Vector3d(1, 0, 0), 0.1);
-			else
-				scn->MyRotate(Eigen::Vector3d(1, 0, 0), 0.1);
-
-			//rndr->TranslateCamera(Eigen::Vector3f(0, 0.01f,0));
+			scn->direction = 'u';
 			break;
+
 		case GLFW_KEY_DOWN:
-			if (scn->current_picked != -1)
-				scn->data().MyRotate(Eigen::Vector3d(1, 0, 0), -0.1);
-			else
-				scn->MyRotate(Eigen::Vector3d(1, 0, 0), -0.1);
-
-			//rndr->TranslateCamera(Eigen::Vector3f(0, -0.01f,0));
-
+			scn->direction = 'd';
 			break;
 
 		case GLFW_KEY_LEFT:
-			if (scn->current_picked != -1)
-				scn->data().MyRotate(Eigen::Vector3d(0, 0, 1), -0.1);
-			else
-				scn->MyRotate(Eigen::Vector3d(0, 0, 1), -0.1);
-
-				//rndr->TranslateCamera(Eigen::Vector3f(-0.01f, 0,0));
+			scn->direction = 'l';
 			break;
 
 		case GLFW_KEY_RIGHT:
-			if (scn->current_picked != -1)
-				scn->data().MyRotate(Eigen::Vector3d(0, 0, 1), 0.1);
-			else
-				scn->MyRotate(Eigen::Vector3d(0, 0, 1), 0.1);
-
-			//rndr->TranslateCamera(Eigen::Vector3f(0.01f, 0, 0));
+			scn->direction = 'r';
 			break;
-		
+
+		case ' ':
+			if (scn->previous_direction) {
+				scn->direction = scn->previous_direction;
+				scn->previous_direction = 0;
+			}
+			else {
+				scn->previous_direction = scn->direction;
+				scn->direction = ' ';
+			}
+			break;
+
 		default: 
 			Eigen::Vector3f shift;
 			float scale;

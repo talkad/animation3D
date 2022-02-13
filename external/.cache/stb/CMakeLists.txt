@@ -8,8 +8,8 @@ project(stb-download NONE)
 include(ExternalProject)
 ExternalProject_Add(stb-download
                     TLS_VERIFY;OFF;GIT_CONFIG;advice.detachedHead=false;GIT_REPOSITORY;https://github.com/libigl/libigl-stb.git;GIT_TAG;cd0fa3fcd90325c83be4d697b00214e029f94ca3
-                    SOURCE_DIR          "C:/Users/tal74/projects/animation/animation3D/cmake/../external/stb"
-                    BINARY_DIR          "C:/Users/tal74/projects/animation/animation3D/build/stb-build"
+                    SOURCE_DIR          "C:/Users/ipism/source/repos/animation3D/cmake/../external/stb"
+                    BINARY_DIR          "C:/Users/ipism/source/repos/animation3D/build/stb-build"
                     CONFIGURE_COMMAND   ""
                     BUILD_COMMAND       ""
                     INSTALL_COMMAND     ""

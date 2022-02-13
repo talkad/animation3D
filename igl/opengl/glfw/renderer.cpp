@@ -77,7 +77,7 @@ IGL_INLINE void Renderer::draw(GLFWwindow* window)
 
 			if (mesh.is_visible & core.id) {
 				{
-					if (selected_core_index == 1) {
+					if (selected_core_index == 0) {
 
 						Eigen::Matrix4d headTransMat = scn->MakeTransd() * scn->CalcParentsTrans(scn->snake_size - 1) * scn->data(scn->snake_size - 1).MakeTransd();
 						core.camera_translation = (headTransMat * Eigen::Vector4d(0, 0.8, 0.8, -1)).block(0, 0, 3, 1).cast<float>();
@@ -142,15 +142,15 @@ IGL_INLINE void Renderer::init(igl::opengl::glfw::Viewer* viewer, int coresNum, 
 
 	}
 
-	selected_core_index = 0;
+	//selected_core_index = 0;
 
 	if (menu)
 	{
 		menu->callback_draw_viewer_menu = [&]()
 		{
 			// Draw parent menu content
-			menu->draw_viewer_menu(scn, core_list);
-
+			//menu->draw_viewer_menu(scn, core_list);
+			menu->callback_draw_custom_window();
 
 		};
 	}

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <PreferredToolArchitecture>x64</PreferredToolArchitecture>
   </PropertyGroup>
@@ -22,7 +22,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{C6407A67-B600-38F1-B7E5-813936CBF1B4}</ProjectGuid>
+    <ProjectGuid>{45DFCC4D-B5EB-3366-9E88-A5AA2FC6D072}</ProjectGuid>
     <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
     <Keyword>Win32Proj</Keyword>
     <Platform>x64</Platform>
@@ -33,22 +33,22 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Utility</ConfigurationType>
     <CharacterSet>MultiByte</CharacterSet>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Utility</ConfigurationType>
     <CharacterSet>MultiByte</CharacterSet>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
     <ConfigurationType>Utility</ConfigurationType>
     <CharacterSet>MultiByte</CharacterSet>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
     <ConfigurationType>Utility</ConfigurationType>
     <CharacterSet>MultiByte</CharacterSet>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -105,24 +105,24 @@
     </Midl>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <CustomBuild Include="C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\CMakeFiles\044450142c8a70b973f9ea9af2ade2d5\glad-download-mkdir.rule">
+    <CustomBuild Include="C:\Users\ipism\source\repos\animation3D\external\.cache\glad\CMakeFiles\f34c458230dfd87d4d98ee17914b7273\glad-download-mkdir.rule">
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Creating directories for 'glad-download'</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/projects/animation/animation3D/cmake/../external/glad
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ipism/source/repos/animation3D/cmake/../external/glad
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/projects/animation/animation3D/build/glad-build
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ipism/source/repos/animation3D/build/glad-build
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/projects/animation/animation3D/external/.cache/glad/glad-download-prefix
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ipism/source/repos/animation3D/external/.cache/glad/glad-download-prefix
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/projects/animation/animation3D/external/.cache/glad/glad-download-prefix/tmp
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ipism/source/repos/animation3D/external/.cache/glad/glad-download-prefix/tmp
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/projects/animation/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/$(Configuration)
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ipism/source/repos/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/$(Configuration)
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/projects/animation/animation3D/external/.cache/glad/glad-download-prefix/src
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ipism/source/repos/animation3D/external/.cache/glad/glad-download-prefix/src
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/projects/animation/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ipism/source/repos/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/projects/animation/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/$(Configuration)/glad-download-mkdir
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/$(Configuration)/glad-download-mkdir
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -131,25 +131,25 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-mkdir</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-mkdir</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Creating directories for 'glad-download'</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/projects/animation/animation3D/cmake/../external/glad
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ipism/source/repos/animation3D/cmake/../external/glad
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/projects/animation/animation3D/build/glad-build
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ipism/source/repos/animation3D/build/glad-build
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/projects/animation/animation3D/external/.cache/glad/glad-download-prefix
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ipism/source/repos/animation3D/external/.cache/glad/glad-download-prefix
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/projects/animation/animation3D/external/.cache/glad/glad-download-prefix/tmp
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ipism/source/repos/animation3D/external/.cache/glad/glad-download-prefix/tmp
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/projects/animation/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/$(Configuration)
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ipism/source/repos/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/$(Configuration)
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/projects/animation/animation3D/external/.cache/glad/glad-download-prefix/src
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ipism/source/repos/animation3D/external/.cache/glad/glad-download-prefix/src
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/projects/animation/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ipism/source/repos/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/projects/animation/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/$(Configuration)/glad-download-mkdir
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/$(Configuration)/glad-download-mkdir
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -158,25 +158,25 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-mkdir</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-mkdir</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
       <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Creating directories for 'glad-download'</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/projects/animation/animation3D/cmake/../external/glad
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ipism/source/repos/animation3D/cmake/../external/glad
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/projects/animation/animation3D/build/glad-build
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ipism/source/repos/animation3D/build/glad-build
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/projects/animation/animation3D/external/.cache/glad/glad-download-prefix
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ipism/source/repos/animation3D/external/.cache/glad/glad-download-prefix
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/projects/animation/animation3D/external/.cache/glad/glad-download-prefix/tmp
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ipism/source/repos/animation3D/external/.cache/glad/glad-download-prefix/tmp
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/projects/animation/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/$(Configuration)
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ipism/source/repos/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/$(Configuration)
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/projects/animation/animation3D/external/.cache/glad/glad-download-prefix/src
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ipism/source/repos/animation3D/external/.cache/glad/glad-download-prefix/src
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/projects/animation/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ipism/source/repos/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/projects/animation/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/$(Configuration)/glad-download-mkdir
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/$(Configuration)/glad-download-mkdir
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -185,25 +185,25 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-mkdir</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-mkdir</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
       <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Creating directories for 'glad-download'</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/projects/animation/animation3D/cmake/../external/glad
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ipism/source/repos/animation3D/cmake/../external/glad
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/projects/animation/animation3D/build/glad-build
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ipism/source/repos/animation3D/build/glad-build
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/projects/animation/animation3D/external/.cache/glad/glad-download-prefix
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ipism/source/repos/animation3D/external/.cache/glad/glad-download-prefix
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/projects/animation/animation3D/external/.cache/glad/glad-download-prefix/tmp
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ipism/source/repos/animation3D/external/.cache/glad/glad-download-prefix/tmp
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/projects/animation/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/$(Configuration)
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ipism/source/repos/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/$(Configuration)
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/projects/animation/animation3D/external/.cache/glad/glad-download-prefix/src
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ipism/source/repos/animation3D/external/.cache/glad/glad-download-prefix/src
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/projects/animation/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ipism/source/repos/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/projects/animation/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/$(Configuration)/glad-download-mkdir
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/$(Configuration)/glad-download-mkdir
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -212,21 +212,21 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-mkdir</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-mkdir</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\CMakeFiles\044450142c8a70b973f9ea9af2ade2d5\glad-download-download.rule">
+    <CustomBuild Include="C:\Users\ipism\source\repos\animation3D\external\.cache\glad\CMakeFiles\f34c458230dfd87d4d98ee17914b7273\glad-download-download.rule">
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Performing download step (git clone) for 'glad-download'</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
-cd C:\Users\tal74\projects\animation\animation3D\external
+cd C:\Users\ipism\source\repos\animation3D\external
 if %errorlevel% neq 0 goto :cmEnd
 C:
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -P C:/Users/tal74/projects/animation/animation3D/external/.cache/glad/glad-download-prefix/tmp/glad-download-gitclone.cmake
+"C:\Program Files\CMake\bin\cmake.exe" -P C:/Users/ipism/source/repos/animation3D/external/.cache/glad/glad-download-prefix/tmp/glad-download-gitclone.cmake
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/projects/animation/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/$(Configuration)/glad-download-download
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/$(Configuration)/glad-download-download
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -234,18 +234,18 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\glad-download-gitinfo.txt;C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-mkdir;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-download</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\glad-download-gitinfo.txt;C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-mkdir;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-download</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Performing download step (git clone) for 'glad-download'</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
-cd C:\Users\tal74\projects\animation\animation3D\external
+cd C:\Users\ipism\source\repos\animation3D\external
 if %errorlevel% neq 0 goto :cmEnd
 C:
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -P C:/Users/tal74/projects/animation/animation3D/external/.cache/glad/glad-download-prefix/tmp/glad-download-gitclone.cmake
+"C:\Program Files\CMake\bin\cmake.exe" -P C:/Users/ipism/source/repos/animation3D/external/.cache/glad/glad-download-prefix/tmp/glad-download-gitclone.cmake
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/projects/animation/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/$(Configuration)/glad-download-download
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/$(Configuration)/glad-download-download
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -253,18 +253,18 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\glad-download-gitinfo.txt;C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-mkdir;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-download</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\glad-download-gitinfo.txt;C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-mkdir;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-download</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
       <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Performing download step (git clone) for 'glad-download'</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
-cd C:\Users\tal74\projects\animation\animation3D\external
+cd C:\Users\ipism\source\repos\animation3D\external
 if %errorlevel% neq 0 goto :cmEnd
 C:
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -P C:/Users/tal74/projects/animation/animation3D/external/.cache/glad/glad-download-prefix/tmp/glad-download-gitclone.cmake
+"C:\Program Files\CMake\bin\cmake.exe" -P C:/Users/ipism/source/repos/animation3D/external/.cache/glad/glad-download-prefix/tmp/glad-download-gitclone.cmake
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/projects/animation/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/$(Configuration)/glad-download-download
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/$(Configuration)/glad-download-download
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -272,18 +272,18 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\glad-download-gitinfo.txt;C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-mkdir;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-download</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\glad-download-gitinfo.txt;C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-mkdir;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-download</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
       <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Performing download step (git clone) for 'glad-download'</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
-cd C:\Users\tal74\projects\animation\animation3D\external
+cd C:\Users\ipism\source\repos\animation3D\external
 if %errorlevel% neq 0 goto :cmEnd
 C:
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -P C:/Users/tal74/projects/animation/animation3D/external/.cache/glad/glad-download-prefix/tmp/glad-download-gitclone.cmake
+"C:\Program Files\CMake\bin\cmake.exe" -P C:/Users/ipism/source/repos/animation3D/external/.cache/glad/glad-download-prefix/tmp/glad-download-gitclone.cmake
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/projects/animation/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/$(Configuration)/glad-download-download
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/$(Configuration)/glad-download-download
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -291,20 +291,20 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\glad-download-gitinfo.txt;C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-mkdir;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-download</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\glad-download-gitinfo.txt;C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-mkdir;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-download</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\CMakeFiles\044450142c8a70b973f9ea9af2ade2d5\glad-download-update.rule">
+    <CustomBuild Include="C:\Users\ipism\source\repos\animation3D\external\.cache\glad\CMakeFiles\f34c458230dfd87d4d98ee17914b7273\glad-download-update.rule">
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Performing update step for 'glad-download'</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
-cd C:\Users\tal74\projects\animation\animation3D\external\glad
+cd C:\Users\ipism\source\repos\animation3D\external\glad
 if %errorlevel% neq 0 goto :cmEnd
 C:
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -P C:/Users/tal74/projects/animation/animation3D/external/.cache/glad/glad-download-prefix/tmp/glad-download-gitupdate.cmake
+"C:\Program Files\CMake\bin\cmake.exe" -P C:/Users/ipism/source/repos/animation3D/external/.cache/glad/glad-download-prefix/tmp/glad-download-gitupdate.cmake
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -312,17 +312,17 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-download;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-update</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-download;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-update</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
       <VerifyInputsAndOutputsExist Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</VerifyInputsAndOutputsExist>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Performing update step for 'glad-download'</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
-cd C:\Users\tal74\projects\animation\animation3D\external\glad
+cd C:\Users\ipism\source\repos\animation3D\external\glad
 if %errorlevel% neq 0 goto :cmEnd
 C:
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -P C:/Users/tal74/projects/animation/animation3D/external/.cache/glad/glad-download-prefix/tmp/glad-download-gitupdate.cmake
+"C:\Program Files\CMake\bin\cmake.exe" -P C:/Users/ipism/source/repos/animation3D/external/.cache/glad/glad-download-prefix/tmp/glad-download-gitupdate.cmake
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -330,17 +330,17 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-download;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-update</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-download;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-update</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
       <VerifyInputsAndOutputsExist Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</VerifyInputsAndOutputsExist>
       <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Performing update step for 'glad-download'</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
-cd C:\Users\tal74\projects\animation\animation3D\external\glad
+cd C:\Users\ipism\source\repos\animation3D\external\glad
 if %errorlevel% neq 0 goto :cmEnd
 C:
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -P C:/Users/tal74/projects/animation/animation3D/external/.cache/glad/glad-download-prefix/tmp/glad-download-gitupdate.cmake
+"C:\Program Files\CMake\bin\cmake.exe" -P C:/Users/ipism/source/repos/animation3D/external/.cache/glad/glad-download-prefix/tmp/glad-download-gitupdate.cmake
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -348,17 +348,17 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-download;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-update</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-download;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-update</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
       <VerifyInputsAndOutputsExist Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</VerifyInputsAndOutputsExist>
       <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Performing update step for 'glad-download'</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
-cd C:\Users\tal74\projects\animation\animation3D\external\glad
+cd C:\Users\ipism\source\repos\animation3D\external\glad
 if %errorlevel% neq 0 goto :cmEnd
 C:
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -P C:/Users/tal74/projects/animation/animation3D/external/.cache/glad/glad-download-prefix/tmp/glad-download-gitupdate.cmake
+"C:\Program Files\CMake\bin\cmake.exe" -P C:/Users/ipism/source/repos/animation3D/external/.cache/glad/glad-download-prefix/tmp/glad-download-gitupdate.cmake
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -366,19 +366,19 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-download;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-update</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-download;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-update</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
       <VerifyInputsAndOutputsExist Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</VerifyInputsAndOutputsExist>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\CMakeFiles\044450142c8a70b973f9ea9af2ade2d5\glad-download-patch.rule">
+    <CustomBuild Include="C:\Users\ipism\source\repos\animation3D\external\.cache\glad\CMakeFiles\f34c458230dfd87d4d98ee17914b7273\glad-download-patch.rule">
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">No patch step for 'glad-download'</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
 "C:\Program Files\CMake\bin\cmake.exe" -E echo_append
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/projects/animation/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/$(Configuration)/glad-download-patch
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/$(Configuration)/glad-download-patch
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -386,15 +386,15 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-update;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-patch</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-update;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-patch</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
       <VerifyInputsAndOutputsExist Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</VerifyInputsAndOutputsExist>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">No patch step for 'glad-download'</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
 "C:\Program Files\CMake\bin\cmake.exe" -E echo_append
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/projects/animation/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/$(Configuration)/glad-download-patch
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/$(Configuration)/glad-download-patch
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -402,15 +402,15 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-update;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-patch</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-update;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-patch</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
       <VerifyInputsAndOutputsExist Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</VerifyInputsAndOutputsExist>
       <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">No patch step for 'glad-download'</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
 "C:\Program Files\CMake\bin\cmake.exe" -E echo_append
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/projects/animation/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/$(Configuration)/glad-download-patch
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/$(Configuration)/glad-download-patch
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -418,15 +418,15 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-update;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-patch</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-update;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-patch</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
       <VerifyInputsAndOutputsExist Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</VerifyInputsAndOutputsExist>
       <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">No patch step for 'glad-download'</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
 "C:\Program Files\CMake\bin\cmake.exe" -E echo_append
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/projects/animation/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/$(Configuration)/glad-download-patch
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/$(Configuration)/glad-download-patch
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -434,23 +434,23 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-update;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-patch</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-update;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-patch</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
       <VerifyInputsAndOutputsExist Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</VerifyInputsAndOutputsExist>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\CMakeFiles\044450142c8a70b973f9ea9af2ade2d5\glad-download-configure.rule">
+    <CustomBuild Include="C:\Users\ipism\source\repos\animation3D\external\.cache\glad\CMakeFiles\f34c458230dfd87d4d98ee17914b7273\glad-download-configure.rule">
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">No configure step for 'glad-download'</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
-cd C:\Users\tal74\projects\animation\animation3D\build\glad-build
+cd C:\Users\ipism\source\repos\animation3D\build\glad-build
 if %errorlevel% neq 0 goto :cmEnd
 C:
 if %errorlevel% neq 0 goto :cmEnd
 "C:\Program Files\CMake\bin\cmake.exe" -E echo_append
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/projects/animation/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/$(Configuration)/glad-download-configure
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/$(Configuration)/glad-download-configure
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -458,18 +458,18 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\tmp\glad-download-cfgcmd.txt;C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-patch;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-configure</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\tmp\glad-download-cfgcmd.txt;C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-patch;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-configure</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">No configure step for 'glad-download'</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
-cd C:\Users\tal74\projects\animation\animation3D\build\glad-build
+cd C:\Users\ipism\source\repos\animation3D\build\glad-build
 if %errorlevel% neq 0 goto :cmEnd
 C:
 if %errorlevel% neq 0 goto :cmEnd
 "C:\Program Files\CMake\bin\cmake.exe" -E echo_append
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/projects/animation/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/$(Configuration)/glad-download-configure
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/$(Configuration)/glad-download-configure
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -477,18 +477,18 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\tmp\glad-download-cfgcmd.txt;C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-patch;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-configure</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\tmp\glad-download-cfgcmd.txt;C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-patch;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-configure</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
       <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">No configure step for 'glad-download'</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
-cd C:\Users\tal74\projects\animation\animation3D\build\glad-build
+cd C:\Users\ipism\source\repos\animation3D\build\glad-build
 if %errorlevel% neq 0 goto :cmEnd
 C:
 if %errorlevel% neq 0 goto :cmEnd
 "C:\Program Files\CMake\bin\cmake.exe" -E echo_append
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/projects/animation/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/$(Configuration)/glad-download-configure
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/$(Configuration)/glad-download-configure
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -496,18 +496,18 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\tmp\glad-download-cfgcmd.txt;C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-patch;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-configure</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\tmp\glad-download-cfgcmd.txt;C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-patch;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-configure</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
       <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">No configure step for 'glad-download'</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
-cd C:\Users\tal74\projects\animation\animation3D\build\glad-build
+cd C:\Users\ipism\source\repos\animation3D\build\glad-build
 if %errorlevel% neq 0 goto :cmEnd
 C:
 if %errorlevel% neq 0 goto :cmEnd
 "C:\Program Files\CMake\bin\cmake.exe" -E echo_append
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/projects/animation/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/$(Configuration)/glad-download-configure
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/$(Configuration)/glad-download-configure
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -515,22 +515,22 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\tmp\glad-download-cfgcmd.txt;C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-patch;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-configure</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\tmp\glad-download-cfgcmd.txt;C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-patch;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-configure</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\CMakeFiles\044450142c8a70b973f9ea9af2ade2d5\glad-download-build.rule">
+    <CustomBuild Include="C:\Users\ipism\source\repos\animation3D\external\.cache\glad\CMakeFiles\f34c458230dfd87d4d98ee17914b7273\glad-download-build.rule">
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">No build step for 'glad-download'</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
-cd C:\Users\tal74\projects\animation\animation3D\build\glad-build
+cd C:\Users\ipism\source\repos\animation3D\build\glad-build
 if %errorlevel% neq 0 goto :cmEnd
 C:
 if %errorlevel% neq 0 goto :cmEnd
 "C:\Program Files\CMake\bin\cmake.exe" -E echo_append
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/projects/animation/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/$(Configuration)/glad-download-build
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/$(Configuration)/glad-download-build
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -538,18 +538,18 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-configure;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-build</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-configure;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-build</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">No build step for 'glad-download'</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
-cd C:\Users\tal74\projects\animation\animation3D\build\glad-build
+cd C:\Users\ipism\source\repos\animation3D\build\glad-build
 if %errorlevel% neq 0 goto :cmEnd
 C:
 if %errorlevel% neq 0 goto :cmEnd
 "C:\Program Files\CMake\bin\cmake.exe" -E echo_append
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/projects/animation/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/$(Configuration)/glad-download-build
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/$(Configuration)/glad-download-build
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -557,18 +557,18 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-configure;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-build</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-configure;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-build</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
       <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">No build step for 'glad-download'</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
-cd C:\Users\tal74\projects\animation\animation3D\build\glad-build
+cd C:\Users\ipism\source\repos\animation3D\build\glad-build
 if %errorlevel% neq 0 goto :cmEnd
 C:
 if %errorlevel% neq 0 goto :cmEnd
 "C:\Program Files\CMake\bin\cmake.exe" -E echo_append
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/projects/animation/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/$(Configuration)/glad-download-build
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/$(Configuration)/glad-download-build
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -576,18 +576,18 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-configure;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-build</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-configure;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-build</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
       <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">No build step for 'glad-download'</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
-cd C:\Users\tal74\projects\animation\animation3D\build\glad-build
+cd C:\Users\ipism\source\repos\animation3D\build\glad-build
 if %errorlevel% neq 0 goto :cmEnd
 C:
 if %errorlevel% neq 0 goto :cmEnd
 "C:\Program Files\CMake\bin\cmake.exe" -E echo_append
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/projects/animation/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/$(Configuration)/glad-download-build
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/$(Configuration)/glad-download-build
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -595,22 +595,22 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-configure;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-build</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-configure;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-build</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\CMakeFiles\044450142c8a70b973f9ea9af2ade2d5\glad-download-install.rule">
+    <CustomBuild Include="C:\Users\ipism\source\repos\animation3D\external\.cache\glad\CMakeFiles\f34c458230dfd87d4d98ee17914b7273\glad-download-install.rule">
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">No install step for 'glad-download'</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
-cd C:\Users\tal74\projects\animation\animation3D\build\glad-build
+cd C:\Users\ipism\source\repos\animation3D\build\glad-build
 if %errorlevel% neq 0 goto :cmEnd
 C:
 if %errorlevel% neq 0 goto :cmEnd
 "C:\Program Files\CMake\bin\cmake.exe" -E echo_append
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/projects/animation/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/$(Configuration)/glad-download-install
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/$(Configuration)/glad-download-install
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -618,18 +618,18 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-build;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-install</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-build;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-install</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">No install step for 'glad-download'</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
-cd C:\Users\tal74\projects\animation\animation3D\build\glad-build
+cd C:\Users\ipism\source\repos\animation3D\build\glad-build
 if %errorlevel% neq 0 goto :cmEnd
 C:
 if %errorlevel% neq 0 goto :cmEnd
 "C:\Program Files\CMake\bin\cmake.exe" -E echo_append
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/projects/animation/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/$(Configuration)/glad-download-install
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/$(Configuration)/glad-download-install
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -637,18 +637,18 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-build;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-install</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-build;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-install</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
       <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">No install step for 'glad-download'</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
-cd C:\Users\tal74\projects\animation\animation3D\build\glad-build
+cd C:\Users\ipism\source\repos\animation3D\build\glad-build
 if %errorlevel% neq 0 goto :cmEnd
 C:
 if %errorlevel% neq 0 goto :cmEnd
 "C:\Program Files\CMake\bin\cmake.exe" -E echo_append
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/projects/animation/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/$(Configuration)/glad-download-install
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/$(Configuration)/glad-download-install
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -656,18 +656,18 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-build;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-install</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-build;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-install</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
       <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">No install step for 'glad-download'</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
-cd C:\Users\tal74\projects\animation\animation3D\build\glad-build
+cd C:\Users\ipism\source\repos\animation3D\build\glad-build
 if %errorlevel% neq 0 goto :cmEnd
 C:
 if %errorlevel% neq 0 goto :cmEnd
 "C:\Program Files\CMake\bin\cmake.exe" -E echo_append
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/projects/animation/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/$(Configuration)/glad-download-install
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/$(Configuration)/glad-download-install
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -675,22 +675,22 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-build;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-install</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-build;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-install</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\CMakeFiles\044450142c8a70b973f9ea9af2ade2d5\glad-download-test.rule">
+    <CustomBuild Include="C:\Users\ipism\source\repos\animation3D\external\.cache\glad\CMakeFiles\f34c458230dfd87d4d98ee17914b7273\glad-download-test.rule">
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">No test step for 'glad-download'</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
-cd C:\Users\tal74\projects\animation\animation3D\build\glad-build
+cd C:\Users\ipism\source\repos\animation3D\build\glad-build
 if %errorlevel% neq 0 goto :cmEnd
 C:
 if %errorlevel% neq 0 goto :cmEnd
 "C:\Program Files\CMake\bin\cmake.exe" -E echo_append
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/projects/animation/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/$(Configuration)/glad-download-test
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/$(Configuration)/glad-download-test
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -698,18 +698,18 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-install;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-test</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-install;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-test</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">No test step for 'glad-download'</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
-cd C:\Users\tal74\projects\animation\animation3D\build\glad-build
+cd C:\Users\ipism\source\repos\animation3D\build\glad-build
 if %errorlevel% neq 0 goto :cmEnd
 C:
 if %errorlevel% neq 0 goto :cmEnd
 "C:\Program Files\CMake\bin\cmake.exe" -E echo_append
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/projects/animation/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/$(Configuration)/glad-download-test
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/$(Configuration)/glad-download-test
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -717,18 +717,18 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-install;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-test</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-install;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-test</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
       <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">No test step for 'glad-download'</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
-cd C:\Users\tal74\projects\animation\animation3D\build\glad-build
+cd C:\Users\ipism\source\repos\animation3D\build\glad-build
 if %errorlevel% neq 0 goto :cmEnd
 C:
 if %errorlevel% neq 0 goto :cmEnd
 "C:\Program Files\CMake\bin\cmake.exe" -E echo_append
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/projects/animation/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/$(Configuration)/glad-download-test
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/$(Configuration)/glad-download-test
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -736,18 +736,18 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-install;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-test</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-install;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-test</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
       <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">No test step for 'glad-download'</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
-cd C:\Users\tal74\projects\animation\animation3D\build\glad-build
+cd C:\Users\ipism\source\repos\animation3D\build\glad-build
 if %errorlevel% neq 0 goto :cmEnd
 C:
 if %errorlevel% neq 0 goto :cmEnd
 "C:\Program Files\CMake\bin\cmake.exe" -E echo_append
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/projects/animation/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/$(Configuration)/glad-download-test
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/$(Configuration)/glad-download-test
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -755,20 +755,20 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-install;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-test</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-install;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-test</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\CMakeFiles\1a2fc97c31d93b65646a6eb9d5f6db30\glad-download-complete.rule">
+    <CustomBuild Include="C:\Users\ipism\source\repos\animation3D\external\.cache\glad\CMakeFiles\50540721b6fe031a21897ddb1c25a947\glad-download-complete.rule">
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Completed 'glad-download'</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/projects/animation/animation3D/external/.cache/glad/CMakeFiles/$(Configuration)
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ipism/source/repos/animation3D/external/.cache/glad/CMakeFiles/$(Configuration)
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/projects/animation/animation3D/external/.cache/glad/CMakeFiles/$(Configuration)/glad-download-complete
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/glad/CMakeFiles/$(Configuration)/glad-download-complete
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/projects/animation/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/$(Configuration)/glad-download-done
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/$(Configuration)/glad-download-done
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -776,17 +776,17 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-install;C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-mkdir;C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-download;C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-update;C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-patch;C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-configure;C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-build;C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-test;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\CMakeFiles\$(Configuration)\glad-download-complete</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-install;C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-mkdir;C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-download;C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-update;C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-patch;C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-configure;C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-build;C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-test;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\glad\CMakeFiles\$(Configuration)\glad-download-complete</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
       <VerifyInputsAndOutputsExist Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</VerifyInputsAndOutputsExist>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Completed 'glad-download'</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/projects/animation/animation3D/external/.cache/glad/CMakeFiles/$(Configuration)
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ipism/source/repos/animation3D/external/.cache/glad/CMakeFiles/$(Configuration)
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/projects/animation/animation3D/external/.cache/glad/CMakeFiles/$(Configuration)/glad-download-complete
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/glad/CMakeFiles/$(Configuration)/glad-download-complete
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/projects/animation/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/$(Configuration)/glad-download-done
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/$(Configuration)/glad-download-done
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -794,17 +794,17 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-install;C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-mkdir;C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-download;C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-update;C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-patch;C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-configure;C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-build;C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-test;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\CMakeFiles\$(Configuration)\glad-download-complete</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-install;C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-mkdir;C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-download;C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-update;C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-patch;C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-configure;C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-build;C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-test;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\glad\CMakeFiles\$(Configuration)\glad-download-complete</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
       <VerifyInputsAndOutputsExist Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</VerifyInputsAndOutputsExist>
       <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Completed 'glad-download'</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/projects/animation/animation3D/external/.cache/glad/CMakeFiles/$(Configuration)
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ipism/source/repos/animation3D/external/.cache/glad/CMakeFiles/$(Configuration)
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/projects/animation/animation3D/external/.cache/glad/CMakeFiles/$(Configuration)/glad-download-complete
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/glad/CMakeFiles/$(Configuration)/glad-download-complete
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/projects/animation/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/$(Configuration)/glad-download-done
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/$(Configuration)/glad-download-done
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -812,17 +812,17 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-install;C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-mkdir;C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-download;C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-update;C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-patch;C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-configure;C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-build;C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-test;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\CMakeFiles\$(Configuration)\glad-download-complete</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-install;C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-mkdir;C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-download;C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-update;C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-patch;C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-configure;C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-build;C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-test;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\glad\CMakeFiles\$(Configuration)\glad-download-complete</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
       <VerifyInputsAndOutputsExist Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</VerifyInputsAndOutputsExist>
       <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Completed 'glad-download'</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/projects/animation/animation3D/external/.cache/glad/CMakeFiles/$(Configuration)
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ipism/source/repos/animation3D/external/.cache/glad/CMakeFiles/$(Configuration)
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/projects/animation/animation3D/external/.cache/glad/CMakeFiles/$(Configuration)/glad-download-complete
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/glad/CMakeFiles/$(Configuration)/glad-download-complete
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/projects/animation/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/$(Configuration)/glad-download-done
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ipism/source/repos/animation3D/external/.cache/glad/glad-download-prefix/src/glad-download-stamp/$(Configuration)/glad-download-done
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -830,14 +830,14 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-install;C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-mkdir;C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-download;C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-update;C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-patch;C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-configure;C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-build;C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-test;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\CMakeFiles\$(Configuration)\glad-download-complete</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-install;C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-mkdir;C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-download;C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-update;C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-patch;C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-configure;C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-build;C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\src\glad-download-stamp\$(Configuration)\glad-download-test;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\glad\CMakeFiles\$(Configuration)\glad-download-complete</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
       <VerifyInputsAndOutputsExist Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</VerifyInputsAndOutputsExist>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\CMakeFiles\54869e19c32ba7c5d1ee4276f31eb51c\glad-download.rule">
+    <CustomBuild Include="C:\Users\ipism\source\repos\animation3D\external\.cache\glad\CMakeFiles\fe5e443c3eff9d60318eb6c9bd7d03ef\glad-download.rule">
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"></Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
 :cmEnd
@@ -846,8 +846,8 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\CMakeFiles\$(Configuration)\glad-download-complete;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\CMakeFiles\glad-download</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\glad\CMakeFiles\$(Configuration)\glad-download-complete;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\glad\CMakeFiles\glad-download</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
       <VerifyInputsAndOutputsExist Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</VerifyInputsAndOutputsExist>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'"></Message>
@@ -858,8 +858,8 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\CMakeFiles\$(Configuration)\glad-download-complete;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\CMakeFiles\glad-download</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\glad\CMakeFiles\$(Configuration)\glad-download-complete;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\glad\CMakeFiles\glad-download</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
       <VerifyInputsAndOutputsExist Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</VerifyInputsAndOutputsExist>
       <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'"></Message>
@@ -870,8 +870,8 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\CMakeFiles\$(Configuration)\glad-download-complete;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\CMakeFiles\glad-download</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\glad\CMakeFiles\$(Configuration)\glad-download-complete;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\glad\CMakeFiles\glad-download</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
       <VerifyInputsAndOutputsExist Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</VerifyInputsAndOutputsExist>
       <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'"></Message>
@@ -882,18 +882,18 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\CMakeFiles\$(Configuration)\glad-download-complete;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\CMakeFiles\glad-download</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\glad\CMakeFiles\$(Configuration)\glad-download-complete;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\glad\CMakeFiles\glad-download</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
       <VerifyInputsAndOutputsExist Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</VerifyInputsAndOutputsExist>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\CMakeLists.txt">
+    <CustomBuild Include="C:\Users\ipism\source\repos\animation3D\external\.cache\glad\CMakeLists.txt">
       <UseUtf8Encoding>Always</UseUtf8Encoding>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule C:/Users/tal74/projects/animation/animation3D/external/.cache/glad/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule C:/Users/ipism/source/repos/animation3D/external/.cache/glad/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/tal74/projects/animation/animation3D/external/.cache/glad -BC:/Users/tal74/projects/animation/animation3D/external/.cache/glad --check-stamp-file C:/Users/tal74/projects/animation/animation3D/external/.cache/glad/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/ipism/source/repos/animation3D/external/.cache/glad -BC:/Users/ipism/source/repos/animation3D/external/.cache/glad --check-stamp-file C:/Users/ipism/source/repos/animation3D/external/.cache/glad/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -901,12 +901,12 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeDetermineSystem.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeSystem.cmake.in;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\ExternalProject-gitupdate.cmake.in;C:\Program Files\CMake\share\cmake-3.22\Modules\ExternalProject.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindGit.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\Platform\WindowsPaths.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\RepositoryInfo.txt.in;C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\CMakeFiles\3.22.0-rc1\CMakeSystem.cmake;C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\tmp\glad-download-cfgcmd.txt.in;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeDetermineSystem.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeSystem.cmake.in;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\ExternalProject-gitupdate.cmake.in;C:\Program Files\CMake\share\cmake-3.22\Modules\ExternalProject.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindGit.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\Platform\WindowsPaths.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\RepositoryInfo.txt.in;C:\Users\ipism\source\repos\animation3D\external\.cache\glad\CMakeFiles\3.22.0\CMakeSystem.cmake;C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\tmp\glad-download-cfgcmd.txt.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\glad\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule C:/Users/tal74/projects/animation/animation3D/external/.cache/glad/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule C:/Users/ipism/source/repos/animation3D/external/.cache/glad/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/tal74/projects/animation/animation3D/external/.cache/glad -BC:/Users/tal74/projects/animation/animation3D/external/.cache/glad --check-stamp-file C:/Users/tal74/projects/animation/animation3D/external/.cache/glad/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/ipism/source/repos/animation3D/external/.cache/glad -BC:/Users/ipism/source/repos/animation3D/external/.cache/glad --check-stamp-file C:/Users/ipism/source/repos/animation3D/external/.cache/glad/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -914,12 +914,12 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeDetermineSystem.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeSystem.cmake.in;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\ExternalProject-gitupdate.cmake.in;C:\Program Files\CMake\share\cmake-3.22\Modules\ExternalProject.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindGit.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\Platform\WindowsPaths.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\RepositoryInfo.txt.in;C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\CMakeFiles\3.22.0-rc1\CMakeSystem.cmake;C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\tmp\glad-download-cfgcmd.txt.in;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeDetermineSystem.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeSystem.cmake.in;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\ExternalProject-gitupdate.cmake.in;C:\Program Files\CMake\share\cmake-3.22\Modules\ExternalProject.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindGit.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\Platform\WindowsPaths.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\RepositoryInfo.txt.in;C:\Users\ipism\source\repos\animation3D\external\.cache\glad\CMakeFiles\3.22.0\CMakeSystem.cmake;C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\tmp\glad-download-cfgcmd.txt.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\glad\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule C:/Users/tal74/projects/animation/animation3D/external/.cache/glad/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule C:/Users/ipism/source/repos/animation3D/external/.cache/glad/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/tal74/projects/animation/animation3D/external/.cache/glad -BC:/Users/tal74/projects/animation/animation3D/external/.cache/glad --check-stamp-file C:/Users/tal74/projects/animation/animation3D/external/.cache/glad/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/ipism/source/repos/animation3D/external/.cache/glad -BC:/Users/ipism/source/repos/animation3D/external/.cache/glad --check-stamp-file C:/Users/ipism/source/repos/animation3D/external/.cache/glad/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -927,12 +927,12 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeDetermineSystem.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeSystem.cmake.in;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\ExternalProject-gitupdate.cmake.in;C:\Program Files\CMake\share\cmake-3.22\Modules\ExternalProject.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindGit.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\Platform\WindowsPaths.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\RepositoryInfo.txt.in;C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\CMakeFiles\3.22.0-rc1\CMakeSystem.cmake;C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\tmp\glad-download-cfgcmd.txt.in;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeDetermineSystem.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeSystem.cmake.in;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\ExternalProject-gitupdate.cmake.in;C:\Program Files\CMake\share\cmake-3.22\Modules\ExternalProject.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindGit.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\Platform\WindowsPaths.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\RepositoryInfo.txt.in;C:\Users\ipism\source\repos\animation3D\external\.cache\glad\CMakeFiles\3.22.0\CMakeSystem.cmake;C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\tmp\glad-download-cfgcmd.txt.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\glad\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule C:/Users/tal74/projects/animation/animation3D/external/.cache/glad/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule C:/Users/ipism/source/repos/animation3D/external/.cache/glad/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/tal74/projects/animation/animation3D/external/.cache/glad -BC:/Users/tal74/projects/animation/animation3D/external/.cache/glad --check-stamp-file C:/Users/tal74/projects/animation/animation3D/external/.cache/glad/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/ipism/source/repos/animation3D/external/.cache/glad -BC:/Users/ipism/source/repos/animation3D/external/.cache/glad --check-stamp-file C:/Users/ipism/source/repos/animation3D/external/.cache/glad/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -940,18 +940,18 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeDetermineSystem.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeSystem.cmake.in;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\ExternalProject-gitupdate.cmake.in;C:\Program Files\CMake\share\cmake-3.22\Modules\ExternalProject.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindGit.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\Platform\WindowsPaths.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\RepositoryInfo.txt.in;C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\CMakeFiles\3.22.0-rc1\CMakeSystem.cmake;C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\glad-download-prefix\tmp\glad-download-cfgcmd.txt.in;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeDetermineSystem.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeSystem.cmake.in;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\ExternalProject-gitupdate.cmake.in;C:\Program Files\CMake\share\cmake-3.22\Modules\ExternalProject.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindGit.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\Platform\WindowsPaths.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\RepositoryInfo.txt.in;C:\Users\ipism\source\repos\animation3D\external\.cache\glad\CMakeFiles\3.22.0\CMakeSystem.cmake;C:\Users\ipism\source\repos\animation3D\external\.cache\glad\glad-download-prefix\tmp\glad-download-cfgcmd.txt.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\ipism\source\repos\animation3D\external\.cache\glad\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <None Include="C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\CMakeFiles\glad-download">
+    <None Include="C:\Users\ipism\source\repos\animation3D\external\.cache\glad\CMakeFiles\glad-download">
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="C:\Users\tal74\projects\animation\animation3D\external\.cache\glad\ZERO_CHECK.vcxproj">
-      <Project>{E3872725-0116-3952-91E8-B2D390C47D86}</Project>
+    <ProjectReference Include="C:\Users\ipism\source\repos\animation3D\external\.cache\glad\ZERO_CHECK.vcxproj">
+      <Project>{D84687CE-50CC-3AB1-A13A-22FEABEE4B89}</Project>
       <Name>ZERO_CHECK</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>

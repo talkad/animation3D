@@ -1,6 +1,6 @@
-^C:\USERS\TAL74\PROJECTS\ANIMATION\ANIMATION3D\EXTERNAL\.CACHE\GLFW\CMAKELISTS.TXT
+^C:\USERS\IPISM\SOURCE\REPOS\ANIMATION3D\EXTERNAL\.CACHE\GLFW\CMAKELISTS.TXT
 setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/tal74/projects/animation/animation3D/external/.cache/glfw -BC:/Users/tal74/projects/animation/animation3D/external/.cache/glfw --check-stamp-file C:/Users/tal74/projects/animation/animation3D/external/.cache/glfw/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/ipism/source/repos/animation3D/external/.cache/glfw -BC:/Users/ipism/source/repos/animation3D/external/.cache/glfw --check-stamp-file C:/Users/ipism/source/repos/animation3D/external/.cache/glfw/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone

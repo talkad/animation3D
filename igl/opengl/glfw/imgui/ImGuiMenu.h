@@ -11,7 +11,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 #include "igl/opengl/glfw/Viewer.h"
 //#include <igl/opengl/glfw/ViewerPlugin.h>
-
+#include "../../../../tutorial/sandBox/sandBox.h"
 #include "igl/opengl/ViewerCore.h"
 #include "igl/opengl/ViewerData.h"
 #include "igl/opengl/glfw/Display.h"
@@ -45,6 +45,8 @@ protected:
   ImGuiContext * context_ = nullptr;
 
 public:
+    IGL_INLINE bool all_button_actions(const char* id, Viewer& viewer);
+    IGL_INLINE void init_custom_callback(Viewer& viewer);
     IGL_INLINE virtual void init(Display* disp);// override;
 
   IGL_INLINE virtual void reload_font(int font_size = 13);

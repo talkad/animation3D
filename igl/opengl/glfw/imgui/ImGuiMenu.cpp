@@ -10,7 +10,6 @@
 //#include "ImGuiHelpers.h"
 #include <igl/project.h>
 #include "ImGuiHelpers.h"
-
 #include "ImGuiMenu.h"
 #include "../imgui.h"
 #include "igl/opengl/glfw/imgui/imgui_impl_glfw.h"
@@ -29,12 +28,59 @@ namespace glfw
 {
 namespace imgui
 {
+    IGL_INLINE bool ImGuiMenu::all_button_actions(const char* id, Viewer& viewer) {
+
+        static bool isButtuned = false;//checking if any buttoned is pressed
+        bool window_appirance = true;
+
+        if (isButtuned == true) {
+            viewer.isActive = true;
+            window_appirance = false;
+            isButtuned = false;
+        }
+        else if (viewer.isNextLevel) {
+            if (ImGui::Button("	  START OVER		")) {
+                window_appirance = true;
+                isButtuned = true;
+                viewer.isNextLevel = false;
+                viewer.isActive = true;
+                viewer.score = 0;
+            }
+            if (ImGui::Button("	  NEXT LEVEL		")) {
+                window_appirance = true;
+                isButtuned = true;
+                viewer.isNextLevel = false;
+                viewer.isActive = true;
+                viewer.score = 0;
+                viewer.level += 1;
+            }
+        }
+        else if (viewer.isResume) {
+            if (ImGui::Button("              RESUME              ")) {
+                window_appirance = true;
+                isButtuned = true;
+                viewer.isActive = true;//it ruined the movment
+                viewer.isResume = false;
+                viewer.isGameStarted = true;
+                viewer.isNextLevel = false;
+            }
+        }
+        else
+        {
+            if (ImGui::Button("             Let's Start             "))
+                isButtuned = true;
+        }
+        return window_appirance;
+    }
+
 
 IGL_INLINE void ImGuiMenu::init(Display* disp)
 {
   // Setup ImGui binding
   if (disp->window)
   {
+  Viewer* viewer = (Viewer*)(disp->GetScene());
+
     IMGUI_CHECKVERSION();
     if (!context_)
     {
@@ -51,6 +97,101 @@ IGL_INLINE void ImGuiMenu::init(Display* disp)
     ImGuiStyle& style = ImGui::GetStyle();
     style.FrameRounding = 5.0f;
     reload_font();
+
+    this->callback_draw_custom_window = [&]()
+    {
+        ImGui::CreateContext();
+        // window position + size
+        ImGui::SetNextWindowPos(ImVec2(0.f * this->menu_scaling(), 0), ImGuiCond_Always);
+        ImGui::SetNextWindowSize(ImVec2(800, 2000), ImGuiCond_Always);
+        static bool showWindow = true;
+
+        if (showWindow && viewer->level == 1) {
+            viewer->isGameStarted = false;
+            if (!ImGui::Begin(
+                "  3D Snake Game", &showWindow,
+                ImGuiWindowFlags_NoSavedSettings
+            )) {
+                ImGui::End();
+            }
+            else {
+                ImGui::SetWindowFontScale(1.5f);
+                ImGui::PushItemWidth(10);
+                ImGui::Text("\n\n\n\n");
+                ImGui::Text("	Score: %d", viewer->score);
+                ImGui::Text("	Level: %d", viewer->level);
+                ImGui::Text("               ");
+                ImGui::PopItemWidth();
+                showWindow = all_button_actions("Start Playin'", *viewer);
+                ImGui::End();
+            }
+        }
+        else if (viewer->isNextLevel)
+        {
+            viewer->isGameStarted = false;
+            if (!ImGui::Begin("		Next Level		", &showWindow,
+                ImGuiWindowFlags_NoSavedSettings
+            )) {
+                ImGui::End();
+            }
+            else {
+                ImGui::SetWindowFontScale(1.5f);
+
+                ImGui::PushItemWidth(-100);
+                ImGui::Text("Press NEXT LVL or START OVER\n\n");
+                ImGui::Text("    Score: %d", viewer->score);
+                ImGui::Text("    Level: %d", viewer->level);
+                ImGui::PopItemWidth();
+
+                showWindow = all_button_actions("		NEXT LVL		", *viewer);
+                ImGui::End();
+            }
+        }
+        else if (viewer->isResume) {
+            viewer->isGameStarted = false;
+            if (!ImGui::Begin(
+                "Resume When Ready To Play", &showWindow,
+                ImGuiWindowFlags_NoSavedSettings
+            )) {
+                ImGui::End();
+            }
+            else {
+                ImGui::SetWindowFontScale(1.5f);
+                // Expose the same variable directly ...
+                ImGui::PushItemWidth(-100);
+                ImGui::Text("\n\n\n\n");
+                ImGui::Text("       Score: %d", viewer->score);
+                ImGui::Text("       Level: %d", viewer->level);
+                ImGui::Text("");
+                ImGui::PopItemWidth();
+
+
+                showWindow = all_button_actions("RESUME", *viewer);
+                ImGui::End();
+            }
+        }
+        else {
+            if (!ImGui::Begin(
+                "Give Your Best Shot", &showWindow,
+                ImGuiWindowFlags_NoSavedSettings
+            )) {
+                ImGui::End();
+            }
+            else {
+
+                ImGui::SetWindowFontScale(1.5f);
+                // Expose the same variable directly ...
+                viewer->isGameStarted = true;
+                ImGui::PushItemWidth(-100);
+                ImGui::Text("\n\n\n\n");
+                ImGui::Text("Score: %d", viewer->score);
+                ImGui::Text("Level: %d", viewer->level);
+
+                ImGui::PopItemWidth();
+                ImGui::End();
+            }
+        }
+    };
   }
 }
 
@@ -181,7 +322,7 @@ IGL_INLINE void ImGuiMenu::draw_viewer_window(igl::opengl::glfw::Viewer* viewer,
 }
 
 
-IGL_INLINE void ImGuiMenu::draw_viewer_menu(igl::opengl::glfw::Viewer *viewer, std::vector<igl::opengl::ViewerCore>& core)
+IGL_INLINE void ImGuiMenu::draw_viewer_menu(igl::opengl::glfw::Viewer* viewer, std::vector<igl::opengl::ViewerCore>& core)
 {
     bool* p_open = NULL;
     static bool no_titlebar = false;
@@ -325,6 +466,7 @@ IGL_INLINE void ImGuiMenu::draw_viewer_menu(igl::opengl::glfw::Viewer *viewer, s
 
   }
   ImGui::End();
+
 }
 
 IGL_INLINE void ImGuiMenu::draw_labels_window(igl::opengl::glfw::Viewer* viewer,  const igl::opengl::ViewerCore* core)

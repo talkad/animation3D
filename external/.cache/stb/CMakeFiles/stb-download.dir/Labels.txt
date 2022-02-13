@@ -1,14 +1,14 @@
 # Target labels
  stb-download
 # Source files and their labels
-C:/Users/tal74/projects/animation/animation3D/external/.cache/stb/CMakeFiles/stb-download
-C:/Users/tal74/projects/animation/animation3D/external/.cache/stb/CMakeFiles/094e749752043788c5eea64cda90e9c5/stb-download.rule
-C:/Users/tal74/projects/animation/animation3D/external/.cache/stb/CMakeFiles/3e3b042d298120318eb6d6ff6b3fa34c/stb-download-complete.rule
-C:/Users/tal74/projects/animation/animation3D/external/.cache/stb/CMakeFiles/bd726330e7e8079be51f0939eda44d30/stb-download-build.rule
-C:/Users/tal74/projects/animation/animation3D/external/.cache/stb/CMakeFiles/bd726330e7e8079be51f0939eda44d30/stb-download-configure.rule
-C:/Users/tal74/projects/animation/animation3D/external/.cache/stb/CMakeFiles/bd726330e7e8079be51f0939eda44d30/stb-download-download.rule
-C:/Users/tal74/projects/animation/animation3D/external/.cache/stb/CMakeFiles/bd726330e7e8079be51f0939eda44d30/stb-download-install.rule
-C:/Users/tal74/projects/animation/animation3D/external/.cache/stb/CMakeFiles/bd726330e7e8079be51f0939eda44d30/stb-download-mkdir.rule
-C:/Users/tal74/projects/animation/animation3D/external/.cache/stb/CMakeFiles/bd726330e7e8079be51f0939eda44d30/stb-download-patch.rule
-C:/Users/tal74/projects/animation/animation3D/external/.cache/stb/CMakeFiles/bd726330e7e8079be51f0939eda44d30/stb-download-test.rule
-C:/Users/tal74/projects/animation/animation3D/external/.cache/stb/CMakeFiles/bd726330e7e8079be51f0939eda44d30/stb-download-update.rule
+C:/Users/ipism/source/repos/animation3D/external/.cache/stb/CMakeFiles/stb-download
+C:/Users/ipism/source/repos/animation3D/external/.cache/stb/CMakeFiles/724c2688dc417fafbcb82f3186f191a2/stb-download.rule
+C:/Users/ipism/source/repos/animation3D/external/.cache/stb/CMakeFiles/bf230a862d804246baa916bcd774bc9b/stb-download-complete.rule
+C:/Users/ipism/source/repos/animation3D/external/.cache/stb/CMakeFiles/cef1bc2b84b017613f2e41b3208b56b0/stb-download-build.rule
+C:/Users/ipism/source/repos/animation3D/external/.cache/stb/CMakeFiles/cef1bc2b84b017613f2e41b3208b56b0/stb-download-configure.rule
+C:/Users/ipism/source/repos/animation3D/external/.cache/stb/CMakeFiles/cef1bc2b84b017613f2e41b3208b56b0/stb-download-download.rule
+C:/Users/ipism/source/repos/animation3D/external/.cache/stb/CMakeFiles/cef1bc2b84b017613f2e41b3208b56b0/stb-download-install.rule
+C:/Users/ipism/source/repos/animation3D/external/.cache/stb/CMakeFiles/cef1bc2b84b017613f2e41b3208b56b0/stb-download-mkdir.rule
+C:/Users/ipism/source/repos/animation3D/external/.cache/stb/CMakeFiles/cef1bc2b84b017613f2e41b3208b56b0/stb-download-patch.rule
+C:/Users/ipism/source/repos/animation3D/external/.cache/stb/CMakeFiles/cef1bc2b84b017613f2e41b3208b56b0/stb-download-test.rule
+C:/Users/ipism/source/repos/animation3D/external/.cache/stb/CMakeFiles/cef1bc2b84b017613f2e41b3208b56b0/stb-download-update.rule

@@ -80,7 +80,8 @@ namespace igl
                 delta(0.1),
                 snake_size(1),  // currently the head will be the circle
                 snake_view(false),
-                prev_tic(0)
+                prev_tic(0),
+                level(1)
             {
                 data_list.front().id = 0;
 
@@ -296,7 +297,7 @@ namespace igl
 
                 //this->load_mesh_from_file(fname.c_str());
 
-                load_mesh_from_file("C:/Users/tal74/projects/animation/animation3D/tutorial/data/sphere.obj");
+                load_mesh_from_file("C:/Users/ipism/source/repos/animation3D/tutorial/data/sphere.obj");
             }
 
             IGL_INLINE void Viewer::open_dialog_save_mesh()
@@ -524,7 +525,6 @@ namespace igl
             IGL_INLINE void Viewer::generate_target()
             {
                 float tic = static_cast<float>(glfwGetTime());
-                std::cout << tic << std::endl;
                 if (tic - prev_tic > 5) {
                     prev_tic = tic;
 

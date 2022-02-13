@@ -179,6 +179,15 @@ namespace igl
                 bool snake_view;
                 float prev_tic;
 
+                Eigen::Vector3d target_pose;
+                int counter = 0;
+                int level;
+                bool isNextLevel = false;
+                bool gameLost = false;
+                bool start = true;
+                int score = 0;
+                bool isResume = false;
+                bool isGameStarted = false;
                 // List of registered plugins
             //    std::vector<ViewerPlugin*> plugins;
 
