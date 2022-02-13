@@ -9,8 +9,12 @@
 #define VIEWPORT_HEIGHT 2160
 
 
+
 int main(int argc, char* argv[])
-{	
+{
+	//PlaySound(TEXT("C:/Users/tal74/projects/animation/animation3D/tutorial/sandBox/applause.wav"), NULL, SND_NODEFAULT | SND_LOOP | SND_ASYNC);
+
+
 	Display* disp = new Display(VIEWPORT_WIDTH, VIEWPORT_HEIGHT, "Animation3D - Final Project");
 	Renderer renderer;
 

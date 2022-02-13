@@ -16,6 +16,7 @@ void SandBox::Init(const std::string& config)
     vT.resize(17);
     vQ.resize(17);
 
+
     snakeFile.open(config);
     if (!snakeFile.is_open())
         std::cout << "Can't open file " << config << std::endl;
@@ -36,6 +37,10 @@ void SandBox::Init(const std::string& config)
     }
     MyTranslate(-Eigen::Vector3d::UnitZ(), true);
 
+	// load_mesh_from_file("C:/Users/tal74/projects/animation/animation3D/tutorial/data/cube.obj");
+	// data().init();
+	// data().drawAlignedBox(data().kd_tree.m_box, Eigen::RowVector3d(0, 1, 0));
+
     double z = -0.8 * scale;
     for (int i = 0; i <= joints_num; ++i)
     {
@@ -48,6 +53,10 @@ void SandBox::Init(const std::string& config)
 
     target_pose = skinnedSkeleton[joints_num];
     U = V;
+
+    MyTranslateInSystem(GetRotation(), Eigen::RowVector3d(0, 0, -10));
+	start_level(); // remove it xxxxxxxxxxxxxxxxxxxxxxxxx
+
 }
 
 SandBox::~SandBox()
@@ -165,6 +174,8 @@ void SandBox::Animate()
          move_snake();
          generate_target();
          move_targets();
+         clean_data_list();
 }
+
 
 

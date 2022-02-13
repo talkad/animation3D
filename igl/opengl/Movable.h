@@ -27,6 +27,10 @@ public:
 
 	Eigen::Vector3d Movable::GetCenterOfRotation();
 
+	void SetTranslation(Eigen::Vector3d position);
+
+	void LookAt(Eigen::Vector3d forward);
+
 	virtual ~Movable() {}
 
 	Eigen::Affine3d Tout, Tin;

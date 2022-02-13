@@ -43,6 +43,7 @@ namespace igl
             class Viewer : public Movable
             {
             public:
+
                 // UI Enumerations
                // enum class MouseButton {Left, Middle, Right};
                // enum class MouseMode { None, Rotation, Zoom, Pan, Translation} mouse_mode;
@@ -135,6 +136,8 @@ namespace igl
 
                 IGL_INLINE bool boxes_collide(Eigen::AlignedBox<double, 3>&, Eigen::AlignedBox<double, 3>&);
 
+                IGL_INLINE void clean_data_list();
+
                 IGL_INLINE void move_targets();
 
                 IGL_INLINE void generate_target();
@@ -144,6 +147,9 @@ namespace igl
                 // check if two object in data_list are collided
                 IGL_INLINE void check_collision();
 
+                IGL_INLINE void start_level();
+
+                IGL_INLINE void add_score(int);
 
                 inline bool SetAnimation() {
                     if (isActive)
@@ -179,15 +185,24 @@ namespace igl
                 bool snake_view;
                 float prev_tic;
 
+
                 Eigen::Vector3d target_pose;
                 int counter = 0;
-                int level;
                 bool isNextLevel = false;
                 bool gameLost = false;
                 bool start = true;
-                int score = 0;
                 bool isResume = false;
                 bool isGameStarted = false;
+
+                int TTL;
+
+                int level;
+                int score;
+                int start_time;
+                double p; // probability to generate target of type 1
+                int target2_creation;
+
+
                 // List of registered plugins
             //    std::vector<ViewerPlugin*> plugins;
 

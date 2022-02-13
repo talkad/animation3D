@@ -17,6 +17,11 @@
 #include <iostream>
 #include <Windows.h>
 #include <MMSystem.h>
+
+#pragma comment(lib, "winmm.lib")
+#include <igl/get_seconds.h>
+#include "external/glfw/include/GLFW/glfw3.h"
+
 //#include "external/stb/igl_stb_image.h"
 
 #define g 0.05
@@ -38,15 +43,21 @@ IGL_INLINE igl::opengl::ViewerData::ViewerData()
     shininess(35.0f),
     id(-1),
     is_visible(1),
-    type(0)
+    type(0),
+    creation_time(static_cast<float>(glfwGetTime())),
+    isTerminated(false)
 {
-    speed = Eigen::Vector3d(0, 0, 0);
     clear();
+};
+
+IGL_INLINE igl::opengl::ViewerData::~ViewerData() {
+// there is no inner dynamically allocated
 };
 
 IGL_INLINE void igl::opengl::ViewerData::init() {
     std::cout << "init" << std::endl;
     kd_tree.init(V, F);
+
 }
 
 IGL_INLINE void igl::opengl::ViewerData::drawAlignedBox(Eigen::AlignedBox<double, 3>& alignedBox, Eigen::RowVector3d& color) {
@@ -91,15 +102,42 @@ IGL_INLINE void igl::opengl::ViewerData::drawAlignedBox(Eigen::AlignedBox<double
 
 IGL_INLINE void igl::opengl::ViewerData::move()
 {
-      MyTranslateInSystem(GetRotation(), speed);
+    
+      if (type == 4) {
+          double vel = 0.5;
+          t += 0.05 * vel / 2;
 
+          if (t <= 1) {
+              calcT();
+              curr_pos = T * MG;
+              Eigen::Vector3d tangent = (curr_pos - last_pos).normalized();
+              LookAt(tangent);
+              SetTranslation(curr_pos);
+          }
+          else {
+              MyTranslate(final_dir * vel * 0.05, true);
+          }
+          last_pos = curr_pos;
+      }
       if (type == 2){
-          speed -= Eigen::Vector3d(0, g, 0);
+          MyTranslateInSystem(GetRotation(), speed);
+          
+          speed[1] -= g;
 
           if (Tout.matrix()(1, 3) < -5) {
-              PlaySound(TEXT("C:/Users/tal74/projects/animation/animation3D/tutorial/sandBox/ballbounce.wav"), NULL, SND_ASYNC);
-              speed = Eigen::Vector3d(speed(0), -speed(1), speed(2));
+              PlaySound(TEXT("C:/Users/tal74/projects/animation/animation3D/tutorial/sounds/ballbounce.wav"), NULL, SND_NODEFAULT | SND_ASYNC);
+              speed[1] = -speed[1];
           }
+
+          // streching the ball
+          if (speed[1] < 0)
+              MyScale(Eigen::Vector3d(1, 1.05, 1));
+          else
+              MyScale(Eigen::Vector3d(1, 0.95, 1));
+
+      }
+      else {
+          MyTranslateInSystem(GetRotation(), speed);
       }
 
 }
@@ -109,16 +147,107 @@ IGL_INLINE void igl::opengl::ViewerData::update_movement_type(unsigned int new_t
     type = new_type;
 }
 
+IGL_INLINE void igl::opengl::ViewerData::calcT() {
+    T[0] = powf(t, 3);
+    T[1] = powf(t, 2);
+    T[2] = t;
+    T[3] = 1;
+}
+
+IGL_INLINE void igl::opengl::ViewerData::drawCurve() {
+    Eigen::RowVector3d color = Eigen::RowVector3d(0, 1, 0);
+    
+    add_edges(bezier_points.row(0) * 10, bezier_points.row(1) * 10, color);
+    add_edges(bezier_points.row(1) * 10, bezier_points.row(2) * 10, color);
+    add_edges(bezier_points.row(2) * 10, bezier_points.row(3) * 10, color);
+    
+    line_width = 30;
+    show_lines = true;
+    show_overlay_depth = true;
+}
+
 IGL_INLINE void igl::opengl::ViewerData::initiate_speed()
 {
     double x = ((double)rand() / (RAND_MAX)) - 0.5;
     double y = ((double)rand() / (RAND_MAX)) - 0.5;
     double z = ((double)rand() / (RAND_MAX)) - 0.5;
 
-    if(type == 2)
-        speed = Eigen::Vector3d(x / 10, y, z);
-    else
-        speed = Eigen::Vector3d(x / 10, y / 10, z);
+    if (type == 4) {
+        srand((unsigned)time(0));
+        Eigen::Vector3d spawner_positions[4];
+        spawner_positions[0] = Eigen::Vector3d(10, 0, 10);
+        spawner_positions[1] = Eigen::Vector3d(-10, 0, 10);
+        spawner_positions[2] = Eigen::Vector3d(-10, 0, -10);
+        spawner_positions[3] = Eigen::Vector3d(10, 0, -10);
+
+        speed = Eigen::Vector3d(0, 0, 0);
+        int iSpawner = (rand() % 4);
+        double spawnerX = spawner_positions[iSpawner][0];
+        double spawnerZ = spawner_positions[iSpawner][2];
+
+        int angle = (rand() % 270) - 90;
+
+        Eigen::Matrix <double, 4, 3> spline_points = Eigen::Matrix <double, 4, 3>::Zero();
+
+        Eigen::Vector4d p0 = Eigen::Vector4d(0, 0, 0, 1);
+        Eigen::Vector4d p1 = Eigen::Vector4d(0, 0, 0, 1);
+        Eigen::Vector4d p2 = Eigen::Vector4d(0, 0, 0, 1);
+        Eigen::Vector4d p3 = Eigen::Vector4d(0, 0, 0, 1);
+
+        for (int i = 0; i < 3; i++) {
+            p1[i] = rand() % 20 - 2;
+            p2[i] = rand() % 20 - 2;
+            p3[i] = rand() % 20 - 2;
+        }
+
+        double deg2rad = 0.017453292;
+        double angel_rad = angle * deg2rad;
+
+        Eigen::Matrix <double, 3, 4> trans;		//	x rotation and translation to spawner
+        trans << cosf(angel_rad), 0, -sinf(angel_rad), spawnerX,
+            0, 1, 0, 0,
+            sinf(angel_rad), 0, cosf(angel_rad), spawnerZ;
+
+        spline_points.row(0) = trans * p0;
+        spline_points.row(1) = trans * p1;
+        spline_points.row(2) = trans * p2;
+        spline_points.row(3) = trans * p3;
+
+        bezier_points = spline_points;
+        Eigen::Matrix4d	M;					// Blending functions matrix
+        M << -1, 3, -3, 1,
+              3, -6, 3, 0,
+             -3, 3, 0, 0,
+              1, 0, 0, 0;
+
+        MG = M * bezier_points;
+        T << 0, 0, 0, 1;
+
+        t = 0;
+        final_dir = (bezier_points.row(3) - bezier_points.row(2)).normalized();
+        drawCurve();
+    }
+    if (type == 2) {
+        speed = Eigen::Vector3d(x / 2, y / 20, z / 10);
+
+        if (x > 0)
+            MyTranslateInSystem(GetRotation(), Eigen::Vector3d(-8, 0, 0));
+        else
+            MyTranslateInSystem(GetRotation(), Eigen::Vector3d(8, 0, 0));
+    }
+    else {
+        speed = Eigen::Vector3d(x / 2, y / 20, z / 20);
+
+        if(x > 0)
+            MyTranslateInSystem(GetRotation(), Eigen::Vector3d(-8, 0, 0));
+        else
+            MyTranslateInSystem(GetRotation(), Eigen::Vector3d(8, 0, 0));
+
+        if(y > 0)
+            MyTranslateInSystem(GetRotation(), Eigen::Vector3d(0, -3, 0));
+        else
+            MyTranslateInSystem(GetRotation(), Eigen::Vector3d(0, 3, 0));
+    }
 }
 
 IGL_INLINE void igl::opengl::ViewerData::set_face_based(bool newvalue)

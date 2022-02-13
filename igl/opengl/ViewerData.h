@@ -45,6 +45,8 @@ namespace igl
         public:
             ViewerData();
 
+            ~ViewerData();
+
             // Empty all fields
             IGL_INLINE void clear();
 
@@ -57,6 +59,10 @@ namespace igl
             IGL_INLINE void update_movement_type(unsigned int);
 
             IGL_INLINE void initiate_speed();
+
+            IGL_INLINE void calcT();
+
+            IGL_INLINE void drawCurve();
 
             IGL_INLINE void init();
 
@@ -237,6 +243,21 @@ namespace igl
             Eigen::Vector3d speed;
             // 0 - none, 1- basic, 2- bouncy, 4- bezier
             unsigned int type; 
+            float creation_time;
+
+            bool isTerminated;
+
+
+            double t;
+            Eigen::Matrix <double, 4, 3> MG;
+            Eigen::RowVector4d T;
+            Eigen::Vector3d final_dir;
+            Eigen::Vector3d last_pos;
+            Eigen::Vector3d curr_pos;
+            Eigen::Matrix <double, 4, 3> bezier_points;
+
+
+
 
             // Point size / line width
             float point_size;
