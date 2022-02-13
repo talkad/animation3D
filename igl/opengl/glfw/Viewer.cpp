@@ -297,7 +297,7 @@ namespace igl
 
                 //this->load_mesh_from_file(fname.c_str());
 
-                load_mesh_from_file("C:/Users/ipism/source/repos/animation3D/tutorial/data/sphere.obj");
+                load_mesh_from_file("C:/Users/tal74/projects/animation/animation3D/tutorial/data/sphere.obj");
             }
 
             IGL_INLINE void Viewer::open_dialog_save_mesh()

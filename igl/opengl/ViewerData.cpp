@@ -97,7 +97,7 @@ IGL_INLINE void igl::opengl::ViewerData::move()
           speed -= Eigen::Vector3d(0, g, 0);
 
           if (Tout.matrix()(1, 3) < -5) {
-              PlaySound(TEXT("C:/Users/ipism/source/repos/animation3D/tutorial/sandBox/ballbounce.wav"), NULL, SND_ASYNC);
+              PlaySound(TEXT("C:/Users/tal74/projects/animation/animation3D/tutorial/sandBox/ballbounce.wav"), NULL, SND_ASYNC);
               speed = Eigen::Vector3d(speed(0), -speed(1), speed(2));
           }
       }
@@ -157,7 +157,7 @@ IGL_INLINE void igl::opengl::ViewerData::set_mesh(
             Eigen::Vector3d(GOLD_AMBIENT[0], GOLD_AMBIENT[1], GOLD_AMBIENT[2]),
             Eigen::Vector3d(GOLD_DIFFUSE[0], GOLD_DIFFUSE[1], GOLD_DIFFUSE[2]),
             Eigen::Vector3d(GOLD_SPECULAR[0], GOLD_SPECULAR[1], GOLD_SPECULAR[2]));
-        image_texture("C:/Users/ipism/source/repos/animation3D/tutorial/textures/snake1.png");
+        image_texture("C:/Users/tal74/projects/animation/animation3D/tutorial/textures/snake1.png");
         //    grid_texture();
     }
     else

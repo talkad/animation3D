@@ -91,7 +91,9 @@ Display::Display(int windowWidth, int windowHeight, const std::string& title)
 				//	windowHeight = 800;
 	//			window = glfwCreateWindow(windowWidth, windowHeight, title.c_str(), nullptr, nullptr);
 	//		}
-	window = glfwCreateWindow(windowWidth, windowHeight, title.c_str(), glfwGetPrimaryMonitor(), nullptr);
+	//window = glfwCreateWindow(windowWidth, windowHeight, title.c_str(), glfwGetPrimaryMonitor(), nullptr);
+	window = glfwCreateWindow(windowWidth, windowHeight, title.c_str(), nullptr, nullptr);
+
 	if (!window)
 	{
 		glfwTerminate();
@@ -232,33 +234,6 @@ bool Display::launch_rendering(bool loop)
 	skyboxShader.use(); // shader configuration
 	skyboxShader.setInt("skybox", 0);
 
-	// fog shader
-	Shader fogShader("../../../shaders/shader.vert", "../../../shaders/shader.frag");
-
-	fogShader.use(); // shader configuration
-	fogShader.setInt("sampler", 0); // for 2D structure
-	fogShader.setVec4("color", glm::vec4(1, 0, 0, 0));
-	
-	glm::vec3 color = glm::vec3(1, 0, 0);
-	glUniform3fv(glGetUniformLocation(fogShader.ID, "ambientLight.color"), 1, &color[0]);
-	glUniform1i(glGetUniformLocation(fogShader.ID, "ambientLight.isOn"), 1);
-
-
-	glUniform3fv(glGetUniformLocation(fogShader.ID, "diffuseLight.color"), 1, &color[0]);
-	glUniform3fv(glGetUniformLocation(fogShader.ID, "diffuseLight.direction"), 1, &color[0]);
-	glUniform1f(glGetUniformLocation(fogShader.ID, "diffuseLight.factor"), 1.0f);
-	glUniform1i(glGetUniformLocation(fogShader.ID, "diffuseLight.isOn"), 1);
-
-
-	glUniform3fv(glGetUniformLocation(fogShader.ID, "fogParams.color"), 1, &color[0]);
-	glUniform1f(glGetUniformLocation(fogShader.ID, "fogParams.linearStart"), 1.0f);
-	glUniform1f(glGetUniformLocation(fogShader.ID, "fogParams.linearEnd"), 5.0f);
-	glUniform1f(glGetUniformLocation(fogShader.ID, "fogParams.density"), 0.9f);
-	glUniform1i(glGetUniformLocation(fogShader.ID, "fogParams.equation"), 2);
-	glUniform1i(glGetUniformLocation(fogShader.ID, "fogParams.isEnabled"), 1);
-
-
-
 	// Rendering loop
 	const int num_extra_frames = 5;
 	int frame_counter = 0;
@@ -294,17 +269,6 @@ bool Display::launch_rendering(bool loop)
 		glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
 
 
-		// for shader
-		fogShader.use();
-		glm::mat4 Model4 = glm::mat4(2.0);
-		glm::mat3 Model3 = glm::mat3(1.0);
-		glUniformMatrix4fv(glGetUniformLocation(fogShader.ID, "matrices.projectionMatrix"), 1, GL_FALSE, &projection[0][0]);
-		glUniformMatrix4fv(glGetUniformLocation(fogShader.ID, "matrices.viewMatrix"), 1, GL_FALSE, &view[0][0]);
-		glUniformMatrix4fv(glGetUniformLocation(fogShader.ID, "matrices.modelMatrix"), 1, GL_FALSE, &Model4[0][0]);
-		glUniformMatrix3fv(glGetUniformLocation(fogShader.ID, "matrices.normalMatrix"), 1, GL_FALSE, &Model3[0][0]);
-
-
-
 		glDepthFunc(GL_LEQUAL);  // change depth function so depth test passes when values are equal to depth buffer's content
 		skyboxShader.use();
 		skyboxShader.setMat4("view", view);
@@ -319,8 +283,6 @@ bool Display::launch_rendering(bool loop)
 
 		// draw background
 		glViewport((VIEWPORT_WIDTH / 4) * 3, VIEWPORT_HEIGHT / 5, VIEWPORT_WIDTH / 4 * 1, VIEWPORT_HEIGHT / 5);
-
-
 
 
 		// glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
@@ -338,7 +300,7 @@ bool Display::launch_rendering(bool loop)
 			{
 				std::this_thread::sleep_for(std::chrono::microseconds((int)(min_duration - duration)));
 			}
-	}
+		}
 		else
 		{
 			glfwPollEvents();
@@ -355,7 +317,7 @@ bool Display::launch_rendering(bool loop)
 			first_time_hack = false;
 		}
 #endif
-}
+	}
 
 	glDeleteVertexArrays(1, &skyboxVAO);
 	glDeleteBuffers(1, &skyboxVBO);
@@ -365,7 +327,7 @@ bool Display::launch_rendering(bool loop)
 
 // process all input : query GLFW whether relevant keys are pressed / released this frame and react accordingly
 // ---------------------------------------------------------------------------------------------------------
-void processInput(GLFWwindow * window)
+void processInput(GLFWwindow* window)
 {
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, true);
@@ -382,7 +344,7 @@ void processInput(GLFWwindow * window)
 
 // glfw: whenever the window size changed (by OS or user resize) this callback function executes
 // ---------------------------------------------------------------------------------------------
-void framebuffer_size_callback(GLFWwindow * window, int width, int height)
+void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
 	// make sure the viewport matches the new window dimensions; note that width and 
 	// height will be significantly larger than specified on retina displays.
@@ -489,7 +451,7 @@ void mouse_callback(GLFWwindow* window, int button, int action, int modifier)
 
 // glfw: whenever the mouse scroll wheel scrolls, this callback is called
 // ----------------------------------------------------------------------
-void scroll_callback(GLFWwindow * window, double xoffset, double yoffset)
+void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 {
 	//std::cout << "scroll callback -" << yoffset  << std::endl;
 

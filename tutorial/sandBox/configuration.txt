@@ -1,3 +1,1 @@
-C:/Users/ipism/source/repos/animation3D/tutorial/data/sphere.obj
-C:/Users/ipism/source/repos/animation3D/tutorial/data/cube.obj
-
+C:/Users/tal74/projects/animation/animation3D/tutorial/data/snake3.obj

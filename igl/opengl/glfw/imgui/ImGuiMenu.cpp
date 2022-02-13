@@ -106,91 +106,91 @@ IGL_INLINE void ImGuiMenu::init(Display* disp)
         ImGui::SetNextWindowSize(ImVec2(800, 2000), ImGuiCond_Always);
         static bool showWindow = true;
 
-        if (showWindow && viewer->level == 1) {
-            viewer->isGameStarted = false;
-            if (!ImGui::Begin(
-                "  3D Snake Game", &showWindow,
-                ImGuiWindowFlags_NoSavedSettings
-            )) {
-                ImGui::End();
-            }
-            else {
-                ImGui::SetWindowFontScale(1.5f);
-                ImGui::PushItemWidth(10);
-                ImGui::Text("\n\n\n\n");
-                ImGui::Text("	Score: %d", viewer->score);
-                ImGui::Text("	Level: %d", viewer->level);
-                ImGui::Text("               ");
-                ImGui::PopItemWidth();
-                showWindow = all_button_actions("Start Playin'", *viewer);
-                ImGui::End();
-            }
-        }
-        else if (viewer->isNextLevel)
-        {
-            viewer->isGameStarted = false;
-            if (!ImGui::Begin("		Next Level		", &showWindow,
-                ImGuiWindowFlags_NoSavedSettings
-            )) {
-                ImGui::End();
-            }
-            else {
-                ImGui::SetWindowFontScale(1.5f);
+        //if (showWindow && viewer->level == 1) {
+        //    viewer->isGameStarted = false;
+        //    if (!ImGui::Begin(
+        //        "  3D Snake Game", &showWindow,
+        //        ImGuiWindowFlags_NoSavedSettings
+        //    )) {
+        //        ImGui::End();
+        //    }
+        //    else {
+        //        ImGui::SetWindowFontScale(1.5f);
+        //        ImGui::PushItemWidth(10);
+        //        ImGui::Text("\n\n\n\n");
+        //        ImGui::Text("	Score: %d", viewer->score);
+        //        ImGui::Text("	Level: %d", viewer->level);
+        //        ImGui::Text("               ");
+        //        ImGui::PopItemWidth();
+        //        showWindow = all_button_actions("Start Playin'", *viewer);
+        //        ImGui::End();
+        //    }
+        //}
+        //else if (viewer->isNextLevel)
+        //{
+        //    viewer->isGameStarted = false;
+        //    if (!ImGui::Begin("		Next Level		", &showWindow,
+        //        ImGuiWindowFlags_NoSavedSettings
+        //    )) {
+        //        ImGui::End();
+        //    }
+        //    else {
+        //        ImGui::SetWindowFontScale(1.5f);
 
-                ImGui::PushItemWidth(-100);
-                ImGui::Text("Press NEXT LVL or START OVER\n\n");
-                ImGui::Text("    Score: %d", viewer->score);
-                ImGui::Text("    Level: %d", viewer->level);
-                ImGui::PopItemWidth();
+        //        ImGui::PushItemWidth(-100);
+        //        ImGui::Text("Press NEXT LVL or START OVER\n\n");
+        //        ImGui::Text("    Score: %d", viewer->score);
+        //        ImGui::Text("    Level: %d", viewer->level);
+        //        ImGui::PopItemWidth();
 
-                showWindow = all_button_actions("		NEXT LVL		", *viewer);
-                ImGui::End();
-            }
-        }
-        else if (viewer->isResume) {
-            viewer->isGameStarted = false;
-            if (!ImGui::Begin(
-                "Resume When Ready To Play", &showWindow,
-                ImGuiWindowFlags_NoSavedSettings
-            )) {
-                ImGui::End();
-            }
-            else {
-                ImGui::SetWindowFontScale(1.5f);
-                // Expose the same variable directly ...
-                ImGui::PushItemWidth(-100);
-                ImGui::Text("\n\n\n\n");
-                ImGui::Text("       Score: %d", viewer->score);
-                ImGui::Text("       Level: %d", viewer->level);
-                ImGui::Text("");
-                ImGui::PopItemWidth();
+        //        showWindow = all_button_actions("		NEXT LVL		", *viewer);
+        //        ImGui::End();
+        //    }
+        //}
+        //else if (viewer->isResume) {
+        //    viewer->isGameStarted = false;
+        //    if (!ImGui::Begin(
+        //        "Resume When Ready To Play", &showWindow,
+        //        ImGuiWindowFlags_NoSavedSettings
+        //    )) {
+        //        ImGui::End();
+        //    }
+        //    else {
+        //        ImGui::SetWindowFontScale(1.5f);
+        //        // Expose the same variable directly ...
+        //        ImGui::PushItemWidth(-100);
+        //        ImGui::Text("\n\n\n\n");
+        //        ImGui::Text("       Score: %d", viewer->score);
+        //        ImGui::Text("       Level: %d", viewer->level);
+        //        ImGui::Text("");
+        //        ImGui::PopItemWidth();
 
 
-                showWindow = all_button_actions("RESUME", *viewer);
-                ImGui::End();
-            }
-        }
-        else {
-            if (!ImGui::Begin(
-                "Give Your Best Shot", &showWindow,
-                ImGuiWindowFlags_NoSavedSettings
-            )) {
-                ImGui::End();
-            }
-            else {
+        //        showWindow = all_button_actions("RESUME", *viewer);
+        //        ImGui::End();
+        //    }
+        //}
+        //else {
+        //    if (!ImGui::Begin(
+        //        "Give Your Best Shot", &showWindow,
+        //        ImGuiWindowFlags_NoSavedSettings
+        //    )) {
+        //        ImGui::End();
+        //    }
+        //    else {
 
-                ImGui::SetWindowFontScale(1.5f);
-                // Expose the same variable directly ...
-                viewer->isGameStarted = true;
-                ImGui::PushItemWidth(-100);
-                ImGui::Text("\n\n\n\n");
-                ImGui::Text("Score: %d", viewer->score);
-                ImGui::Text("Level: %d", viewer->level);
+        //        ImGui::SetWindowFontScale(1.5f);
+        //        // Expose the same variable directly ...
+        //        viewer->isGameStarted = true;
+        //        ImGui::PushItemWidth(-100);
+        //        ImGui::Text("\n\n\n\n");
+        //        ImGui::Text("Score: %d", viewer->score);
+        //        ImGui::Text("Level: %d", viewer->level);
 
-                ImGui::PopItemWidth();
-                ImGui::End();
-            }
-        }
+        //        ImGui::PopItemWidth();
+        //        ImGui::End();
+        //    }
+        //}
     };
   }
 }
