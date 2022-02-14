@@ -151,6 +151,8 @@ namespace igl
 
                 IGL_INLINE void add_score(int);
 
+                IGL_INLINE void update_timer();
+
                 IGL_INLINE void move_snake();
 
                 IGL_INLINE void calc_all_weights();
@@ -205,11 +207,12 @@ namespace igl
                 bool start;
                 bool isResume;
                 bool isGameStarted;
-
+                
                 int TTL;
 
                 int level;
                 int score;
+                int timer;
                 int start_time;
                 double p; // probability to generate target of type 1
                 int target2_creation;

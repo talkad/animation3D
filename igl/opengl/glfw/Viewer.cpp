@@ -95,7 +95,8 @@ namespace igl
                 isLost(false),
                 start(true),
                 isResume(false),
-                isGameStarted(false)
+                isGameStarted(false),
+                timer(0)
             {
                 data_list.front().id = 0;
 
@@ -638,6 +639,11 @@ namespace igl
                     score += 25;
                     // activate special abilities
                 }
+            }
+
+            IGL_INLINE void Viewer::update_timer() {
+                int offset = static_cast<int>(glfwGetTime()) - start_time;
+                timer = (level * 20) - offset;
             }
 
             IGL_INLINE Eigen::VectorXd Viewer::create_weight_vec(double w1, double idx_w1, double w2, double idx_w2)

@@ -49,11 +49,13 @@ protected:
 
 
 public:
-    IGL_INLINE bool all_button_actions(const char* id, Viewer& viewer);
+    IGL_INLINE void all_button_actions(const char* id, Viewer& viewer);
 
     IGL_INLINE virtual void init(Display* disp);// override;
 
     IGL_INLINE virtual void init_callback(Viewer&);
+
+    IGL_INLINE virtual void display_stats(Viewer&);
 
   IGL_INLINE virtual void reload_font(int font_size = 32);
 

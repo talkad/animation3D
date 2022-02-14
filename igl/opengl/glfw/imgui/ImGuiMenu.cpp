@@ -28,49 +28,9 @@ namespace glfw
 {
 namespace imgui
 {
-    IGL_INLINE bool ImGuiMenu::all_button_actions(const char* id, Viewer& viewer) {
+    IGL_INLINE void ImGuiMenu::all_button_actions(const char* id, Viewer& viewer) {
 
-        static bool isButtuned = false;//checking if any buttoned is pressed
-        bool window_appirance = true;
-
-        if (isButtuned == true) {
-            viewer.isActive = true;
-            window_appirance = false;
-            isButtuned = false;
-        }
-        else if (viewer.isNewLevel) {
-            if (ImGui::Button("	  START OVER		")) {
-                window_appirance = true;
-                isButtuned = true;
-                viewer.isNewLevel = false;
-                viewer.isActive = true;
-                viewer.score = 0;
-            }
-            if (ImGui::Button("	  NEXT LEVEL		")) {
-                window_appirance = true;
-                isButtuned = true;
-                viewer.isNewLevel = false;
-                viewer.isActive = true;
-                viewer.score = 0;
-                viewer.level += 1;
-            }
-        }
-        else if (viewer.isResume) {
-            if (ImGui::Button("              RESUME              ")) {
-                window_appirance = true;
-                isButtuned = true;
-                viewer.isActive = true;//it ruined the movment
-                viewer.isResume = false;
-                viewer.isGameStarted = true;
-                viewer.isNewLevel = false;
-            }
-        }
-        else
-        {
-            if (ImGui::Button("                   Let's Start                    "))
-                isButtuned = true;
-        }
-        return window_appirance;
+        ImGui::Button("                       Start                        ");
     }
 
 
@@ -104,98 +64,79 @@ IGL_INLINE void ImGuiMenu::init_callback(Viewer& viewer)
     {
 
         ImGui::CreateContext();
-        ImGui::SetNextWindowPos(ImVec2(0.f * this->menu_scaling(), 0), ImGuiCond_Always);
-        ImGui::SetNextWindowSize(ImVec2(480, 2000), ImGuiCond_Always);
-        static bool showWindow = true;
+        ImGui::SetNextWindowPos(ImVec2(0, 0), ImGuiCond_Always);
+        ImGui::SetNextWindowSize(ImVec2(485, 2000), ImGuiCond_Always);
+        bool isVisibleWindow = true;
 
-        if (showWindow && viewer.level == 1) {
+        if (viewer.level == 1) {
             viewer.isGameStarted = false;
-            if (!ImGui::Begin(
-                "   The Best Snake Game", &showWindow,
-                ImGuiWindowFlags_NoSavedSettings
-            )) {
+
+            if (!ImGui::Begin("   The Best Snake Game", &isVisibleWindow, ImGuiWindowFlags_NoSavedSettings)) {
                 ImGui::End();
             }
             else {
-                
-                ImGui::SetWindowFontScale(1.5f);
-                ImGui::PushItemWidth(10);
-                ImGui::Text("\n\n");
-                ImGui::TextColored(ImVec4(1,0,0,1), "	     Score: %d", viewer.score); // to be changed
-                ImGui::Text("\n");
-                ImGui::Text("	     Level: %d", viewer.level);
-                ImGui::Text("\n\n");
-                ImGui::PopItemWidth();
-                showWindow = all_button_actions("   Start Playin'", viewer);
+                display_stats(viewer);
+                all_button_actions("   Game in Progress     ", viewer);
                 ImGui::End();
             }
         }
         else if (viewer.isNewLevel)
         {
             viewer.isGameStarted = false;
-            if (!ImGui::Begin("		Next Level		", &showWindow,
-                ImGuiWindowFlags_NoSavedSettings
-            )) {
+            if (!ImGui::Begin("		   Level up		   ", &isVisibleWindow, ImGuiWindowFlags_NoSavedSettings)) {
                 ImGui::End();
             }
             else {
-                ImGui::SetWindowFontScale(1.5f);
 
-                ImGui::PushItemWidth(-100);
-                ImGui::Text("Press NEXT LVL or START OVER\n\n");
-                ImGui::Text("    Score: %d", viewer.score);
-                ImGui::Text("    Level: %d", viewer.level);
-                ImGui::PopItemWidth();
+                //ImGui::Text("Press NEXT LVL or START OVER\n\n");
+                display_stats(viewer);
 
-                showWindow = all_button_actions("		NEXT LVL		", viewer);
+                all_button_actions("		   Level up		   ", viewer);
                 ImGui::End();
             }
         }
         else if (viewer.isResume) {
             viewer.isGameStarted = false;
-            if (!ImGui::Begin(
-                "Resume When Ready To Play", &showWindow,
-                ImGuiWindowFlags_NoSavedSettings
-            )) {
+            if (!ImGui::Begin("  Game Paused", &isVisibleWindow, ImGuiWindowFlags_NoSavedSettings)) {
                 ImGui::End();
             }
             else {
-                ImGui::SetWindowFontScale(1.5f);
-                // Expose the same variable directly ...
-                ImGui::PushItemWidth(-100);
-                ImGui::Text("\n\n\n\n");
-                ImGui::Text("       Score: %d", viewer.score);
-                ImGui::Text("       Level: %d", viewer.level);
-                ImGui::Text("");
-                ImGui::PopItemWidth();
+                display_stats(viewer);
 
-                showWindow = all_button_actions("RESUME", viewer);
+                all_button_actions("         Resume         ", viewer);
                 ImGui::End();
             }
         }
         else {
-            if (!ImGui::Begin(
-                "Give Your Best Shot", &showWindow,
-                ImGuiWindowFlags_NoSavedSettings
-            )) {
+            if (!ImGui::Begin("  Game in Progress", &isVisibleWindow, ImGuiWindowFlags_NoSavedSettings)) {
                 ImGui::End();
             }
             else {
-
-                ImGui::SetWindowFontScale(1.5f);
-                // Expose the same variable directly ...
                 viewer.isGameStarted = true;
-                ImGui::PushItemWidth(-100);
-
-                ImGui::Text("\n\n\n\n");
-                ImGui::Text("Score: %d", viewer.score);
-                ImGui::Text("Level: %d", viewer.level);
-
-                ImGui::PopItemWidth();
+                display_stats(viewer);
                 ImGui::End();
             }
         }
     };
+}
+
+IGL_INLINE void ImGuiMenu::display_stats(Viewer& viewer)
+{
+    viewer.update_timer();
+
+    ImGui::SetWindowFontScale(1.5f);
+    ImGui::Text("\n\n");
+    ImGui::Text("	     Level: %d", viewer.score);
+    ImGui::Text("\n");
+    ImGui::Text("	     Score: %d", viewer.level);
+    ImGui::Text("\n");
+
+    if(viewer.timer <= 5)
+        ImGui::TextColored(ImVec4(1, 0, 0, 1), "	     Time: %d", viewer.timer);
+    else
+        ImGui::Text("	     Time: %d", viewer.timer);
+
+    ImGui::Text("\n\n");
 }
 
 IGL_INLINE void ImGuiMenu::reload_font(int font_size)
