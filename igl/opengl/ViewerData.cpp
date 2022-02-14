@@ -228,7 +228,7 @@ IGL_INLINE void igl::opengl::ViewerData::initiate_speed()
         drawCurve();
     }
     if (type == 2) {
-        speed = Eigen::Vector3d(x / 2, y / 20, z / 10);
+        speed = Eigen::Vector3d(x / 2, y / 20, z / 5);
 
         if (x > 0)
             MyTranslateInSystem(GetRotation(), Eigen::Vector3d(-8, 0, 0));
@@ -236,7 +236,7 @@ IGL_INLINE void igl::opengl::ViewerData::initiate_speed()
             MyTranslateInSystem(GetRotation(), Eigen::Vector3d(8, 0, 0));
     }
     else {
-        speed = Eigen::Vector3d(x / 2, y / 20, z / 20);
+        speed = Eigen::Vector3d(x / 2, y / 20, z / 10);
 
         if(x > 0)
             MyTranslateInSystem(GetRotation(), Eigen::Vector3d(-8, 0, 0));

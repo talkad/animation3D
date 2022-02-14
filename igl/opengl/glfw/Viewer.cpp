@@ -43,6 +43,7 @@
 #include <igl/serialize.h>
 #include <igl/get_seconds.h>
 #include <GLFW/glfw3.h>
+#include <igl/dqs.h>
 
 
 // Internal global variables used for glfw event handling
@@ -82,10 +83,19 @@ namespace igl
                 snake_view(false),
                 prev_tic(0),
                 TTL(10),
-                level(3),  // change to zero xxxxxxxxxxxxxxxxxxxxxxx
+                level(0),
                 score(0),
                 start_time(0),
-                target2_creation(3)
+                target2_creation(3),
+                joints_num(16),
+                scale(2),
+                direction(' '),
+                previous_direction('r'),
+                isNewLevel(false),
+                isLost(false),
+                start(true),
+                isResume(false),
+                isGameStarted(false)
             {
                 data_list.front().id = 0;
 
@@ -549,7 +559,7 @@ namespace igl
                     else {
                         double target_proba = (double)(rand() % 10) / 10;
                         
-                        std::cout << target_proba << "<" << p << std::endl;
+                        //std::cout << target_proba << "<" << p << std::endl;
 
                         if (target_proba < p)
                             data().update_movement_type(1);
@@ -630,7 +640,112 @@ namespace igl
                 }
             }
 
-            Eigen::Matrix4d Viewer::CalcParentsTrans(int indx)
+            IGL_INLINE Eigen::VectorXd Viewer::create_weight_vec(double w1, double idx_w1, double w2, double idx_w2)
+            {
+                Eigen::VectorXd Wi;
+                Wi.resize(joints_num + 1);
+
+                for (int i = 0; i < Wi.size(); ++i)
+                {
+                    i == idx_w1 ? Wi[idx_w1] = w1 :
+                        i == idx_w2 ? Wi[idx_w2] = w2 :
+                        Wi[i] = 0;
+                }
+                return Wi;
+            }
+
+            IGL_INLINE void Viewer::calc_all_weights()
+            {
+                Eigen::MatrixXd V = data_list[0].V;
+                int vertexNum = V.rows();
+                W.resize(vertexNum, 17);
+
+                double z_axe_coord, w_1, w_2, lower_bound, upper_bound;
+                for (int i = 0; i < vertexNum; ++i) {
+                    z_axe_coord = V(i, 2);
+                    lower_bound = (floor(z_axe_coord * 10)) / 10;
+                    upper_bound = (ceil(z_axe_coord * 10)) / 10;
+                    w_1 = abs(z_axe_coord - upper_bound) * 10;
+                    w_2 = 1 - w_1;
+                    W.row(i) = create_weight_vec(w_1, lower_bound * 10 + 8, w_2, upper_bound * 10 + 8);
+                }
+            }
+
+            IGL_INLINE void Viewer::next_vertices_position()
+            {
+                vT[0] = skinnedSkeleton[0];
+                for (int i = 0; i < joints_num; ++i) {
+                    vT[i + 1] = skinnedSkeleton[i + 1];
+                    vT[i] += (vT[i + 1] - vT[i]) / 6;
+                }
+                vT[joints_num] += target_pose;
+            }
+
+            IGL_INLINE void Viewer::add_weights() {
+                double distance;
+                Eigen::MatrixXd V = data_list[0].V;
+                int vertexNum = V.rows();
+                W.resize(vertexNum, 17);
+
+                for (int i = 0; i < vertexNum; ++i) {
+                    double related_distance = calc_related_distance(i);
+                    for (int j = 0; j < skinnedSkeleton.size(); ++j) {
+                        distance = abs(skinnedSkeleton[j].z() - V(i, 2));
+                        W(i, j) = pow((1 / distance), 4) / related_distance;
+                    }
+                    W.row(i).normalized();
+                }
+            }
+
+            IGL_INLINE double Viewer::calc_related_distance(int i) {
+                double sum = 0, distance;
+
+                for (int j = 0; j < skinnedSkeleton.size(); ++j) {
+                    distance = abs(skinnedSkeleton[j].z() - data_list[0].V(i, 2));
+                    if (distance <= 0.1)
+                        sum += pow((1 / distance), 4);
+                }
+                return sum;
+            }
+
+            IGL_INLINE void Viewer::move_snake() {
+                double snake_speed = 0.1;
+
+                if (direction != ' ')
+                {
+                    switch (direction) {
+                    case 'l':
+                        target_pose = Eigen::Vector3d(0, 0, -snake_speed);
+                        break;
+                    case 'r':
+                        target_pose = Eigen::Vector3d(0, 0, snake_speed);
+                        break;
+                    case 'u':
+                        target_pose = Eigen::Vector3d(0, snake_speed, 0);
+                        break;
+                    case 'd':
+                        target_pose = Eigen::Vector3d(0, -snake_speed, 0);
+                        break;
+                    case 'w':
+                        target_pose = Eigen::Vector3d(snake_speed, 0, 0);
+                        break;
+                    case 's':
+                        target_pose = Eigen::Vector3d(-snake_speed, 0, 0);
+                        break;
+                    default:
+                        break;
+                    }
+
+                    next_vertices_position();
+                    igl::dqs(V, W, vQ, vT, U);
+                    data_list[0].set_vertices(U);
+
+                    for (int i = 0; i < skinnedSkeleton.size(); ++i)
+                        skinnedSkeleton[i] = vT[i];
+                }
+            }
+
+            IGL_INLINE Eigen::Matrix4d Viewer::CalcParentsTrans(int indx)
             {
                 Eigen::Matrix4d prevTrans = Eigen::Matrix4d::Identity();
 

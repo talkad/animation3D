@@ -14,11 +14,11 @@
 #include "../imgui.h"
 #include "igl/opengl/glfw/imgui/imgui_impl_glfw.h"
 #include "igl/opengl/glfw/imgui/imgui_impl_opengl3.h"
+#include "igl/opengl/glfw/renderer.h"
 
 //#include <imgui_fonts_droid_sans.h>
 //#include <GLFW/glfw3.h>
 #include <iostream>
-////////////////////////////////////////////////////////////////////////////////
 
 namespace igl
 {
@@ -38,18 +38,18 @@ namespace imgui
             window_appirance = false;
             isButtuned = false;
         }
-        else if (viewer.isNextLevel) {
+        else if (viewer.isNewLevel) {
             if (ImGui::Button("	  START OVER		")) {
                 window_appirance = true;
                 isButtuned = true;
-                viewer.isNextLevel = false;
+                viewer.isNewLevel = false;
                 viewer.isActive = true;
                 viewer.score = 0;
             }
             if (ImGui::Button("	  NEXT LEVEL		")) {
                 window_appirance = true;
                 isButtuned = true;
-                viewer.isNextLevel = false;
+                viewer.isNewLevel = false;
                 viewer.isActive = true;
                 viewer.score = 0;
                 viewer.level += 1;
@@ -62,12 +62,12 @@ namespace imgui
                 viewer.isActive = true;//it ruined the movment
                 viewer.isResume = false;
                 viewer.isGameStarted = true;
-                viewer.isNextLevel = false;
+                viewer.isNewLevel = false;
             }
         }
         else
         {
-            if (ImGui::Button("             Let's Start             "))
+            if (ImGui::Button("                   Let's Start                    "))
                 isButtuned = true;
         }
         return window_appirance;
@@ -76,123 +76,126 @@ namespace imgui
 
 IGL_INLINE void ImGuiMenu::init(Display* disp)
 {
-  // Setup ImGui binding
-  if (disp->window)
-  {
-  Viewer* viewer = (Viewer*)(disp->GetScene());
-
-    IMGUI_CHECKVERSION();
-    if (!context_)
+    // Setup ImGui binding
+    if (disp->window)
     {
-      // Single global context by default, but can be overridden by the user
-      static ImGuiContext * __global_context = ImGui::CreateContext();
-      context_ = __global_context;
+        IMGUI_CHECKVERSION();
+        if (!context_)
+        {
+            // Single global context by default, but can be overridden by the user
+            static ImGuiContext* __global_context = ImGui::CreateContext();
+            context_ = __global_context;
+        }
+        const char* glsl_version = "#version 150";
+
+        ImGui_ImplGlfw_InitForOpenGL(disp->window, true);
+        ImGui_ImplOpenGL3_Init(glsl_version);
+        ImGui::GetIO().IniFilename = nullptr;
+        ImGui::StyleColorsClassic();
+        ImGuiStyle& style = ImGui::GetStyle();
+        style.FrameRounding = 5.0f;
+        reload_font();
     }
-    const char* glsl_version = "#version 150";
+}
 
-    ImGui_ImplGlfw_InitForOpenGL(disp->window, true);
-    ImGui_ImplOpenGL3_Init(glsl_version);
-    ImGui::GetIO().IniFilename = nullptr;
-    ImGui::StyleColorsDark();
-    ImGuiStyle& style = ImGui::GetStyle();
-    style.FrameRounding = 5.0f;
-    reload_font();
-
+IGL_INLINE void ImGuiMenu::init_callback(Viewer& viewer)
+{
     this->callback_draw_custom_window = [&]()
     {
+
         ImGui::CreateContext();
-        // window position + size
         ImGui::SetNextWindowPos(ImVec2(0.f * this->menu_scaling(), 0), ImGuiCond_Always);
-        ImGui::SetNextWindowSize(ImVec2(800, 2000), ImGuiCond_Always);
+        ImGui::SetNextWindowSize(ImVec2(480, 2000), ImGuiCond_Always);
         static bool showWindow = true;
 
-        //if (showWindow && viewer->level == 1) {
-        //    viewer->isGameStarted = false;
-        //    if (!ImGui::Begin(
-        //        "  3D Snake Game", &showWindow,
-        //        ImGuiWindowFlags_NoSavedSettings
-        //    )) {
-        //        ImGui::End();
-        //    }
-        //    else {
-        //        ImGui::SetWindowFontScale(1.5f);
-        //        ImGui::PushItemWidth(10);
-        //        ImGui::Text("\n\n\n\n");
-        //        ImGui::Text("	Score: %d", viewer->score);
-        //        ImGui::Text("	Level: %d", viewer->level);
-        //        ImGui::Text("               ");
-        //        ImGui::PopItemWidth();
-        //        showWindow = all_button_actions("Start Playin'", *viewer);
-        //        ImGui::End();
-        //    }
-        //}
-        //else if (viewer->isNextLevel)
-        //{
-        //    viewer->isGameStarted = false;
-        //    if (!ImGui::Begin("		Next Level		", &showWindow,
-        //        ImGuiWindowFlags_NoSavedSettings
-        //    )) {
-        //        ImGui::End();
-        //    }
-        //    else {
-        //        ImGui::SetWindowFontScale(1.5f);
+        if (showWindow && viewer.level == 1) {
+            viewer.isGameStarted = false;
+            if (!ImGui::Begin(
+                "   The Best Snake Game", &showWindow,
+                ImGuiWindowFlags_NoSavedSettings
+            )) {
+                ImGui::End();
+            }
+            else {
+                
+                ImGui::SetWindowFontScale(1.5f);
+                ImGui::PushItemWidth(10);
+                ImGui::Text("\n\n");
+                ImGui::TextColored(ImVec4(1,0,0,1), "	     Score: %d", viewer.score); // to be changed
+                ImGui::Text("\n");
+                ImGui::Text("	     Level: %d", viewer.level);
+                ImGui::Text("\n\n");
+                ImGui::PopItemWidth();
+                showWindow = all_button_actions("   Start Playin'", viewer);
+                ImGui::End();
+            }
+        }
+        else if (viewer.isNewLevel)
+        {
+            viewer.isGameStarted = false;
+            if (!ImGui::Begin("		Next Level		", &showWindow,
+                ImGuiWindowFlags_NoSavedSettings
+            )) {
+                ImGui::End();
+            }
+            else {
+                ImGui::SetWindowFontScale(1.5f);
 
-        //        ImGui::PushItemWidth(-100);
-        //        ImGui::Text("Press NEXT LVL or START OVER\n\n");
-        //        ImGui::Text("    Score: %d", viewer->score);
-        //        ImGui::Text("    Level: %d", viewer->level);
-        //        ImGui::PopItemWidth();
+                ImGui::PushItemWidth(-100);
+                ImGui::Text("Press NEXT LVL or START OVER\n\n");
+                ImGui::Text("    Score: %d", viewer.score);
+                ImGui::Text("    Level: %d", viewer.level);
+                ImGui::PopItemWidth();
 
-        //        showWindow = all_button_actions("		NEXT LVL		", *viewer);
-        //        ImGui::End();
-        //    }
-        //}
-        //else if (viewer->isResume) {
-        //    viewer->isGameStarted = false;
-        //    if (!ImGui::Begin(
-        //        "Resume When Ready To Play", &showWindow,
-        //        ImGuiWindowFlags_NoSavedSettings
-        //    )) {
-        //        ImGui::End();
-        //    }
-        //    else {
-        //        ImGui::SetWindowFontScale(1.5f);
-        //        // Expose the same variable directly ...
-        //        ImGui::PushItemWidth(-100);
-        //        ImGui::Text("\n\n\n\n");
-        //        ImGui::Text("       Score: %d", viewer->score);
-        //        ImGui::Text("       Level: %d", viewer->level);
-        //        ImGui::Text("");
-        //        ImGui::PopItemWidth();
+                showWindow = all_button_actions("		NEXT LVL		", viewer);
+                ImGui::End();
+            }
+        }
+        else if (viewer.isResume) {
+            viewer.isGameStarted = false;
+            if (!ImGui::Begin(
+                "Resume When Ready To Play", &showWindow,
+                ImGuiWindowFlags_NoSavedSettings
+            )) {
+                ImGui::End();
+            }
+            else {
+                ImGui::SetWindowFontScale(1.5f);
+                // Expose the same variable directly ...
+                ImGui::PushItemWidth(-100);
+                ImGui::Text("\n\n\n\n");
+                ImGui::Text("       Score: %d", viewer.score);
+                ImGui::Text("       Level: %d", viewer.level);
+                ImGui::Text("");
+                ImGui::PopItemWidth();
 
+                showWindow = all_button_actions("RESUME", viewer);
+                ImGui::End();
+            }
+        }
+        else {
+            if (!ImGui::Begin(
+                "Give Your Best Shot", &showWindow,
+                ImGuiWindowFlags_NoSavedSettings
+            )) {
+                ImGui::End();
+            }
+            else {
 
-        //        showWindow = all_button_actions("RESUME", *viewer);
-        //        ImGui::End();
-        //    }
-        //}
-        //else {
-        //    if (!ImGui::Begin(
-        //        "Give Your Best Shot", &showWindow,
-        //        ImGuiWindowFlags_NoSavedSettings
-        //    )) {
-        //        ImGui::End();
-        //    }
-        //    else {
+                ImGui::SetWindowFontScale(1.5f);
+                // Expose the same variable directly ...
+                viewer.isGameStarted = true;
+                ImGui::PushItemWidth(-100);
 
-        //        ImGui::SetWindowFontScale(1.5f);
-        //        // Expose the same variable directly ...
-        //        viewer->isGameStarted = true;
-        //        ImGui::PushItemWidth(-100);
-        //        ImGui::Text("\n\n\n\n");
-        //        ImGui::Text("Score: %d", viewer->score);
-        //        ImGui::Text("Level: %d", viewer->level);
+                ImGui::Text("\n\n\n\n");
+                ImGui::Text("Score: %d", viewer.score);
+                ImGui::Text("Level: %d", viewer.level);
 
-        //        ImGui::PopItemWidth();
-        //        ImGui::End();
-        //    }
-        //}
+                ImGui::PopItemWidth();
+                ImGui::End();
+            }
+        }
     };
-  }
 }
 
 IGL_INLINE void ImGuiMenu::reload_font(int font_size)
@@ -201,6 +204,7 @@ IGL_INLINE void ImGuiMenu::reload_font(int font_size)
   pixel_ratio_ = pixel_ratio();
   ImGuiIO& io = ImGui::GetIO();
   io.Fonts->Clear();
+  font = io.Fonts->AddFontFromFileTTF("../../../fonts/KaushanScript-Regular.ttf", font_size);
  // io.Fonts->AddFontFromMemoryCompressedTTF(droid_sans_compressed_data,
  //   droid_sans_compressed_size, font_size * hidpi_scaling_);
   io.FontGlobalScale = 1.0 / pixel_ratio_;
@@ -305,7 +309,11 @@ IGL_INLINE void ImGuiMenu::draw_menu(igl::opengl::glfw::Viewer* viewer, std::vec
   else { draw_viewer_window(viewer,core); }
 
   // Other windows
-  if (callback_draw_custom_window) { callback_draw_custom_window(); }
+  if (callback_draw_custom_window) { 
+      std::cout << "Bbbbbbbbbbbbb" << std::endl;
+
+      callback_draw_custom_window(); 
+  }
   else { draw_custom_window(); }
 }
 

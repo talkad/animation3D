@@ -59,7 +59,7 @@ static void glfw_error_callback(int error, const char* description)
 	fputs(description, stderr);
 }
 
-Display::Display(int windowWidth, int windowHeight, const std::string& title)
+Display::Display(int windowWidth, int windowHeight, const std::string& title): renderer(0)
 {
 	bool resizable = true, fullscreen = false;
 	glfwSetErrorCallback(glfw_error_callback);
@@ -98,6 +98,8 @@ Display::Display(int windowWidth, int windowHeight, const std::string& title)
 				//	windowHeight = 800;
 	//			window = glfwCreateWindow(windowWidth, windowHeight, title.c_str(), nullptr, nullptr);
 	//		}
+	// 
+	//window = glfwCreateWindow(windowWidth, windowHeight, title.c_str(), glfwGetMonitorPos(), nullptr);
 	window = glfwCreateWindow(windowWidth, windowHeight, title.c_str(), nullptr, nullptr);
 	if (!window)
 	{

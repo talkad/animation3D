@@ -153,7 +153,7 @@ IGL_INLINE void Renderer::init(igl::opengl::glfw::Viewer* viewer, int coresNum, 
 			// Draw parent menu content
 			//menu->draw_viewer_menu(scn, core_list);
 			menu->callback_draw_custom_window();
-
+			
 		};
 	}
 }

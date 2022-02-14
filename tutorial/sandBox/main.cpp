@@ -28,6 +28,10 @@ int main(int argc, char* argv[])
 	renderer.init(&viewer, 2, &menu);
 
 	disp->SetRenderer(&renderer);
+	menu.init_callback(viewer);
+
 	disp->launch_rendering(true);
+
+
 	delete disp;
 }

@@ -151,6 +151,19 @@ namespace igl
 
                 IGL_INLINE void add_score(int);
 
+                IGL_INLINE void move_snake();
+
+                IGL_INLINE void calc_all_weights();
+
+                IGL_INLINE Eigen::VectorXd create_weight_vec(double, double, double, double);
+
+                IGL_INLINE void next_vertices_position();
+
+                IGL_INLINE void add_weights();
+
+                IGL_INLINE double calc_related_distance(int i);
+
+
                 inline bool SetAnimation() {
                     if (isActive)
                         fixAxis();
@@ -187,12 +200,11 @@ namespace igl
 
 
                 Eigen::Vector3d target_pose;
-                int counter = 0;
-                bool isNextLevel = false;
-                bool gameLost = false;
-                bool start = true;
-                bool isResume = false;
-                bool isGameStarted = false;
+                bool isNewLevel;
+                bool isLost;
+                bool start;
+                bool isResume;
+                bool isGameStarted;
 
                 int TTL;
 
@@ -202,9 +214,29 @@ namespace igl
                 double p; // probability to generate target of type 1
                 int target2_creation;
 
+                //Eigen::Vector3d target_pose;
+                int scale;
+                int joints_num;
+                std::vector<Eigen::Vector3d> skinnedSkeleton;
+                std::vector<Movable> Joints;
+                unsigned char direction;
+                unsigned char previous_direction;
 
-                // List of registered plugins
-            //    std::vector<ViewerPlugin*> plugins;
+                typedef
+                    std::vector<Eigen::Quaterniond, Eigen::aligned_allocator<Eigen::Quaterniond> >
+                    RotationList;
+
+                // W - weights matrix
+                // BE - Edges between joints
+                // C - joints positions
+                // P - parents
+                // M - weights per vertex per joint matrix
+                // U - new vertices position after skinning
+                Eigen::MatrixXd V, W, C, U, M;
+                Eigen::MatrixXi F, BE;
+                Eigen::VectorXi P;
+                RotationList vQ;
+                std::vector<Eigen::Vector3d> vT;
 
                 // Keep track of the global position of the scrollwheel
                 float scroll_position;
