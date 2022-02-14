@@ -17,7 +17,6 @@
 #include <iostream>
 #include <Windows.h>
 #include <MMSystem.h>
-
 #pragma comment(lib, "winmm.lib")
 #include <igl/get_seconds.h>
 #include "external/glfw/include/GLFW/glfw3.h"

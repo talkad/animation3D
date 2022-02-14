@@ -52,8 +52,6 @@ void SandBox::Init(const std::string& config)
 
     MyTranslateInSystem(GetRotation(), Eigen::RowVector3d(0, 0, -10));
 
-	start_level(); // remove it xxxxxxxxxxxxxxxxxxxxxxxxx
-
 }
 
 SandBox::~SandBox()

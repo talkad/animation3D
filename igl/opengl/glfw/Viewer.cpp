@@ -44,6 +44,9 @@
 #include <igl/get_seconds.h>
 #include <GLFW/glfw3.h>
 #include <igl/dqs.h>
+#include <Windows.h>
+#include <MMSystem.h>
+#pragma comment(lib, "winmm.lib")
 
 
 // Internal global variables used for glfw event handling
@@ -83,7 +86,7 @@ namespace igl
                 snake_view(false),
                 prev_tic(0),
                 TTL(10),
-                level(0),
+                level(1),
                 score(0),
                 start_time(0),
                 target2_creation(3),
@@ -92,11 +95,15 @@ namespace igl
                 direction(' '),
                 previous_direction('r'),
                 isNewLevel(false),
-                isLost(false),
+                isGameOver(false),
                 start(true),
                 isResume(false),
                 isGameStarted(false),
-                timer(0)
+                isPaused(false),
+                timer(0),
+                pause_time(0),
+                resume_time(0),
+                paused_time(0)
             {
                 data_list.front().id = 0;
 
@@ -377,6 +384,9 @@ namespace igl
             IGL_INLINE void Viewer::clean_data_list() {
                 // attempt to use erase_mesh ended up with failure
 
+                if (!isGameStarted || isPaused || isGameOver)
+                    return;
+
                 float tic = static_cast<float>(glfwGetTime());
                 for (auto& mesh : data_list) {
                     if (mesh.type > 0 && !mesh.isTerminated && tic - mesh.creation_time > TTL) {
@@ -527,14 +537,19 @@ namespace igl
 
             IGL_INLINE void Viewer::move_targets()
             {
-                for (auto& data : data_list) {
-                    if (data.type > 0)
-                        data.move();
+                if (!isPaused && !isGameOver) {
+                    for (auto& data : data_list) {
+                        if (data.type > 0)
+                            data.move();
+                    }
                 }
             }
 
             IGL_INLINE void Viewer::generate_target()
             {
+                if (!isGameStarted || isPaused || isGameOver)
+                    return;
+
                 float tic = static_cast<float>(glfwGetTime());
                 //std::cout << tic << std::endl;
                 if (tic - prev_tic > 5) {
@@ -621,11 +636,16 @@ namespace igl
 
             // start a new level
             IGL_INLINE void Viewer::start_level() {
-                level++;
-                score = 0;
+
                 start_time = static_cast<int>(glfwGetTime());
+                paused_time = 0;
 
                 p = 1.0 / level + 0.33;
+            }
+
+            IGL_INLINE void Viewer::level_up() {
+                level++;
+                PlaySound(TEXT("C:/Users/tal74/projects/animation/animation3D/tutorial/sounds/nextLevel.wav"), NULL, SND_NODEFAULT | SND_ASYNC);
             }
 
             IGL_INLINE void Viewer::add_score(int type) {
@@ -643,7 +663,12 @@ namespace igl
 
             IGL_INLINE void Viewer::update_timer() {
                 int offset = static_cast<int>(glfwGetTime()) - start_time;
-                timer = (level * 20) - offset;
+                timer = (level * 20) - offset + paused_time;
+
+                if (timer == 0) {
+                    isGameOver = true;
+                    PlaySound(TEXT("C:/Users/tal74/projects/animation/animation3D/tutorial/sounds/gameOver.wav"), NULL, SND_NODEFAULT | SND_ASYNC);
+                }
             }
 
             IGL_INLINE Eigen::VectorXd Viewer::create_weight_vec(double w1, double idx_w1, double w2, double idx_w2)
@@ -716,6 +741,11 @@ namespace igl
 
             IGL_INLINE void Viewer::move_snake() {
                 double snake_speed = 0.1;
+
+                if (!isGameStarted || isPaused || isGameOver) {
+                    target_pose = Eigen::Vector3d(0, 0, 0);
+                    return;
+                }
 
                 if (direction != ' ')
                 {

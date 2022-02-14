@@ -28,10 +28,37 @@ namespace glfw
 {
 namespace imgui
 {
-    IGL_INLINE void ImGuiMenu::all_button_actions(const char* id, Viewer& viewer) {
 
-        ImGui::Button("                       Start                        ");
+IGL_INLINE void ImGuiMenu::all_button_actions(const char* id, Viewer& viewer) {
+
+    if (viewer.isGameOver && ImGui::Button("                 Play Again?                    ")) {
+        viewer.isGameOver = false;
+        viewer.isGameStarted = true;
+        viewer.level = 1;
+        viewer.score = 0;
+
+        viewer.start_level();
     }
+    else if (viewer.isGameStarted && !viewer.isGameOver) {
+        if (!viewer.isPaused && ImGui::Button("                       Pause                         ")) {
+            viewer.isPaused = true;
+            viewer.pause_time = static_cast<int>(glfwGetTime());
+        }
+        else if (viewer.isPaused && ImGui::Button("                       Resume                      ")) {
+            viewer.isPaused = false;
+            viewer.resume_time = static_cast<int>(glfwGetTime());
+
+            viewer.paused_time += (viewer.resume_time - viewer.pause_time);
+        }
+
+    }
+    else if (!viewer.isGameOver && ImGui::Button("                       Start                        ")) {
+        //std::cout << "b" << std::endl;
+        viewer.isGameStarted = true;
+        viewer.start_level();
+    }
+            
+}
 
 
 IGL_INLINE void ImGuiMenu::init(Display* disp)
@@ -69,7 +96,7 @@ IGL_INLINE void ImGuiMenu::init_callback(Viewer& viewer)
         bool isVisibleWindow = true;
 
         if (viewer.level == 1) {
-            viewer.isGameStarted = false;
+            //viewer.isGameStarted = false;
 
             if (!ImGui::Begin("   The Best Snake Game", &isVisibleWindow, ImGuiWindowFlags_NoSavedSettings)) {
                 ImGui::End();
@@ -82,7 +109,7 @@ IGL_INLINE void ImGuiMenu::init_callback(Viewer& viewer)
         }
         else if (viewer.isNewLevel)
         {
-            viewer.isGameStarted = false;
+            //viewer.isGameStarted = false;
             if (!ImGui::Begin("		   Level up		   ", &isVisibleWindow, ImGuiWindowFlags_NoSavedSettings)) {
                 ImGui::End();
             }
@@ -95,46 +122,29 @@ IGL_INLINE void ImGuiMenu::init_callback(Viewer& viewer)
                 ImGui::End();
             }
         }
-        else if (viewer.isResume) {
-            viewer.isGameStarted = false;
-            if (!ImGui::Begin("  Game Paused", &isVisibleWindow, ImGuiWindowFlags_NoSavedSettings)) {
-                ImGui::End();
-            }
-            else {
-                display_stats(viewer);
-
-                all_button_actions("         Resume         ", viewer);
-                ImGui::End();
-            }
-        }
-        else {
-            if (!ImGui::Begin("  Game in Progress", &isVisibleWindow, ImGuiWindowFlags_NoSavedSettings)) {
-                ImGui::End();
-            }
-            else {
-                viewer.isGameStarted = true;
-                display_stats(viewer);
-                ImGui::End();
-            }
-        }
     };
 }
 
 IGL_INLINE void ImGuiMenu::display_stats(Viewer& viewer)
 {
-    viewer.update_timer();
 
     ImGui::SetWindowFontScale(1.5f);
     ImGui::Text("\n\n");
-    ImGui::Text("	     Level: %d", viewer.score);
+    ImGui::Text("	     Level: %d", viewer.level);
     ImGui::Text("\n");
-    ImGui::Text("	     Score: %d", viewer.level);
+    ImGui::Text("	     Score: %d", viewer.score);
     ImGui::Text("\n");
 
-    if(viewer.timer <= 5)
-        ImGui::TextColored(ImVec4(1, 0, 0, 1), "	     Time: %d", viewer.timer);
-    else
-        ImGui::Text("	     Time: %d", viewer.timer);
+    if (viewer.isGameStarted && !viewer.isGameOver) {
+
+        if(!viewer.isPaused)
+            viewer.update_timer();
+
+        if (viewer.timer <= 5)
+            ImGui::TextColored(ImVec4(1, 0, 0, 1), "	     Time: %d", viewer.timer);
+        else
+            ImGui::Text("	     Time: %d", viewer.timer);
+    }
 
     ImGui::Text("\n\n");
 }
@@ -251,8 +261,6 @@ IGL_INLINE void ImGuiMenu::draw_menu(igl::opengl::glfw::Viewer* viewer, std::vec
 
   // Other windows
   if (callback_draw_custom_window) { 
-      std::cout << "Bbbbbbbbbbbbb" << std::endl;
-
       callback_draw_custom_window(); 
   }
   else { draw_custom_window(); }
