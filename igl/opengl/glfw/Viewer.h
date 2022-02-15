@@ -142,9 +142,10 @@ namespace igl
 
                 IGL_INLINE void generate_target();
 
-                IGL_INLINE bool treeNodesCollide(AABB<Eigen::MatrixXd, 3>&, AABB<Eigen::MatrixXd, 3>&);
+                IGL_INLINE bool treeNodesCollide(AABB<Eigen::MatrixXd, 3>&, Eigen::AlignedBox<double, 3>&);
 
                 // check if two object in data_list are collided
+
                 IGL_INLINE void check_collision();
 
                 IGL_INLINE void start_level();
@@ -209,7 +210,7 @@ namespace igl
                 bool isGameStarted;
                 
                 int TTL;
-
+                unsigned int frames = 0;
                 int level;
                 int score;
                 int timer;
@@ -217,10 +218,9 @@ namespace igl
                 double p; // probability to generate target of type 1
                 int target2_creation;
 
-                //Eigen::Vector3d target_pose;
                 int scale;
                 int joints_num;
-                std::vector<Eigen::Vector3d> skinnedSkeleton;
+                std::vector<Eigen::Vector3d> skeleton;
                 std::vector<Movable> Joints;
                 unsigned char direction;
                 unsigned char previous_direction;
@@ -228,7 +228,7 @@ namespace igl
                 typedef
                     std::vector<Eigen::Quaterniond, Eigen::aligned_allocator<Eigen::Quaterniond> >
                     RotationList;
-
+                std::vector<Eigen::AlignedBox<double, 3>> jointBoxes;
                 // W - weights matrix
                 // BE - Edges between joints
                 // C - joints positions

@@ -89,27 +89,33 @@ static void glfw_key_callback(GLFWwindow* window, int key, int scancode, int act
 			break;
 		case 'w':
 		case 'W':
+			scn->previous_direction = 0;
 			scn->direction = 'w';
 			break;
 
 		case 's':
 		case 'S':
+			scn->previous_direction = 0;
 			scn->direction = 's';
 			break;
 
 		case GLFW_KEY_UP:
+			scn->previous_direction = 0;
 			scn->direction = 'u';
 			break;
 
 		case GLFW_KEY_DOWN:
+			scn->previous_direction = 0;
 			scn->direction = 'd';
 			break;
 
 		case GLFW_KEY_LEFT:
+			scn->previous_direction = 0;
 			scn->direction = 'l';
 			break;
 
 		case GLFW_KEY_RIGHT:
+			scn->previous_direction = 0;
 			scn->direction = 'r';
 			break;
 

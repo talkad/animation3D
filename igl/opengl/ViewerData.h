@@ -30,6 +30,8 @@
 // See this thread for a more detailed discussion:
 // https://github.com/libigl/libigl/pull/1029
 //
+enum type {NONE, BASIC, BOUNCY, BEZIER};
+
 namespace igl
 {
 
@@ -56,7 +58,7 @@ namespace igl
             // change current location by speed
             IGL_INLINE void move();
 
-            IGL_INLINE void update_movement_type(unsigned int);
+            IGL_INLINE void update_movement_type(enum type);
 
             IGL_INLINE void initiate_speed();
 
@@ -242,7 +244,7 @@ namespace igl
 
             Eigen::Vector3d speed;
             // 0 - none, 1- basic, 2- bouncy, 4- bezier
-            unsigned int type; 
+            type type; 
             float creation_time;
 
             bool isTerminated;
@@ -255,9 +257,6 @@ namespace igl
             Eigen::Vector3d last_pos;
             Eigen::Vector3d curr_pos;
             Eigen::Matrix <double, 4, 3> bezier_points;
-
-
-
 
             // Point size / line width
             float point_size;

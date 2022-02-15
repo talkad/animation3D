@@ -31,6 +31,7 @@ void SandBox::Init(const std::string& config)
         }
         snakeFile.close();
     }
+
     MyTranslate(-Eigen::Vector3d::UnitZ(), true);
 
 	// load_mesh_from_file("C:/Users/tal74/projects/animation/animation3D/tutorial/data/cube.obj");
@@ -40,20 +41,20 @@ void SandBox::Init(const std::string& config)
     double z = -0.8 * scale;
     for (int i = 0; i <= joints_num; ++i)
     {
-        skinnedSkeleton.push_back(z * Eigen::Vector3d::UnitZ());
+        skeleton.push_back(z * Eigen::Vector3d::UnitZ());
         z += 0.1 * scale;
     }
 
     calc_all_weights();
     data().MyRotate(Eigen::Vector3d::UnitY(), M_PI / 2);
 
-    target_pose = skinnedSkeleton[joints_num];
+    target_pose = skeleton[joints_num];
     U = V;
 
     MyTranslateInSystem(GetRotation(), Eigen::RowVector3d(0, 0, -10));
 
 	start_level(); // remove it xxxxxxxxxxxxxxxxxxxxxxxxx
-
+    isActive = true;
 }
 
 SandBox::~SandBox()
@@ -64,10 +65,20 @@ SandBox::~SandBox()
 
 void SandBox::Animate()
 {
-         move_snake();
-         generate_target();
-         move_targets();
-         clean_data_list();
+
+    //if (frames < 100) 
+    //    ++frames;
+    //else {
+    //    data_list[0].kd_tree.init(data_list[0].V, data_list[0].F);
+    //    check_collision();
+    //    frames = 0;
+    //}
+    if (isActive) {
+        move_snake();
+        generate_target();
+        move_targets();
+        clean_data_list();
+    }
 }
 
 

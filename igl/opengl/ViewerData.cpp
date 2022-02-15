@@ -43,7 +43,7 @@ IGL_INLINE igl::opengl::ViewerData::ViewerData()
     shininess(35.0f),
     id(-1),
     is_visible(1),
-    type(0),
+    type(NONE),
     creation_time(static_cast<float>(glfwGetTime())),
     isTerminated(false)
 {
@@ -103,7 +103,7 @@ IGL_INLINE void igl::opengl::ViewerData::drawAlignedBox(Eigen::AlignedBox<double
 IGL_INLINE void igl::opengl::ViewerData::move()
 {
     
-      if (type == 4) {
+      if (type == BEZIER) {
           double vel = 0.5;
           t += 0.05 * vel / 2;
 
@@ -119,13 +119,13 @@ IGL_INLINE void igl::opengl::ViewerData::move()
           }
           last_pos = curr_pos;
       }
-      if (type == 2){
+      if (type == BOUNCY){
           MyTranslateInSystem(GetRotation(), speed);
           
           speed[1] -= g;
 
           if (Tout.matrix()(1, 3) < -5) {
-              PlaySound(TEXT("C:/Users/tal74/projects/animation/animation3D/tutorial/sounds/ballbounce.wav"), NULL, SND_NODEFAULT | SND_ASYNC);
+              PlaySound(TEXT("C:/Users/ipism/source/repos/animation3D/tutorial/sounds/ballbounce.wav"), NULL, SND_NODEFAULT | SND_ASYNC);
               speed[1] = -speed[1];
           }
 
@@ -142,7 +142,7 @@ IGL_INLINE void igl::opengl::ViewerData::move()
 
 }
 
-IGL_INLINE void igl::opengl::ViewerData::update_movement_type(unsigned int new_type)
+IGL_INLINE void igl::opengl::ViewerData::update_movement_type(enum type new_type)
 {
     type = new_type;
 }
@@ -172,7 +172,7 @@ IGL_INLINE void igl::opengl::ViewerData::initiate_speed()
     double y = ((double)rand() / (RAND_MAX)) - 0.5;
     double z = ((double)rand() / (RAND_MAX)) - 0.5;
 
-    if (type == 4) {
+    if (type == BEZIER) {
         srand((unsigned)time(0));
         Eigen::Vector3d spawner_positions[4];
         spawner_positions[0] = Eigen::Vector3d(10, 0, 10);
@@ -180,7 +180,7 @@ IGL_INLINE void igl::opengl::ViewerData::initiate_speed()
         spawner_positions[2] = Eigen::Vector3d(-10, 0, -10);
         spawner_positions[3] = Eigen::Vector3d(10, 0, -10);
 
-        speed = Eigen::Vector3d(0, 0, 0);
+        speed = Eigen::Vector3d::Zero();
         int iSpawner = (rand() % 4);
         double spawnerX = spawner_positions[iSpawner][0];
         double spawnerZ = spawner_positions[iSpawner][2];
@@ -227,7 +227,7 @@ IGL_INLINE void igl::opengl::ViewerData::initiate_speed()
         final_dir = (bezier_points.row(3) - bezier_points.row(2)).normalized();
         drawCurve();
     }
-    if (type == 2) {
+    if (type == BOUNCY) {
         speed = Eigen::Vector3d(x / 2, y / 20, z / 5);
 
         if (x > 0)
@@ -236,7 +236,7 @@ IGL_INLINE void igl::opengl::ViewerData::initiate_speed()
             MyTranslateInSystem(GetRotation(), Eigen::Vector3d(8, 0, 0));
     }
     else {
-        speed = Eigen::Vector3d(x / 2, y / 20, z / 10);
+        speed = Eigen::Vector3d(x / 50, y / 100, z / 50);
 
         if(x > 0)
             MyTranslateInSystem(GetRotation(), Eigen::Vector3d(-8, 0, 0));
@@ -286,7 +286,7 @@ IGL_INLINE void igl::opengl::ViewerData::set_mesh(
             Eigen::Vector3d(GOLD_AMBIENT[0], GOLD_AMBIENT[1], GOLD_AMBIENT[2]),
             Eigen::Vector3d(GOLD_DIFFUSE[0], GOLD_DIFFUSE[1], GOLD_DIFFUSE[2]),
             Eigen::Vector3d(GOLD_SPECULAR[0], GOLD_SPECULAR[1], GOLD_SPECULAR[2]));
-        image_texture("C:/Users/tal74/projects/animation/animation3D/tutorial/textures/snake1.png");
+        image_texture("C:/Users/ipism/source/repos/animation3D/tutorial/textures/snake1.png");
         //    grid_texture();
     }
     else

@@ -23,7 +23,6 @@ int main(int argc, char* argv[])
 
 	igl::opengl::glfw::imgui::ImGuiMenu menu;
 	viewer.Init("configuration.txt");
-
 	Init(*disp, &menu);
 	renderer.init(&viewer, 2, &menu);
 
