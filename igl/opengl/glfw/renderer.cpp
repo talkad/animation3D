@@ -107,8 +107,9 @@ IGL_INLINE void Renderer::draw(GLFWwindow* window)
 					if (dist > FOG_START && mesh.speed(2) < 0) {
 						double visibility = -0.161 * dist + 1;
 
-						std::cout << visibility << std::endl;
-						mesh.set_colors(RowVector4d(mesh.color(0), mesh.color(1), mesh.color(2), visibility));
+						//std::cout << visibility << std::endl;
+						if(visibility > -1)
+							mesh.set_colors(RowVector4d(mesh.color(0), mesh.color(1), mesh.color(2), visibility));
 					}
 
 					//if (mesh.id == 1) {

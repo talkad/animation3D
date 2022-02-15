@@ -235,9 +235,6 @@ bool Display::launch_rendering(bool loop)
 	skyboxShader.use(); // shader configuration
 	skyboxShader.setInt("skybox", 0);
 
-
-
-
 	// Rendering loop
 	const int num_extra_frames = 5;
 	int frame_counter = 0;
@@ -287,7 +284,6 @@ bool Display::launch_rendering(bool loop)
 
 		// draw background
 		glViewport((VIEWPORT_WIDTH / 4) * 3, VIEWPORT_HEIGHT / 5, VIEWPORT_WIDTH / 4 * 1, VIEWPORT_HEIGHT / 5);
-
 
 
 
