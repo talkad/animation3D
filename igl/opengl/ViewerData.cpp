@@ -36,7 +36,8 @@ IGL_INLINE igl::opengl::ViewerData::ViewerData()
     shininess(35.0f),
     id(-1),
     is_visible(1),
-    type(0)
+    type(0),
+    color(Eigen::Vector3d(0,0,0))
 {
     clear();
 };
@@ -312,6 +313,9 @@ IGL_INLINE void igl::opengl::ViewerData::set_colors(const Eigen::MatrixXd& C)
 {
     using namespace std;
     using namespace Eigen;
+
+    color = Eigen::Vector3d(C(0,0), C(0, 1), C(0, 2));
+
     if (C.rows() > 0 && C.cols() == 1)
     {
         Eigen::MatrixXd C3;

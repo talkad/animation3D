@@ -25,6 +25,8 @@ public:
 
 	Eigen::Matrix3d GetRotation() const { return Tout.rotation().matrix(); }
 
+	Eigen::Vector3d GetTranslation() const { return (Tout * Tin).matrix().block(0, 3, 3, 1); }
+
 	Eigen::Vector3d Movable::GetCenterOfRotation();
 
 	void SetTranslation(Eigen::Vector3d position);

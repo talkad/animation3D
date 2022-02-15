@@ -9,6 +9,11 @@
 #define VIEWPORT_WIDTH 1000
 #define VIEWPORT_HEIGHT 800
 
+#define e 2.718
+#define FOG_START 2
+#define FOG_DENSTITY 0.000001
+
+
 Renderer::Renderer() : selected_core_index(0), camera_angle(front),
 next_core_id(2)
 {
@@ -92,20 +97,33 @@ IGL_INLINE void Renderer::draw(GLFWwindow* window)
 					}
 
 
-					switch (camera_angle) {
-						case down:
-							std::cout << "down" << std::endl;
-							break;
-						case semi_down:
-							std::cout << "semi_down" << std::endl;
-							break;
-						case front:
-							std::cout << "front" << std::endl;
-							break;
-						case up:
-							std::cout << "up" << std::endl;
-							break;
-					}
+					Eigen::Vector3d distanceVector = mesh.GetTranslation() - core.camera_translation.cast <double>();;
+					double dist = sqrt(distanceVector.dot(distanceVector));
+					//std::cout << mesh.id << " visibility rate: " << visibility << std::endl;
+
+					//if (dist > FOG_START && mesh.speed(2) < 0) {
+					//	Eigen::RowVector3d color;
+					//	double visibility = 1 / (dist * FOG_DENSTITY);
+
+					//	switch (camera_angle) {
+					//		case down:
+					//			color = down_color;
+					//			break;
+					//		case semi_down:
+					//			color = semi_down_color;
+					//			break;
+					//		case front:
+					//			color = front_color;
+					//			break;
+					//		case up:
+					//			color = up_color;
+					//			break;
+					//	}
+
+					//	mesh.set_colors(visibility * color + (1 - visibility) * color);
+					//}
+
+
 
 					core.draw(scn->MakeTransScale() * scn->CalcParentsTrans(indx).cast<float>(), mesh);
 				}
