@@ -22,8 +22,6 @@ public:
 	ParticleGenerator(unsigned int amount);
 	// update all particles
 	void Update(float dt, unsigned int newParticles, glm::vec2 offset = glm::vec2(0.0f, 0.0f));
-	// render all particles
-	void Draw();
 
 	// state
 	unsigned int lastUsedParticle;

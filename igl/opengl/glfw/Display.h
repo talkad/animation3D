@@ -1,8 +1,12 @@
+#define GLFW_INCLUDE_NONE
+
 #pragma once
 #include <string>
 #include <GLFW/glfw3.h>
 
 //#include "igl/opengl/glfw/renderer.h"
+#include <igl/opengl/glfw/ParticleGenerator.h>
+
 #define EXIT_FAILURE 1
 struct GLFWwindow;
 
@@ -28,7 +32,7 @@ public:
 //private:
 	GLFWwindow* window;
 	void* renderer;
-	//ParticleGenerator* particleGen;
+	ParticleGenerator* particleGen;
 	//int highdpi;  //relation between width and height?
 
 };

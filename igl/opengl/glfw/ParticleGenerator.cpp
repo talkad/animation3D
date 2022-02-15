@@ -1,5 +1,6 @@
-#include <igl/ParticleGenerator.h>
-#include <glad/glad.h>
+
+#include <igl/opengl/glfw/ParticleGenerator.h>
+#include <glad\glad.h>
 
 ParticleGenerator::ParticleGenerator(unsigned int amount): amount(amount), lastUsedParticle(0)
 {
@@ -8,44 +9,23 @@ ParticleGenerator::ParticleGenerator(unsigned int amount): amount(amount), lastU
 
 void ParticleGenerator::Update(float dt, unsigned int newParticles, glm::vec2 offset)
 {
-	// // add new particles 
-	// for (unsigned int i = 0; i < newParticles; ++i)
-	// {
-	//     int unusedParticle = this->firstUnusedParticle();
-	//     this->respawnParticle(this->particles[unusedParticle], object, offset);
-	// }
-	// // update all particles
-	// for (unsigned int i = 0; i < this->amount; ++i)
-	// {
-	//     Particle &p = this->particles[i];
-	//     p.Life -= dt; // reduce life
-	//     if (p.Life > 0.0f)
-	//     {	// particle is alive, thus update
-	//         p.Position -= p.Velocity * dt; 
-	//         p.Color.a -= dt * 2.5f;
-	//     }
-	// }
-}
-
-void ParticleGenerator::Draw()
-{
-     //// use additive blending to give it a 'glow' effect
-     //glBlendFunc(GL_SRC_ALPHA, GL_ONE);
-     //this->shader.Use();
-     //for (Particle particle : this->particles)
-     //{
-     //    if (particle.Life > 0.0f)
-     //    {
-     //        this->shader.SetVector2f("offset", particle.Position);
-     //        this->shader.SetVector4f("color", particle.Color);
-     //        this->texture.Bind();
-     //        glBindVertexArray(this->VAO);
-     //        glDrawArrays(GL_TRIANGLES, 0, 6);
-     //        glBindVertexArray(0);
-     //    }
-     //}
-     //// don't forget to reset to default blending mode
-     //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	 // add new particles 
+	 for (unsigned int i = 0; i < newParticles; ++i)
+	 {
+	     int unusedParticle = this->firstUnusedParticle();
+	     this->respawnParticle(this->particles[unusedParticle], offset);
+	 }
+	 // update all particles
+	 for (unsigned int i = 0; i < this->amount; ++i)
+	 {
+	     Particle &p = this->particles[i];
+	     p.Life -= dt; // reduce life
+	     if (p.Life > 0.0f)
+	     {	// particle is alive, thus update
+	         p.Position -= p.Velocity * dt; 
+	         p.Color.a -= dt * 2.5f;
+	     }
+	 }
 }
 
 void ParticleGenerator::init()

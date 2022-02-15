@@ -81,7 +81,6 @@ namespace igl
                 snake_size(1),  // currently the head will be the circle
                 snake_view(false),
                 prev_tic(0)
-                //particles(nullptr)
             {
                 data_list.front().id = 0;
 

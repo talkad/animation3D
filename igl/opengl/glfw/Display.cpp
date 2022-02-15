@@ -109,7 +109,7 @@ Display::Display(int windowWidth, int windowHeight, const std::string& title)
 	glfwSetCursorPosCallback(window, mouse_move);
 
 	// tell GLFW to capture our mouse
-	// glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED); xxxxxxxxxxxxxxxxxxxx
+	// glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED); 
 
 	// Load OpenGL and its extensions
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
@@ -245,7 +245,7 @@ bool Display::launch_rendering(bool loop)
 	fogShader.setMat4("projection", projection);
 
 	unsigned int textureID = loadTexture("../../../tutorial/textures/particle.png");
-	//particleGen = new ParticleGenerator(500);
+	particleGen = new ParticleGenerator(500);
 
 
 	// Rendering loop
@@ -300,28 +300,28 @@ bool Display::launch_rendering(bool loop)
 
 
 		// fog shader
-		//particleGen->Update(0.1f, 2, glm::vec2(2, 2));
+		particleGen->Update(0.1f, 2, glm::vec2(2, 2));
 
-		//// draw particles	
-		//// use additive blending to give it a 'glow' effect
-		//glBlendFunc(GL_SRC_ALPHA, GL_ONE);
-		//fogShader.use();
-		//for (Particle particle : particleGen->particles)
-		//{
-		//	if (particle.Life > 0.0f)
-		//	{
-		//		fogShader.setVec2("offset", particle.Position);
-		//		fogShader.setVec4("color", particle.Color);
+		// draw particles	
+		// use additive blending to give it a 'glow' effect
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+		fogShader.use();
+		for (Particle particle : particleGen->particles)
+		{
+			if (particle.Life > 0.0f)
+			{
+				fogShader.setVec2("offset", particle.Position);
+				fogShader.setVec4("color", particle.Color);
 
-		//		glBindTexture(GL_TEXTURE_2D, textureID);
+				glBindTexture(GL_TEXTURE_2D, textureID);
 
-		//		glBindVertexArray(particleGen->VAO);
-		//		glDrawArrays(GL_TRIANGLES, 0, 6);
-		//		glBindVertexArray(0);
-		//	}
-		//}
-		//// don't forget to reset to default blending mode
-		//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+				glBindVertexArray(particleGen->VAO);
+				glDrawArrays(GL_TRIANGLES, 0, 6);
+				glBindVertexArray(0);
+			}
+		}
+		// don't forget to reset to default blending mode
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 
 		// glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
