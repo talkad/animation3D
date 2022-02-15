@@ -112,20 +112,6 @@ public:
 	Eigen::Vector3f prev_camera_eye;
 	Eigen::Vector3f prev_camera_up;
 
-	IGL_INLINE void set_camera_angle(int);
-
-	enum CameraAngle {  down = 0,
-						semi_down = 1,
-						front = 2,
-						up = 3};
-
-	Eigen::RowVector3d down_color = Eigen::RowVector3d(0.66, 0.818, 1);
-	Eigen::RowVector3d semi_down_color = Eigen::RowVector3d(0.907, 1, 0.984);
-	Eigen::RowVector3d front_color = Eigen::RowVector3d(0.855, 0.975, 1);
-	Eigen::RowVector3d up_color = Eigen::RowVector3d(0.696, 0.834, 1);
-
-
-	CameraAngle camera_angle;
 
 private:
 	// Stores all the viewing options

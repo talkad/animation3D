@@ -264,13 +264,6 @@ bool Display::launch_rendering(bool loop)
 		lastFrame = currentFrame;
 
 
-
-		float camera_y_angle = camera.Up[2];
-		camera_y_angle < -0.55 ? renderer->set_camera_angle(0) :
-			camera_y_angle < -0.2 ? renderer->set_camera_angle(1) :
-			camera_y_angle < 0.15 ? renderer->set_camera_angle(2) : renderer->set_camera_angle(3);
-
-
 		// input
 		// -----
 		processInput(window);

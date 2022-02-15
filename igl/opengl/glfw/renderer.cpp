@@ -11,10 +11,11 @@
 
 #define e 2.718
 #define FOG_START 2
-#define FOG_DENSTITY 0.000001
+#define FOG_DENSTITY 5
 
 
-Renderer::Renderer() : selected_core_index(0), camera_angle(front),
+
+Renderer::Renderer() : selected_core_index(0),
 next_core_id(2)
 {
 	core_list.emplace_back(igl::opengl::ViewerCore());
@@ -44,6 +45,8 @@ next_core_id(2)
 	xold = 0;
 	yold = 0;
 }
+
+double a = 1; 
 
 IGL_INLINE void Renderer::draw(GLFWwindow* window)
 {
@@ -101,26 +104,20 @@ IGL_INLINE void Renderer::draw(GLFWwindow* window)
 					double dist = sqrt(distanceVector.dot(distanceVector));
 					//std::cout << mesh.id << " visibility rate: " << visibility << std::endl;
 
-					//if (dist > FOG_START && mesh.speed(2) < 0) {
-					//	Eigen::RowVector3d color;
-					//	double visibility = 1 / (dist * FOG_DENSTITY);
+					if (dist > FOG_START && mesh.speed(2) < 0) {
+						double visibility = -0.161 * dist + 1;
 
-					//	switch (camera_angle) {
-					//		case down:
-					//			color = down_color;
-					//			break;
-					//		case semi_down:
-					//			color = semi_down_color;
-					//			break;
-					//		case front:
-					//			color = front_color;
-					//			break;
-					//		case up:
-					//			color = up_color;
-					//			break;
-					//	}
+						std::cout << visibility << std::endl;
+						mesh.set_colors(RowVector4d(mesh.color(0), mesh.color(1), mesh.color(2), visibility));
+					}
 
-					//	mesh.set_colors(visibility * color + (1 - visibility) * color);
+					//if (mesh.id == 1) {
+					//	double visibility = -0.161 * dist + 1;
+					//	//double visibility = a;
+					//	//a-=0.05;
+
+					//	std::cout <<  dist << std::endl;
+					//	mesh.set_colors(RowVector4d(mesh.color(0), mesh.color(1), mesh.color(2), visibility));
 					//}
 
 
@@ -268,12 +265,6 @@ void Renderer::RotateCamera(float amtX, float amtY)
 
 }
 
-IGL_INLINE void Renderer::set_camera_angle(int dir)
-{
-	dir == 0 ? camera_angle = down :
-		dir == 1 ? camera_angle = semi_down :
-		dir == 2 ? camera_angle = front : camera_angle = up;
-}
 
 Renderer::~Renderer()
 {

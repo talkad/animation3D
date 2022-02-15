@@ -199,11 +199,11 @@ namespace igl
                     data().update_movement_type(1);
 
                     if (data().type == 4)
-                        data().set_colors(Eigen::RowVector3d(0, 0, 1));
+                        data().set_colors(Eigen::RowVector4d(0, 0, 1, 1));
                     else if(data().type == 2)
-                        data().set_colors(Eigen::RowVector3d(1, 0, 0));
+                        data().set_colors(Eigen::RowVector4d(1, 0, 0, 1));
                     else
-                        data().set_colors(Eigen::RowVector3d(0, 1, 0));
+                        data().set_colors(Eigen::RowVector4d(0, 1, 0, 1));
 
                     // if current object is a target then init its speed vector
                     if (data().type > 0)
