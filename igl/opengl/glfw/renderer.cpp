@@ -3,12 +3,13 @@
 #include <GLFW/glfw3.h>
 #include <igl/unproject_onto_mesh.h>
 #include "igl/look_at.h"
+
 //#include <Eigen/Dense>
 
 #define VIEWPORT_WIDTH 1000
 #define VIEWPORT_HEIGHT 800
 
-Renderer::Renderer() : selected_core_index(0),
+Renderer::Renderer() : selected_core_index(0), camera_angle(front),
 next_core_id(2)
 {
 	core_list.emplace_back(igl::opengl::ViewerCore());
@@ -88,6 +89,22 @@ IGL_INLINE void Renderer::draw(GLFWwindow* window)
 						core.camera_translation = prev_camera_translation;
 						core.camera_eye = prev_camera_eye;
 						core.camera_up = prev_camera_up;
+					}
+
+
+					switch (camera_angle) {
+						case down:
+							std::cout << "down" << std::endl;
+							break;
+						case semi_down:
+							std::cout << "semi_down" << std::endl;
+							break;
+						case front:
+							std::cout << "front" << std::endl;
+							break;
+						case up:
+							std::cout << "up" << std::endl;
+							break;
 					}
 
 					core.draw(scn->MakeTransScale() * scn->CalcParentsTrans(indx).cast<float>(), mesh);
@@ -231,6 +248,13 @@ void Renderer::RotateCamera(float amtX, float amtY)
 	Mat << cos(amtY), 0, sin(amtY), 0, 1, 0, -sin(amtY), 0, cos(amtY);
 	core().camera_eye = Mat * core().camera_eye;
 
+}
+
+IGL_INLINE void Renderer::set_camera_angle(int dir)
+{
+	dir == 0 ? camera_angle = down :
+		dir == 1 ? camera_angle = semi_down :
+		dir == 2 ? camera_angle = front : camera_angle = up;
 }
 
 Renderer::~Renderer()

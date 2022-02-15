@@ -196,7 +196,7 @@ namespace igl
                 std::string name = mesh_file_name_string.substr(file_name_idx + 1);
 
                 if (name == "sphere.obj") {
-                    data().update_movement_type(4);
+                    data().update_movement_type(1);
 
                     if (data().type == 4)
                         data().set_colors(Eigen::RowVector3d(0, 0, 1));
