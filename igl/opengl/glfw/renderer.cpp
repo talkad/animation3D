@@ -112,15 +112,6 @@ IGL_INLINE void Renderer::draw(GLFWwindow* window)
 							mesh.set_colors(RowVector4d(mesh.color(0), mesh.color(1), mesh.color(2), visibility));
 					}
 
-					//if (mesh.id == 1) {
-					//	double visibility = -0.161 * dist + 1;
-					//	//double visibility = a;
-					//	//a-=0.05;
-
-					//	std::cout <<  dist << std::endl;
-					//	mesh.set_colors(RowVector4d(mesh.color(0), mesh.color(1), mesh.color(2), visibility));
-					//}
-
 
 
 					core.draw(scn->MakeTransScale() * scn->CalcParentsTrans(indx).cast<float>(), mesh);

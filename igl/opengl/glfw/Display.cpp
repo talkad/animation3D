@@ -27,6 +27,7 @@
 
 
 
+
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void mouse_callback(GLFWwindow* window, int button, int action, int modifier);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
@@ -235,6 +236,18 @@ bool Display::launch_rendering(bool loop)
 	skyboxShader.use(); // shader configuration
 	skyboxShader.setInt("skybox", 0);
 
+	// fog
+	Shader fogShader("../../../shaders/particle.vs", "../../../shaders/particle.fs");
+	glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+	
+	fogShader.use();
+	fogShader.setInt("sprite", 0);
+	fogShader.setMat4("projection", projection);
+
+	unsigned int textureID = loadTexture("../../../tutorial/textures/particle.png");
+	particleGen = new ParticleGenerator(500);
+
+
 	// Rendering loop
 	const int num_extra_frames = 5;
 	int frame_counter = 0;
@@ -265,26 +278,50 @@ bool Display::launch_rendering(bool loop)
 		// -----
 		processInput(window);
 
-		glViewport(0, 0, VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
-		glm::mat4 view = glm::mat4(glm::mat3(camera.GetViewMatrix()));
-		glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+		//glViewport(0, 0, VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
+		//glm::mat4 view = glm::mat4(glm::mat3(camera.GetViewMatrix()));
+		//glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
 
-		// cubemap shader
-		glDepthFunc(GL_LEQUAL);  // change depth function so depth test passes when values are equal to depth buffer's content
-		skyboxShader.use();
-		skyboxShader.setMat4("view", view);
-		skyboxShader.setMat4("projection", projection);
-		// skybox cube
-		glBindVertexArray(skyboxVAO);
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_CUBE_MAP, cubemapTexture);
-		glDrawArrays(GL_TRIANGLES, 0, 36);
-		glBindVertexArray(0);
-		glDepthFunc(GL_LESS); // set depth function back to default
+		//// cubemap shader
+		//glDepthFunc(GL_LEQUAL);  // change depth function so depth test passes when values are equal to depth buffer's content
+		//skyboxShader.use();
+		//skyboxShader.setMat4("view", view);
+		//skyboxShader.setMat4("projection", projection);
+		//// skybox cube
+		//glBindVertexArray(skyboxVAO);
+		//glActiveTexture(GL_TEXTURE0);
+		//glBindTexture(GL_TEXTURE_CUBE_MAP, cubemapTexture);
+		//glDrawArrays(GL_TRIANGLES, 0, 36);
+		//glBindVertexArray(0);
+		//glDepthFunc(GL_LESS); // set depth function back to default
 
-		// draw background
-		glViewport((VIEWPORT_WIDTH / 4) * 3, VIEWPORT_HEIGHT / 5, VIEWPORT_WIDTH / 4 * 1, VIEWPORT_HEIGHT / 5);
+		//// draw background
+		//glViewport((VIEWPORT_WIDTH / 4) * 3, VIEWPORT_HEIGHT / 5, VIEWPORT_WIDTH / 4 * 1, VIEWPORT_HEIGHT / 5);
 
+
+		// fog shader
+		particleGen->Update(0.1f, 2, glm::vec2(2, 2));
+
+		// draw particles	
+		// use additive blending to give it a 'glow' effect
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+		fogShader.use();
+		for (Particle particle : particleGen->particles)
+		{
+			if (particle.Life > 0.0f)
+			{
+				fogShader.setVec2("offset", particle.Position);
+				fogShader.setVec4("color", particle.Color);
+
+				glBindTexture(GL_TEXTURE_2D, textureID);
+
+				glBindVertexArray(particleGen->VAO);
+				glDrawArrays(GL_TRIANGLES, 0, 6);
+				glBindVertexArray(0);
+			}
+		}
+		// don't forget to reset to default blending mode
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 
 		// glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
@@ -323,6 +360,8 @@ bool Display::launch_rendering(bool loop)
 
 	glDeleteVertexArrays(1, &skyboxVAO);
 	glDeleteBuffers(1, &skyboxVBO);
+
+	delete(particleGen);
 
 	return EXIT_SUCCESS;
 }
@@ -594,4 +633,113 @@ unsigned int loadCubemap(std::vector<std::string> faces)
 	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
 
 	return textureID;
+}
+
+
+
+ParticleGenerator::ParticleGenerator(unsigned int amount): amount(amount), lastUsedParticle(0)
+{
+	this->init();
+}
+
+void ParticleGenerator::Update(float dt, unsigned int newParticles, glm::vec2 offset)
+{
+	// // add new particles 
+	// for (unsigned int i = 0; i < newParticles; ++i)
+	// {
+	//     int unusedParticle = this->firstUnusedParticle();
+	//     this->respawnParticle(this->particles[unusedParticle], object, offset);
+	// }
+	// // update all particles
+	// for (unsigned int i = 0; i < this->amount; ++i)
+	// {
+	//     Particle &p = this->particles[i];
+	//     p.Life -= dt; // reduce life
+	//     if (p.Life > 0.0f)
+	//     {	// particle is alive, thus update
+	//         p.Position -= p.Velocity * dt; 
+	//         p.Color.a -= dt * 2.5f;
+	//     }
+	// }
+}
+
+void ParticleGenerator::Draw()
+{
+     //// use additive blending to give it a 'glow' effect
+     //glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+     //this->shader.Use();
+     //for (Particle particle : this->particles)
+     //{
+     //    if (particle.Life > 0.0f)
+     //    {
+     //        this->shader.SetVector2f("offset", particle.Position);
+     //        this->shader.SetVector4f("color", particle.Color);
+     //        this->texture.Bind();
+     //        glBindVertexArray(this->VAO);
+     //        glDrawArrays(GL_TRIANGLES, 0, 6);
+     //        glBindVertexArray(0);
+     //    }
+     //}
+     //// don't forget to reset to default blending mode
+     //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+}
+
+void ParticleGenerator::init()
+{
+	// set up mesh and attribute properties
+	unsigned int VBO;
+	float particle_quad[] = {
+		0.0f, 1.0f, 0.0f, 1.0f,
+		1.0f, 0.0f, 1.0f, 0.0f,
+		0.0f, 0.0f, 0.0f, 0.0f,
+
+		0.0f, 1.0f, 0.0f, 1.0f,
+		1.0f, 1.0f, 1.0f, 1.0f,
+		1.0f, 0.0f, 1.0f, 0.0f
+	};
+	glGenVertexArrays(1, &this->VAO);
+	glGenBuffers(1, &VBO);
+	glBindVertexArray(this->VAO);
+	// fill mesh buffer
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(particle_quad), particle_quad, GL_STATIC_DRAW);
+	// set mesh attributes
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
+	glBindVertexArray(0);
+
+	// create this->amount default particle instances
+	for (unsigned int i = 0; i < this->amount; ++i)
+		this->particles.push_back(Particle());
+}
+
+unsigned int ParticleGenerator::firstUnusedParticle()
+{
+	// first search from last used particle, this will usually return almost instantly
+	for (unsigned int i = lastUsedParticle; i < this->amount; ++i) {
+		if (this->particles[i].Life <= 0.0f) {
+			lastUsedParticle = i;
+			return i;
+		}
+	}
+	// otherwise, do a linear search
+	for (unsigned int i = 0; i < lastUsedParticle; ++i) {
+		if (this->particles[i].Life <= 0.0f) {
+			lastUsedParticle = i;
+			return i;
+		}
+	}
+	// all particles are taken, override the first one (note that if it repeatedly hits this case, more particles should be reserved)
+	lastUsedParticle = 0;
+	return 0;
+}
+
+void ParticleGenerator::respawnParticle(Particle& particle, glm::vec2 offset)
+{
+	float random = ((rand() % 100) - 50) / 10.0f;
+	float rColor = 0.5f + ((rand() % 100) / 100.0f);
+	//particle.Position = object.Position + random + offset;
+	particle.Color = glm::vec4(rColor, rColor, rColor, 1.0f);
+	particle.Life = 1.0f;
+	//particle.Velocity = object.Velocity * 0.1f;
 }
