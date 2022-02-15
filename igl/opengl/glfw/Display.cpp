@@ -240,26 +240,23 @@ bool Display::launch_rendering(bool loop)
 
 	fogShader.use(); // shader configuration
 	fogShader.setInt("sampler", 0); // for 2D structure
-	fogShader.setVec4("color", glm::vec4(1, 0, 0, 0));
+	fogShader.setVec4("color", glm::vec4(1.0f, 0, 0, 0));
 
 
-	glm::vec3 color = glm::vec3(1, 0, 0);
-	glUniform3fv(glGetUniformLocation(fogShader.ID, "ambientLight.color"), 1, &color[0]);
-	glUniform1i(glGetUniformLocation(fogShader.ID, "ambientLight.isOn"), 1);
+	fogShader.setVec3("ambientLight.color", glm::vec3(0.6f, 0.6f, 0.6f));
+	fogShader.setBool("ambientLight.isOn", true);
 
+	fogShader.setVec3("diffuseLight.color", glm::vec3(1.0f, 1.0f, 1.0f));
+	fogShader.setVec3("diffuseLight.direction", glm::normalize(glm::vec3(0.0f, -1.0f, -1.0f)));
+	fogShader.setFloat("diffuseLight.factor", 0.4f);
+	fogShader.setBool("diffuseLight.isOn", true);
 
-	glUniform3fv(glGetUniformLocation(fogShader.ID, "diffuseLight.color"), 1, &color[0]);
-	glUniform3fv(glGetUniformLocation(fogShader.ID, "diffuseLight.direction"), 1, &color[0]);
-	glUniform1f(glGetUniformLocation(fogShader.ID, "diffuseLight.factor"), 1.0f);
-	glUniform1i(glGetUniformLocation(fogShader.ID, "diffuseLight.isOn"), 1);
-
-
-	glUniform3fv(glGetUniformLocation(fogShader.ID, "fogParams.color"), 1, &color[0]);
-	glUniform1f(glGetUniformLocation(fogShader.ID, "fogParams.linearStart"), 1.0f);
-	glUniform1f(glGetUniformLocation(fogShader.ID, "fogParams.linearEnd"), 5.0f);
-	glUniform1f(glGetUniformLocation(fogShader.ID, "fogParams.density"), 0.9f);
-	glUniform1i(glGetUniformLocation(fogShader.ID, "fogParams.equation"), 2);
-	glUniform1i(glGetUniformLocation(fogShader.ID, "fogParams.isEnabled"), 1);
+	fogShader.setVec3("fogParams.color", glm::vec3(0.7f, 0.7f, 0.7f));
+	fogShader.setFloat("fogParams.linearStart", 20.0f);
+	fogShader.setFloat("fogParams.linearEnd", 75.0f);
+	fogShader.setFloat("fogParams.density", 0.01f);
+	fogShader.setInt("fogParams.equation", 2); // Used fog equation, 3 options are valid - 0 = linear, 1 = exp, 2 = exp2
+	fogShader.setBool("fogParams.isEnabled", true);
 
 
 
@@ -296,19 +293,19 @@ bool Display::launch_rendering(bool loop)
 		//glViewport(0, 0, VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
 		glm::mat4 view = glm::mat4(glm::mat3(camera.GetViewMatrix()));
 		glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+		glm::mat4 model = glm::mat4(1.0f);
+		glm::mat3 normal = glm::mat3(1.0f);
 
-
-		// for shader
+		// fog shader
 		fogShader.use();
-		glm::mat4 Model4 = glm::mat4(2.0);
-		glm::mat3 Model3 = glm::mat3(1.0);
-		glUniformMatrix4fv(glGetUniformLocation(fogShader.ID, "matrices.projectionMatrix"), 1, GL_FALSE, &projection[0][0]);
-		glUniformMatrix4fv(glGetUniformLocation(fogShader.ID, "matrices.viewMatrix"), 1, GL_FALSE, &view[0][0]);
-		glUniformMatrix4fv(glGetUniformLocation(fogShader.ID, "matrices.modelMatrix"), 1, GL_FALSE, &Model4[0][0]);
-		glUniformMatrix3fv(glGetUniformLocation(fogShader.ID, "matrices.normalMatrix"), 1, GL_FALSE, &Model3[0][0]);
+		glm::mat4 Model4 = glm::mat4(2.0f);
+		glm::mat3 Model3 = glm::mat3(1.0f);
+		fogShader.setMat4("matrices.projectionMatrix", projection);
+		fogShader.setMat4("matrices.viewMatrix", view);
+		fogShader.setMat4("matrices.modelMatrix", model);
+		fogShader.setMat3("matrices.normalMatrix", normal);
 
-
-
+		// cubemap shader
 		glDepthFunc(GL_LEQUAL);  // change depth function so depth test passes when values are equal to depth buffer's content
 		skyboxShader.use();
 		skyboxShader.setMat4("view", view);
