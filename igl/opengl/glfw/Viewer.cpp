@@ -637,7 +637,8 @@ namespace igl
             // start a new level
             IGL_INLINE void Viewer::start_level() {
 
-                start_time = static_cast<int>(glfwGetTime());
+                start_time = static_cast<int>(glfwGetTime()); // not accurate when mltiple levels
+                prev_tic = static_cast<int>(glfwGetTime());
                 paused_time = 0;
 
                 p = 1.0 / level + 0.33;

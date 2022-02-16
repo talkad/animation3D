@@ -20,6 +20,7 @@
 #pragma comment(lib, "winmm.lib")
 #include <igl/get_seconds.h>
 #include "external/glfw/include/GLFW/glfw3.h"
+#include <random>
 
 //#include "external/stb/igl_stb_image.h"
 
@@ -44,7 +45,8 @@ IGL_INLINE igl::opengl::ViewerData::ViewerData()
     is_visible(1),
     type(0),
     creation_time(static_cast<float>(glfwGetTime())),
-    isTerminated(false)
+    isTerminated(false),
+    color(Eigen::Vector3d(0,0,0))
 {
     clear();
 };
@@ -167,9 +169,13 @@ IGL_INLINE void igl::opengl::ViewerData::drawCurve() {
 
 IGL_INLINE void igl::opengl::ViewerData::initiate_speed()
 {
-    double x = ((double)rand() / (RAND_MAX)) - 0.5;
-    double y = ((double)rand() / (RAND_MAX)) - 0.5;
-    double z = ((double)rand() / (RAND_MAX)) - 0.5;
+    std::random_device rd;
+    std::mt19937 gen(rd()); 
+    std::uniform_int_distribution<> distr(0, 50); 
+
+    double x = (distr(gen) - 25.0) / 50.0;
+    double y = (distr(gen) - 25.0) / 50.0;
+    double z = (distr(gen) - 25.0) / 50.0;
 
     if (type == 4) {
         srand((unsigned)time(0));
@@ -227,7 +233,7 @@ IGL_INLINE void igl::opengl::ViewerData::initiate_speed()
         drawCurve();
     }
     if (type == 2) {
-        speed = Eigen::Vector3d(x / 2, y / 20, z / 5);
+        speed = Eigen::Vector3d(x / 2.0, y / 20.0, z / 5.0);
 
         if (x > 0)
             MyTranslateInSystem(GetRotation(), Eigen::Vector3d(-8, 0, 0));
@@ -235,7 +241,10 @@ IGL_INLINE void igl::opengl::ViewerData::initiate_speed()
             MyTranslateInSystem(GetRotation(), Eigen::Vector3d(8, 0, 0));
     }
     else {
-        speed = Eigen::Vector3d(x / 2, y / 20, z / 10);
+        speed = Eigen::Vector3d(x / 2.0, y / 10.0, z/ 5.0);
+
+        if (id == 1)
+            std::cout << speed << std::endl;
 
         if(x > 0)
             MyTranslateInSystem(GetRotation(), Eigen::Vector3d(-8, 0, 0));
@@ -347,6 +356,9 @@ IGL_INLINE void igl::opengl::ViewerData::set_colors(const Eigen::MatrixXd& C)
 {
     using namespace std;
     using namespace Eigen;
+
+    color = Eigen::Vector3d(C(0,0), C(0, 1), C(0, 2));
+
     if (C.rows() > 0 && C.cols() == 1)
     {
         Eigen::MatrixXd C3;

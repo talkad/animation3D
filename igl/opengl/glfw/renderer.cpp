@@ -3,10 +3,17 @@
 #include <GLFW/glfw3.h>
 #include <igl/unproject_onto_mesh.h>
 #include "igl/look_at.h"
+
 //#include <Eigen/Dense>
 
 #define VIEWPORT_WIDTH 1000
 #define VIEWPORT_HEIGHT 800
+
+#define e 2.718
+#define FOG_START 2
+#define FOG_DENSTITY 5
+
+
 
 Renderer::Renderer() : selected_core_index(0),
 next_core_id(2)
@@ -38,6 +45,8 @@ next_core_id(2)
 	xold = 0;
 	yold = 0;
 }
+
+double a = 1; 
 
 IGL_INLINE void Renderer::draw(GLFWwindow* window)
 {
@@ -90,8 +99,27 @@ IGL_INLINE void Renderer::draw(GLFWwindow* window)
 						core.camera_up = prev_camera_up;
 					}
 
-					if(!mesh.isTerminated)
+					if(!mesh.isTerminated){
+
+						/*Eigen::Vector3d distanceVector = mesh.GetTranslation() - core.camera_translation.cast <double>();;
+						double dist = sqrt(distanceVector.dot(distanceVector));*/
+
+						double dist = abs(mesh.GetTranslation()[2] - core.camera_translation.cast <double>()[2]); // according z axis
+
+						//std::cout << mesh.id << " visibility rate: " << visibility << std::endl;
+
+						if (dist > FOG_START && mesh.speed(2) < 0) {
+							double visibility = -0.161 * dist + 1;
+
+							//std::cout << visibility << std::endl;
+
+							if(visibility > -1)
+								mesh.set_colors(RowVector4d(mesh.color(0), mesh.color(1), mesh.color(2), visibility));
+						}
+
 						core.draw(scn->MakeTransScale() * scn->CalcParentsTrans(indx).cast<float>(), mesh);
+					}
+
 				}
 			}
 			indx++;
@@ -234,6 +262,7 @@ void Renderer::RotateCamera(float amtX, float amtY)
 	core().camera_eye = Mat * core().camera_eye;
 
 }
+
 
 Renderer::~Renderer()
 {
