@@ -1,20 +1,8 @@
-^C:\USERS\TAL74\PROJECTS\ANIMATION\ANIMATION3D\EXTERNAL\.CACHE\GLFW\CMAKEFILES\FF5922C5C2014A63534FA81F53DF5DB0\GLFW-DOWNLOAD-MKDIR.RULE
+^C:\USERS\PIJON\ONEDRIVE\DESKTOP\ANIMATION3D\EXTERNAL\.CACHE\GLFW\CMAKEFILES\90BA51A0B1FEAACA04806B9077685829\GLFW-DOWNLOAD-MKDIR.RULE
 setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/projects/animation/animation3D/cmake/../external/glfw
+"C:\Program Files\CMake\bin\cmake.exe" -P C:/Users/pijon/OneDrive/Desktop/animation3D/external/.cache/glfw/glfw-download-prefix/tmp/glfw-download-mkdirs.cmake
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/projects/animation/animation3D/build/glfw-build
-if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/projects/animation/animation3D/external/.cache/glfw/glfw-download-prefix
-if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/projects/animation/animation3D/external/.cache/glfw/glfw-download-prefix/tmp
-if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/projects/animation/animation3D/external/.cache/glfw/glfw-download-prefix/src/glfw-download-stamp/Debug
-if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/projects/animation/animation3D/external/.cache/glfw/glfw-download-prefix/src
-if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/projects/animation/animation3D/external/.cache/glfw/glfw-download-prefix/src/glfw-download-stamp
-if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/projects/animation/animation3D/external/.cache/glfw/glfw-download-prefix/src/glfw-download-stamp/Debug/glfw-download-mkdir
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/pijon/OneDrive/Desktop/animation3D/external/.cache/glfw/glfw-download-prefix/src/glfw-download-stamp/Debug/glfw-download-mkdir
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
@@ -22,15 +10,15 @@ endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd
-^C:\USERS\TAL74\PROJECTS\ANIMATION\ANIMATION3D\EXTERNAL\.CACHE\GLFW\CMAKEFILES\FF5922C5C2014A63534FA81F53DF5DB0\GLFW-DOWNLOAD-DOWNLOAD.RULE
+^C:\USERS\PIJON\ONEDRIVE\DESKTOP\ANIMATION3D\EXTERNAL\.CACHE\GLFW\CMAKEFILES\90BA51A0B1FEAACA04806B9077685829\GLFW-DOWNLOAD-DOWNLOAD.RULE
 setlocal
-cd C:\Users\tal74\projects\animation\animation3D\external
+cd C:\Users\pijon\OneDrive\Desktop\animation3D\external
 if %errorlevel% neq 0 goto :cmEnd
 C:
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -P C:/Users/tal74/projects/animation/animation3D/external/.cache/glfw/glfw-download-prefix/tmp/glfw-download-gitclone.cmake
+"C:\Program Files\CMake\bin\cmake.exe" -P C:/Users/pijon/OneDrive/Desktop/animation3D/external/.cache/glfw/glfw-download-prefix/tmp/glfw-download-gitclone.cmake
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/projects/animation/animation3D/external/.cache/glfw/glfw-download-prefix/src/glfw-download-stamp/Debug/glfw-download-download
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/pijon/OneDrive/Desktop/animation3D/external/.cache/glfw/glfw-download-prefix/src/glfw-download-stamp/Debug/glfw-download-download
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
@@ -38,13 +26,13 @@ endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd
-^C:\USERS\TAL74\PROJECTS\ANIMATION\ANIMATION3D\EXTERNAL\.CACHE\GLFW\CMAKEFILES\FF5922C5C2014A63534FA81F53DF5DB0\GLFW-DOWNLOAD-UPDATE.RULE
+^C:\USERS\PIJON\ONEDRIVE\DESKTOP\ANIMATION3D\EXTERNAL\.CACHE\GLFW\CMAKEFILES\90BA51A0B1FEAACA04806B9077685829\GLFW-DOWNLOAD-UPDATE.RULE
 setlocal
-cd C:\Users\tal74\projects\animation\animation3D\external\glfw
+cd C:\Users\pijon\OneDrive\Desktop\animation3D\external\glfw
 if %errorlevel% neq 0 goto :cmEnd
 C:
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -P C:/Users/tal74/projects/animation/animation3D/external/.cache/glfw/glfw-download-prefix/tmp/glfw-download-gitupdate.cmake
+"C:\Program Files\CMake\bin\cmake.exe" -P C:/Users/pijon/OneDrive/Desktop/animation3D/external/.cache/glfw/glfw-download-prefix/tmp/glfw-download-gitupdate.cmake
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
@@ -52,11 +40,11 @@ endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd
-^C:\USERS\TAL74\PROJECTS\ANIMATION\ANIMATION3D\EXTERNAL\.CACHE\GLFW\CMAKEFILES\FF5922C5C2014A63534FA81F53DF5DB0\GLFW-DOWNLOAD-PATCH.RULE
+^C:\USERS\PIJON\ONEDRIVE\DESKTOP\ANIMATION3D\EXTERNAL\.CACHE\GLFW\CMAKEFILES\90BA51A0B1FEAACA04806B9077685829\GLFW-DOWNLOAD-PATCH.RULE
 setlocal
 "C:\Program Files\CMake\bin\cmake.exe" -E echo_append
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/projects/animation/animation3D/external/.cache/glfw/glfw-download-prefix/src/glfw-download-stamp/Debug/glfw-download-patch
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/pijon/OneDrive/Desktop/animation3D/external/.cache/glfw/glfw-download-prefix/src/glfw-download-stamp/Debug/glfw-download-patch
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
@@ -64,15 +52,15 @@ endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd
-^C:\USERS\TAL74\PROJECTS\ANIMATION\ANIMATION3D\EXTERNAL\.CACHE\GLFW\CMAKEFILES\FF5922C5C2014A63534FA81F53DF5DB0\GLFW-DOWNLOAD-CONFIGURE.RULE
+^C:\USERS\PIJON\ONEDRIVE\DESKTOP\ANIMATION3D\EXTERNAL\.CACHE\GLFW\CMAKEFILES\90BA51A0B1FEAACA04806B9077685829\GLFW-DOWNLOAD-CONFIGURE.RULE
 setlocal
-cd C:\Users\tal74\projects\animation\animation3D\build\glfw-build
+cd C:\Users\pijon\OneDrive\Desktop\animation3D\build\glfw-build
 if %errorlevel% neq 0 goto :cmEnd
 C:
 if %errorlevel% neq 0 goto :cmEnd
 "C:\Program Files\CMake\bin\cmake.exe" -E echo_append
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/projects/animation/animation3D/external/.cache/glfw/glfw-download-prefix/src/glfw-download-stamp/Debug/glfw-download-configure
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/pijon/OneDrive/Desktop/animation3D/external/.cache/glfw/glfw-download-prefix/src/glfw-download-stamp/Debug/glfw-download-configure
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
@@ -80,15 +68,15 @@ endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd
-^C:\USERS\TAL74\PROJECTS\ANIMATION\ANIMATION3D\EXTERNAL\.CACHE\GLFW\CMAKEFILES\FF5922C5C2014A63534FA81F53DF5DB0\GLFW-DOWNLOAD-BUILD.RULE
+^C:\USERS\PIJON\ONEDRIVE\DESKTOP\ANIMATION3D\EXTERNAL\.CACHE\GLFW\CMAKEFILES\90BA51A0B1FEAACA04806B9077685829\GLFW-DOWNLOAD-BUILD.RULE
 setlocal
-cd C:\Users\tal74\projects\animation\animation3D\build\glfw-build
+cd C:\Users\pijon\OneDrive\Desktop\animation3D\build\glfw-build
 if %errorlevel% neq 0 goto :cmEnd
 C:
 if %errorlevel% neq 0 goto :cmEnd
 "C:\Program Files\CMake\bin\cmake.exe" -E echo_append
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/projects/animation/animation3D/external/.cache/glfw/glfw-download-prefix/src/glfw-download-stamp/Debug/glfw-download-build
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/pijon/OneDrive/Desktop/animation3D/external/.cache/glfw/glfw-download-prefix/src/glfw-download-stamp/Debug/glfw-download-build
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
@@ -96,15 +84,15 @@ endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd
-^C:\USERS\TAL74\PROJECTS\ANIMATION\ANIMATION3D\EXTERNAL\.CACHE\GLFW\CMAKEFILES\FF5922C5C2014A63534FA81F53DF5DB0\GLFW-DOWNLOAD-INSTALL.RULE
+^C:\USERS\PIJON\ONEDRIVE\DESKTOP\ANIMATION3D\EXTERNAL\.CACHE\GLFW\CMAKEFILES\90BA51A0B1FEAACA04806B9077685829\GLFW-DOWNLOAD-INSTALL.RULE
 setlocal
-cd C:\Users\tal74\projects\animation\animation3D\build\glfw-build
+cd C:\Users\pijon\OneDrive\Desktop\animation3D\build\glfw-build
 if %errorlevel% neq 0 goto :cmEnd
 C:
 if %errorlevel% neq 0 goto :cmEnd
 "C:\Program Files\CMake\bin\cmake.exe" -E echo_append
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/projects/animation/animation3D/external/.cache/glfw/glfw-download-prefix/src/glfw-download-stamp/Debug/glfw-download-install
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/pijon/OneDrive/Desktop/animation3D/external/.cache/glfw/glfw-download-prefix/src/glfw-download-stamp/Debug/glfw-download-install
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
@@ -112,15 +100,15 @@ endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd
-^C:\USERS\TAL74\PROJECTS\ANIMATION\ANIMATION3D\EXTERNAL\.CACHE\GLFW\CMAKEFILES\FF5922C5C2014A63534FA81F53DF5DB0\GLFW-DOWNLOAD-TEST.RULE
+^C:\USERS\PIJON\ONEDRIVE\DESKTOP\ANIMATION3D\EXTERNAL\.CACHE\GLFW\CMAKEFILES\90BA51A0B1FEAACA04806B9077685829\GLFW-DOWNLOAD-TEST.RULE
 setlocal
-cd C:\Users\tal74\projects\animation\animation3D\build\glfw-build
+cd C:\Users\pijon\OneDrive\Desktop\animation3D\build\glfw-build
 if %errorlevel% neq 0 goto :cmEnd
 C:
 if %errorlevel% neq 0 goto :cmEnd
 "C:\Program Files\CMake\bin\cmake.exe" -E echo_append
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/projects/animation/animation3D/external/.cache/glfw/glfw-download-prefix/src/glfw-download-stamp/Debug/glfw-download-test
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/pijon/OneDrive/Desktop/animation3D/external/.cache/glfw/glfw-download-prefix/src/glfw-download-stamp/Debug/glfw-download-test
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
@@ -128,13 +116,13 @@ endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd
-^C:\USERS\TAL74\PROJECTS\ANIMATION\ANIMATION3D\EXTERNAL\.CACHE\GLFW\CMAKEFILES\DAD3698FAC8D455ACE415FE78DBA2C95\GLFW-DOWNLOAD-COMPLETE.RULE
+^C:\USERS\PIJON\ONEDRIVE\DESKTOP\ANIMATION3D\EXTERNAL\.CACHE\GLFW\CMAKEFILES\5B517EF6610AF9AED3C5810BC8F88ACD\GLFW-DOWNLOAD-COMPLETE.RULE
 setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/projects/animation/animation3D/external/.cache/glfw/CMakeFiles/Debug
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/pijon/OneDrive/Desktop/animation3D/external/.cache/glfw/CMakeFiles/Debug
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/projects/animation/animation3D/external/.cache/glfw/CMakeFiles/Debug/glfw-download-complete
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/pijon/OneDrive/Desktop/animation3D/external/.cache/glfw/CMakeFiles/Debug/glfw-download-complete
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/projects/animation/animation3D/external/.cache/glfw/glfw-download-prefix/src/glfw-download-stamp/Debug/glfw-download-done
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/pijon/OneDrive/Desktop/animation3D/external/.cache/glfw/glfw-download-prefix/src/glfw-download-stamp/Debug/glfw-download-done
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
@@ -142,7 +130,7 @@ endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd
-^C:\USERS\TAL74\PROJECTS\ANIMATION\ANIMATION3D\EXTERNAL\.CACHE\GLFW\CMAKEFILES\E14D094B3C0E0A8DBD7C9ACE58E8A6B2\GLFW-DOWNLOAD.RULE
+^C:\USERS\PIJON\ONEDRIVE\DESKTOP\ANIMATION3D\EXTERNAL\.CACHE\GLFW\CMAKEFILES\91C6D37ACED81B1C8084AC7D1D978A67\GLFW-DOWNLOAD.RULE
 setlocal
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
@@ -150,9 +138,9 @@ endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd
-^C:\USERS\TAL74\PROJECTS\ANIMATION\ANIMATION3D\EXTERNAL\.CACHE\GLFW\CMAKELISTS.TXT
+^C:\USERS\PIJON\ONEDRIVE\DESKTOP\ANIMATION3D\EXTERNAL\.CACHE\GLFW\CMAKELISTS.TXT
 setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/tal74/projects/animation/animation3D/external/.cache/glfw -BC:/Users/tal74/projects/animation/animation3D/external/.cache/glfw --check-stamp-file C:/Users/tal74/projects/animation/animation3D/external/.cache/glfw/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/pijon/OneDrive/Desktop/animation3D/external/.cache/glfw -BC:/Users/pijon/OneDrive/Desktop/animation3D/external/.cache/glfw --check-stamp-file C:/Users/pijon/OneDrive/Desktop/animation3D/external/.cache/glfw/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone

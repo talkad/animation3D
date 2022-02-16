@@ -66,14 +66,17 @@ SandBox::~SandBox()
 void SandBox::Animate()
 {
 
-    //if (frames < 100) 
-    //    ++frames;
-    //else {
-    //    data_list[0].kd_tree.init(data_list[0].V, data_list[0].F);
-    //    check_collision();
-    //    frames = 0;
-    //}
+
     if (isActive) {
+
+        if (frames < 50)
+            ++frames;
+        else {
+            data_list[0].kd_tree.init(data_list[0].V, data_list[0].F);
+            check_collision();
+            frames = 0;
+        }
+
         move_snake();
         generate_target();
         move_targets();

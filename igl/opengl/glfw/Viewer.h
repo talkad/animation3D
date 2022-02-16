@@ -138,13 +138,23 @@ namespace igl
 
                 IGL_INLINE void clean_data_list();
 
+                bool boxes_collide(Eigen::AlignedBox<double, 3>& box1, Eigen::AlignedBox<double, 3>& box2, int i);
+
                 IGL_INLINE void move_targets();
 
                 IGL_INLINE void generate_target();
 
+                IGL_INLINE bool treeNodesCollide(AABB<Eigen::MatrixXd, 3>&, AABB<Eigen::MatrixXd, 3>&);
+
                 IGL_INLINE bool treeNodesCollide(AABB<Eigen::MatrixXd, 3>&, Eigen::AlignedBox<double, 3>&);
 
+                IGL_INLINE bool treeNodesCollide(AABB<Eigen::MatrixXd, 3>&, AABB<Eigen::MatrixXd, 3>&, int);
+
+                IGL_INLINE bool treeNodesCollide(AABB<Eigen::MatrixXd, 3>&, Eigen::AlignedBox<double, 3>&, int);
+
                 // check if two object in data_list are collided
+
+                IGL_INLINE bool treeNodesCollide(AABB<Eigen::MatrixXd, 3>* node1, Eigen::AlignedBox<double, 3>* node2, int i);
 
                 IGL_INLINE void check_collision();
 
