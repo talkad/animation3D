@@ -248,7 +248,7 @@ bool Display::launch_rendering(bool loop)
 	fogShader.setMat4("projection", projection);
 
 	Texture2D fogTexture = loadTexture("../../../tutorial/textures/particle.png", true);
-	particleGen = new ParticleGenerator(500);
+	particleGen = new ParticleGenerator(5000);
 
 
 	// Rendering loop
@@ -304,7 +304,7 @@ bool Display::launch_rendering(bool loop)
 
 		// fog shader
 		// update particle positions
-		particleGen->Update(0.1f, 2, glm::vec2(2, 2));
+		particleGen->Update(0.1f, 50);
 
 		// draw particles	
 		// use additive blending to give it a 'glow' effect

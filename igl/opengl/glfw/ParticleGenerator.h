@@ -1,5 +1,5 @@
 #include <vector>
-
+#include <random>
 #include <external/glad/include/glad/glad.h>
 #include <external/glm/glm.hpp>
 
@@ -21,7 +21,7 @@ public:
 	// constructor
 	ParticleGenerator(unsigned int amount);
 	// update all particles
-	void Update(float dt, unsigned int newParticles, glm::vec2 offset = glm::vec2(0.0f, 0.0f));
+	void Update(float dt, unsigned int newParticles);
 
 	// state
 	unsigned int lastUsedParticle;
@@ -30,10 +30,15 @@ public:
 	// render state
 	unsigned int VAO;
 
+private:
+	std::random_device rd; // obtain a random number from hardware
+
 	// initializes buffer and vertex attributes
 	void init();
 	// returns the first Particle index that's currently unused e.g. Life <= 0.0f or 0 if no particle is currently inactive
 	unsigned int firstUnusedParticle();
 	// respawns particle
-	void respawnParticle(Particle &particle, glm::vec2 offset = glm::vec2(0.0f, 0.0f));
+	void respawnParticle(Particle& particle);
+
+	float randRange(int min, int max);
 };

@@ -1,7 +1,6 @@
 
 #include <igl/opengl/glfw/ParticleGenerator.h>
 #include <glad\glad.h>
-
 #include <iostream>
 
 
@@ -10,27 +9,29 @@ ParticleGenerator::ParticleGenerator(unsigned int amount): amount(amount), lastU
 	this->init();
 }
 
-void ParticleGenerator::Update(float dt, unsigned int newParticles, glm::vec2 offset)
+void ParticleGenerator::Update(float dt, unsigned int newParticles)
 {
 	 // add new particles 
 	 for (unsigned int i = 0; i < newParticles; ++i)
 	 {
 	     int unusedParticle = this->firstUnusedParticle();
-	     this->respawnParticle(this->particles[unusedParticle], offset);
+	     this->respawnParticle(this->particles[unusedParticle]);
 	 }
+
 	 // update all particles
 	 for (unsigned int i = 0; i < this->amount; ++i)
 	 {
 	     Particle &p = this->particles[i];
 	     p.Life -= dt; // reduce life
-	     if (p.Life > 0.0f)
-	     {	// particle is alive, thus update
-	         p.Position -= p.Velocity * dt; 
-	         //p.Color.a -= dt * 2.5f;
-	     }
 
-		 if (i == 0) {
-			 std::cout << "Position: (" << p.Position[0] << "," << p.Position[1] << ")" << std::endl;
+		 if (p.Life > 0.0f) // particle is alive, thus update
+		 {	
+			 // move in random dir
+			 float x_dir_rand = randRange(0, 100) / 100.0f;
+			 float y_dir_rand = randRange(0, 100) / 100.0f;
+
+			 p.Position -= glm::vec2(p.Velocity[0] * x_dir_rand, p.Velocity[1] * y_dir_rand) * dt;
+			 p.Color.a -= dt * 0.1f;
 		 }
 	 }
 }
@@ -41,8 +42,8 @@ void ParticleGenerator::init()
 	unsigned int VBO;
 	float particle_quad[] = {
 		0.0f, 1.0f, 0.0f, 1.0f,
+		1.0f, 1.0f, 1.0f, 1.0f,
 		1.0f, 0.0f, 1.0f, 0.0f,
-		0.0f, 0.0f, 0.0f, 0.0f,
 
 		0.0f, 1.0f, 0.0f, 1.0f,
 		1.0f, 1.0f, 1.0f, 1.0f,
@@ -85,15 +86,25 @@ unsigned int ParticleGenerator::firstUnusedParticle()
 	return 0;
 }
 
-void ParticleGenerator::respawnParticle(Particle& particle, glm::vec2 offset)
+void ParticleGenerator::respawnParticle(Particle& particle)
 {
-	float random = ((rand() % 100) - 50) / 10.0f;
-	float rColor = 0.5f + ((rand() % 100) / 100.0f);
-	//particle.Position = object.Position + random + offset;
-	particle.Position = random + offset + glm::vec2(400, 200);
+	// move in random dir
+	float x_dir_rand = (randRange(0, 200) - 100) / 100.0f;
+	float y_dir_rand = (randRange(0, 200) - 100) / 100.0f;
 
-	particle.Color = glm::vec4(rColor, rColor, rColor, 1.0f);
-	particle.Life = 20.0f;
-	//particle.Velocity = object.Velocity * 0.1f;
-	particle.Velocity = glm::vec2(200, 100) * 0.1f;
+	float x_pos_rand = randRange(0, 1000);
+	float y_pos_rand = randRange(0, 700);
+
+	particle.Position =  glm::vec2(x_pos_rand, y_pos_rand);
+	particle.Color = glm::vec4(2.0f, 10.0f, 5.0f, 1.0f);
+	particle.Life = 10.0f;
+	particle.Velocity = glm::vec2(200 * x_dir_rand, 100 * y_dir_rand) * 0.1f;
+}
+
+float ParticleGenerator::randRange(int min, int max)
+{
+	std::mt19937 gen(rd()); // seed the generator
+	std::uniform_int_distribution<> distr_dir(min, max); // define the range
+
+	return distr_dir(gen);
 }
