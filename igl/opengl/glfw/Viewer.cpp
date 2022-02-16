@@ -89,7 +89,7 @@ namespace igl
                 level(1),
                 score(0),
                 start_time(0),
-                target2_creation(3),
+                target2_creation(2),
                 joints_num(16),
                 scale(2),
                 direction(' '),
@@ -103,7 +103,8 @@ namespace igl
                 timer(0),
                 pause_time(0),
                 resume_time(0),
-                paused_time(0)
+                paused_time(0),
+                isFog(true)
             {
                 data_list.front().id = 0;
 
@@ -552,7 +553,7 @@ namespace igl
 
                 float tic = static_cast<float>(glfwGetTime());
                 //std::cout << tic << std::endl;
-                if (tic - prev_tic > 5) {
+                if (tic - prev_tic > 4) {
                     prev_tic = tic;
 
                     std::this_thread::sleep_for(std::chrono::microseconds(5));
@@ -570,7 +571,7 @@ namespace igl
                     // generate different targets according to level
                     if (target2_creation == 0) {
                         data().update_movement_type(4);
-                        target2_creation = 3;
+                        target2_creation = 2;
                     }
                     else {
                         double target_proba = (double)(rand() % 10) / 10;

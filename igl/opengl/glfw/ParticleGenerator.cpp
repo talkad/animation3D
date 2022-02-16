@@ -4,7 +4,8 @@
 #include <iostream>
 
 
-ParticleGenerator::ParticleGenerator(unsigned int amount): amount(amount), lastUsedParticle(0), camera_angle(front)
+ParticleGenerator::ParticleGenerator(unsigned int amount, bool isExplosion, double x, double y):
+amount(amount), lastUsedParticle(0), camera_angle(front), isExplosion(isExplosion), x(x), y(y)
 {
 	this->init();
 }
@@ -51,8 +52,8 @@ void ParticleGenerator::init()
 	unsigned int VBO;
 	float particle_quad[] = {
 		0.0f, 1.0f, 0.0f, 1.0f,
-		1.0f, 1.0f, 1.0f, 1.0f,
 		1.0f, 0.0f, 1.0f, 0.0f,
+		0.0f, 0.0f, 0.0f, 0.0f,
 
 		0.0f, 1.0f, 0.0f, 1.0f,
 		1.0f, 1.0f, 1.0f, 1.0f,
@@ -101,13 +102,35 @@ void ParticleGenerator::respawnParticle(Particle& particle)
 	float x_dir_rand = (randRange(0, 200) - 100) / 100.0f;
 	float y_dir_rand = (randRange(0, 200) - 100) / 100.0f;
 
-	float x_pos_rand = randRange(0, 1000);
-	float y_pos_rand = randRange(0, camera_angle);
+	if (isExplosion) {
+		particle.Color = glm::vec4(0.0f, 0.0f, 100.0f, 1.0f);
+		particle.Position = glm::vec2(x, y);
+		particle.Velocity = glm::vec2(100 * x_dir_rand, 100 * y_dir_rand) * 0.3f;
+	}
+	else {
+		float x_pos_rand = randRange(0, 1000);
+		float y_pos_rand = randRange(0, camera_angle);
 
-	particle.Position =  glm::vec2(x_pos_rand, y_pos_rand);
-	particle.Color = glm::vec4(30.0f, 50.0f, 50.0f, 1.0f);
+		int color_rand = randRange(0, 2);
+
+		switch (color_rand) {
+			case 0:
+				particle.Color = glm::vec4(75.0f, 75.0f, 75.0f, 1.0f);
+				break;
+			case 1:
+				particle.Color = glm::vec4(0.0f, 75.0f, 0.0f, 1.0f);
+				break;
+			case 2:
+				particle.Color = glm::vec4(0.0f, 0.0f, 75.0f, 1.0f);
+				break;
+		}
+
+		particle.Position =  glm::vec2(x_pos_rand, y_pos_rand);
+		particle.Velocity = glm::vec2(200 * x_dir_rand, 100 * y_dir_rand) * 0.1f;
+	}
+
 	particle.Life = 10.0f;
-	particle.Velocity = glm::vec2(200 * x_dir_rand, 100 * y_dir_rand) * 0.1f;
+	
 }
 
 float ParticleGenerator::randRange(int min, int max)

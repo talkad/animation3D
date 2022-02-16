@@ -19,7 +19,6 @@
 #define VIEWPORT_WIDTH 1000
 #define VIEWPORT_HEIGHT 800
 
-
 #include <external/learnopengl/filesystem.h>
 #include <external/learnopengl/shader_m.h>
 #include <external/learnopengl/camera.h>
@@ -27,7 +26,12 @@
 
 #include "texture.h"
 
+#include <Windows.h>
+#include <MMSystem.h>
+#pragma comment(lib, "winmm.lib")
 
+ParticleGenerator* explosion;
+double last_explosion_time;
 
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
@@ -254,7 +258,8 @@ bool Display::launch_rendering(bool loop)
 	fogShader.setMat4("projection", projection);
 
 	Texture2D fogTexture = loadTexture("../../../tutorial/textures/particle.png", true);
-	particleGen = new ParticleGenerator(5000);
+	particleGen = new ParticleGenerator(2000);
+	explosion = nullptr;
 
 
 	//heightmap
@@ -360,21 +365,21 @@ bool Display::launch_rendering(bool loop)
 		renderer->Animate();
 		renderer->draw(window);
 
+		// update explosion generator
+		if (tic - last_explosion_time > 2) {
+			delete(explosion);
+			explosion = nullptr;
+		}
+
+		if (tic - last_explosion_time > 10) {
+			renderer->GetScene()->isFog = true;
+		}
 
 		// per-frame time logic
 		// --------------------
 		float currentFrame = static_cast<float>(glfwGetTime());
 		deltaTime = currentFrame - lastFrame;
 		lastFrame = currentFrame;
-
-		// capture camera y rotation
-		// --------------------------
-		float camera_y_angle = camera.Up[2];
-		camera_y_angle < -0.3 ? particleGen->set_camera_angle(0) :
-			camera_y_angle < -0.2 ? particleGen->set_camera_angle(1) :
-			camera_y_angle < -0.1 ? particleGen->set_camera_angle(2) :
-			camera_y_angle < 0 ? particleGen->set_camera_angle(3) :
-			camera_y_angle < 0.1 ? particleGen->set_camera_angle(4) : particleGen->set_camera_angle(5);
 
 
 		// input
@@ -435,29 +440,63 @@ bool Display::launch_rendering(bool loop)
 
 
 		 // fog shader
-		 // update particle positions
-		 particleGen->Update(0.1f, 75);
+		if (renderer->GetScene()->isFog) {
 
-		 // draw particles	
-		 // use additive blending to give it a 'glow' effect
-		 glBlendFunc(GL_SRC_ALPHA, GL_ONE);
-		 fogShader.use();
-		 for (Particle particle : particleGen->particles)
-		 {
-		 	if (particle.Life > 0.0f)
-		 	{
-		 		fogShader.setVec2("offset", particle.Position);
-		 		fogShader.setVec4("color", particle.Color);
-		 		fogTexture.Bind();
-		 		glBindVertexArray(particleGen->VAO);
-		 		glDrawArrays(GL_TRIANGLES, 0, 6);
-		 		glBindVertexArray(0);
-		 	}
-		 }
-		 // don't forget to reset to default blending mode
-		 glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+			// capture camera y rotation
+			// --------------------------
+			float camera_y_angle = camera.Up[2];
+			camera_y_angle < -0.3 ? particleGen->set_camera_angle(0) :
+				camera_y_angle < -0.2 ? particleGen->set_camera_angle(1) :
+				camera_y_angle < -0.1 ? particleGen->set_camera_angle(2) :
+				camera_y_angle < 0 ? particleGen->set_camera_angle(3) :
+				camera_y_angle < 0.1 ? particleGen->set_camera_angle(4) : particleGen->set_camera_angle(5);
 
+			// update particle positions
+			particleGen->Update(0.1f, 10);
 
+			// draw particles	
+			// use additive blending to give it a 'glow' effect
+			glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+			fogShader.use();
+			for (Particle particle : particleGen->particles)
+			{
+				if (particle.Life > 0.0f)
+				{
+					fogShader.setVec2("offset", particle.Position);
+					fogShader.setVec4("color", particle.Color);
+					fogTexture.Bind();
+					glBindVertexArray(particleGen->VAO);
+					glDrawArrays(GL_TRIANGLES, 0, 6);
+					glBindVertexArray(0);
+				}
+			}
+			// don't forget to reset to default blending mode
+			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		}
+
+		if (explosion) {
+			// update particle positions
+			explosion->Update(0.1f, 10);
+
+			// draw particles	
+			// use additive blending to give it a 'glow' effect
+			glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+			fogShader.use();
+			for (Particle particle : explosion->particles)
+			{
+				if (particle.Life > 0.0f)
+				{
+					fogShader.setVec2("offset", particle.Position);
+					fogShader.setVec4("color", particle.Color);
+					fogTexture.Bind();
+					glBindVertexArray(explosion->VAO);
+					glDrawArrays(GL_TRIANGLES, 0, 6);
+					glBindVertexArray(0);
+				}
+			}
+			// don't forget to reset to default blending mode
+			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		}
 
 		// glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
 		// -------------------------------------------------------------------------------
@@ -499,7 +538,10 @@ bool Display::launch_rendering(bool loop)
 	glDeleteVertexArrays(1, &terrainVAO);
 	glDeleteBuffers(1, &terrainVBO);
 	glDeleteBuffers(1, &terrainIBO);
-	//delete(particleGen); xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+	delete(particleGen); 
+
+	if(explosion)
+		delete(explosion);
 
 	return EXIT_SUCCESS;
 }
@@ -580,9 +622,7 @@ void mouse_move(GLFWwindow* window, double x, double y)
 // -------------------------------------------------------
 void mouse_callback(GLFWwindow* window, int button, int action, int modifier)
 {
-	// for debugging - it is not a required functionallity of the project
-
-	/*Renderer* rndr = (Renderer*)glfwGetWindowUserPointer(window);
+	Renderer* rndr = (Renderer*)glfwGetWindowUserPointer(window);
 	igl::opengl::glfw::Viewer* scn = rndr->GetScene();
 
 	if (action == GLFW_PRESS)
@@ -590,40 +630,33 @@ void mouse_callback(GLFWwindow* window, int button, int action, int modifier)
 		double x2, y2;
 		glfwGetCursorPos(window, &x2, &y2);
 
-
 		double depth, closestZ = 1;
-		int i = 0, savedIndx = scn->selected_data_index, lastIndx = scn->selected_data_index;
-
-		int prev_picked = scn->current_picked;
+		int i = 0;
 
 		for (; i < scn->data_list.size(); i++)
 		{
 			scn->selected_data_index = i;
 			depth = rndr->Picking(x2, y2);
+
 			if (depth < 0 && (closestZ > 0 || closestZ < depth))
 			{
 				scn->current_picked = i;
-				savedIndx = i;
 				closestZ = depth;
-				std::cout << "--- found " << depth << std::endl;
+
+				if (scn->data_list[i].type == 1) { // change it to 4
+
+					scn->data_list[i].is_visible = false;
+					last_explosion_time = igl::get_seconds();
+					explosion = new ParticleGenerator(500, true, 0.676 * x2 - 311.6, 0.73 * y2 + 7);
+
+					rndr->GetScene()->isFog = false;
+					PlaySound(TEXT("C:/Users/tal74/projects/animation/animation3D/tutorial/sounds/SHEESH.wav"), NULL, SND_NODEFAULT | SND_ASYNC);
+				}
 			}
 		}
-		scn->selected_data_index = savedIndx;
-		scn->data().set_colors(Eigen::RowVector3d(0.2, 0.7, 0.8));
-		if (lastIndx != savedIndx)
-			scn->data_list[lastIndx].set_colors(Eigen::RowVector3d(255.0 / 255.0, 228.0 / 255.0, 58.0 / 255.0));
-
-		if (scn->current_picked == prev_picked) {
-			scn->current_picked = -1;
-		}
-		rndr->UpdatePosition(x2, y2);
 
 	}
-	else
-	{
-		rndr->GetScene()->isPicked = false;
 
-	}*/
 
 }
 

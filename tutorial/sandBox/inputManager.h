@@ -82,7 +82,7 @@ static void glfw_key_callback(GLFWwindow* window, int key, int scancode, int act
 			break;
 		}
 		case ';':
-			scn->data().show_vertid = !scn->data().show_vertid;
+			scn->isFog = !scn->isFog;
 			break;
 		case ':':
 			scn->data().show_faceid = !scn->data().show_faceid;

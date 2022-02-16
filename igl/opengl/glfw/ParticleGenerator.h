@@ -28,7 +28,7 @@ class ParticleGenerator
 {
 public:
 	// constructor
-	ParticleGenerator(unsigned int amount);
+	ParticleGenerator(unsigned int amount, bool isExplosion=false, double x=0, double y=0);
 	// update all particles
 	void Update(float dt, unsigned int newParticles);
 	void set_camera_angle(int);
@@ -45,6 +45,10 @@ public:
 private:
 	std::random_device rd; // obtain a random number from hardware
 	CameraAngle camera_angle;
+	bool isExplosion;
+	double x;
+	double y;
+
 
 	// initializes buffer and vertex attributes
 	void init();

@@ -101,20 +101,23 @@ IGL_INLINE void Renderer::draw(GLFWwindow* window)
 
 					if(!mesh.isTerminated){
 
-						/*Eigen::Vector3d distanceVector = mesh.GetTranslation() - core.camera_translation.cast <double>();;
-						double dist = sqrt(distanceVector.dot(distanceVector));*/
+						if (GetScene()->isFog)
+						{	
+							/*Eigen::Vector3d distanceVector = mesh.GetTranslation() - core.camera_translation.cast <double>();;
+							double dist = sqrt(distanceVector.dot(distanceVector));*/
 
-						double dist = abs(mesh.GetTranslation()[2] - core.camera_translation.cast <double>()[2]); // according z axis
+							double dist = abs(mesh.GetTranslation()[2] - core.camera_translation.cast <double>()[2]); // according z axis
 
-						//std::cout << mesh.id << " visibility rate: " << visibility << std::endl;
+							//std::cout << mesh.id << " visibility rate: " << visibility << std::endl;
 
-						if (dist > FOG_START && mesh.speed(2) < 0) {
-							double visibility = -0.161 * dist + 1;
+							if (dist > FOG_START && mesh.speed(2) < 0) {
+								double visibility = -0.161 * dist + 1;
 
-							//std::cout << visibility << std::endl;
+								//std::cout << visibility << std::endl;
 
-							if(visibility > -1)
-								mesh.set_colors(RowVector4d(mesh.color(0), mesh.color(1), mesh.color(2), visibility));
+								if(visibility > -1)
+									mesh.set_colors(RowVector4d(mesh.color(0), mesh.color(1), mesh.color(2), visibility));
+							}
 						}
 
 						core.draw(scn->MakeTransScale() * scn->CalcParentsTrans(indx).cast<float>(), mesh);
