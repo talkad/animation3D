@@ -25,6 +25,8 @@
 #include <external/learnopengl/camera.h>
 #include <external/learnopengl/model.h>
 
+#include "texture.h"
+
 
 
 
@@ -34,7 +36,7 @@ void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 void mouse_move(GLFWwindow* window, double x, double y);
 void processInput(GLFWwindow* window);
 
-unsigned int loadTexture(const char* path);
+Texture2D loadTexture(const char* path, bool alpha);
 unsigned int loadCubemap(vector<std::string> faces);
 
 const unsigned int SCR_WIDTH = 1000;
@@ -238,13 +240,14 @@ bool Display::launch_rendering(bool loop)
 
 	// fog
 	Shader fogShader("../../../shaders/particle.vs", "../../../shaders/particle.fs");
-	glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+	glm::mat4 projection = glm::ortho(0.0f, static_cast<float>(VIEWPORT_WIDTH),
+		static_cast<float>(VIEWPORT_HEIGHT), 0.0f, -1.0f, 1.0f);
 	
 	fogShader.use();
 	fogShader.setInt("sprite", 0);
 	fogShader.setMat4("projection", projection);
 
-	unsigned int textureID = loadTexture("../../../tutorial/textures/particle.png");
+	Texture2D fogTexture = loadTexture("../../../tutorial/textures/particle.png", true);
 	particleGen = new ParticleGenerator(500);
 
 
@@ -300,6 +303,7 @@ bool Display::launch_rendering(bool loop)
 
 
 		// fog shader
+		// update particle positions
 		particleGen->Update(0.1f, 2, glm::vec2(2, 2));
 
 		// draw particles	
@@ -312,9 +316,7 @@ bool Display::launch_rendering(bool loop)
 			{
 				fogShader.setVec2("offset", particle.Position);
 				fogShader.setVec4("color", particle.Color);
-
-				glBindTexture(GL_TEXTURE_2D, textureID);
-
+				fogTexture.Bind();
 				glBindVertexArray(particleGen->VAO);
 				glDrawArrays(GL_TRIANGLES, 0, 6);
 				glBindVertexArray(0);
@@ -559,41 +561,31 @@ Display::~Display()
 
 // utility function for loading a 2D texture from file
 // ---------------------------------------------------
-unsigned int loadTexture(char const* path)
+Texture2D loadTexture(char const* path, bool alpha)
 {
-	unsigned int textureID;
-	glGenTextures(1, &textureID);
-
-	int width, height, nrComponents;
-	unsigned char* data = stbi_load(path, &width, &height, &nrComponents, 0);
-	if (data)
+	// create texture object
+	Texture2D texture;
+	if (alpha)
 	{
-		GLenum format;
-		if (nrComponents == 1)
-			format = GL_RED;
-		else if (nrComponents == 3)
-			format = GL_RGB;
-		else if (nrComponents == 4)
-			format = GL_RGBA;
-
-		glBindTexture(GL_TEXTURE_2D, textureID);
-		glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
-		glGenerateMipmap(GL_TEXTURE_2D);
-
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-		stbi_image_free(data);
+		texture.Internal_Format = GL_RGBA;
+		texture.Image_Format = GL_RGBA;
 	}
-	else
-	{
+	// load image
+	int width, height, nrChannels;
+	unsigned char* data = stbi_load(path, &width, &height, &nrChannels, 0);
+
+	if (data) {
+		// now generate texture
+		texture.Generate(width, height, data);
+	}
+	else {
 		std::cout << "Texture failed to load at path: " << path << std::endl;
-		stbi_image_free(data);
 	}
 
-	return textureID;
+	// and finally free image data
+	stbi_image_free(data);
+
+	return texture;
 }
 
 // loads a cubemap texture from 6 individual texture faces

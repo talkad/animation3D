@@ -2,6 +2,9 @@
 #include <igl/opengl/glfw/ParticleGenerator.h>
 #include <glad\glad.h>
 
+#include <iostream>
+
+
 ParticleGenerator::ParticleGenerator(unsigned int amount): amount(amount), lastUsedParticle(0)
 {
 	this->init();
@@ -23,8 +26,12 @@ void ParticleGenerator::Update(float dt, unsigned int newParticles, glm::vec2 of
 	     if (p.Life > 0.0f)
 	     {	// particle is alive, thus update
 	         p.Position -= p.Velocity * dt; 
-	         p.Color.a -= dt * 2.5f;
+	         //p.Color.a -= dt * 2.5f;
 	     }
+
+		 if (i == 0) {
+			 std::cout << "Position: (" << p.Position[0] << "," << p.Position[1] << ")" << std::endl;
+		 }
 	 }
 }
 
@@ -83,7 +90,10 @@ void ParticleGenerator::respawnParticle(Particle& particle, glm::vec2 offset)
 	float random = ((rand() % 100) - 50) / 10.0f;
 	float rColor = 0.5f + ((rand() % 100) / 100.0f);
 	//particle.Position = object.Position + random + offset;
+	particle.Position = random + offset + glm::vec2(400, 200);
+
 	particle.Color = glm::vec4(rColor, rColor, rColor, 1.0f);
-	particle.Life = 1.0f;
+	particle.Life = 20.0f;
 	//particle.Velocity = object.Velocity * 0.1f;
+	particle.Velocity = glm::vec2(200, 100) * 0.1f;
 }
