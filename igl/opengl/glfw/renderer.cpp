@@ -53,6 +53,14 @@ IGL_INLINE void Renderer::draw(GLFWwindow* window)
 	using namespace std;
 	using namespace Eigen;
 
+	Eigen::Vector3d colorVec;
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_int_distribution<> distr_color(0, 2);
+	std::uniform_int_distribution<> distr_sign(0, 1);
+
+	int color;
+	int sign;
 	int width, height;
 	glfwGetFramebufferSize(window, &width, &height);
 
@@ -119,6 +127,28 @@ IGL_INLINE void Renderer::draw(GLFWwindow* window)
 								if(visibility > -1)
 									mesh.set_colors(RowVector4d(mesh.color(0), mesh.color(1), mesh.color(2), visibility));
 							}
+						}
+
+						if (mesh.type == 4) {
+							color = distr_color(gen);
+							sign = distr_sign(gen);
+
+							sign == 0 ? sign = 1 : sign = -1;
+
+							switch (color) {
+							case 1:
+								colorVec = mesh.color + sign * Eigen::Vector3d(1, 0, 0) * 0.1;
+								break;
+							case 2:
+								colorVec = mesh.color + sign * Eigen::Vector3d(0, 1, 0) * 0.1;
+								break;
+							default:
+								colorVec = mesh.color + sign * Eigen::Vector3d(0, 0, 1) * 0.05;
+								break;
+							}
+
+							mesh.set_colors(Eigen::RowVector3d(colorVec(0), colorVec(1), colorVec(2)));
+
 						}
 
 						core.draw(scn->MakeTransScale() * scn->CalcParentsTrans(indx).cast<float>(), mesh);

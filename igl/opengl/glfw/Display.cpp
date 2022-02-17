@@ -645,7 +645,7 @@ void mouse_callback(GLFWwindow* window, int button, int action, int modifier)
 				scn->current_picked = i;
 				closestZ = depth;
 
-				if (scn->data_list[i].type == 1) { // change it to 4
+				if (scn->data_list[i].type == 4) {
 
 					scn->data_list[i].is_visible = false;
 					last_explosion_time = igl::get_seconds();

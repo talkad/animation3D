@@ -103,7 +103,7 @@ void ParticleGenerator::respawnParticle(Particle& particle)
 	float y_dir_rand = (randRange(0, 200) - 100) / 100.0f;
 
 	if (isExplosion) {
-		particle.Color = glm::vec4(0.0f, 0.0f, 100.0f, 1.0f);
+		particle.Color = glm::vec4(100.0f, 0.0f, 0.0f, 1.0f);
 		particle.Position = glm::vec2(x, y);
 		particle.Velocity = glm::vec2(100 * x_dir_rand, 100 * y_dir_rand) * 0.3f;
 	}
