@@ -140,7 +140,7 @@ IGL_INLINE void ImGuiMenu::display_stats(Viewer& viewer)
         if(!viewer.isPaused)
             viewer.update_timer();
 
-        if (viewer.timer <= 5)
+        if (viewer.timer <= 5 && viewer.timer % 2 == 1)
             ImGui::TextColored(ImVec4(1, 0, 0, 1), "	     Time: %d", viewer.timer);
         else
             ImGui::Text("	     Time: %d", viewer.timer);
