@@ -592,10 +592,9 @@ namespace igl
   
             IGL_INLINE void Viewer::move_targets()
             {
-                for (auto& data : data_list) {
-                    if (data.type > 0)
-                        data.move();
-                }
+                for (auto& data : data_list) 
+                    if (data.type != NONE)
+                        data.move();   
             }
 
             IGL_INLINE void Viewer::generate_target()
@@ -803,9 +802,6 @@ namespace igl
                         box = Eigen::AlignedBox<double, 3>(m, M);
                         jointBoxes.at(i) = box;
                     }
-                    //for (int i = 0; i < skeleton.size(); ++i)
-                    //    std::cout << "SKELETON INDEX NO." << i << " " << skeleton[i].x() << " " << skeleton[i].y() << " " << skeleton[i].z() << std::endl;
-                    //check_collision();
                 }
             }
 
