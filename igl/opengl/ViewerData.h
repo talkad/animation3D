@@ -234,6 +234,7 @@ namespace igl
             // Each option is a binary mask specifying on which viewport each option is set.
             // When using a single viewport, standard boolean can still be used for simplicity.
             unsigned int is_visible;
+            unsigned int is_collided;
             unsigned int show_overlay;
             unsigned int show_overlay_depth;
             unsigned int show_texture;

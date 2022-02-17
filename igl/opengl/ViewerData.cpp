@@ -44,6 +44,7 @@ IGL_INLINE igl::opengl::ViewerData::ViewerData()
     id(-1),
     is_visible(1),
     type(NONE),
+    is_collided(false),
     creation_time(static_cast<float>(glfwGetTime())),
     isTerminated(false),
     color(Eigen::Vector3d(0,0,0))
@@ -241,15 +242,15 @@ IGL_INLINE void igl::opengl::ViewerData::initiate_speed()
             MyTranslateInSystem(GetRotation(), Eigen::Vector3d(8, 0, 0));
     }
     else {
-        speed = Eigen::Vector3d(x / 2.0, y / 10.0, z/ 5.0);
+        speed = Eigen::Vector3d(x / 20.0, y / 100.0, z/ 50.0);
 
         if (id == 1)
             std::cout << speed << std::endl;
 
         if(x > 0)
-            MyTranslateInSystem(GetRotation(), Eigen::Vector3d(-8, 0, 0));
+            MyTranslateInSystem(GetRotation(), Eigen::Vector3d(-3, 0, 0));
         else
-            MyTranslateInSystem(GetRotation(), Eigen::Vector3d(8, 0, 0));
+            MyTranslateInSystem(GetRotation(), Eigen::Vector3d(3, 0, 0));
 
         if(y > 0)
             MyTranslateInSystem(GetRotation(), Eigen::Vector3d(0, -3, 0));

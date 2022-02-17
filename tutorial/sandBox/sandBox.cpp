@@ -42,11 +42,17 @@ void SandBox::Init(const std::string& config)
     for (int i = 0; i <= joints_num; ++i)
     {
         skeleton.push_back(z * Eigen::Vector3d::UnitZ());
-        z += 0.1 * scale;
+        z += 0.05 * scale;
     }
 
     calc_all_weights();
     data().MyRotate(Eigen::Vector3d::UnitY(), M_PI / 2);
+
+    for (int i = 0; i <= joints_num; ++i)
+    {
+        split_snake.emplace_back();
+        split_snake[i].MyTranslate(skeleton[i], true);
+    }
 
     target_pose = skeleton[joints_num];
     U = V;
@@ -69,13 +75,13 @@ void SandBox::Animate()
 
     if (isActive) {
 
-        if (frames < 50)
-            ++frames;
-        else {
-            data_list[0].kd_tree.init(data_list[0].V, data_list[0].F);
-            check_collision();
-            frames = 0;
-        }
+        //if (frames < 50)
+        //    ++frames;
+        //else {
+        //    data_list[0].kd_tree.init(data_list[0].V, data_list[0].F);
+        //    check_collision();
+        //    frames = 0;
+        //}
 
         move_snake();
         generate_target();

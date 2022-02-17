@@ -140,17 +140,15 @@ namespace igl
 
                 bool boxes_collide(Eigen::AlignedBox<double, 3>& box1, Eigen::AlignedBox<double, 3>& box2, int i);
 
+                bool boxes_collide(Eigen::AlignedBox<double, 3>& box1, Eigen::AlignedBox<double, 3>& box2, int i, int j);
+
                 IGL_INLINE void move_targets();
 
                 IGL_INLINE void generate_target();
 
                 IGL_INLINE bool treeNodesCollide(AABB<Eigen::MatrixXd, 3>&, AABB<Eigen::MatrixXd, 3>&);
 
-                IGL_INLINE bool treeNodesCollide(AABB<Eigen::MatrixXd, 3>&, Eigen::AlignedBox<double, 3>&);
-
-                IGL_INLINE bool treeNodesCollide(AABB<Eigen::MatrixXd, 3>&, AABB<Eigen::MatrixXd, 3>&, int);
-
-                IGL_INLINE bool treeNodesCollide(AABB<Eigen::MatrixXd, 3>&, Eigen::AlignedBox<double, 3>&, int);
+                IGL_INLINE bool treeNodesCollide(AABB<Eigen::MatrixXd, 3>&, Eigen::AlignedBox<double, 3>&, int, int);
 
                 // check if two object in data_list are collided
 
@@ -165,6 +163,8 @@ namespace igl
                 IGL_INLINE void add_score(int);
 
                 IGL_INLINE void update_timer();
+
+                IGL_INLINE void Viewer::createJointBoxes();
 
                 IGL_INLINE void move_snake();
 
@@ -238,7 +238,7 @@ namespace igl
                 int scale;
                 int joints_num;
                 std::vector<Eigen::Vector3d> skeleton;
-                std::vector<Movable> Joints;
+                std::vector<Movable> split_snake;
                 unsigned char direction;
                 unsigned char previous_direction;
 

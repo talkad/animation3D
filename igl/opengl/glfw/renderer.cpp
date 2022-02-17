@@ -120,6 +120,12 @@ IGL_INLINE void Renderer::draw(GLFWwindow* window)
 							}
 						}
 
+						/*if (mesh.id == 1) {
+							std::cout << "MESH LOC: \n" << mesh.GetTranslation() << std::endl;
+							std::cout << "SNAKE HEAD LOC: \n" << GetScene()->split_snake[15].GetTranslation() << std::endl
+								<< "SNAKE HEAD JOINT LOC: \n" << GetScene()->jointBoxes[15].center() << std::endl;
+						}*/
+
 						core.draw(scn->MakeTransScale() * scn->CalcParentsTrans(indx).cast<float>(), mesh);
 					}
 

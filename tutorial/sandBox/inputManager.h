@@ -38,6 +38,12 @@ static void glfw_key_callback(GLFWwindow* window, int key, int scancode, int act
 	else if(action == GLFW_PRESS || action == GLFW_REPEAT)
 		switch (key)
 		{
+		case 'R':
+		case 'r':
+			std::cout << "SNAKE HEAD LOC: \n" << scn->split_snake[16].GetTranslation() << std::endl;
+			std::cout << "OBJECT LOC: \n" << scn->data_list[1].GetTranslation() << std::endl;
+			std::cout << "DISTANCE: \n" << (scn->split_snake[16].GetTranslation() - scn->data_list[1].GetTranslation()).norm() << std::endl;
+			break;
 		case 'A':
 		case 'a':
 		{
