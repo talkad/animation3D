@@ -158,7 +158,7 @@ namespace igl
 
                 IGL_INLINE void start_level();
 
-                IGL_INLINE void level_up();
+                IGL_INLINE void check_level_up();
 
                 IGL_INLINE void add_score(int);
 
@@ -215,8 +215,8 @@ namespace igl
 
 
                 Eigen::Vector3d target_pose;
-                bool isNewLevel;
                 bool isGameOver;
+                bool isLevelUp;
                 bool start;
                 bool isResume;
                 bool isGameStarted;

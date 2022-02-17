@@ -93,7 +93,6 @@ namespace igl
                 scale(1),
                 direction(' '),
                 previous_direction('r'),
-                isNewLevel(false),
                 isGameOver(false),
                 start(true),
                 isResume(false),
@@ -103,7 +102,8 @@ namespace igl
                 pause_time(0),
                 resume_time(0),
                 paused_time(0),
-                isFog(true)
+                isFog(true),
+                isLevelUp(false)
             {
                 jointBoxes.resize(joints_num);
                 data_list.front().id = 0;
@@ -623,7 +623,7 @@ namespace igl
 
                     std::this_thread::sleep_for(std::chrono::microseconds(5));
 
-                    load_mesh_from_file("C:/Users/pijon/OneDrive/Desktop/animation3D/tutorial/data/sphere.obj");
+                    load_mesh_from_file("C:/Users/tal74/projects/animation/animation3D/tutorial/data/sphere.obj");
                     if (data_list.size() > parents.size())
                     {
                         parents.push_back(-1);
@@ -696,24 +696,34 @@ namespace igl
                 p = 1.0 / level + 0.33;
             }
 
-            IGL_INLINE void Viewer::level_up() {
-                level++;
-                PlaySound(TEXT("C:/Users/tal74/projects/animation/animation3D/tutorial/sounds/nextLevel.wav"), NULL, SND_NODEFAULT | SND_ASYNC);
+            IGL_INLINE void Viewer::check_level_up() {
+                if (score >= 10 * level) {
+                    level++;
+                    isLevelUp = true;
+                    isActive = false;
+                    score = 0;
+                    timer = 0;
+
+                    PlaySound(TEXT("C:/Users/tal74/projects/animation/animation3D/tutorial/sounds/nextLevel.wav"), NULL, SND_NODEFAULT | SND_ASYNC);
+                }
+                
             }
 
             IGL_INLINE void Viewer::add_score(int type) {
                 type == BASIC  ? score += 10 :
-                type == BOUNCY ? score -= 20 :
-                type == BEZIER ? score += 25 :
+                type == BOUNCY ? score += 20 :
+                type == BEZIER ? score += 30 :
                                  score += 0  ;
                     // activate special abilities
             }
 
             IGL_INLINE void Viewer::update_timer() {
-                int offset = static_cast<int>(glfwGetTime()) - start_time;
-                timer = (level * 80) - offset + paused_time;
+                if(!isLevelUp){
+                    int offset = static_cast<int>(glfwGetTime()) - start_time;
+                    timer = (level * 30) - offset + paused_time;
+                }
 
-                if (timer == 0) {
+                if (timer == 0 && !isLevelUp) {
                     isGameOver = true;
                     PlaySound(TEXT("C:/Users/tal74/projects/animation/animation3D/tutorial/sounds/gameOver.wav"), NULL, SND_NODEFAULT | SND_ASYNC);
                 }

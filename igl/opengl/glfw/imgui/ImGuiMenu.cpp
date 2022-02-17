@@ -31,7 +31,12 @@ namespace imgui
 
 IGL_INLINE void ImGuiMenu::all_button_actions(const char* id, Viewer& viewer) {
 
-    if (viewer.isGameOver && ImGui::Button("                 Play Again?                    ")) {
+    if (viewer.isLevelUp && ImGui::Button("                    Level Up                     ")) {
+        viewer.isActive = true;
+        viewer.isLevelUp = false;
+        viewer.start_level();
+    }
+    else if (viewer.isGameOver && ImGui::Button("                 Play Again?                    ")) {
         viewer.isGameOver = false;
         viewer.isGameStarted = true;
         viewer.level = 1;
@@ -39,20 +44,22 @@ IGL_INLINE void ImGuiMenu::all_button_actions(const char* id, Viewer& viewer) {
 
         viewer.start_level();
     }
-    else if (viewer.isGameStarted && !viewer.isGameOver) {
+    else if (!viewer.isLevelUp && viewer.isGameStarted && !viewer.isGameOver) {
         if (!viewer.isPaused && ImGui::Button("                       Pause                         ")) {
             viewer.isPaused = true;
+            viewer.isActive = false;
             viewer.pause_time = static_cast<int>(glfwGetTime());
         }
         else if (viewer.isPaused && ImGui::Button("                       Resume                      ")) {
             viewer.isPaused = false;
+            viewer.isActive = true;
             viewer.resume_time = static_cast<int>(glfwGetTime());
 
             viewer.paused_time += (viewer.resume_time - viewer.pause_time);
         }
 
     }
-    else if (!viewer.isGameOver && ImGui::Button("                       Start                        ")) {
+    else if (!viewer.isLevelUp && !viewer.isGameOver && ImGui::Button("                       Start                        ")) {
         //std::cout << "b" << std::endl;
         viewer.isGameStarted = true;
         viewer.start_level();
@@ -95,7 +102,7 @@ IGL_INLINE void ImGuiMenu::init_callback(Viewer& viewer)
         ImGui::SetNextWindowSize(ImVec2(485, 2000), ImGuiCond_Always);
         bool isVisibleWindow = true;
 
-        if (viewer.level == 1) {
+        //if (viewer.level == 1) {
             //viewer.isGameStarted = false;
 
             if (!ImGui::Begin("   The Best Snake Game", &isVisibleWindow, ImGuiWindowFlags_NoSavedSettings)) {
@@ -106,22 +113,22 @@ IGL_INLINE void ImGuiMenu::init_callback(Viewer& viewer)
                 all_button_actions("   Game in Progress     ", viewer);
                 ImGui::End();
             }
-        }
-        else if (viewer.isNewLevel)
-        {
-            //viewer.isGameStarted = false;
-            if (!ImGui::Begin("		   Level up		   ", &isVisibleWindow, ImGuiWindowFlags_NoSavedSettings)) {
-                ImGui::End();
-            }
-            else {
+        //}
+        //else if (viewer.isNewLevel)
+        //{
+        //    //viewer.isGameStarted = false;
+        //    if (!ImGui::Begin("		   Level up		   ", &isVisibleWindow, ImGuiWindowFlags_NoSavedSettings)) {
+        //        ImGui::End();
+        //    }
+        //    else {
 
-                //ImGui::Text("Press NEXT LVL or START OVER\n\n");
-                display_stats(viewer);
+        //        //ImGui::Text("Press NEXT LVL or START OVER\n\n");
+        //        display_stats(viewer);
 
-                all_button_actions("		   Level up		   ", viewer);
-                ImGui::End();
-            }
-        }
+        //        all_button_actions("		   Level up		   ", viewer);
+        //        ImGui::End();
+        //    }
+        //}
     };
 }
 
@@ -135,7 +142,7 @@ IGL_INLINE void ImGuiMenu::display_stats(Viewer& viewer)
     ImGui::Text("	     Score: %d", viewer.score);
     ImGui::Text("\n");
 
-    if (viewer.isGameStarted && !viewer.isGameOver) {
+    if (viewer.isGameStarted && !viewer.isGameOver && !viewer.isLevelUp) {
 
         if(!viewer.isPaused)
             viewer.update_timer();
@@ -144,6 +151,10 @@ IGL_INLINE void ImGuiMenu::display_stats(Viewer& viewer)
             ImGui::TextColored(ImVec4(1, 0, 0, 1), "	     Time: %d", viewer.timer);
         else
             ImGui::Text("	     Time: %d", viewer.timer);
+    }
+    else if (viewer.isGameOver) {
+        ImGui::Text("	     You Lost :(\n");
+        ImGui::Text("	     You Reached Level: %d\n", viewer.level);
     }
 
     ImGui::Text("\n\n");

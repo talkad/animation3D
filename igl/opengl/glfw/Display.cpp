@@ -643,13 +643,17 @@ void mouse_callback(GLFWwindow* window, int button, int action, int modifier)
 				scn->current_picked = i;
 				closestZ = depth;
 
-				if (scn->data_list[i].type == 1) { // change it to 4
+				if (scn->data_list[i].type > 1) {
 
 					scn->data_list[i].is_visible = false;
 					last_explosion_time = igl::get_seconds();
 					explosion = new ParticleGenerator(500, true, 0.676 * x2 - 311.6, 0.73 * y2 + 7);
 
-					rndr->GetScene()->isFog = false;
+					if (scn->data_list[i].type == BEZIER) 
+						rndr->GetScene()->isFog = false;
+					
+					scn->add_score(scn->data_list[i].type);
+
 					PlaySound(TEXT("C:/Users/tal74/projects/animation/animation3D/tutorial/sounds/SHEESH.wav"), NULL, SND_NODEFAULT | SND_ASYNC);
 				}
 			}
