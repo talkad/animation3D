@@ -1,3 +1,15 @@
-repository='https://github.com/libigl/libigl-stb.git'
-module=''
-tag='origin'
+# This is a generated file and its contents are an internal implementation detail.
+# The download step will be re-executed if anything in this file changes.
+# No other meaning or use of this file is supported.
+
+method=git
+command=C:/Program Files/CMake/bin/cmake.exe;-P;C:/Users/pijon/OneDrive/Desktop/animation3D/external/.cache/stb/stb-download-prefix/tmp/stb-download-gitclone.cmake
+source_dir=C:/Users/pijon/OneDrive/Desktop/animation3D/cmake/../external/stb
+work_dir=C:/Users/pijon/OneDrive/Desktop/animation3D/cmake/../external
+repository=https://github.com/libigl/libigl-stb.git
+remote=origin
+init_submodules=TRUE
+recurse_submodules=--recursive
+submodules=
+CMP0097=
+

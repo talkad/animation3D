@@ -25,7 +25,6 @@
 #include <cassert>
 
 #include <igl/project.h>
-//#include <igl/get_seconds.h>
 #include <igl/readOBJ.h>
 #include <igl/readOFF.h>
 #include <igl/adjacency_list.h>
@@ -105,6 +104,7 @@ namespace igl
                 resume_time(0),
                 paused_time(0)
             {
+                jointBoxes.resize(joints_num + 1);
                 data_list.front().id = 0;
 
                 // Temporary variables initialization
@@ -389,38 +389,40 @@ namespace igl
 
                 float tic = static_cast<float>(glfwGetTime());
                 for (auto& mesh : data_list) {
-                    if (mesh.type > 0 && !mesh.isTerminated && tic - mesh.creation_time > TTL) {
+                    if (mesh.type != NONE && !mesh.isTerminated && tic - mesh.creation_time > TTL) {
                         std::cout << "delete mesh " << mesh.id << std::endl;
 
-                        /*mesh.meshgl.free();
-                        data_list.erase(data_list.begin() + mesh.id);*/
+                //        /*mesh.meshgl.free();
+                //        data_list.erase(data_list.begin() + mesh.id);*/
 
                         mesh.is_visible = false;
-                        mesh.update_movement_type(0);
+                        mesh.update_movement_type(NONE);
                         mesh.isTerminated = true;
                     }
                 }
-
+        /*        for (int i = 1; i < data_list.size(); ++i)
+                    if (tic - data_list[i].creation_time > TTL)
+                        erase_mesh(i);*/
+                
             }
-
-            IGL_INLINE bool Viewer::boxes_collide(Eigen::AlignedBox<double, 3>& firstbox, Eigen::AlignedBox<double, 3>& secondbox) {
+            IGL_INLINE bool Viewer::boxes_collide(Eigen::AlignedBox<double, 3>& firstbox, Eigen::AlignedBox<double, 3>& secondbox, int i) {
                 double a0 = firstbox.sizes()[0] / 2, a1 = firstbox.sizes()[1] / 2, a2 = firstbox.sizes()[2] / 2,
                     b0 = secondbox.sizes()[0] / 2, b1 = secondbox.sizes()[1] / 2, b2 = secondbox.sizes()[2] / 2,
                     R0, R1, R;
                 Eigen::Matrix3d A, B, C;
                 Eigen::Vector3d D, C0, C1;
-                Eigen::RowVector3d A0 = data_list[0].GetRotation() * Eigen::Vector3d(1, 0, 0),
-                    A1 = data_list[0].GetRotation() * Eigen::Vector3d(0, 1, 0),
-                    A2 = data_list[0].GetRotation() * Eigen::Vector3d(0, 0, 1),
-                    B0 = data_list[1].GetRotation() * Eigen::Vector3d(1, 0, 0),
-                    B1 = data_list[1].GetRotation() * Eigen::Vector3d(0, 1, 0),
-                    B2 = data_list[1].GetRotation() * Eigen::Vector3d(0, 0, 1);
+                Eigen::RowVector3d  A0 = data_list[0].GetRotation() * Eigen::Vector3d(1, 0, 0),
+                                    A1 = data_list[0].GetRotation() * Eigen::Vector3d(0, 1, 0),
+                                    A2 = data_list[0].GetRotation() * Eigen::Vector3d(0, 0, 1),
+                                    B0 = data_list[i].GetRotation() * Eigen::Vector3d(1, 0, 0),
+                                    B1 = data_list[i].GetRotation() * Eigen::Vector3d(0, 1, 0),
+                                    B2 = data_list[i].GetRotation() * Eigen::Vector3d(0, 0, 1);
                 A << Eigen::RowVector3d(A0[0], A1[0], A2[0]), Eigen::RowVector3d(A0[1], A1[1], A2[1]), Eigen::RowVector3d(A0[2], A1[2], A2[2]);
                 B << Eigen::RowVector3d(B0[0], B1[0], B2[0]), Eigen::RowVector3d(B0[1], B1[1], B2[1]), Eigen::RowVector3d(B0[2], B1[2], B2[2]);
                 C = A.transpose() * B;
 
                 Eigen::Vector4f C0_4cord = data_list[0].MakeTransScale() * Eigen::Vector4f(firstbox.center()[0], firstbox.center()[1], firstbox.center()[2], 1);
-                Eigen::Vector4f C1_4cord = data_list[1].MakeTransScale() * Eigen::Vector4f(secondbox.center()[0], secondbox.center()[1], secondbox.center()[2], 1);
+                Eigen::Vector4f C1_4cord = data_list[i].MakeTransScale() * Eigen::Vector4f(secondbox.center()[0], secondbox.center()[1], secondbox.center()[2], 1);
 
                 C0 = Eigen::Vector3d(C0_4cord[0], C0_4cord[1], C0_4cord[2]);
                 C1 = Eigen::Vector3d(C1_4cord[0], C1_4cord[1], C1_4cord[2]);
@@ -535,14 +537,74 @@ namespace igl
                 return true;
             }
 
-            IGL_INLINE void Viewer::move_targets()
-            {
-                if (!isPaused && !isGameOver) {
-                    for (auto& data : data_list) {
-                        if (data.type > 0)
-                            data.move();
+            //IGL_INLINE bool Viewer::treeNodesCollide(AABB<Eigen::MatrixXd, 3>& firstObjNode, Eigen::AlignedBox<double, 3>& secondObjNode, int i) {
+            //    if (boxes_collide(firstObjNode.m_box, secondObjNode, i)) {
+            //        if (firstObjNode.is_leaf()) {
+            //            //data_list[0].drawAlignedBox(firstObjNode.m_box, Eigen::RowVector3d(1, 0, 0));
+            //            //data_list[1].drawAlignedBox(secondObjNode.m_box, Eigen::RowVector3d(1, 0, 0));
+            //            return true;
+            //        }
+            //        else {
+            //            return treeNodesCollide(*firstObjNode.m_left, secondObjNode, i) || 
+            //                   treeNodesCollide(*firstObjNode.m_right, secondObjNode, i);
+            //        }
+            //    }
+            //    return false;
+            //}
+
+            //// check if two object in data_list are collided
+            //// assume there are exactly two objects
+            //IGL_INLINE void Viewer::check_collision() {
+            //    for (int i = 1; i < data_list.size(); ++i) {
+            //        for(auto& box : jointBoxes)
+            //            if (treeNodesCollide(data_list[0].kd_tree, box, i))
+            //            isActive = false;
+            //    }
+            //}
+
+            IGL_INLINE bool Viewer::treeNodesCollide(AABB<Eigen::MatrixXd, 3>& firstObjNode, AABB<Eigen::MatrixXd, 3>& secondObjNode, int i) {
+                if (boxes_collide(firstObjNode.m_box, secondObjNode.m_box, i)) {
+                    if (firstObjNode.is_leaf() && secondObjNode.is_leaf()) {
+                        //data_list[0].drawAlignedBox(firstObjNode.m_box, Eigen::RowVector3d(1, 0, 0));
+                        //data_list[1].drawAlignedBox(secondObjNode.m_box, Eigen::RowVector3d(1, 0, 0));
+                        return true;
+                    }
+                    else {
+                        if (firstObjNode.is_leaf()) {
+                            if (secondObjNode.m_left)
+                                return treeNodesCollide(firstObjNode, *secondObjNode.m_left, i);
+                            if (secondObjNode.m_right)
+                                return treeNodesCollide(firstObjNode, *secondObjNode.m_right, i);
+                        }
+                        else if (secondObjNode.is_leaf()) {
+                            if (firstObjNode.m_left)
+                                return treeNodesCollide(*firstObjNode.m_left, secondObjNode, i);
+                            if (firstObjNode.m_right)
+                                return treeNodesCollide(*firstObjNode.m_right, secondObjNode, i);
+                        }
+                        else
+                            return treeNodesCollide(*firstObjNode.m_left, *secondObjNode.m_left, i) ||
+                            treeNodesCollide(*firstObjNode.m_left, *secondObjNode.m_right, i) ||
+                            treeNodesCollide(*firstObjNode.m_right, *secondObjNode.m_left, i) ||
+                            treeNodesCollide(*firstObjNode.m_right, *secondObjNode.m_right, i);
                     }
                 }
+                return false;
+            }
+
+            // check if two object in data_list are collided
+            // assume there are exactly two objects
+            IGL_INLINE void Viewer::check_collision() {
+                for(int i = 1; i < data_list.size(); ++i)
+                    if (treeNodesCollide(data_list[0].kd_tree, data_list[i].kd_tree, i))
+                        isActive = false;
+            }
+  
+            IGL_INLINE void Viewer::move_targets()
+            {
+                for (auto& data : data_list) 
+                    if (data.type != NONE)
+                        data.move();   
             }
 
             IGL_INLINE void Viewer::generate_target()
@@ -557,7 +619,7 @@ namespace igl
 
                     std::this_thread::sleep_for(std::chrono::microseconds(5));
 
-                    load_mesh_from_file("C:/Users/tal74/projects/animation/animation3D/tutorial/data/sphere.obj");
+                    load_mesh_from_file("C:/Users/pijon/OneDrive/Desktop/animation3D/tutorial/data/sphere.obj");
 
                     if (data_list.size() > parents.size())
                     {
@@ -569,7 +631,7 @@ namespace igl
 
                     // generate different targets according to level
                     if (target2_creation == 0) {
-                        data().update_movement_type(4);
+                        data().update_movement_type(BEZIER);
                         target2_creation = 3;
                     }
                     else {
@@ -578,14 +640,14 @@ namespace igl
                         //std::cout << target_proba << "<" << p << std::endl;
 
                         if (target_proba < p)
-                            data().update_movement_type(1);
+                            data().update_movement_type(BASIC);
                         else
-                            data().update_movement_type(2);
+                            data().update_movement_type(BOUNCY);
 
                         target2_creation--;
                     }
                     
-                    if (data().type == 4)
+                    if (data().type == BEZIER)
                         data().set_colors(Eigen::RowVector3d(0, 0, 1));
                     else if (data().type == 2)
                         data().set_colors(Eigen::RowVector3d(1, 0, 0));
@@ -597,42 +659,29 @@ namespace igl
                 }
             }
 
-            IGL_INLINE bool Viewer::treeNodesCollide(AABB<Eigen::MatrixXd, 3>& firstObjNode, AABB<Eigen::MatrixXd, 3>& secondObjNode) {
-                if (boxes_collide(firstObjNode.m_box, secondObjNode.m_box)) {
-                    if (firstObjNode.is_leaf() && secondObjNode.is_leaf()) {
-                        data_list[0].drawAlignedBox(firstObjNode.m_box, Eigen::RowVector3d(1, 0, 0));
-                        data_list[1].drawAlignedBox(secondObjNode.m_box, Eigen::RowVector3d(1, 0, 0));
-                        return true;
-                    }
-                    else {
-                        if (firstObjNode.is_leaf()) {
-                            if (secondObjNode.m_left)
-                                return treeNodesCollide(firstObjNode, *secondObjNode.m_left);
-                            if (secondObjNode.m_right)
-                                return treeNodesCollide(firstObjNode, *secondObjNode.m_right);
-                        }
-                        else if (secondObjNode.is_leaf()) {
-                            if (firstObjNode.m_left)
-                                return treeNodesCollide(*firstObjNode.m_left, secondObjNode);
-                            if (firstObjNode.m_right)
-                                return treeNodesCollide(*firstObjNode.m_right, secondObjNode);
-                        }
-                        else
-                            return treeNodesCollide(*firstObjNode.m_left, *secondObjNode.m_left) ||
-                            treeNodesCollide(*firstObjNode.m_left, *secondObjNode.m_right) ||
-                            treeNodesCollide(*firstObjNode.m_right, *secondObjNode.m_left) ||
-                            treeNodesCollide(*firstObjNode.m_right, *secondObjNode.m_right);
-                    }
-                }
-                return false;
-            }
+            //IGL_INLINE bool Viewer::treeNodesCollide(AABB<Eigen::MatrixXd, 3>& firstObjNode, Eigen::AlignedBox<double, 3>& secondObjNode) {
+            //    if (boxes_collide(firstObjNode.m_box, secondObjNode)) {
+            //        if (firstObjNode.is_leaf()) {
+            //            return true;
+            //        }
+            //        else 
+            //            return treeNodesCollide(*firstObjNode.m_left, secondObjNode) ||
+            //                   treeNodesCollide(*firstObjNode.m_right, secondObjNode);       
+            //    }
+            //    return false;
+            //}
 
-            // check if two object in data_list are collided
-            // assume there are exactly two objects
-            IGL_INLINE void Viewer::check_collision() {
-                if (treeNodesCollide(data_list[0].kd_tree, data_list[1].kd_tree))
-                    isActive = false;
-            }
+            //// check if two object in data_list are collided
+            //// assume there are exactly two objects
+            //IGL_INLINE void Viewer::check_collision() {
+            //    for (int i = 1; i < data_list.size(); ++i) 
+            //        for (int j = 0; j < skeleton.size(); ++j) {
+            //            if (treeNodesCollide(data_list[i].kd_tree, jointBoxes[j])) {
+            //                isActive = false;
+            //                std::cout << "AAAAAAAAAAAAAAAAAA" << std::endl;
+            //            }
+            //        }
+            //}
 
             // start a new level
             IGL_INLINE void Viewer::start_level() {
@@ -649,16 +698,11 @@ namespace igl
             }
 
             IGL_INLINE void Viewer::add_score(int type) {
-                if (type == 1) {
-                    score += 10;
-                }
-                else if (type == 2) {
-                    score -= 20;
-                }
-                else if (type == 4) {
-                    score += 25;
+                type == BASIC  ? score += 10 :
+                type == BOUNCY ? score -= 20 :
+                type == BEZIER ? score += 25 :
+                                 score += 0  ;
                     // activate special abilities
-                }
             }
 
             IGL_INLINE void Viewer::update_timer() {
@@ -704,9 +748,9 @@ namespace igl
 
             IGL_INLINE void Viewer::next_vertices_position()
             {
-                vT[0] = skinnedSkeleton[0];
+                vT[0] = skeleton[0];
                 for (int i = 0; i < joints_num; ++i) {
-                    vT[i + 1] = skinnedSkeleton[i + 1];
+                    vT[i + 1] = skeleton[i + 1];
                     vT[i] += (vT[i + 1] - vT[i]) / 6;
                 }
                 vT[joints_num] += target_pose;
@@ -720,8 +764,8 @@ namespace igl
 
                 for (int i = 0; i < vertexNum; ++i) {
                     double related_distance = calc_related_distance(i);
-                    for (int j = 0; j < skinnedSkeleton.size(); ++j) {
-                        distance = abs(skinnedSkeleton[j].z() - V(i, 2));
+                    for (int j = 0; j < skeleton.size(); ++j) {
+                        distance = abs(skeleton[j].z() - V(i, 2));
                         W(i, j) = pow((1 / distance), 4) / related_distance;
                     }
                     W.row(i).normalized();
@@ -731,8 +775,8 @@ namespace igl
             IGL_INLINE double Viewer::calc_related_distance(int i) {
                 double sum = 0, distance;
 
-                for (int j = 0; j < skinnedSkeleton.size(); ++j) {
-                    distance = abs(skinnedSkeleton[j].z() - data_list[0].V(i, 2));
+                for (int j = 0; j < skeleton.size(); ++j) {
+                    distance = abs(skeleton[j].z() - data_list[0].V(i, 2));
                     if (distance <= 0.1)
                         sum += pow((1 / distance), 4);
                 }
@@ -776,8 +820,16 @@ namespace igl
                     igl::dqs(V, W, vQ, vT, U);
                     data_list[0].set_vertices(U);
 
-                    for (int i = 0; i < skinnedSkeleton.size(); ++i)
-                        skinnedSkeleton[i] = vT[i];
+                    for (int i = 0; i < skeleton.size(); ++i)
+                        skeleton[i] = vT[i];
+
+                    for (int i = 0; i < skeleton.size(); ++i) {
+                        Eigen::Vector3d m = skeleton[i] + Eigen::Vector3d(-0.4, -0.4, -0.4),
+                            M = skeleton[i] + Eigen::Vector3d(0.4, 0.4, 0.4);
+                        Eigen::AlignedBox<double, 3> box;
+                        box = Eigen::AlignedBox<double, 3>(m, M);
+                        jointBoxes.at(i) = box;
+                    }
                 }
             }
 

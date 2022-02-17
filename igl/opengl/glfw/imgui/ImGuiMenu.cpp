@@ -261,6 +261,15 @@ IGL_INLINE void ImGuiMenu::draw_menu(igl::opengl::glfw::Viewer* viewer, std::vec
 
   // Other windows
   if (callback_draw_custom_window) { 
+      std::cout << "Bbbbbbbbbbbbb" << std::endl;
+
+
+
+
+
+
+
+
       callback_draw_custom_window(); 
   }
   else { draw_custom_window(); }

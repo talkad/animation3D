@@ -138,13 +138,24 @@ namespace igl
 
                 IGL_INLINE void clean_data_list();
 
+                bool boxes_collide(Eigen::AlignedBox<double, 3>& box1, Eigen::AlignedBox<double, 3>& box2, int i);
+
                 IGL_INLINE void move_targets();
 
                 IGL_INLINE void generate_target();
 
                 IGL_INLINE bool treeNodesCollide(AABB<Eigen::MatrixXd, 3>&, AABB<Eigen::MatrixXd, 3>&);
 
+                IGL_INLINE bool treeNodesCollide(AABB<Eigen::MatrixXd, 3>&, Eigen::AlignedBox<double, 3>&);
+
+                IGL_INLINE bool treeNodesCollide(AABB<Eigen::MatrixXd, 3>&, AABB<Eigen::MatrixXd, 3>&, int);
+
+                IGL_INLINE bool treeNodesCollide(AABB<Eigen::MatrixXd, 3>&, Eigen::AlignedBox<double, 3>&, int);
+
                 // check if two object in data_list are collided
+
+                IGL_INLINE bool treeNodesCollide(AABB<Eigen::MatrixXd, 3>* node1, Eigen::AlignedBox<double, 3>* node2, int i);
+
                 IGL_INLINE void check_collision();
 
                 IGL_INLINE void start_level();
@@ -216,7 +227,7 @@ namespace igl
                 int paused_time;
                 
                 int TTL;
-
+                unsigned int frames = 0;
                 int level;
                 int score;
                 int timer;
@@ -224,10 +235,9 @@ namespace igl
                 double p; // probability to generate target of type 1
                 int target2_creation;
 
-                //Eigen::Vector3d target_pose;
                 int scale;
                 int joints_num;
-                std::vector<Eigen::Vector3d> skinnedSkeleton;
+                std::vector<Eigen::Vector3d> skeleton;
                 std::vector<Movable> Joints;
                 unsigned char direction;
                 unsigned char previous_direction;
@@ -235,7 +245,7 @@ namespace igl
                 typedef
                     std::vector<Eigen::Quaterniond, Eigen::aligned_allocator<Eigen::Quaterniond> >
                     RotationList;
-
+                std::vector<Eigen::AlignedBox<double, 3>> jointBoxes;
                 // W - weights matrix
                 // BE - Edges between joints
                 // C - joints positions
