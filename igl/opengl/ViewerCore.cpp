@@ -92,10 +92,13 @@ IGL_INLINE void igl::opengl::ViewerCore::clear_framebuffers()
   // (in case the user wants different background colors in each viewport.)
   glScissor(viewport(0), viewport(1), viewport(2), viewport(3));
   glEnable(GL_SCISSOR_TEST);
-  glClearColor(background_color[0],
-               background_color[1],
-               background_color[2],
-               background_color[3]);
+  //glClearColor(background_color[0],
+  //             background_color[1],
+  //             background_color[2],
+  //             background_color[3]);
+
+  glClearColor(0.8f, 0.8f, 0.85f, 1.0f);
+
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   glDisable(GL_SCISSOR_TEST);
 }

@@ -88,7 +88,7 @@ namespace igl
                 level(1),
                 score(0),
                 start_time(0),
-                target2_creation(3),
+                target2_creation(2),
                 joints_num(16),
                 scale(2),
                 direction(' '),
@@ -102,7 +102,8 @@ namespace igl
                 timer(0),
                 pause_time(0),
                 resume_time(0),
-                paused_time(0)
+                paused_time(0),
+                isFog(true)
             {
                 jointBoxes.resize(joints_num + 1);
                 data_list.front().id = 0;
@@ -614,7 +615,7 @@ namespace igl
 
                 float tic = static_cast<float>(glfwGetTime());
                 //std::cout << tic << std::endl;
-                if (tic - prev_tic > 5) {
+                if (tic - prev_tic > 4) {
                     prev_tic = tic;
 
                     std::this_thread::sleep_for(std::chrono::microseconds(5));
@@ -686,7 +687,8 @@ namespace igl
             // start a new level
             IGL_INLINE void Viewer::start_level() {
 
-                start_time = static_cast<int>(glfwGetTime());
+                start_time = static_cast<int>(glfwGetTime()); // not accurate when mltiple levels
+                prev_tic = static_cast<int>(glfwGetTime());
                 paused_time = 0;
 
                 p = 1.0 / level + 0.33;

@@ -19,12 +19,19 @@
 #define VIEWPORT_WIDTH 1000
 #define VIEWPORT_HEIGHT 800
 
-
 #include <external/learnopengl/filesystem.h>
 #include <external/learnopengl/shader_m.h>
 #include <external/learnopengl/camera.h>
 #include <external/learnopengl/model.h>
 
+#include "texture.h"
+
+#include <Windows.h>
+#include <MMSystem.h>
+#pragma comment(lib, "winmm.lib")
+
+ParticleGenerator* explosion;
+double last_explosion_time;
 
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
@@ -33,7 +40,7 @@ void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 void mouse_move(GLFWwindow* window, double x, double y);
 void processInput(GLFWwindow* window);
 
-unsigned int loadTexture(const char* path);
+Texture2D loadTexture(const char* path, bool alpha);
 unsigned int loadCubemap(vector<std::string> faces);
 
 const unsigned int SCR_WIDTH = 1000;
@@ -114,7 +121,7 @@ Display::Display(int windowWidth, int windowHeight, const std::string& title): r
 	glfwSetCursorPosCallback(window, mouse_move);
 
 	// tell GLFW to capture our mouse
-	// glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED); xxxxxxxxxxxxxxxxxxxx
+	// glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED); 
 
 	// Load OpenGL and its extensions
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
@@ -235,10 +242,24 @@ bool Display::launch_rendering(bool loop)
 		FileSystem::getPath("tutorial/textures/skybox/back.jpg")
 
 	};
+
 	unsigned int cubemapTexture = loadCubemap(faces);
 
 	skyboxShader.use(); // shader configuration
 	skyboxShader.setInt("skybox", 0);
+
+	// fog
+	Shader fogShader("../../../shaders/particle.vs", "../../../shaders/particle.fs");
+	glm::mat4 projection = glm::ortho(0.0f, static_cast<float>(VIEWPORT_WIDTH),
+		static_cast<float>(VIEWPORT_HEIGHT), 0.0f, -1.0f, 1.0f);
+	
+	fogShader.use();
+	fogShader.setInt("sprite", 0);
+	fogShader.setMat4("projection", projection);
+
+	Texture2D fogTexture = loadTexture("../../../tutorial/textures/particle.png", true);
+	particleGen = new ParticleGenerator(2000);
+	explosion = nullptr;
 
 
 	//heightmap
@@ -344,6 +365,15 @@ bool Display::launch_rendering(bool loop)
 		renderer->Animate();
 		renderer->draw(window);
 
+		// update explosion generator
+		if (tic - last_explosion_time > 2) {
+			delete(explosion);
+			explosion = nullptr;
+		}
+
+		if (tic - last_explosion_time > 10) {
+			renderer->GetScene()->isFog = true;
+		}
 
 		// per-frame time logic
 		// --------------------
@@ -352,18 +382,17 @@ bool Display::launch_rendering(bool loop)
 		lastFrame = currentFrame;
 
 
-
 		// input
 		// -----
 		processInput(window);
 
-
 		//glViewport(0, 0, VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
-		glm::mat4 view = camera.GetViewMatrix();
+		glm::mat4 view = glm::mat4(glm::mat3(camera.GetViewMatrix()));
 		glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+
+		// cubemap shader
 		glDepthFunc(GL_LEQUAL);  // change depth function so depth test passes when values are equal to depth buffer's content
 		skyboxShader.use();
-		view = glm::mat4(glm::mat3(camera.GetViewMatrix())); // remove translation from the view matrix
 		skyboxShader.setMat4("view", view);
 		skyboxShader.setMat4("projection", projection);
 		// skybox cube
@@ -373,13 +402,14 @@ bool Display::launch_rendering(bool loop)
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 		glBindVertexArray(0);
 		glDepthFunc(GL_LESS); // set depth function back to default
+
 		// draw background
 		//glViewport((VIEWPORT_WIDTH / 4) * 3, VIEWPORT_HEIGHT / 5, VIEWPORT_WIDTH / 4 * 1, VIEWPORT_HEIGHT / 5);
 
 
 
 
-		// render
+		// heightmap
 		// ------
 		//glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 		//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -407,6 +437,66 @@ bool Display::launch_rendering(bool loop)
 		}
 
 
+
+
+		 // fog shader
+		if (renderer->GetScene()->isFog) {
+
+			// capture camera y rotation
+			// --------------------------
+			float camera_y_angle = camera.Up[2];
+			camera_y_angle < -0.3 ? particleGen->set_camera_angle(0) :
+				camera_y_angle < -0.2 ? particleGen->set_camera_angle(1) :
+				camera_y_angle < -0.1 ? particleGen->set_camera_angle(2) :
+				camera_y_angle < 0 ? particleGen->set_camera_angle(3) :
+				camera_y_angle < 0.1 ? particleGen->set_camera_angle(4) : particleGen->set_camera_angle(5);
+
+			// update particle positions
+			particleGen->Update(0.1f, 10);
+
+			// draw particles	
+			// use additive blending to give it a 'glow' effect
+			glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+			fogShader.use();
+			for (Particle particle : particleGen->particles)
+			{
+				if (particle.Life > 0.0f)
+				{
+					fogShader.setVec2("offset", particle.Position);
+					fogShader.setVec4("color", particle.Color);
+					fogTexture.Bind();
+					glBindVertexArray(particleGen->VAO);
+					glDrawArrays(GL_TRIANGLES, 0, 6);
+					glBindVertexArray(0);
+				}
+			}
+			// don't forget to reset to default blending mode
+			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		}
+
+		if (explosion) {
+			// update particle positions
+			explosion->Update(0.1f, 10);
+
+			// draw particles	
+			// use additive blending to give it a 'glow' effect
+			glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+			fogShader.use();
+			for (Particle particle : explosion->particles)
+			{
+				if (particle.Life > 0.0f)
+				{
+					fogShader.setVec2("offset", particle.Position);
+					fogShader.setVec4("color", particle.Color);
+					fogTexture.Bind();
+					glBindVertexArray(explosion->VAO);
+					glDrawArrays(GL_TRIANGLES, 0, 6);
+					glBindVertexArray(0);
+				}
+			}
+			// don't forget to reset to default blending mode
+			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		}
 
 		// glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
 		// -------------------------------------------------------------------------------
@@ -448,6 +538,10 @@ bool Display::launch_rendering(bool loop)
 	glDeleteVertexArrays(1, &terrainVAO);
 	glDeleteBuffers(1, &terrainVBO);
 	glDeleteBuffers(1, &terrainIBO);
+	delete(particleGen); 
+
+	if(explosion)
+		delete(explosion);
 
 	return EXIT_SUCCESS;
 }
@@ -528,9 +622,7 @@ void mouse_move(GLFWwindow* window, double x, double y)
 // -------------------------------------------------------
 void mouse_callback(GLFWwindow* window, int button, int action, int modifier)
 {
-	// for debugging - it is not a required functionallity of the project
-
-	/*Renderer* rndr = (Renderer*)glfwGetWindowUserPointer(window);
+	Renderer* rndr = (Renderer*)glfwGetWindowUserPointer(window);
 	igl::opengl::glfw::Viewer* scn = rndr->GetScene();
 
 	if (action == GLFW_PRESS)
@@ -538,40 +630,33 @@ void mouse_callback(GLFWwindow* window, int button, int action, int modifier)
 		double x2, y2;
 		glfwGetCursorPos(window, &x2, &y2);
 
-
 		double depth, closestZ = 1;
-		int i = 0, savedIndx = scn->selected_data_index, lastIndx = scn->selected_data_index;
-
-		int prev_picked = scn->current_picked;
+		int i = 0;
 
 		for (; i < scn->data_list.size(); i++)
 		{
 			scn->selected_data_index = i;
 			depth = rndr->Picking(x2, y2);
+
 			if (depth < 0 && (closestZ > 0 || closestZ < depth))
 			{
 				scn->current_picked = i;
-				savedIndx = i;
 				closestZ = depth;
-				std::cout << "--- found " << depth << std::endl;
+
+				if (scn->data_list[i].type == 1) { // change it to 4
+
+					scn->data_list[i].is_visible = false;
+					last_explosion_time = igl::get_seconds();
+					explosion = new ParticleGenerator(500, true, 0.676 * x2 - 311.6, 0.73 * y2 + 7);
+
+					rndr->GetScene()->isFog = false;
+					PlaySound(TEXT("C:/Users/tal74/projects/animation/animation3D/tutorial/sounds/SHEESH.wav"), NULL, SND_NODEFAULT | SND_ASYNC);
+				}
 			}
 		}
-		scn->selected_data_index = savedIndx;
-		scn->data().set_colors(Eigen::RowVector3d(0.2, 0.7, 0.8));
-		if (lastIndx != savedIndx)
-			scn->data_list[lastIndx].set_colors(Eigen::RowVector3d(255.0 / 255.0, 228.0 / 255.0, 58.0 / 255.0));
-
-		if (scn->current_picked == prev_picked) {
-			scn->current_picked = -1;
-		}
-		rndr->UpdatePosition(x2, y2);
 
 	}
-	else
-	{
-		rndr->GetScene()->isPicked = false;
 
-	}*/
 
 }
 
@@ -645,41 +730,31 @@ Display::~Display()
 
 // utility function for loading a 2D texture from file
 // ---------------------------------------------------
-unsigned int loadTexture(char const* path)
+Texture2D loadTexture(char const* path, bool alpha)
 {
-	unsigned int textureID;
-	glGenTextures(1, &textureID);
-
-	int width, height, nrComponents;
-	unsigned char* data = stbi_load(path, &width, &height, &nrComponents, 0);
-	if (data)
+	// create texture object
+	Texture2D texture;
+	if (alpha)
 	{
-		GLenum format;
-		if (nrComponents == 1)
-			format = GL_RED;
-		else if (nrComponents == 3)
-			format = GL_RGB;
-		else if (nrComponents == 4)
-			format = GL_RGBA;
-
-		glBindTexture(GL_TEXTURE_2D, textureID);
-		glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
-		glGenerateMipmap(GL_TEXTURE_2D);
-
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-		stbi_image_free(data);
+		texture.Internal_Format = GL_RGBA;
+		texture.Image_Format = GL_RGBA;
 	}
-	else
-	{
+	// load image
+	int width, height, nrChannels;
+	unsigned char* data = stbi_load(path, &width, &height, &nrChannels, 0);
+
+	if (data) {
+		// now generate texture
+		texture.Generate(width, height, data);
+	}
+	else {
 		std::cout << "Texture failed to load at path: " << path << std::endl;
-		stbi_image_free(data);
 	}
 
-	return textureID;
+	// and finally free image data
+	stbi_image_free(data);
+
+	return texture;
 }
 
 // loads a cubemap texture from 6 individual texture faces

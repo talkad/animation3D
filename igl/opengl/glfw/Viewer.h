@@ -242,6 +242,8 @@ namespace igl
                 unsigned char direction;
                 unsigned char previous_direction;
 
+                bool isFog;
+
                 typedef
                     std::vector<Eigen::Quaterniond, Eigen::aligned_allocator<Eigen::Quaterniond> >
                     RotationList;

@@ -263,6 +263,7 @@ namespace igl
             float line_width;
             Eigen::Matrix<float, 4, 1, Eigen::DontAlign> line_color;
             Eigen::Matrix<float, 4, 1, Eigen::DontAlign> label_color;
+            Eigen::Vector3d color;
 
             // Shape material
             float shininess;

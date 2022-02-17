@@ -20,7 +20,7 @@ public:
 	
 	//IGL_INLINE bool key_pressed(unsigned int unicode_key, int modifiers);
 
-		// Returns **true** if action should be cancelled.
+	// Returns **true** if action should be cancelled.
 	std::function<bool(GLFWwindow* window)> callback_init;
 	std::function<bool(GLFWwindow* window)> callback_pre_draw;
 	std::function<bool(GLFWwindow* window)> callback_post_draw;
@@ -111,6 +111,7 @@ public:
 	Eigen::Vector3f prev_camera_translation;
 	Eigen::Vector3f prev_camera_eye;
 	Eigen::Vector3f prev_camera_up;
+
 
 private:
 	// Stores all the viewing options
