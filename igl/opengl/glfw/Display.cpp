@@ -106,8 +106,8 @@ Display::Display(int windowWidth, int windowHeight, const std::string& title): r
 	//			window = glfwCreateWindow(windowWidth, windowHeight, title.c_str(), nullptr, nullptr);
 	//		}
 	// 
-	//window = glfwCreateWindow(windowWidth, windowHeight, title.c_str(), glfwGetMonitorPos(), nullptr);
-	window = glfwCreateWindow(windowWidth, windowHeight, title.c_str(), nullptr, nullptr);
+	window = glfwCreateWindow(windowWidth, windowHeight, title.c_str(), glfwGetPrimaryMonitor(), nullptr);
+	//window = glfwCreateWindow(windowWidth, windowHeight, title.c_str(), nullptr, nullptr);
 	if (!window)
 	{
 		glfwTerminate();
@@ -497,6 +497,8 @@ bool Display::launch_rendering(bool loop)
 			// don't forget to reset to default blending mode
 			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		}
+
+		
 
 		// glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
 		// -------------------------------------------------------------------------------

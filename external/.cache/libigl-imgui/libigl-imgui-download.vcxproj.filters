@@ -1,44 +1,44 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <CustomBuild Include="C:\Users\pijon\OneDrive\Desktop\animation3D\external\.cache\libigl-imgui\CMakeFiles\52a967f3798efaa9d2c45d47d71ea006\libigl-imgui-download-mkdir.rule">
+    <CustomBuild Include="C:\Users\tal74\projects\animation\animation3D\external\.cache\libigl-imgui\CMakeFiles\f96900cf1f05c47f0a69000631a718b7\libigl-imgui-download-mkdir.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\pijon\OneDrive\Desktop\animation3D\external\.cache\libigl-imgui\CMakeFiles\52a967f3798efaa9d2c45d47d71ea006\libigl-imgui-download-download.rule">
+    <CustomBuild Include="C:\Users\tal74\projects\animation\animation3D\external\.cache\libigl-imgui\CMakeFiles\f96900cf1f05c47f0a69000631a718b7\libigl-imgui-download-download.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\pijon\OneDrive\Desktop\animation3D\external\.cache\libigl-imgui\CMakeFiles\52a967f3798efaa9d2c45d47d71ea006\libigl-imgui-download-update.rule">
+    <CustomBuild Include="C:\Users\tal74\projects\animation\animation3D\external\.cache\libigl-imgui\CMakeFiles\f96900cf1f05c47f0a69000631a718b7\libigl-imgui-download-update.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\pijon\OneDrive\Desktop\animation3D\external\.cache\libigl-imgui\CMakeFiles\52a967f3798efaa9d2c45d47d71ea006\libigl-imgui-download-patch.rule">
+    <CustomBuild Include="C:\Users\tal74\projects\animation\animation3D\external\.cache\libigl-imgui\CMakeFiles\f96900cf1f05c47f0a69000631a718b7\libigl-imgui-download-patch.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\pijon\OneDrive\Desktop\animation3D\external\.cache\libigl-imgui\CMakeFiles\52a967f3798efaa9d2c45d47d71ea006\libigl-imgui-download-configure.rule">
+    <CustomBuild Include="C:\Users\tal74\projects\animation\animation3D\external\.cache\libigl-imgui\CMakeFiles\f96900cf1f05c47f0a69000631a718b7\libigl-imgui-download-configure.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\pijon\OneDrive\Desktop\animation3D\external\.cache\libigl-imgui\CMakeFiles\52a967f3798efaa9d2c45d47d71ea006\libigl-imgui-download-build.rule">
+    <CustomBuild Include="C:\Users\tal74\projects\animation\animation3D\external\.cache\libigl-imgui\CMakeFiles\f96900cf1f05c47f0a69000631a718b7\libigl-imgui-download-build.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\pijon\OneDrive\Desktop\animation3D\external\.cache\libigl-imgui\CMakeFiles\52a967f3798efaa9d2c45d47d71ea006\libigl-imgui-download-install.rule">
+    <CustomBuild Include="C:\Users\tal74\projects\animation\animation3D\external\.cache\libigl-imgui\CMakeFiles\f96900cf1f05c47f0a69000631a718b7\libigl-imgui-download-install.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\pijon\OneDrive\Desktop\animation3D\external\.cache\libigl-imgui\CMakeFiles\52a967f3798efaa9d2c45d47d71ea006\libigl-imgui-download-test.rule">
+    <CustomBuild Include="C:\Users\tal74\projects\animation\animation3D\external\.cache\libigl-imgui\CMakeFiles\f96900cf1f05c47f0a69000631a718b7\libigl-imgui-download-test.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\pijon\OneDrive\Desktop\animation3D\external\.cache\libigl-imgui\CMakeFiles\7ee9e162066079d2cccdbc697a9e18ad\libigl-imgui-download-complete.rule">
+    <CustomBuild Include="C:\Users\tal74\projects\animation\animation3D\external\.cache\libigl-imgui\CMakeFiles\0a0f5262535b5e53a3571f4587c05d3c\libigl-imgui-download-complete.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\pijon\OneDrive\Desktop\animation3D\external\.cache\libigl-imgui\CMakeFiles\3027af9b5dede7f85a39214636a022c9\libigl-imgui-download.rule">
+    <CustomBuild Include="C:\Users\tal74\projects\animation\animation3D\external\.cache\libigl-imgui\CMakeFiles\9cab171905d80a2660e55a7a871a594c\libigl-imgui-download.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\pijon\OneDrive\Desktop\animation3D\external\.cache\libigl-imgui\CMakeLists.txt" />
+    <CustomBuild Include="C:\Users\tal74\projects\animation\animation3D\external\.cache\libigl-imgui\CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="C:\Users\pijon\OneDrive\Desktop\animation3D\external\.cache\libigl-imgui\CMakeFiles\libigl-imgui-download" />
+    <None Include="C:\Users\tal74\projects\animation\animation3D\external\.cache\libigl-imgui\CMakeFiles\libigl-imgui-download" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="CMake Rules">
-      <UniqueIdentifier>{7E202F58-139B-3EAE-8304-9C02D8DCFCBC}</UniqueIdentifier>
+      <UniqueIdentifier>{2FEA4F90-E04D-3122-B401-4AE6D2B82E60}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

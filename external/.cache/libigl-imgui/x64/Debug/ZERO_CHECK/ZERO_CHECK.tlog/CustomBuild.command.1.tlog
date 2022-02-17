@@ -1,6 +1,6 @@
-^C:\USERS\PIJON\ONEDRIVE\DESKTOP\ANIMATION3D\EXTERNAL\.CACHE\LIBIGL-IMGUI\CMAKEFILES\3027AF9B5DEDE7F85A39214636A022C9\GENERATE.STAMP.RULE
+^C:\USERS\TAL74\PROJECTS\ANIMATION\ANIMATION3D\EXTERNAL\.CACHE\LIBIGL-IMGUI\CMAKEFILES\9CAB171905D80A2660E55A7A871A594C\GENERATE.STAMP.RULE
 setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/pijon/OneDrive/Desktop/animation3D/external/.cache/libigl-imgui -BC:/Users/pijon/OneDrive/Desktop/animation3D/external/.cache/libigl-imgui --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/pijon/OneDrive/Desktop/animation3D/external/.cache/libigl-imgui/libigl-imgui-download.sln
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/tal74/projects/animation/animation3D/external/.cache/libigl-imgui -BC:/Users/tal74/projects/animation/animation3D/external/.cache/libigl-imgui --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/tal74/projects/animation/animation3D/external/.cache/libigl-imgui/libigl-imgui-download.sln
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone

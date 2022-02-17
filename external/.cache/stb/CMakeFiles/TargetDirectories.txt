@@ -1,3 +1,3 @@
-C:/Users/pijon/OneDrive/Desktop/animation3D/external/.cache/stb/CMakeFiles/stb-download.dir
-C:/Users/pijon/OneDrive/Desktop/animation3D/external/.cache/stb/CMakeFiles/ALL_BUILD.dir
-C:/Users/pijon/OneDrive/Desktop/animation3D/external/.cache/stb/CMakeFiles/ZERO_CHECK.dir
+C:/Users/tal74/projects/animation/animation3D/external/.cache/stb/CMakeFiles/stb-download.dir
+C:/Users/tal74/projects/animation/animation3D/external/.cache/stb/CMakeFiles/ALL_BUILD.dir
+C:/Users/tal74/projects/animation/animation3D/external/.cache/stb/CMakeFiles/ZERO_CHECK.dir

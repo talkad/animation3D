@@ -2,37 +2,37 @@
 	"sources" : 
 	[
 		{
-			"file" : "C:/Users/pijon/OneDrive/Desktop/animation3D/external/.cache/libigl-imgui/CMakeFiles/libigl-imgui-download"
+			"file" : "C:/Users/tal74/projects/animation/animation3D/external/.cache/libigl-imgui/CMakeFiles/libigl-imgui-download"
 		},
 		{
-			"file" : "C:/Users/pijon/OneDrive/Desktop/animation3D/external/.cache/libigl-imgui/CMakeFiles/3027af9b5dede7f85a39214636a022c9/libigl-imgui-download.rule"
+			"file" : "C:/Users/tal74/projects/animation/animation3D/external/.cache/libigl-imgui/CMakeFiles/9cab171905d80a2660e55a7a871a594c/libigl-imgui-download.rule"
 		},
 		{
-			"file" : "C:/Users/pijon/OneDrive/Desktop/animation3D/external/.cache/libigl-imgui/CMakeFiles/7ee9e162066079d2cccdbc697a9e18ad/libigl-imgui-download-complete.rule"
+			"file" : "C:/Users/tal74/projects/animation/animation3D/external/.cache/libigl-imgui/CMakeFiles/0a0f5262535b5e53a3571f4587c05d3c/libigl-imgui-download-complete.rule"
 		},
 		{
-			"file" : "C:/Users/pijon/OneDrive/Desktop/animation3D/external/.cache/libigl-imgui/CMakeFiles/52a967f3798efaa9d2c45d47d71ea006/libigl-imgui-download-build.rule"
+			"file" : "C:/Users/tal74/projects/animation/animation3D/external/.cache/libigl-imgui/CMakeFiles/f96900cf1f05c47f0a69000631a718b7/libigl-imgui-download-build.rule"
 		},
 		{
-			"file" : "C:/Users/pijon/OneDrive/Desktop/animation3D/external/.cache/libigl-imgui/CMakeFiles/52a967f3798efaa9d2c45d47d71ea006/libigl-imgui-download-configure.rule"
+			"file" : "C:/Users/tal74/projects/animation/animation3D/external/.cache/libigl-imgui/CMakeFiles/f96900cf1f05c47f0a69000631a718b7/libigl-imgui-download-configure.rule"
 		},
 		{
-			"file" : "C:/Users/pijon/OneDrive/Desktop/animation3D/external/.cache/libigl-imgui/CMakeFiles/52a967f3798efaa9d2c45d47d71ea006/libigl-imgui-download-download.rule"
+			"file" : "C:/Users/tal74/projects/animation/animation3D/external/.cache/libigl-imgui/CMakeFiles/f96900cf1f05c47f0a69000631a718b7/libigl-imgui-download-download.rule"
 		},
 		{
-			"file" : "C:/Users/pijon/OneDrive/Desktop/animation3D/external/.cache/libigl-imgui/CMakeFiles/52a967f3798efaa9d2c45d47d71ea006/libigl-imgui-download-install.rule"
+			"file" : "C:/Users/tal74/projects/animation/animation3D/external/.cache/libigl-imgui/CMakeFiles/f96900cf1f05c47f0a69000631a718b7/libigl-imgui-download-install.rule"
 		},
 		{
-			"file" : "C:/Users/pijon/OneDrive/Desktop/animation3D/external/.cache/libigl-imgui/CMakeFiles/52a967f3798efaa9d2c45d47d71ea006/libigl-imgui-download-mkdir.rule"
+			"file" : "C:/Users/tal74/projects/animation/animation3D/external/.cache/libigl-imgui/CMakeFiles/f96900cf1f05c47f0a69000631a718b7/libigl-imgui-download-mkdir.rule"
 		},
 		{
-			"file" : "C:/Users/pijon/OneDrive/Desktop/animation3D/external/.cache/libigl-imgui/CMakeFiles/52a967f3798efaa9d2c45d47d71ea006/libigl-imgui-download-patch.rule"
+			"file" : "C:/Users/tal74/projects/animation/animation3D/external/.cache/libigl-imgui/CMakeFiles/f96900cf1f05c47f0a69000631a718b7/libigl-imgui-download-patch.rule"
 		},
 		{
-			"file" : "C:/Users/pijon/OneDrive/Desktop/animation3D/external/.cache/libigl-imgui/CMakeFiles/52a967f3798efaa9d2c45d47d71ea006/libigl-imgui-download-test.rule"
+			"file" : "C:/Users/tal74/projects/animation/animation3D/external/.cache/libigl-imgui/CMakeFiles/f96900cf1f05c47f0a69000631a718b7/libigl-imgui-download-test.rule"
 		},
 		{
-			"file" : "C:/Users/pijon/OneDrive/Desktop/animation3D/external/.cache/libigl-imgui/CMakeFiles/52a967f3798efaa9d2c45d47d71ea006/libigl-imgui-download-update.rule"
+			"file" : "C:/Users/tal74/projects/animation/animation3D/external/.cache/libigl-imgui/CMakeFiles/f96900cf1f05c47f0a69000631a718b7/libigl-imgui-download-update.rule"
 		}
 	],
 	"target" : 

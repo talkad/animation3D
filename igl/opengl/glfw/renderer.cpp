@@ -53,6 +53,14 @@ IGL_INLINE void Renderer::draw(GLFWwindow* window)
 	using namespace std;
 	using namespace Eigen;
 
+	Eigen::Vector3d colorVec;
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_int_distribution<> distr_color(0, 2);
+	std::uniform_int_distribution<> distr_sign(0, 1);
+
+	int color;
+	int sign;
 	int width, height;
 	glfwGetFramebufferSize(window, &width, &height);
 
@@ -88,10 +96,11 @@ IGL_INLINE void Renderer::draw(GLFWwindow* window)
 				{
 					if (selected_core_index == 0) {
 
-						Eigen::Matrix4d headTransMat = scn->MakeTransd() * scn->CalcParentsTrans(scn->snake_size - 1) * scn->data(scn->snake_size - 1).MakeTransd();
+						/*Eigen::Matrix4d headTransMat = scn->MakeTransd() * scn->CalcParentsTrans(scn->snake_size - 1) * scn->data(scn->snake_size - 1).MakeTransd();
 						core.camera_translation = (headTransMat * Eigen::Vector4d(0, 0.8, 0.8, -1)).block(0, 0, 3, 1).cast<float>();
 						core.camera_eye = (headTransMat.block(0, 0, 3, 3) * Eigen::Vector3d(0, -1, 0)).block(0, 0, 3, 1).cast<float>();
-						core.camera_up = (headTransMat.block(0, 0, 3, 3) * Eigen::Vector3d(0, 0, -1)).block(0, 0, 3, 1).cast<float>();
+						core.camera_up = (headTransMat.block(0, 0, 3, 3) * Eigen::Vector3d(0, 0, -1)).block(0, 0, 3, 1).cast<float>();*/
+
 					}
 					else {
 						core.camera_translation = prev_camera_translation;
@@ -125,6 +134,29 @@ IGL_INLINE void Renderer::draw(GLFWwindow* window)
 							std::cout << "SNAKE HEAD LOC: \n" << GetScene()->split_snake[15].GetTranslation() << std::endl
 								<< "SNAKE HEAD JOINT LOC: \n" << GetScene()->jointBoxes[15].center() << std::endl;
 						}*/
+
+						if (mesh.type == 4) {
+							color = distr_color(gen);
+							sign = distr_sign(gen);
+
+							sign == 0 ? sign = 1 : sign = -1;
+
+							switch (color) {
+							case 1:
+								colorVec = mesh.color + sign * Eigen::Vector3d(1, 0, 0) * 0.1;
+								break;
+							case 2:
+								colorVec = mesh.color + sign * Eigen::Vector3d(0, 1, 0) * 0.1;
+								break;
+							default:
+								colorVec = mesh.color + sign * Eigen::Vector3d(0, 0, 1) * 0.05;
+								break;
+							}
+
+							mesh.set_colors(Eigen::RowVector3d(colorVec(0), colorVec(1), colorVec(2)));
+
+						}
+
 
 						core.draw(scn->MakeTransScale() * scn->CalcParentsTrans(indx).cast<float>(), mesh);
 					}

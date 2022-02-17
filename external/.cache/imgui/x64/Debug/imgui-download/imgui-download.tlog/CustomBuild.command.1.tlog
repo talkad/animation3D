@@ -1,8 +1,20 @@
-^C:\USERS\PIJON\ONEDRIVE\DESKTOP\ANIMATION3D\EXTERNAL\.CACHE\IMGUI\CMAKEFILES\4F809FD009B043C65B0F6000D0C47808\IMGUI-DOWNLOAD-MKDIR.RULE
+^C:\USERS\TAL74\PROJECTS\ANIMATION\ANIMATION3D\EXTERNAL\.CACHE\IMGUI\CMAKEFILES\B113B6CBEB5A90FE93AB0D94D44B4451\IMGUI-DOWNLOAD-MKDIR.RULE
 setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -P C:/Users/pijon/OneDrive/Desktop/animation3D/external/.cache/imgui/imgui-download-prefix/tmp/imgui-download-mkdirs.cmake
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/projects/animation/animation3D/cmake/../external/imgui
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/pijon/OneDrive/Desktop/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/Debug/imgui-download-mkdir
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/projects/animation/animation3D/build/imgui-build
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/projects/animation/animation3D/external/.cache/imgui/imgui-download-prefix
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/projects/animation/animation3D/external/.cache/imgui/imgui-download-prefix/tmp
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/projects/animation/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/Debug
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/projects/animation/animation3D/external/.cache/imgui/imgui-download-prefix/src
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/projects/animation/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/projects/animation/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/Debug/imgui-download-mkdir
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
@@ -10,15 +22,15 @@ endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd
-^C:\USERS\PIJON\ONEDRIVE\DESKTOP\ANIMATION3D\EXTERNAL\.CACHE\IMGUI\CMAKEFILES\4F809FD009B043C65B0F6000D0C47808\IMGUI-DOWNLOAD-DOWNLOAD.RULE
+^C:\USERS\TAL74\PROJECTS\ANIMATION\ANIMATION3D\EXTERNAL\.CACHE\IMGUI\CMAKEFILES\B113B6CBEB5A90FE93AB0D94D44B4451\IMGUI-DOWNLOAD-DOWNLOAD.RULE
 setlocal
-cd C:\Users\pijon\OneDrive\Desktop\animation3D\external
+cd C:\Users\tal74\projects\animation\animation3D\external
 if %errorlevel% neq 0 goto :cmEnd
 C:
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -P C:/Users/pijon/OneDrive/Desktop/animation3D/external/.cache/imgui/imgui-download-prefix/tmp/imgui-download-gitclone.cmake
+"C:\Program Files\CMake\bin\cmake.exe" -P C:/Users/tal74/projects/animation/animation3D/external/.cache/imgui/imgui-download-prefix/tmp/imgui-download-gitclone.cmake
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/pijon/OneDrive/Desktop/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/Debug/imgui-download-download
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/projects/animation/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/Debug/imgui-download-download
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
@@ -26,13 +38,13 @@ endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd
-^C:\USERS\PIJON\ONEDRIVE\DESKTOP\ANIMATION3D\EXTERNAL\.CACHE\IMGUI\CMAKEFILES\4F809FD009B043C65B0F6000D0C47808\IMGUI-DOWNLOAD-UPDATE.RULE
+^C:\USERS\TAL74\PROJECTS\ANIMATION\ANIMATION3D\EXTERNAL\.CACHE\IMGUI\CMAKEFILES\B113B6CBEB5A90FE93AB0D94D44B4451\IMGUI-DOWNLOAD-UPDATE.RULE
 setlocal
-cd C:\Users\pijon\OneDrive\Desktop\animation3D\external\imgui
+cd C:\Users\tal74\projects\animation\animation3D\external\imgui
 if %errorlevel% neq 0 goto :cmEnd
 C:
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -P C:/Users/pijon/OneDrive/Desktop/animation3D/external/.cache/imgui/imgui-download-prefix/tmp/imgui-download-gitupdate.cmake
+"C:\Program Files\CMake\bin\cmake.exe" -P C:/Users/tal74/projects/animation/animation3D/external/.cache/imgui/imgui-download-prefix/tmp/imgui-download-gitupdate.cmake
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
@@ -40,11 +52,11 @@ endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd
-^C:\USERS\PIJON\ONEDRIVE\DESKTOP\ANIMATION3D\EXTERNAL\.CACHE\IMGUI\CMAKEFILES\4F809FD009B043C65B0F6000D0C47808\IMGUI-DOWNLOAD-PATCH.RULE
+^C:\USERS\TAL74\PROJECTS\ANIMATION\ANIMATION3D\EXTERNAL\.CACHE\IMGUI\CMAKEFILES\B113B6CBEB5A90FE93AB0D94D44B4451\IMGUI-DOWNLOAD-PATCH.RULE
 setlocal
 "C:\Program Files\CMake\bin\cmake.exe" -E echo_append
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/pijon/OneDrive/Desktop/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/Debug/imgui-download-patch
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/projects/animation/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/Debug/imgui-download-patch
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
@@ -52,31 +64,15 @@ endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd
-^C:\USERS\PIJON\ONEDRIVE\DESKTOP\ANIMATION3D\EXTERNAL\.CACHE\IMGUI\CMAKEFILES\4F809FD009B043C65B0F6000D0C47808\IMGUI-DOWNLOAD-CONFIGURE.RULE
+^C:\USERS\TAL74\PROJECTS\ANIMATION\ANIMATION3D\EXTERNAL\.CACHE\IMGUI\CMAKEFILES\B113B6CBEB5A90FE93AB0D94D44B4451\IMGUI-DOWNLOAD-CONFIGURE.RULE
 setlocal
-cd C:\Users\pijon\OneDrive\Desktop\animation3D\build\imgui-build
-if %errorlevel% neq 0 goto :cmEnd
-C:
-if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E echo_append
-if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/pijon/OneDrive/Desktop/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/Debug/imgui-download-configure
-if %errorlevel% neq 0 goto :cmEnd
-:cmEnd
-endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
-:cmErrorLevel
-exit /b %1
-:cmDone
-if %errorlevel% neq 0 goto :VCEnd
-^C:\USERS\PIJON\ONEDRIVE\DESKTOP\ANIMATION3D\EXTERNAL\.CACHE\IMGUI\CMAKEFILES\4F809FD009B043C65B0F6000D0C47808\IMGUI-DOWNLOAD-BUILD.RULE
-setlocal
-cd C:\Users\pijon\OneDrive\Desktop\animation3D\build\imgui-build
+cd C:\Users\tal74\projects\animation\animation3D\build\imgui-build
 if %errorlevel% neq 0 goto :cmEnd
 C:
 if %errorlevel% neq 0 goto :cmEnd
 "C:\Program Files\CMake\bin\cmake.exe" -E echo_append
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/pijon/OneDrive/Desktop/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/Debug/imgui-download-build
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/projects/animation/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/Debug/imgui-download-configure
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
@@ -84,15 +80,15 @@ endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd
-^C:\USERS\PIJON\ONEDRIVE\DESKTOP\ANIMATION3D\EXTERNAL\.CACHE\IMGUI\CMAKEFILES\4F809FD009B043C65B0F6000D0C47808\IMGUI-DOWNLOAD-INSTALL.RULE
+^C:\USERS\TAL74\PROJECTS\ANIMATION\ANIMATION3D\EXTERNAL\.CACHE\IMGUI\CMAKEFILES\B113B6CBEB5A90FE93AB0D94D44B4451\IMGUI-DOWNLOAD-BUILD.RULE
 setlocal
-cd C:\Users\pijon\OneDrive\Desktop\animation3D\build\imgui-build
+cd C:\Users\tal74\projects\animation\animation3D\build\imgui-build
 if %errorlevel% neq 0 goto :cmEnd
 C:
 if %errorlevel% neq 0 goto :cmEnd
 "C:\Program Files\CMake\bin\cmake.exe" -E echo_append
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/pijon/OneDrive/Desktop/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/Debug/imgui-download-install
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/projects/animation/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/Debug/imgui-download-build
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
@@ -100,15 +96,15 @@ endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd
-^C:\USERS\PIJON\ONEDRIVE\DESKTOP\ANIMATION3D\EXTERNAL\.CACHE\IMGUI\CMAKEFILES\4F809FD009B043C65B0F6000D0C47808\IMGUI-DOWNLOAD-TEST.RULE
+^C:\USERS\TAL74\PROJECTS\ANIMATION\ANIMATION3D\EXTERNAL\.CACHE\IMGUI\CMAKEFILES\B113B6CBEB5A90FE93AB0D94D44B4451\IMGUI-DOWNLOAD-INSTALL.RULE
 setlocal
-cd C:\Users\pijon\OneDrive\Desktop\animation3D\build\imgui-build
+cd C:\Users\tal74\projects\animation\animation3D\build\imgui-build
 if %errorlevel% neq 0 goto :cmEnd
 C:
 if %errorlevel% neq 0 goto :cmEnd
 "C:\Program Files\CMake\bin\cmake.exe" -E echo_append
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/pijon/OneDrive/Desktop/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/Debug/imgui-download-test
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/projects/animation/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/Debug/imgui-download-install
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
@@ -116,13 +112,15 @@ endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd
-^C:\USERS\PIJON\ONEDRIVE\DESKTOP\ANIMATION3D\EXTERNAL\.CACHE\IMGUI\CMAKEFILES\6E8EEF7536BEAEBCD6F2D900BA1E7982\IMGUI-DOWNLOAD-COMPLETE.RULE
+^C:\USERS\TAL74\PROJECTS\ANIMATION\ANIMATION3D\EXTERNAL\.CACHE\IMGUI\CMAKEFILES\B113B6CBEB5A90FE93AB0D94D44B4451\IMGUI-DOWNLOAD-TEST.RULE
 setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/pijon/OneDrive/Desktop/animation3D/external/.cache/imgui/CMakeFiles/Debug
+cd C:\Users\tal74\projects\animation\animation3D\build\imgui-build
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/pijon/OneDrive/Desktop/animation3D/external/.cache/imgui/CMakeFiles/Debug/imgui-download-complete
+C:
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/pijon/OneDrive/Desktop/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/Debug/imgui-download-done
+"C:\Program Files\CMake\bin\cmake.exe" -E echo_append
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/projects/animation/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/Debug/imgui-download-test
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
@@ -130,7 +128,21 @@ endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd
-^C:\USERS\PIJON\ONEDRIVE\DESKTOP\ANIMATION3D\EXTERNAL\.CACHE\IMGUI\CMAKEFILES\4A8007FB7D904B1CEAB309AD69EB2D3D\IMGUI-DOWNLOAD.RULE
+^C:\USERS\TAL74\PROJECTS\ANIMATION\ANIMATION3D\EXTERNAL\.CACHE\IMGUI\CMAKEFILES\9B0F177BFEE95FE3AEEF05B3C3DF0693\IMGUI-DOWNLOAD-COMPLETE.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/projects/animation/animation3D/external/.cache/imgui/CMakeFiles/Debug
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/projects/animation/animation3D/external/.cache/imgui/CMakeFiles/Debug/imgui-download-complete
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/projects/animation/animation3D/external/.cache/imgui/imgui-download-prefix/src/imgui-download-stamp/Debug/imgui-download-done
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\TAL74\PROJECTS\ANIMATION\ANIMATION3D\EXTERNAL\.CACHE\IMGUI\CMAKEFILES\26B6A076E9EF24B31C28DA9618D0ABA7\IMGUI-DOWNLOAD.RULE
 setlocal
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
@@ -138,9 +150,9 @@ endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd
-^C:\USERS\PIJON\ONEDRIVE\DESKTOP\ANIMATION3D\EXTERNAL\.CACHE\IMGUI\CMAKELISTS.TXT
+^C:\USERS\TAL74\PROJECTS\ANIMATION\ANIMATION3D\EXTERNAL\.CACHE\IMGUI\CMAKELISTS.TXT
 setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/pijon/OneDrive/Desktop/animation3D/external/.cache/imgui -BC:/Users/pijon/OneDrive/Desktop/animation3D/external/.cache/imgui --check-stamp-file C:/Users/pijon/OneDrive/Desktop/animation3D/external/.cache/imgui/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/tal74/projects/animation/animation3D/external/.cache/imgui -BC:/Users/tal74/projects/animation/animation3D/external/.cache/imgui --check-stamp-file C:/Users/tal74/projects/animation/animation3D/external/.cache/imgui/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone

@@ -1,8 +1,20 @@
-^C:\USERS\PIJON\ONEDRIVE\DESKTOP\ANIMATION3D\EXTERNAL\.CACHE\STB\CMAKEFILES\74F73A86003AC8F52376D67CC2D853EC\STB-DOWNLOAD-MKDIR.RULE
+^C:\USERS\TAL74\PROJECTS\ANIMATION\ANIMATION3D\EXTERNAL\.CACHE\STB\CMAKEFILES\BD726330E7E8079BE51F0939EDA44D30\STB-DOWNLOAD-MKDIR.RULE
 setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -P C:/Users/pijon/OneDrive/Desktop/animation3D/external/.cache/stb/stb-download-prefix/tmp/stb-download-mkdirs.cmake
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/projects/animation/animation3D/cmake/../external/stb
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/pijon/OneDrive/Desktop/animation3D/external/.cache/stb/stb-download-prefix/src/stb-download-stamp/Debug/stb-download-mkdir
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/projects/animation/animation3D/build/stb-build
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/projects/animation/animation3D/external/.cache/stb/stb-download-prefix
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/projects/animation/animation3D/external/.cache/stb/stb-download-prefix/tmp
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/projects/animation/animation3D/external/.cache/stb/stb-download-prefix/src/stb-download-stamp/Debug
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/projects/animation/animation3D/external/.cache/stb/stb-download-prefix/src
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/projects/animation/animation3D/external/.cache/stb/stb-download-prefix/src/stb-download-stamp
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/projects/animation/animation3D/external/.cache/stb/stb-download-prefix/src/stb-download-stamp/Debug/stb-download-mkdir
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
@@ -10,15 +22,15 @@ endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd
-^C:\USERS\PIJON\ONEDRIVE\DESKTOP\ANIMATION3D\EXTERNAL\.CACHE\STB\CMAKEFILES\74F73A86003AC8F52376D67CC2D853EC\STB-DOWNLOAD-DOWNLOAD.RULE
+^C:\USERS\TAL74\PROJECTS\ANIMATION\ANIMATION3D\EXTERNAL\.CACHE\STB\CMAKEFILES\BD726330E7E8079BE51F0939EDA44D30\STB-DOWNLOAD-DOWNLOAD.RULE
 setlocal
-cd C:\Users\pijon\OneDrive\Desktop\animation3D\external
+cd C:\Users\tal74\projects\animation\animation3D\external
 if %errorlevel% neq 0 goto :cmEnd
 C:
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -P C:/Users/pijon/OneDrive/Desktop/animation3D/external/.cache/stb/stb-download-prefix/tmp/stb-download-gitclone.cmake
+"C:\Program Files\CMake\bin\cmake.exe" -P C:/Users/tal74/projects/animation/animation3D/external/.cache/stb/stb-download-prefix/tmp/stb-download-gitclone.cmake
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/pijon/OneDrive/Desktop/animation3D/external/.cache/stb/stb-download-prefix/src/stb-download-stamp/Debug/stb-download-download
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/projects/animation/animation3D/external/.cache/stb/stb-download-prefix/src/stb-download-stamp/Debug/stb-download-download
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
@@ -26,13 +38,13 @@ endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd
-^C:\USERS\PIJON\ONEDRIVE\DESKTOP\ANIMATION3D\EXTERNAL\.CACHE\STB\CMAKEFILES\74F73A86003AC8F52376D67CC2D853EC\STB-DOWNLOAD-UPDATE.RULE
+^C:\USERS\TAL74\PROJECTS\ANIMATION\ANIMATION3D\EXTERNAL\.CACHE\STB\CMAKEFILES\BD726330E7E8079BE51F0939EDA44D30\STB-DOWNLOAD-UPDATE.RULE
 setlocal
-cd C:\Users\pijon\OneDrive\Desktop\animation3D\external\stb
+cd C:\Users\tal74\projects\animation\animation3D\external\stb
 if %errorlevel% neq 0 goto :cmEnd
 C:
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -P C:/Users/pijon/OneDrive/Desktop/animation3D/external/.cache/stb/stb-download-prefix/tmp/stb-download-gitupdate.cmake
+"C:\Program Files\CMake\bin\cmake.exe" -P C:/Users/tal74/projects/animation/animation3D/external/.cache/stb/stb-download-prefix/tmp/stb-download-gitupdate.cmake
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
@@ -40,11 +52,11 @@ endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd
-^C:\USERS\PIJON\ONEDRIVE\DESKTOP\ANIMATION3D\EXTERNAL\.CACHE\STB\CMAKEFILES\74F73A86003AC8F52376D67CC2D853EC\STB-DOWNLOAD-PATCH.RULE
+^C:\USERS\TAL74\PROJECTS\ANIMATION\ANIMATION3D\EXTERNAL\.CACHE\STB\CMAKEFILES\BD726330E7E8079BE51F0939EDA44D30\STB-DOWNLOAD-PATCH.RULE
 setlocal
 "C:\Program Files\CMake\bin\cmake.exe" -E echo_append
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/pijon/OneDrive/Desktop/animation3D/external/.cache/stb/stb-download-prefix/src/stb-download-stamp/Debug/stb-download-patch
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/projects/animation/animation3D/external/.cache/stb/stb-download-prefix/src/stb-download-stamp/Debug/stb-download-patch
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
@@ -52,31 +64,15 @@ endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd
-^C:\USERS\PIJON\ONEDRIVE\DESKTOP\ANIMATION3D\EXTERNAL\.CACHE\STB\CMAKEFILES\74F73A86003AC8F52376D67CC2D853EC\STB-DOWNLOAD-CONFIGURE.RULE
+^C:\USERS\TAL74\PROJECTS\ANIMATION\ANIMATION3D\EXTERNAL\.CACHE\STB\CMAKEFILES\BD726330E7E8079BE51F0939EDA44D30\STB-DOWNLOAD-CONFIGURE.RULE
 setlocal
-cd C:\Users\pijon\OneDrive\Desktop\animation3D\build\stb-build
-if %errorlevel% neq 0 goto :cmEnd
-C:
-if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E echo_append
-if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/pijon/OneDrive/Desktop/animation3D/external/.cache/stb/stb-download-prefix/src/stb-download-stamp/Debug/stb-download-configure
-if %errorlevel% neq 0 goto :cmEnd
-:cmEnd
-endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
-:cmErrorLevel
-exit /b %1
-:cmDone
-if %errorlevel% neq 0 goto :VCEnd
-^C:\USERS\PIJON\ONEDRIVE\DESKTOP\ANIMATION3D\EXTERNAL\.CACHE\STB\CMAKEFILES\74F73A86003AC8F52376D67CC2D853EC\STB-DOWNLOAD-BUILD.RULE
-setlocal
-cd C:\Users\pijon\OneDrive\Desktop\animation3D\build\stb-build
+cd C:\Users\tal74\projects\animation\animation3D\build\stb-build
 if %errorlevel% neq 0 goto :cmEnd
 C:
 if %errorlevel% neq 0 goto :cmEnd
 "C:\Program Files\CMake\bin\cmake.exe" -E echo_append
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/pijon/OneDrive/Desktop/animation3D/external/.cache/stb/stb-download-prefix/src/stb-download-stamp/Debug/stb-download-build
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/projects/animation/animation3D/external/.cache/stb/stb-download-prefix/src/stb-download-stamp/Debug/stb-download-configure
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
@@ -84,15 +80,15 @@ endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd
-^C:\USERS\PIJON\ONEDRIVE\DESKTOP\ANIMATION3D\EXTERNAL\.CACHE\STB\CMAKEFILES\74F73A86003AC8F52376D67CC2D853EC\STB-DOWNLOAD-INSTALL.RULE
+^C:\USERS\TAL74\PROJECTS\ANIMATION\ANIMATION3D\EXTERNAL\.CACHE\STB\CMAKEFILES\BD726330E7E8079BE51F0939EDA44D30\STB-DOWNLOAD-BUILD.RULE
 setlocal
-cd C:\Users\pijon\OneDrive\Desktop\animation3D\build\stb-build
+cd C:\Users\tal74\projects\animation\animation3D\build\stb-build
 if %errorlevel% neq 0 goto :cmEnd
 C:
 if %errorlevel% neq 0 goto :cmEnd
 "C:\Program Files\CMake\bin\cmake.exe" -E echo_append
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/pijon/OneDrive/Desktop/animation3D/external/.cache/stb/stb-download-prefix/src/stb-download-stamp/Debug/stb-download-install
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/projects/animation/animation3D/external/.cache/stb/stb-download-prefix/src/stb-download-stamp/Debug/stb-download-build
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
@@ -100,15 +96,15 @@ endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd
-^C:\USERS\PIJON\ONEDRIVE\DESKTOP\ANIMATION3D\EXTERNAL\.CACHE\STB\CMAKEFILES\74F73A86003AC8F52376D67CC2D853EC\STB-DOWNLOAD-TEST.RULE
+^C:\USERS\TAL74\PROJECTS\ANIMATION\ANIMATION3D\EXTERNAL\.CACHE\STB\CMAKEFILES\BD726330E7E8079BE51F0939EDA44D30\STB-DOWNLOAD-INSTALL.RULE
 setlocal
-cd C:\Users\pijon\OneDrive\Desktop\animation3D\build\stb-build
+cd C:\Users\tal74\projects\animation\animation3D\build\stb-build
 if %errorlevel% neq 0 goto :cmEnd
 C:
 if %errorlevel% neq 0 goto :cmEnd
 "C:\Program Files\CMake\bin\cmake.exe" -E echo_append
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/pijon/OneDrive/Desktop/animation3D/external/.cache/stb/stb-download-prefix/src/stb-download-stamp/Debug/stb-download-test
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/projects/animation/animation3D/external/.cache/stb/stb-download-prefix/src/stb-download-stamp/Debug/stb-download-install
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
@@ -116,13 +112,15 @@ endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd
-^C:\USERS\PIJON\ONEDRIVE\DESKTOP\ANIMATION3D\EXTERNAL\.CACHE\STB\CMAKEFILES\1D8D5BD14BFEB6FDA8EFEC73B3DF4AF4\STB-DOWNLOAD-COMPLETE.RULE
+^C:\USERS\TAL74\PROJECTS\ANIMATION\ANIMATION3D\EXTERNAL\.CACHE\STB\CMAKEFILES\BD726330E7E8079BE51F0939EDA44D30\STB-DOWNLOAD-TEST.RULE
 setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/pijon/OneDrive/Desktop/animation3D/external/.cache/stb/CMakeFiles/Debug
+cd C:\Users\tal74\projects\animation\animation3D\build\stb-build
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/pijon/OneDrive/Desktop/animation3D/external/.cache/stb/CMakeFiles/Debug/stb-download-complete
+C:
 if %errorlevel% neq 0 goto :cmEnd
-"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/pijon/OneDrive/Desktop/animation3D/external/.cache/stb/stb-download-prefix/src/stb-download-stamp/Debug/stb-download-done
+"C:\Program Files\CMake\bin\cmake.exe" -E echo_append
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/projects/animation/animation3D/external/.cache/stb/stb-download-prefix/src/stb-download-stamp/Debug/stb-download-test
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
@@ -130,7 +128,21 @@ endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd
-^C:\USERS\PIJON\ONEDRIVE\DESKTOP\ANIMATION3D\EXTERNAL\.CACHE\STB\CMAKEFILES\8C4559961289CF12CDC0B4D88EAD3ECF\STB-DOWNLOAD.RULE
+^C:\USERS\TAL74\PROJECTS\ANIMATION\ANIMATION3D\EXTERNAL\.CACHE\STB\CMAKEFILES\3E3B042D298120318EB6D6FF6B3FA34C\STB-DOWNLOAD-COMPLETE.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/tal74/projects/animation/animation3D/external/.cache/stb/CMakeFiles/Debug
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/projects/animation/animation3D/external/.cache/stb/CMakeFiles/Debug/stb-download-complete
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/tal74/projects/animation/animation3D/external/.cache/stb/stb-download-prefix/src/stb-download-stamp/Debug/stb-download-done
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\TAL74\PROJECTS\ANIMATION\ANIMATION3D\EXTERNAL\.CACHE\STB\CMAKEFILES\094E749752043788C5EEA64CDA90E9C5\STB-DOWNLOAD.RULE
 setlocal
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
@@ -138,9 +150,9 @@ endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd
-^C:\USERS\PIJON\ONEDRIVE\DESKTOP\ANIMATION3D\EXTERNAL\.CACHE\STB\CMAKELISTS.TXT
+^C:\USERS\TAL74\PROJECTS\ANIMATION\ANIMATION3D\EXTERNAL\.CACHE\STB\CMAKELISTS.TXT
 setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/pijon/OneDrive/Desktop/animation3D/external/.cache/stb -BC:/Users/pijon/OneDrive/Desktop/animation3D/external/.cache/stb --check-stamp-file C:/Users/pijon/OneDrive/Desktop/animation3D/external/.cache/stb/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/tal74/projects/animation/animation3D/external/.cache/stb -BC:/Users/tal74/projects/animation/animation3D/external/.cache/stb --check-stamp-file C:/Users/tal74/projects/animation/animation3D/external/.cache/stb/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
