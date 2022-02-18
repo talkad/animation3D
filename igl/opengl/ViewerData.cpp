@@ -290,15 +290,15 @@ IGL_INLINE void igl::opengl::ViewerData::initiate_speed()
             set_colors(Eigen::RowVector3d(0, 1, 1));
         }
 
-        /*if(x > 0)
-            MyTranslateInSystem(GetRotation(), Eigen::Vector3d(-3, 0, 0));
-        else
-            MyTranslateInSystem(GetRotation(), Eigen::Vector3d(3, 0, 0));
+        //if(x > 0)
+        //    MyTranslateInSystem(GetRotation(), Eigen::Vector3d(-3, 0, 0));
+        //else
+        //    MyTranslateInSystem(GetRotation(), Eigen::Vector3d(3, 0, 0));
 
-        if(y > 0)
-            MyTranslateInSystem(GetRotation(), Eigen::Vector3d(0, -3, 0));
-        else
-            MyTranslateInSystem(GetRotation(), Eigen::Vector3d(0, 3, 0));*/
+        //if(y > 0)
+        //    MyTranslateInSystem(GetRotation(), Eigen::Vector3d(0, -3, 0));
+        //else
+        //    MyTranslateInSystem(GetRotation(), Eigen::Vector3d(0, 3, 0));
     }
 }
 

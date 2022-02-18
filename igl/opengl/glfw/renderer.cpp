@@ -95,18 +95,24 @@ IGL_INLINE void Renderer::draw(GLFWwindow* window)
 			if (mesh.is_visible & core.id) {
 				{
 					if (selected_core_index == 0) {
-						core.camera_translation << -0.5, -0.5, 10;
-						core.camera_eye << -1, 0.25, 0.5;
+						//core.camera_translation << -0.5, -0.5, 10;
+						//core.camera_eye << -1, 0.25, 0.5;
 						//core.camera_up << 0, 0.75, 0;
 
 
-						//Eigen::Matrix4d headTransMat = scn->MakeTransd() * scn->CalcSnakeJointsTrans();
-						////Eigen::Matrix4d headTransMat = scn->MakeTransd() * scn->CalcParentsTrans(scn->snake_size - 1) * scn->data(scn->snake_size - 1).MakeTransd();
-						//
-						//core.camera_translation = (headTransMat * Eigen::Vector4d(0, 0.8, 0.8, -1)).block(0, 0, 3, 1).cast<float>();
-						//core.camera_eye = (headTransMat.block(0, 0, 3, 3) * Eigen::Vector3d(-1, 0, 0)).block(0, 0, 3, 1).cast<float>();
-						//core.camera_up = (headTransMat.block(0, 0, 3, 3) * Eigen::Vector3d(-0.2, 0, -0.2)).block(0, 0, 3, 1).cast<float>();	
-						//std::cout << "snake head \n" << headTransMat << std::endl;
+						Eigen::Matrix4d headTransMat = scn->split_snake[16].MakeTransd();
+						//scn->MakeTransd()* scn->CalcSnakeJointsTrans();
+						//Eigen::Matrix4d headTransMat = scn->MakeTransd() * scn->CalcParentsTrans(scn->snake_size - 1) * scn->data(scn->snake_size - 1).MakeTransd();
+						
+						core.camera_translation = (headTransMat * Eigen::Vector4d(-0.5, -0.5, 10, 1)).block(0, 0, 3, 1).cast<float>();
+						core.camera_eye = (headTransMat.block(0, 0, 3, 3) * Eigen::Vector3d(-1, 0.25, 0.5)).block(0, 0, 3, 1).cast<float>();
+						// core.camera_up = (headTransMat.block(0, 0, 3, 3) * Eigen::Vector3d(0, 0, 0)).block(0, 0, 3, 1).cast<float>();	
+						
+						//Eigen::Vector3d tempUp = scn->split_snake[16].GetRotation() * Eigen::Vector3d(0, 1, 0);
+						//core.camera_up << tempUp[0], tempUp[1], tempUp[2];
+
+						std::cout << "snake head \n" << headTransMat << std::endl;
+
 
 						//core.camera_up << 0, 5, 5;
 						//std::cout << "camera translation: " << core.camera_translation << std::endl;
