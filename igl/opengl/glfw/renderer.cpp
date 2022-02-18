@@ -95,39 +95,66 @@ IGL_INLINE void Renderer::draw(GLFWwindow* window)
 			if (mesh.is_visible & core.id) {
 				{
 					if (selected_core_index == 0) {
+						core.camera_translation << -0.5, -0.5, 10;
+						core.camera_eye << -1, 0.25, 0.5;
+						//core.camera_up << 0, 0.75, 0;
 
-						/*Eigen::Matrix4d headTransMat = scn->MakeTransd() * scn->CalcParentsTrans(scn->snake_size - 1) * scn->data(scn->snake_size - 1).MakeTransd();
-						core.camera_translation = (headTransMat * Eigen::Vector4d(0, 0.8, 0.8, -1)).block(0, 0, 3, 1).cast<float>();
-						core.camera_eye = (headTransMat.block(0, 0, 3, 3) * Eigen::Vector3d(0, -1, 0)).block(0, 0, 3, 1).cast<float>();
-						core.camera_up = (headTransMat.block(0, 0, 3, 3) * Eigen::Vector3d(0, 0, -1)).block(0, 0, 3, 1).cast<float>();*/
 
+						//Eigen::Matrix4d headTransMat = scn->MakeTransd() * scn->CalcSnakeJointsTrans();
+						////Eigen::Matrix4d headTransMat = scn->MakeTransd() * scn->CalcParentsTrans(scn->snake_size - 1) * scn->data(scn->snake_size - 1).MakeTransd();
+						//
+						//core.camera_translation = (headTransMat * Eigen::Vector4d(0, 0.8, 0.8, -1)).block(0, 0, 3, 1).cast<float>();
+						//core.camera_eye = (headTransMat.block(0, 0, 3, 3) * Eigen::Vector3d(-1, 0, 0)).block(0, 0, 3, 1).cast<float>();
+						//core.camera_up = (headTransMat.block(0, 0, 3, 3) * Eigen::Vector3d(-0.2, 0, -0.2)).block(0, 0, 3, 1).cast<float>();	
+						//std::cout << "snake head \n" << headTransMat << std::endl;
+
+						//core.camera_up << 0, 5, 5;
+						//std::cout << "camera translation: " << core.camera_translation << std::endl;
+						//std::cout << "camera eye: " << core.camera_eye << std::endl;
+						//std::cout << "camera up: " << core.camera_up << std::endl;
+
+						//core.camera_up << 4, 0, 0;
+
+						//Eigen::Vector3d tempEye = core.camera_translation.cast<double>() - scn->split_snake[16].GetTranslation(); //Eigen::Vector3d(0, 0, 0);
+						//core.camera_eye << tempEye[0], tempEye[1], tempEye[2];
+						//Eigen::Vector3d tempUp = scn->split_snake[16].GetRotation() * Eigen::Vector3d(0, 1, 0);
+						//core.camera_up << tempUp[0], tempUp[1], tempUp[2];
+						//Eigen::Vector3d tempCenter = scn->split_snake[16].GetTranslation();
+						//core.camera_translation << tempCenter[0], tempCenter[1], tempCenter[2];
+
+						//std::cout << "camera eye: " << core.camera_eye << std::endl;
+						//std::cout << "camera up: " << core.camera_up << std::endl;
 					}
 					else {
 						core.camera_translation = prev_camera_translation;
 						core.camera_eye = prev_camera_eye;
 						core.camera_up = prev_camera_up;
+
+						std::cout << "original camera eye: " << core.camera_eye << std::endl;
+						std::cout << "original camera up: " << core.camera_up << std::endl;
+						//std::cout << "original camera translation: " << core.camera_translation << std::endl;
 					}
 
 					if(!mesh.isTerminated){
 
-						if (GetScene()->isFog)
-						{	
-							/*Eigen::Vector3d distanceVector = mesh.GetTranslation() - core.camera_translation.cast <double>();;
-							double dist = sqrt(distanceVector.dot(distanceVector));*/
+						//if (GetScene()->isFog)
+						//{	
+						//	/*Eigen::Vector3d distanceVector = mesh.GetTranslation() - core.camera_translation.cast <double>();;
+						//	double dist = sqrt(distanceVector.dot(distanceVector));*/
 
-							double dist = abs(mesh.GetTranslation()[2] - core.camera_translation.cast <double>()[2]); // according z axis
+						//	double dist = abs(mesh.GetTranslation()[2] - core.camera_translation.cast <double>()[2]); // according z axis
 
-							//std::cout << mesh.id << " visibility rate: " << visibility << std::endl;
+						//	//std::cout << mesh.id << " visibility rate: " << visibility << std::endl;
 
-							if (dist > FOG_START && mesh.speed(2) < 0) {
-								double visibility = -0.161 * dist + 1;
+						//	if (dist > FOG_START && mesh.speed(2) < 0) {
+						//		double visibility = -0.161 * dist + 1;
 
-								//std::cout << visibility << std::endl;
+						//		//std::cout << visibility << std::endl;
 
-								if(visibility > -1)
-									mesh.set_colors(RowVector4d(mesh.color(0), mesh.color(1), mesh.color(2), visibility));
-							}
-						}
+						//		if(visibility > -1)
+						//			mesh.set_colors(RowVector4d(mesh.color(0), mesh.color(1), mesh.color(2), visibility));
+						//	}
+						//}
 
 						/*if (mesh.id == 1) {
 							std::cout << "MESH LOC: \n" << mesh.GetTranslation() << std::endl;

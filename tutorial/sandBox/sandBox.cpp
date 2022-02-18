@@ -62,6 +62,7 @@ void SandBox::Init(const std::string& config)
     createJointBoxes();
 	start_level();
     isActive = true;
+
 }
 
 SandBox::~SandBox()
@@ -86,7 +87,7 @@ void SandBox::Animate()
 
         move_snake();
         generate_target();
-        move_targets();
+        //move_targets();
         clean_data_list();
         check_level_up();
 

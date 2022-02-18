@@ -122,7 +122,9 @@ namespace igl
                 // Returns 0 if not found
                 IGL_INLINE size_t mesh_index(const int id) const;
 
-                Eigen::Matrix4d CalcParentsTrans(int indx);
+                IGL_INLINE Eigen::Matrix4d CalcParentsTrans(int indx);
+
+                IGL_INLINE Eigen::Matrix4d CalcSnakeJointsTrans();
 
                 IGL_INLINE Eigen::Vector3d calcJointPos(int);
 

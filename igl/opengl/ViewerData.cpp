@@ -244,7 +244,53 @@ IGL_INLINE void igl::opengl::ViewerData::initiate_speed()
     else {
         speed = Eigen::Vector3d(x / 20.0, y / 100.0, z/ 50.0);
 
-        if(x > 0)
+        std::random_device rd2;
+        std::mt19937 gen(rd2());
+        std::uniform_int_distribution<> distr(0, 9);
+
+        int a = distr(gen);
+        if (a == 0) {
+            MyTranslateInSystem(GetRotation(), Eigen::Vector3d(-3, 0, 0));
+            set_colors(Eigen::RowVector3d(0, 0, 1));
+        }
+        else if (a == 1) {
+            MyTranslateInSystem(GetRotation(), Eigen::Vector3d(3, 0, 0));
+            set_colors(Eigen::RowVector3d(0, 1, 0));
+        }
+        else if (a == 2) {
+            MyTranslateInSystem(GetRotation(), Eigen::Vector3d(0, -3, 0));
+            set_colors(Eigen::RowVector3d(1, 0, 0));
+        }
+        else if (a == 3) {
+            MyTranslateInSystem(GetRotation(), Eigen::Vector3d(0, 3, 0));
+            set_colors(Eigen::RowVector3d(1, 1, 0));
+        }
+        //else if (a == 4) {
+        //    MyTranslateInSystem(GetRotation(), Eigen::Vector3d(0, 0, 0));
+        //    set_colors(Eigen::RowVector3d(0, 0, 0));
+        //}
+        else if (a == 5) {
+            MyTranslateInSystem(GetRotation(), Eigen::Vector3d(3, 3, 0));
+            set_colors(Eigen::RowVector3d(1, 0, 1));
+        }
+        else if (a == 6) {
+            MyTranslateInSystem(GetRotation(), Eigen::Vector3d(-3, -3, 0));
+            set_colors(Eigen::RowVector3d(1, 0.5, 1));
+        }
+        else if (a == 7) {
+            MyTranslateInSystem(GetRotation(), Eigen::Vector3d(-3, 3, 0));
+            set_colors(Eigen::RowVector3d(0.5, 1, 1));
+        }
+        else if (a == 8) {
+            MyTranslateInSystem(GetRotation(), Eigen::Vector3d(3, -3, 0));
+            set_colors(Eigen::RowVector3d(1, 1, 0.5));
+        }
+        else {
+            MyTranslateInSystem(GetRotation(), Eigen::Vector3d(0, 0, -3));
+            set_colors(Eigen::RowVector3d(0, 1, 1));
+        }
+
+        /*if(x > 0)
             MyTranslateInSystem(GetRotation(), Eigen::Vector3d(-3, 0, 0));
         else
             MyTranslateInSystem(GetRotation(), Eigen::Vector3d(3, 0, 0));
@@ -252,7 +298,7 @@ IGL_INLINE void igl::opengl::ViewerData::initiate_speed()
         if(y > 0)
             MyTranslateInSystem(GetRotation(), Eigen::Vector3d(0, -3, 0));
         else
-            MyTranslateInSystem(GetRotation(), Eigen::Vector3d(0, 3, 0));
+            MyTranslateInSystem(GetRotation(), Eigen::Vector3d(0, 3, 0));*/
     }
 }
 

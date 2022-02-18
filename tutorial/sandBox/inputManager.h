@@ -47,7 +47,10 @@ static void glfw_key_callback(GLFWwindow* window, int key, int scancode, int act
 		case 'A':
 		case 'a':
 		{
-			rndr->core().is_animating = !rndr->core().is_animating;
+			std::cout << "camera translation: " << rndr->core().camera_translation << std::endl;
+			std::cout << "camera eye: " << rndr->core().camera_eye << std::endl;
+			std::cout << "camera up: " << rndr->core().camera_up << std::endl;
+			//rndr->core().is_animating = !rndr->core().is_animating;
 			break;
 		}
 		case 'F':

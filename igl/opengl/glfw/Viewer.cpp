@@ -583,7 +583,7 @@ namespace igl
             // check if two object in data_list are collided
             // assume there are exactly two objects
             IGL_INLINE void Viewer::check_collision() {
-                double epsilon = 0.8;
+                //double epsilon = 0.8;
                 for(int i = 1; i < data_list.size(); ++i)
                     if (!data_list[i].is_collided && data_list[i].is_visible) {
                         for (int j = 0; j < jointBoxes.size(); ++j) {
@@ -620,7 +620,7 @@ namespace igl
 
                 float tic = static_cast<float>(glfwGetTime());
                 //std::cout << tic << std::endl;
-                if (tic - prev_tic > 4) {
+                if (tic - prev_tic > 0) { // change to 4 xxxxxxxxxxxxxxxxxxxx
                     prev_tic = tic;
 
                     std::this_thread::sleep_for(std::chrono::microseconds(5));
@@ -800,7 +800,7 @@ namespace igl
             }
 
             IGL_INLINE void Viewer::createJointBoxes() {
-                double epsilon = 0.04;
+                double epsilon = 0.04; // check this line xxxxxxxxxxxxxxxxxxxxxxx
 
                 for (int i = 1; i < joints_num + 1; ++i)
                 {
@@ -851,8 +851,6 @@ namespace igl
                     igl::dqs(V, W, vQ, vT, U);
                     data_list[0].set_vertices(U);
 
-                    
-
                     //for (int i = 0; i < skeleton.size(); ++i) {
                     //    Eigen::Vector3d m = skeleton[i] + Eigen::Vector3d(-0.4, -0.4, -0.4),
                     //        M = skeleton[i] + Eigen::Vector3d(0.4, 0.4, 0.4);
@@ -886,6 +884,18 @@ namespace igl
                 for (int i = indx; parents[i] >= 0; i = parents[i])
                 {
                     prevTrans = data_list[parents[i]].MakeTransd() * prevTrans;
+                }
+
+                return prevTrans;
+            }
+
+            IGL_INLINE Eigen::Matrix4d Viewer::CalcSnakeJointsTrans()
+            {
+                Eigen::Matrix4d prevTrans = Eigen::Matrix4d::Identity();
+
+                for (int i = 15; i >= 0; --i)
+                {
+                    prevTrans = split_snake[i].MakeTransd() * prevTrans;
                 }
 
                 return prevTrans;
