@@ -2,7 +2,9 @@
 #include <iostream>
 
 SandBox::SandBox()
-{ }
+{
+    isTranslated = false;
+}
 
 void SandBox::Init(const std::string& config)
 {

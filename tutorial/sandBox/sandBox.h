@@ -5,6 +5,7 @@
 class SandBox : public igl::opengl::glfw::Viewer
 {
 public:
+	bool isTranslated;
 	SandBox();
 	~SandBox();
 	void Init(const std::string& config);

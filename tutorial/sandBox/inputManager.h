@@ -87,7 +87,17 @@ static void glfw_key_callback(GLFWwindow* window, int key, int scancode, int act
 		case '[':
 		case ']':
 		{
-			rndr->ChangeCamera(key);
+			if (!scn->isTranslated) {
+				rndr->core().camera_eye = rndr->core().snake_camera_eye;
+				rndr->core().camera_translation = rndr->core().snake_camera_translation;
+				scn->isTranslated = true;
+			}
+			else {
+				rndr->core().camera_eye = rndr->core().prev_camera_eye;
+				rndr->core().camera_translation = rndr->core().prev_camera_translation;
+				scn->isTranslated = false;
+			}
+			/*rndr->ChangeCamera(key);*/
 			break;
 		}
 		case ';':

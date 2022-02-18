@@ -27,7 +27,7 @@ int main(int argc, char* argv[])
 
 	disp->SetRenderer(&renderer);
 	menu.init_callback(viewer);
-
+	std::cout << "CORE NO. " << renderer.core().id << std::endl;
 	disp->launch_rendering(true);
 
 

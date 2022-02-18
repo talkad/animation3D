@@ -128,10 +128,15 @@ public:
   float camera_zoom;
   bool orthographic;
   Eigen::Vector3f camera_base_translation;
+  Eigen::Vector3f prev_camera_translation;
+  Eigen::Vector3f prev_camera_eye;
   Eigen::Vector3f camera_translation;
   Eigen::Vector3f camera_eye;
   Eigen::Vector3f camera_up;
   Eigen::Vector3f camera_center;
+  Eigen::Vector3f snake_camera_eye;
+  Eigen::Vector3f snake_camera_translation;
+
   float camera_view_angle;
   float camera_dnear;
   float camera_dfar;

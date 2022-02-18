@@ -658,7 +658,7 @@ void mouse_callback(GLFWwindow* window, int button, int action, int modifier)
 					
 					scn->add_score(scn->data_list[i].type);
 
-					PlaySound(TEXT("C:/Users/tal74/projects/animation/animation3D/tutorial/sounds/SHEESH.wav"), NULL, SND_NODEFAULT | SND_ASYNC);
+					PlaySound(TEXT("C:/Users/pijon/OneDrive/Desktop/animation3D/tutorial/sounds/SHEESH.wav"), NULL, SND_NODEFAULT | SND_ASYNC);
 				}
 			}
 		}
