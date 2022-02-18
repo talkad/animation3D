@@ -106,8 +106,8 @@ Display::Display(int windowWidth, int windowHeight, const std::string& title): r
 	//			window = glfwCreateWindow(windowWidth, windowHeight, title.c_str(), nullptr, nullptr);
 	//		}
 	// 
-	window = glfwCreateWindow(windowWidth, windowHeight, title.c_str(), glfwGetPrimaryMonitor(), nullptr);
-	//window = glfwCreateWindow(windowWidth, windowHeight, title.c_str(), nullptr, nullptr);
+	//window = glfwCreateWindow(windowWidth, windowHeight, title.c_str(), glfwGetPrimaryMonitor(), nullptr);
+	window = glfwCreateWindow(windowWidth, windowHeight, title.c_str(), nullptr, nullptr);
 	if (!window)
 	{
 		glfwTerminate();

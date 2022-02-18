@@ -408,6 +408,7 @@ namespace igl
                         erase_mesh(i);*/
                 
             }
+
             IGL_INLINE bool Viewer::boxes_collide(Eigen::AlignedBox<double, 3>& firstbox, Eigen::AlignedBox<double, 3>& secondbox, int i, int j) {
                 double a0 = firstbox.sizes()[0] / 2, a1 = firstbox.sizes()[1] / 2, a2 = firstbox.sizes()[2] / 2,
                     b0 = secondbox.sizes()[0] / 2, b1 = secondbox.sizes()[1] / 2, b2 = secondbox.sizes()[2] / 2,
@@ -585,21 +586,22 @@ namespace igl
                 double epsilon = 0.8;
                 for(int i = 1; i < data_list.size(); ++i)
                     if (!data_list[i].is_collided && data_list[i].is_visible) {
-                        //for (int j = 0; j < jointBoxes.size(); ++j) {
-                        //    if (treeNodesCollide(data_list[i].kd_tree, jointBoxes[j], i, j)) {
-                        //        std::cout << jointBoxes[j].center() << std::endl;
-                        //        std::cout << split_snake[15].GetTranslation() << std::endl;
+                        for (int j = 0; j < jointBoxes.size(); ++j) {
+                            if (treeNodesCollide(data_list[i].kd_tree, jointBoxes[j], i, j)) {
+                                //std::cout << jointBoxes[j].center() << std::endl;
+                                //std::cout << split_snake[15].GetTranslation() << std::endl;
 
-                        //        add_score(data_list[i].type);
-                        //        data_list[i].is_visible = false;
-                        //        data_list[i].is_collided = true;
-                        //    }
-                        //}
-                            if ((split_snake[split_snake.size() - 1].GetTranslation() - data_list[i].GetTranslation()).norm() <= epsilon) {
                                 add_score(data_list[i].type);
                                 data_list[i].is_visible = false;
                                 data_list[i].is_collided = true;
                             }
+                        }
+
+                            //if ((split_snake[split_snake.size() - 1].GetTranslation() - data_list[i].GetTranslation()).norm() <= epsilon) {
+                            //    add_score(data_list[i].type);
+                            //    data_list[i].is_visible = false;
+                            //    data_list[i].is_collided = true;
+                            //}
                         
                     }
             }
@@ -796,6 +798,7 @@ namespace igl
                 }
                 return sum;
             }
+
             IGL_INLINE void Viewer::createJointBoxes() {
                 double epsilon = 0.04;
 
@@ -807,9 +810,10 @@ namespace igl
                     Eigen::AlignedBox<double, 3> boxforcurrJoint;
                     boxforcurrJoint = Eigen::AlignedBox<double, 3>(m, M);
                     jointBoxes[i - 1] = boxforcurrJoint;
-                    // drawsnakejointBox(snakejointBoxvec[i - 1], 0);
+                     //drawsnakejointBox(snakejointBoxvec[i - 1], 0);
                 }
             }
+
             IGL_INLINE void Viewer::move_snake() {
                 double snake_speed = 0.1;
 
@@ -847,8 +851,7 @@ namespace igl
                     igl::dqs(V, W, vQ, vT, U);
                     data_list[0].set_vertices(U);
 
-                    for (int i = 0; i < skeleton.size(); ++i)
-                        skeleton[i] = vT[i];
+                    
 
                     //for (int i = 0; i < skeleton.size(); ++i) {
                     //    Eigen::Vector3d m = skeleton[i] + Eigen::Vector3d(-0.4, -0.4, -0.4),
@@ -857,14 +860,19 @@ namespace igl
                     //    box = Eigen::AlignedBox<double, 3>(m, M);
                     //    jointBoxes.at(i) = box;
                     //}
+
                     for (int i = 0; i < split_snake.size(); ++i){
+                        Eigen::Vector3d pos_offset = vT[i] - skeleton[i];
 
-                        split_snake[i].MyTranslate(Eigen::Vector3d(target_pose(2), target_pose(1), target_pose(0)), true);
+                        split_snake[i].MyTranslate(Eigen::Vector3d(pos_offset(2), pos_offset(1), pos_offset(0)), true);
 
-                        //Eigen::Quaterniond quat = Eigen::Quaterniond::FromTwoVectors(Eigen::Vector3d(target_pose(2) / 100, target_pose(1) / 100, target_pose(0) / 100), Eigen::Vector3d(snake_skeleton[i](2), snake_skeleton[i](1), snake_skeleton[i](0)));//vT is new tranlate and snake_skeleton still hold the old translate 
-                        //snake_links.at(i).MyRotate(quat);
+                        Eigen::Quaterniond quat = Eigen::Quaterniond::FromTwoVectors(Eigen::Vector3d(target_pose(2), target_pose(1), target_pose(0)), Eigen::Vector3d(skeleton[i](2), skeleton[i](1), skeleton[i](0)));//vT is new tranlate and snake_skeleton still hold the old translate 
+                        split_snake.at(i).MyRotate(quat);
                         //std::cout << parents[i + 1] <<"\n";
                     }
+
+                    for (int i = 0; i < skeleton.size(); ++i)
+                        skeleton[i] = vT[i];
 
                     //createJointBoxes();
                     check_collision();

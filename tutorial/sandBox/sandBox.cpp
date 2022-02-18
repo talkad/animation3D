@@ -59,6 +59,7 @@ void SandBox::Init(const std::string& config)
 
     MyTranslateInSystem(GetRotation(), Eigen::RowVector3d(0, 0, -10));
 
+    createJointBoxes();
 	start_level();
     isActive = true;
 }

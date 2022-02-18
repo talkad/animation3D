@@ -71,6 +71,12 @@ void Movable::MyTranslateInSystem(Eigen::Matrix3d rot, Eigen::Vector3d amt)
 	Tout.pretranslate(rot.transpose() * amt);
 }
 
+void Movable::MyRotate(const Eigen::Quaterniond rot)
+{
+	Tout.rotate(rot);
+}
+
+
 void Movable::RotateInSystem(Eigen::Vector3d rotAxis, double angle)
 {
 	Tout.rotate(Eigen::AngleAxisd(angle, Tout.rotation().transpose() *

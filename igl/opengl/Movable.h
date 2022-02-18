@@ -23,6 +23,8 @@ public:
 
 	void RotateInSystem(Eigen::Vector3d rotAxis, double angle);
 
+	void MyRotate(const Eigen::Quaterniond rot);
+
 	Eigen::Matrix3d GetRotation() const { return Tout.rotation().matrix(); }
 
 	Eigen::Vector3d GetTranslation() const { return (Tout * Tin).matrix().block(0, 3, 3, 1); }
