@@ -89,15 +89,12 @@ IGL_INLINE void Renderer::draw(GLFWwindow* window)
 	for (auto& core : core_list)
 	{
 		int indx = 0;
-		if (core.id == 2) {
-			core.snake_camera_eye = scn->split_snake[scn->split_snake.size() - 1].MakeTransScale() * Eigen::Vector4f(scn->split_snake[scn->split_snake.size() - 1].GetTranslation()(0),
-																													scn->split_snake[scn->split_snake.size() - 1].GetTranslation()(1),
-																													scn->split_snake[scn->split_snake.size() - 1].GetTranslation()(2),
-																													1);
-			//core.camera_up = scn->split_snake[scn->split_snake.size() - 1].GetRotation();
-			//TranslateByDirectionVec(scn->direction);			
-			//RotateCamera(0, 0.25);
-		}
+		//if (core.id == 2) {
+		////	//core.snake_camera_eye = scn->split_snake[scn->split_snake.size() - 1].GetTranslation().cast<float>();
+		////	//core.camera_up = scn->split_snake[scn->split_snake.size() - 1].GetRotation();
+		//	TranslateByDirectionVec(scn->direction);			
+		////	//RotateCamera(0, 0.25);
+		//}
 		for (auto& mesh : scn->data_list)
 		{
 			if (mesh.is_visible & core.id) {

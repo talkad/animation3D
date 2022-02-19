@@ -699,7 +699,7 @@ namespace igl
             }
 
             IGL_INLINE void Viewer::check_level_up() {
-                if (score >= 10 * level) {
+                if (score >= 20000 * level) {
                     level++;
                     isLevelUp = true;
                     isActive = false;
@@ -722,7 +722,7 @@ namespace igl
             IGL_INLINE void Viewer::update_timer() {
                 if(!isLevelUp){
                     int offset = static_cast<int>(glfwGetTime()) - start_time;
-                    timer = (level * 30) - offset + paused_time;
+                    timer = (level * 300) - offset + paused_time;
                 }
 
                 if (timer == 0 && !isLevelUp) {

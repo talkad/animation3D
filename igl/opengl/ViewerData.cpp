@@ -57,9 +57,7 @@ IGL_INLINE igl::opengl::ViewerData::~ViewerData() {
 };
 
 IGL_INLINE void igl::opengl::ViewerData::init() {
-    std::cout << "init" << std::endl;
     kd_tree.init(V, F);
-
 }
 
 IGL_INLINE void igl::opengl::ViewerData::drawAlignedBox(Eigen::AlignedBox<double, 3>& alignedBox, Eigen::RowVector3d& color) {

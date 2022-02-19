@@ -363,6 +363,10 @@ bool Display::launch_rendering(bool loop)
 
 		double tic = igl::get_seconds();
 		renderer->Animate();
+		renderer->core().snake_camera_eye = renderer->GetScene()->split_snake[renderer->GetScene()->split_snake.size() - 1].GetTranslation().cast<float>();
+		//renderer->core().snake_camera_translation = renderer->GetScene()->split_snake[renderer->GetScene()->split_snake.size() - 1].GetTranslation().cast<float>();
+		//renderer->GetScene()->split_snake[16].MyTranslate(renderer->core().snake_camera_translation.cast<double>(), true);
+		//renderer->core().snake_camera_translation = renderer->GetScene()->vT[16].cast<float>();
 		renderer->draw(window);
 
 		// update explosion generator
