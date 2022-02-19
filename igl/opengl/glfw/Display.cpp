@@ -594,7 +594,7 @@ void mouse_move(GLFWwindow* window, double x, double y)
 	float xoffset = xpos - lastX;
 	float yoffset = lastY - ypos; // reversed since y-coordinates go from bottom to top
 
-	std::cout << "x y are " << xoffset << ", " << yoffset << std::endl;
+	//std::cout << "x y are " << xoffset << ", " << yoffset << std::endl;
 
 	if (rndr->IsPicked()) {
 		rndr->UpdatePosition(x, y);

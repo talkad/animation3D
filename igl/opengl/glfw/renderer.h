@@ -102,6 +102,7 @@ public:
 
 	}
 	void TranslateCamera(Eigen::Vector3f amt);
+	void TranslateByDirectionVec(unsigned char dir);
 	void RotateCamera(float amtX, float amtY);
 	inline bool IsPicked() { return scn->isPicked; }
 	

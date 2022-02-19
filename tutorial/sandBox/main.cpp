@@ -5,8 +5,8 @@
 #include <MMSystem.h>
 #pragma comment(lib, "winmm.lib")
 
-#define VIEWPORT_WIDTH 3840
-#define VIEWPORT_HEIGHT 2160
+#define VIEWPORT_WIDTH 800
+#define VIEWPORT_HEIGHT 800
 
 
 

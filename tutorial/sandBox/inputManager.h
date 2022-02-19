@@ -88,6 +88,16 @@ static void glfw_key_callback(GLFWwindow* window, int key, int scancode, int act
 		case ']':
 		{
 			if (!scn->isTranslated) {
+				/*Eigen::Vector3d tempEye = scn->vT[scn->vT.size() - 1];
+				rndr->core().camera_eye << tempEye[0], tempEye[1], tempEye[2];
+				std::cout << "CAMERA EYE: " << rndr->core().camera_eye << std::endl;
+				Eigen::Vector3d tempUp = scn->split_snake[scn->split_snake.size() - 1].GetRotation() * Eigen::Vector3d(0, 1, 0);
+				rndr->core().camera_up << tempUp[0], tempUp[1], tempUp[2];
+				std::cout << "CAMERA UP: " << rndr->core().camera_up << std::endl;
+				std::cout << "UP ROTATION :" << scn->split_snake[scn->split_snake.size() - 1].GetRotation() << std::endl;
+				Eigen::Vector3d tempCenter = (scn->split_snake[scn->split_snake.size() - 1].MakeTransd() * Eigen::Vector4d(0, 0, 5, 1)).head(3);
+				rndr->core().camera_center << tempCenter[0], tempCenter[1], tempCenter[2];
+				std::cout << "CAMERA CENTER: " << rndr->core().camera_center << std::endl;*/
 				rndr->core().camera_eye = rndr->core().snake_camera_eye;
 				rndr->core().camera_translation = rndr->core().snake_camera_translation;
 				scn->isTranslated = true;
@@ -95,8 +105,14 @@ static void glfw_key_callback(GLFWwindow* window, int key, int scancode, int act
 			else {
 				rndr->core().camera_eye = rndr->core().prev_camera_eye;
 				rndr->core().camera_translation = rndr->core().prev_camera_translation;
+				//rndr->core().camera_up << 0, 1, 5;
+				//rndr->core().camera_center << 0, 0, 0;
+
 				scn->isTranslated = false;
 			}
+
+
+			std::cout << rndr->core().id << std::endl;
 			/*rndr->ChangeCamera(key);*/
 			break;
 		}

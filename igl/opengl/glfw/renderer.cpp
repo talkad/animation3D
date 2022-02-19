@@ -89,7 +89,15 @@ IGL_INLINE void Renderer::draw(GLFWwindow* window)
 	for (auto& core : core_list)
 	{
 		int indx = 0;
-
+		if (core.id == 2) {
+			core.snake_camera_eye = scn->split_snake[scn->split_snake.size() - 1].MakeTransScale() * Eigen::Vector4f(scn->split_snake[scn->split_snake.size() - 1].GetTranslation()(0),
+																													scn->split_snake[scn->split_snake.size() - 1].GetTranslation()(1),
+																													scn->split_snake[scn->split_snake.size() - 1].GetTranslation()(2),
+																													1);
+			//core.camera_up = scn->split_snake[scn->split_snake.size() - 1].GetRotation();
+			//TranslateByDirectionVec(scn->direction);			
+			//RotateCamera(0, 0.25);
+		}
 		for (auto& mesh : scn->data_list)
 		{
 			if (mesh.is_visible & core.id) {
@@ -239,9 +247,6 @@ IGL_INLINE void Renderer::init(igl::opengl::glfw::Viewer* viewer, int coresNum, 
 		//TranslateCamera(v.cast<float>());
 
 		core_index(left_view - 1);
-
-		core_list[0].camera_eye << -1, 0.25, 0.5;
-		core_list[0].camera_translation << -0.5, -0.5, 10;
 	}
 
 	//selected_core_index = 0;
@@ -323,15 +328,28 @@ void Renderer::MouseProcessing(int button)
 
 void Renderer::TranslateCamera(Eigen::Vector3f amt)
 {
-	core().camera_translation += amt;
+	core().snake_camera_translation += amt;
+}
+
+void Renderer::TranslateByDirectionVec(unsigned char dir) {
+	Eigen::Vector3f amt;
+	double snake_speed = 0.01;
+	dir == 'l' ? amt = Eigen::Vector3f(0, 0, -snake_speed) :
+	dir == 'r' ? amt = Eigen::Vector3f(0, 0, snake_speed)  :
+	dir == 'u' ? amt = Eigen::Vector3f(0, snake_speed, 0)  :
+	dir == 'd' ? amt = Eigen::Vector3f(0, -snake_speed, 0) :
+	dir == 'w' ? amt = Eigen::Vector3f(snake_speed, 0, 0 ) :
+	dir == 's' ? amt = Eigen::Vector3f(-snake_speed, 0, 0) :
+				 amt = Eigen::Vector3f::Zero();
+	TranslateCamera(amt);
 }
 
 void Renderer::RotateCamera(float amtX, float amtY)
 {
-	core().camera_eye = core().camera_eye + Eigen::Vector3f(0, amtY, 0);
+	core().snake_camera_eye = core().snake_camera_eye + Eigen::Vector3f(0, amtY, 0);
 	Eigen::Matrix3f Mat;
 	Mat << cos(amtY), 0, sin(amtY), 0, 1, 0, -sin(amtY), 0, cos(amtY);
-	core().camera_eye = Mat * core().camera_eye;
+	core().snake_camera_eye = Mat * core().snake_camera_eye;
 
 }
 
@@ -356,6 +374,7 @@ double Renderer::Picking(double newx, double newy)
 	//std::cout << "view matrix\n" << view << std::endl;
 	view = view * (core().trackball_angle * Eigen::Scaling(core().camera_zoom * core().camera_base_zoom)
 		* Eigen::Translation3f(core().camera_translation + core().camera_base_translation)).matrix() * scn->MakeTransScale() * scn->CalcParentsTrans(scn->selected_data_index).cast<float>() * scn->data().MakeTransScale();
+	std::cout << view << std::endl;
 	bool picked = igl::unproject_onto_mesh(Eigen::Vector2f(x, y), view,
 		core().proj, core().viewport, scn->data().V, scn->data().F, fid, bc);
 	scn->isPicked = scn->isPicked | picked;
