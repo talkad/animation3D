@@ -838,12 +838,6 @@ namespace igl
                     case 'd':
                         target_pose = Eigen::Vector3d(0, -snake_speed, 0);
                         break;
-                    case 'w':
-                        target_pose = Eigen::Vector3d(snake_speed, 0, 0);
-                        break;
-                    case 's':
-                        target_pose = Eigen::Vector3d(-snake_speed, 0, 0);
-                        break;
                     default:
                         break;
                     }

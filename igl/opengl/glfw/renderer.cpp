@@ -122,58 +122,13 @@ IGL_INLINE void Renderer::draw(GLFWwindow* window)
 						else {
 							core.camera_translation = scn->split_snake[scn->split_snake.size() - 1].GetTranslation().cast<float>();
 							core.camera_eye = scn->split_snake[scn->split_snake.size() - 2].GetTranslation().cast<float>()- scn->split_snake[scn->split_snake.size() - 1].GetTranslation().cast<float>();
-							//core.camera_up = Eigen::Vector3f(M_PI / 2, 0, 0);
-						}
-					//else if (scn->target_pose(0) > 0) { // in
-					//	core.camera_translation = scn->split_snake[scn->snake_links.size() - 1].GetTranslation().cast<float>();
-
-					//	//core.camera_eye = scn->target_pose.cast<float>() + Eigen::Vector3f(M_PI / 2, 0, 0);
-					//}
-					//else { // else
-
-					//}
+						}			
 					}
 					else {
 						core.camera_eye = core.prev_camera_eye;
 						core.camera_translation = core.prev_camera_translation;
 						core.camera_up = core.prev_camera_up;
 					}
-					//if (isFP) {
-					//	std::cout << "HDSFKGJSDFKOGJDKSFGDS" << std::endl;
-					//	if (scn->target_pose(2) > 0) { // right
-					//		core.camera_translation = -scn->split_snake[scn->split_snake.size() - 1].GetTranslation().cast<float>();
-					//		core.camera_eye = scn->target_pose.cast<float>() + Eigen::Vector3f(-M_PI * 1.25, 0, M_PI / 2);
-					//		core.camera_up = Eigen::Vector3f(M_PI / 2, 0, 0);
-					//	}
-					//	else if (scn->target_pose(2) < 0) { // left
-					//		core.camera_translation = -scn->split_snake[scn->split_snake.size() - 1].GetTranslation().cast<float>();
-					//		core.camera_eye = scn->target_pose.cast<float>() + Eigen::Vector3f(M_PI * 1.25, 0, M_PI / 2);
-					//		core.camera_up = Eigen::Vector3f(-M_PI, 0, 0);
-					//	}
-					//	else if (scn->target_pose(1) > 0) { // up
-					//		core.camera_translation = -scn->split_snake[scn->split_snake.size() - 1].GetTranslation().cast<float>();
-					//		core.camera_eye = scn->target_pose.cast<float>() + Eigen::Vector3f(0, -M_PI * 1.25, M_PI / 2);
-					//		core.camera_up = Eigen::Vector3f(0, M_PI, 0);
-					//	}
-					//	else if (scn->target_pose(1) < 0) { //down
-					//		core.camera_translation = -scn->split_snake[scn->split_snake.size() - 1].GetTranslation().cast<float>();
-					//		core.camera_eye = scn->target_pose.cast<float>() + Eigen::Vector3f(0, M_PI * 1.25, M_PI / 2);
-					//		core.camera_up = Eigen::Vector3f(0, -M_PI, 0);
-					//	}
-					//	//else if (scn->target_pose(0) > 0) { // in
-					//	//	core.camera_translation = scn->snake_links[scn->snake_links.size() - 1].GetTranslation().cast<float>();
-
-					//	//	//core.camera_eye = scn->target_pose.cast<float>() + Eigen::Vector3f(M_PI / 2, 0, 0);
-					//	//}
-					//	//else { // else
-
-					//	//}
-					//}
-					//else {
-					//	core.camera_translation = prev_camera_translation;
-					//	core.camera_eye = prev_camera_eye;
-					//	core.camera_up = prev_camera_up;
-					//}
 
 					if(!mesh.isTerminated){
 
@@ -213,12 +168,8 @@ IGL_INLINE void Renderer::draw(GLFWwindow* window)
 								colorVec = mesh.color + sign * Eigen::Vector3d(0, 0, 1) * 0.05;
 								break;
 							}
-
 							mesh.set_colors(Eigen::RowVector3d(colorVec(0), colorVec(1), colorVec(2)));
-
 						}
-
-
 						core.draw(scn->MakeTransScale() * scn->CalcParentsTrans(indx).cast<float>(), mesh);
 					}
 

@@ -97,26 +97,7 @@ static void glfw_key_callback(GLFWwindow* window, int key, int scancode, int act
 		case ':':
 			scn->data().show_faceid = !scn->data().show_faceid;
 			break;
-		case 'w':
-		case 'W':
-			scn->isPaused = false;
-			scn->isActive = true;
-			if (scn->isFP)
-				scn->direction = 'r';
-			else {
-				scn->previous_direction = 0;
-				scn->direction = 'w';
-			}
-			break;
-
-		case 's':
-		case 'S':
-			scn->isPaused = false;
-			scn->isActive = true;
-			scn->previous_direction = 0;
-			scn->direction = 's';
-			break;
-
+	
 		case GLFW_KEY_UP:
 			scn->isPaused = false;
 			scn->isActive = true;

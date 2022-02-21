@@ -30,6 +30,7 @@ void SandBox::Init(const std::string& config)
             data().set_visible(false, 1);
             if (selected_data_index == 0)
                 V = data().V;
+            data().image_texture("C:/Users/pijon/OneDrive/Desktop/animation3D/tutorial/textures/snake.jpg");
         }
         snakeFile.close();
     }
@@ -53,8 +54,6 @@ void SandBox::Init(const std::string& config)
         Eigen::Vector3d currect_snake_skeleton = Eigen::Vector3d(skeleton.at(i)(2), skeleton.at(i)(1), skeleton.at(i)(0)); //snake_skeleton.at(i);// Eigen::Vector3d(snake_skeleton.at(i)(2), snake_skeleton.at(i)(1), snake_skeleton.at(i)(0));
         split_snake.at(i).MyTranslate(currect_snake_skeleton, true);
     }
-
-    //MyTranslateInSystem(GetRotation(), Eigen::RowVector3d(0, 0, -10));
 
     createJointBoxes();
 	start_level();
