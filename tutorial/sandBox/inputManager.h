@@ -40,9 +40,10 @@ static void glfw_key_callback(GLFWwindow* window, int key, int scancode, int act
 		{
 		case 'R':
 		case 'r':
-			std::cout << "SNAKE HEAD LOC: \n" << scn->split_snake[16].GetTranslation() << std::endl;
+			std::cout << scn->split_snake.size() << std::endl;
+			std::cout << "SNAKE HEAD LOC: \n" << scn->split_snake[15].GetTranslation() << std::endl;
 			std::cout << "OBJECT LOC: \n" << scn->data_list[1].GetTranslation() << std::endl;
-			std::cout << "DISTANCE: \n" << (scn->split_snake[16].GetTranslation() - scn->data_list[1].GetTranslation()).norm() << std::endl;
+			std::cout << "DISTANCE: \n" << (scn->split_snake[15].GetTranslation() - scn->data_list[1].GetTranslation()).norm() << std::endl;
 			break;
 		case 'A':
 		case 'a':
@@ -87,33 +88,7 @@ static void glfw_key_callback(GLFWwindow* window, int key, int scancode, int act
 		case '[':
 		case ']':
 		{
-			if (!scn->isTranslated) {
-				/*Eigen::Vector3d tempEye = scn->vT[scn->vT.size() - 1];
-				rndr->core().camera_eye << tempEye[0], tempEye[1], tempEye[2];
-				std::cout << "CAMERA EYE: " << rndr->core().camera_eye << std::endl;
-				Eigen::Vector3d tempUp = scn->split_snake[scn->split_snake.size() - 1].GetRotation() * Eigen::Vector3d(0, 1, 0);
-				rndr->core().camera_up << tempUp[0], tempUp[1], tempUp[2];
-				std::cout << "CAMERA UP: " << rndr->core().camera_up << std::endl;
-				std::cout << "UP ROTATION :" << scn->split_snake[scn->split_snake.size() - 1].GetRotation() << std::endl;
-				Eigen::Vector3d tempCenter = (scn->split_snake[scn->split_snake.size() - 1].MakeTransd() * Eigen::Vector4d(0, 0, 5, 1)).head(3);
-				rndr->core().camera_center << tempCenter[0], tempCenter[1], tempCenter[2];
-				std::cout << "CAMERA CENTER: " << rndr->core().camera_center << std::endl;*/
-				rndr->core().camera_eye = rndr->core().snake_camera_eye;
-				rndr->core().camera_translation = rndr->core().snake_camera_translation;
-				scn->isTranslated = true;
-			}
-			else {
-				rndr->core().camera_eye = rndr->core().prev_camera_eye;
-				rndr->core().camera_translation = rndr->core().prev_camera_translation;
-				//rndr->core().camera_up << 0, 1, 5;
-				//rndr->core().camera_center << 0, 0, 0;
-
-				scn->isTranslated = false;
-			}
-
-
-			std::cout << rndr->core().id << std::endl;
-			/*rndr->ChangeCamera(key);*/
+			scn->isFP = !scn->isFP;
 			break;
 		}
 		case ';':
@@ -126,8 +101,12 @@ static void glfw_key_callback(GLFWwindow* window, int key, int scancode, int act
 		case 'W':
 			scn->isPaused = false;
 			scn->isActive = true;
-			scn->previous_direction = 0;
-			scn->direction = 'w';
+			if (scn->isFP)
+				scn->direction = 'r';
+			else {
+				scn->previous_direction = 0;
+				scn->direction = 'w';
+			}
 			break;
 
 		case 's':
@@ -141,29 +120,53 @@ static void glfw_key_callback(GLFWwindow* window, int key, int scancode, int act
 		case GLFW_KEY_UP:
 			scn->isPaused = false;
 			scn->isActive = true;
-			scn->previous_direction = 0;
-			scn->direction = 'u';
+			if (scn->isFP)
+				scn->direction = 'r';
+			else {
+				scn->previous_direction = 0;
+				scn->direction = 'u';
+			}
 			break;
 
 		case GLFW_KEY_DOWN:
 			scn->isPaused = false;
 			scn->isActive = true;
-			scn->previous_direction = 0;
-			scn->direction = 'd';
+			if (scn->isFP)
+				scn->direction = 'l';
+			else {
+				scn->previous_direction = 0;
+				scn->direction = 'd';
+			}
 			break;
 
 		case GLFW_KEY_LEFT:
 			scn->isPaused = false;
 			scn->isActive = true;
-			scn->previous_direction = 0;
-			scn->direction = 'l';
+			if (scn->isFP) {
+					scn->direction == 'u' ? scn->direction = 'l' :
+					scn->direction == 'l' ? scn->direction = 'd' :
+					scn->direction == 'd' ? scn->direction = 'r' :
+											scn->direction = 'u' ;
+			}
+			else {
+				scn->previous_direction = 0;
+				scn->direction = 'l';
+			}
 			break;
 
 		case GLFW_KEY_RIGHT:
 			scn->isPaused = false; 
 			scn->isActive = true;
-			scn->previous_direction = 0;
-			scn->direction = 'r';
+			if (scn->isFP) {
+				scn->direction == 'd' ? scn->direction = 'l' :
+				scn->direction == 'l' ? scn->direction = 'u' :
+				scn->direction == 'u' ? scn->direction = 'r' :
+										scn->direction = 'd' ;
+			}
+			else {
+				scn->previous_direction = 0;
+				scn->direction = 'r';
+			}
 			break;
 
 		case ' ':

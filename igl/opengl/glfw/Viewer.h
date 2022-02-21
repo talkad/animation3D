@@ -236,7 +236,7 @@ namespace igl
                 int start_time;
                 double p; // probability to generate target of type 1
                 int target2_creation;
-
+                int a = -1;
                 int scale;
                 int joints_num;
                 std::vector<Eigen::Vector3d> skeleton;
@@ -245,6 +245,7 @@ namespace igl
                 unsigned char previous_direction;
 
                 bool isFog;
+                bool isFP;
 
                 typedef
                     std::vector<Eigen::Quaterniond, Eigen::aligned_allocator<Eigen::Quaterniond> >

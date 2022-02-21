@@ -103,6 +103,7 @@ namespace igl
                 resume_time(0),
                 paused_time(0),
                 isFog(true),
+                isFP(false),
                 isLevelUp(false)
             {
                 jointBoxes.resize(joints_num);
@@ -615,14 +616,14 @@ namespace igl
 
             IGL_INLINE void Viewer::generate_target()
             {
-                if (!isGameStarted || isPaused || isGameOver)
+                if (!isGameStarted || isPaused || isGameOver || a > 10)
                     return;
 
                 float tic = static_cast<float>(glfwGetTime());
                 //std::cout << tic << std::endl;
                 if (tic - prev_tic > 0) { // change to 4 xxxxxxxxxxxxxxxxxxxx
                     prev_tic = tic;
-
+                    a++;
                     std::this_thread::sleep_for(std::chrono::microseconds(5));
 
                     load_mesh_from_file("C:/Users/pijon/OneDrive/Desktop/animation3D/tutorial/data/sphere.obj");
@@ -659,7 +660,7 @@ namespace igl
                     else
                         data().set_colors(Eigen::RowVector3d(0, 1, 0));
 
-                    data().initiate_speed();
+                    data().initiate_speed(a);
 
                 }
             }
@@ -800,11 +801,11 @@ namespace igl
             }
 
             IGL_INLINE void Viewer::createJointBoxes() {
-                double epsilon = 0.04; // check this line xxxxxxxxxxxxxxxxxxxxxxx
+                double epsilon = 0.4; // check this line xxxxxxxxxxxxxxxxxxxxxxx
 
                 for (int i = 1; i < joints_num + 1; ++i)
                 {
-                    Eigen::Vector3d pos = Eigen::Vector3d(skeleton[i - 1](2), skeleton[i - 1](1), skeleton[i - 1](0));
+                    Eigen::Vector3d pos = skeleton[i - 1];
                     Eigen::Vector3d m = pos + Eigen::Vector3d(-epsilon, -epsilon, -epsilon);
                     Eigen::Vector3d M = pos + Eigen::Vector3d(epsilon, epsilon, epsilon);
                     Eigen::AlignedBox<double, 3> boxforcurrJoint;
@@ -851,14 +852,6 @@ namespace igl
                     igl::dqs(V, W, vQ, vT, U);
                     data_list[0].set_vertices(U);
 
-                    //for (int i = 0; i < skeleton.size(); ++i) {
-                    //    Eigen::Vector3d m = skeleton[i] + Eigen::Vector3d(-0.4, -0.4, -0.4),
-                    //        M = skeleton[i] + Eigen::Vector3d(0.4, 0.4, 0.4);
-                    //    Eigen::AlignedBox<double, 3> box;
-                    //    box = Eigen::AlignedBox<double, 3>(m, M);
-                    //    jointBoxes.at(i) = box;
-                    //}
-
                     for (int i = 0; i < split_snake.size(); ++i){
                         Eigen::Vector3d pos_offset = vT[i] - skeleton[i];
 
@@ -866,13 +859,11 @@ namespace igl
 
                         Eigen::Quaterniond quat = Eigen::Quaterniond::FromTwoVectors(Eigen::Vector3d(target_pose(2), target_pose(1), target_pose(0)), Eigen::Vector3d(skeleton[i](2), skeleton[i](1), skeleton[i](0)));//vT is new tranlate and snake_skeleton still hold the old translate 
                         split_snake.at(i).MyRotate(quat);
-                        //std::cout << parents[i + 1] <<"\n";
                     }
 
                     for (int i = 0; i < skeleton.size(); ++i)
                         skeleton[i] = vT[i];
-
-                    //createJointBoxes();
+                    
                     check_collision();
                 }
             }

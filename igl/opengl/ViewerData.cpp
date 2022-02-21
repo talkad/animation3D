@@ -166,7 +166,7 @@ IGL_INLINE void igl::opengl::ViewerData::drawCurve() {
     show_overlay_depth = true;
 }
 
-IGL_INLINE void igl::opengl::ViewerData::initiate_speed()
+IGL_INLINE void igl::opengl::ViewerData::initiate_speed(int a)
 {
     std::random_device rd;
     std::mt19937 gen(rd()); 
@@ -242,11 +242,6 @@ IGL_INLINE void igl::opengl::ViewerData::initiate_speed()
     else {
         speed = Eigen::Vector3d(x / 20.0, y / 100.0, z/ 50.0);
 
-        std::random_device rd2;
-        std::mt19937 gen(rd2());
-        std::uniform_int_distribution<> distr(0, 9);
-
-        int a = distr(gen);
         if (a == 0) {
             MyTranslateInSystem(GetRotation(), Eigen::Vector3d(-3, 0, 0));
             set_colors(Eigen::RowVector3d(0, 0, 1));

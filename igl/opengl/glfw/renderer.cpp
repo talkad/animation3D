@@ -89,61 +89,90 @@ IGL_INLINE void Renderer::draw(GLFWwindow* window)
 	for (auto& core : core_list)
 	{
 		int indx = 0;
-		//if (core.id == 2) {
-		////	//core.snake_camera_eye = scn->split_snake[scn->split_snake.size() - 1].GetTranslation().cast<float>();
-		////	//core.camera_up = scn->split_snake[scn->split_snake.size() - 1].GetRotation();
-		//	TranslateByDirectionVec(scn->direction);			
-		////	//RotateCamera(0, 0.25);
-		//}
+			//core.snake_camera_translation = scn->split_snake[scn->split_snake.size() - 1].GetTranslation().cast<float>();
+		//	//core.camera_up = scn->split_snake[scn->split_snake.size() - 1].GetRotation();
+			//TranslateByDirectionVec(scn->direction);			
+		//	//RotateCamera(0, 0.25);
+		
 		for (auto& mesh : scn->data_list)
 		{
 			if (mesh.is_visible & core.id) {
 				{
-					//if (selected_core_index == 0) {
-					//	//core.camera_translation << -0.5, -0.5, 10;
-					//	//core.camera_eye << -1, 0.25, 0.5;
-					//	//core.camera_up << 0, 0.75, 0;
+					if (scn->isFP) {
+						if(scn->target_pose(2) > 0) { // right
+							core.camera_translation = -scn->split_snake[scn->split_snake.size() - 1].GetTranslation().cast<float>();
+							core.camera_eye = scn->target_pose.cast<float>() + Eigen::Vector3f(-M_PI * 1.25, 0, M_PI / 2);
+							core.camera_up = Eigen::Vector3f(M_PI / 2, 0, 0);
+						}
+						else if (scn->target_pose(2) < 0) { // left
+							core.camera_translation = -scn->split_snake[scn->split_snake.size() - 1].GetTranslation().cast<float>();
+							core.camera_eye = scn->target_pose.cast<float>() + Eigen::Vector3f(M_PI * 1.25, 0, M_PI / 2);
+							core.camera_up = Eigen::Vector3f(-M_PI, 0, 0);
+						}
+						else if (scn->target_pose(1) > 0) { // up
+							core.camera_translation = -scn->split_snake[scn->split_snake.size() - 1].GetTranslation().cast<float>();
+							core.camera_eye = scn->target_pose.cast<float>() + Eigen::Vector3f(0, -M_PI * 1.25, M_PI / 2);
+							core.camera_up = Eigen::Vector3f(0, M_PI, 0);
+						}
+						else if (scn->target_pose(1) < 0) { //down
+							core.camera_translation = -scn->split_snake[scn->split_snake.size() - 1].GetTranslation().cast<float>();
+							core.camera_eye = scn->target_pose.cast<float>() + Eigen::Vector3f(0, M_PI * 1.25, M_PI / 2);
+							core.camera_up = Eigen::Vector3f(0, -M_PI, 0);
+						}
+						else {
+							core.camera_translation = scn->split_snake[scn->split_snake.size() - 1].GetTranslation().cast<float>();
+							core.camera_eye = scn->split_snake[scn->split_snake.size() - 2].GetTranslation().cast<float>()- scn->split_snake[scn->split_snake.size() - 1].GetTranslation().cast<float>();
+							//core.camera_up = Eigen::Vector3f(M_PI / 2, 0, 0);
+						}
+					//else if (scn->target_pose(0) > 0) { // in
+					//	core.camera_translation = scn->split_snake[scn->snake_links.size() - 1].GetTranslation().cast<float>();
 
+					//	//core.camera_eye = scn->target_pose.cast<float>() + Eigen::Vector3f(M_PI / 2, 0, 0);
+					//}
+					//else { // else
 
-					//	Eigen::Matrix4d headTransMat = scn->split_snake[16].MakeTransd();
-					//	//scn->MakeTransd()* scn->CalcSnakeJointsTrans();
-					//	//Eigen::Matrix4d headTransMat = scn->MakeTransd() * scn->CalcParentsTrans(scn->snake_size - 1) * scn->data(scn->snake_size - 1).MakeTransd();
-					//	
-					//	core.camera_translation = (headTransMat * Eigen::Vector4d(-0.5, -0.5, 10, 1)).block(0, 0, 3, 1).cast<float>();
-					//	core.camera_eye = (headTransMat.block(0, 0, 3, 3) * Eigen::Vector3d(-1, 0.25, 0.5)).block(0, 0, 3, 1).cast<float>();
-					//	// core.camera_up = (headTransMat.block(0, 0, 3, 3) * Eigen::Vector3d(0, 0, 0)).block(0, 0, 3, 1).cast<float>();	
-					//	
-					//	//Eigen::Vector3d tempUp = scn->split_snake[16].GetRotation() * Eigen::Vector3d(0, 1, 0);
-					//	//core.camera_up << tempUp[0], tempUp[1], tempUp[2];
+					//}
+					}
+					else {
+						core.camera_eye = core.prev_camera_eye;
+						core.camera_translation = core.prev_camera_translation;
+						core.camera_up = core.prev_camera_up;
+					}
+					//if (isFP) {
+					//	std::cout << "HDSFKGJSDFKOGJDKSFGDS" << std::endl;
+					//	if (scn->target_pose(2) > 0) { // right
+					//		core.camera_translation = -scn->split_snake[scn->split_snake.size() - 1].GetTranslation().cast<float>();
+					//		core.camera_eye = scn->target_pose.cast<float>() + Eigen::Vector3f(-M_PI * 1.25, 0, M_PI / 2);
+					//		core.camera_up = Eigen::Vector3f(M_PI / 2, 0, 0);
+					//	}
+					//	else if (scn->target_pose(2) < 0) { // left
+					//		core.camera_translation = -scn->split_snake[scn->split_snake.size() - 1].GetTranslation().cast<float>();
+					//		core.camera_eye = scn->target_pose.cast<float>() + Eigen::Vector3f(M_PI * 1.25, 0, M_PI / 2);
+					//		core.camera_up = Eigen::Vector3f(-M_PI, 0, 0);
+					//	}
+					//	else if (scn->target_pose(1) > 0) { // up
+					//		core.camera_translation = -scn->split_snake[scn->split_snake.size() - 1].GetTranslation().cast<float>();
+					//		core.camera_eye = scn->target_pose.cast<float>() + Eigen::Vector3f(0, -M_PI * 1.25, M_PI / 2);
+					//		core.camera_up = Eigen::Vector3f(0, M_PI, 0);
+					//	}
+					//	else if (scn->target_pose(1) < 0) { //down
+					//		core.camera_translation = -scn->split_snake[scn->split_snake.size() - 1].GetTranslation().cast<float>();
+					//		core.camera_eye = scn->target_pose.cast<float>() + Eigen::Vector3f(0, M_PI * 1.25, M_PI / 2);
+					//		core.camera_up = Eigen::Vector3f(0, -M_PI, 0);
+					//	}
+					//	//else if (scn->target_pose(0) > 0) { // in
+					//	//	core.camera_translation = scn->snake_links[scn->snake_links.size() - 1].GetTranslation().cast<float>();
 
-					//	std::cout << "snake head \n" << headTransMat << std::endl;
+					//	//	//core.camera_eye = scn->target_pose.cast<float>() + Eigen::Vector3f(M_PI / 2, 0, 0);
+					//	//}
+					//	//else { // else
 
-
-					//	//core.camera_up << 0, 5, 5;
-					//	//std::cout << "camera translation: " << core.camera_translation << std::endl;
-					//	//std::cout << "camera eye: " << core.camera_eye << std::endl;
-					//	//std::cout << "camera up: " << core.camera_up << std::endl;
-
-					//	//core.camera_up << 4, 0, 0;
-
-					//	//Eigen::Vector3d tempEye = core.camera_translation.cast<double>() - scn->split_snake[16].GetTranslation(); //Eigen::Vector3d(0, 0, 0);
-					//	//core.camera_eye << tempEye[0], tempEye[1], tempEye[2];
-					//	//Eigen::Vector3d tempUp = scn->split_snake[16].GetRotation() * Eigen::Vector3d(0, 1, 0);
-					//	//core.camera_up << tempUp[0], tempUp[1], tempUp[2];
-					//	//Eigen::Vector3d tempCenter = scn->split_snake[16].GetTranslation();
-					//	//core.camera_translation << tempCenter[0], tempCenter[1], tempCenter[2];
-
-					//	//std::cout << "camera eye: " << core.camera_eye << std::endl;
-					//	//std::cout << "camera up: " << core.camera_up << std::endl;
+					//	//}
 					//}
 					//else {
 					//	core.camera_translation = prev_camera_translation;
 					//	core.camera_eye = prev_camera_eye;
 					//	core.camera_up = prev_camera_up;
-
-					//	std::cout << "original camera eye: " << core.camera_eye << std::endl;
-					//	std::cout << "original camera up: " << core.camera_up << std::endl;
-					//	//std::cout << "original camera translation: " << core.camera_translation << std::endl;
 					//}
 
 					if(!mesh.isTerminated){
@@ -166,12 +195,6 @@ IGL_INLINE void Renderer::draw(GLFWwindow* window)
 						//			mesh.set_colors(RowVector4d(mesh.color(0), mesh.color(1), mesh.color(2), visibility));
 						//	}
 						//}
-
-						/*if (mesh.id == 1) {
-							std::cout << "MESH LOC: \n" << mesh.GetTranslation() << std::endl;
-							std::cout << "SNAKE HEAD LOC: \n" << GetScene()->split_snake[15].GetTranslation() << std::endl
-								<< "SNAKE HEAD JOINT LOC: \n" << GetScene()->jointBoxes[15].center() << std::endl;
-						}*/
 
 						if (mesh.type == 4) {
 							color = distr_color(gen);

@@ -5,8 +5,8 @@
 #include <MMSystem.h>
 #pragma comment(lib, "winmm.lib")
 
-#define VIEWPORT_WIDTH 800
-#define VIEWPORT_HEIGHT 800
+#define VIEWPORT_WIDTH 3840
+#define VIEWPORT_HEIGHT 2160
 
 
 
@@ -25,9 +25,6 @@ int main(int argc, char* argv[])
 	renderer.init(&viewer, 2, &menu);
 	disp->SetRenderer(&renderer);
 	menu.init_callback(viewer);
-	std::cout << "CORE NO. " << renderer.core().id << std::endl;
-	viewer.MyRotate(Eigen::Vector3d::UnitZ(), M_PI / 2);
-	viewer.MyRotate(Eigen::Vector3d::UnitY(), M_PI / 2);
 	disp->launch_rendering(true);
 
 

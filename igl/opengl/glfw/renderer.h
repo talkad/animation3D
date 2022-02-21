@@ -109,11 +109,6 @@ public:
 	std::vector<igl::opengl::ViewerCore> core_list;
 	size_t selected_core_index;
 	
-	Eigen::Vector3f prev_camera_translation;
-	Eigen::Vector3f prev_camera_eye;
-	Eigen::Vector3f prev_camera_up;
-
-
 private:
 	// Stores all the viewing options
 	igl::opengl::glfw::Viewer* scn;

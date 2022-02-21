@@ -60,7 +60,7 @@ namespace igl
 
             IGL_INLINE void update_movement_type(enum type);
 
-            IGL_INLINE void initiate_speed();
+            IGL_INLINE void initiate_speed(int);
 
             IGL_INLINE void calcT();
 

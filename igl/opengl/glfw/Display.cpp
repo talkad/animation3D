@@ -363,7 +363,7 @@ bool Display::launch_rendering(bool loop)
 
 		double tic = igl::get_seconds();
 		renderer->Animate();
-		renderer->core().snake_camera_eye = renderer->GetScene()->split_snake[renderer->GetScene()->split_snake.size() - 1].GetTranslation().cast<float>();
+		//renderer->core().snake_camera_eye = renderer->GetScene()->split_snake[renderer->GetScene()->split_snake.size() - 1].GetTranslation().cast<float>();
 		//renderer->core().snake_camera_translation = renderer->GetScene()->split_snake[renderer->GetScene()->split_snake.size() - 1].GetTranslation().cast<float>();
 		//renderer->GetScene()->split_snake[16].MyTranslate(renderer->core().snake_camera_translation.cast<double>(), true);
 		//renderer->core().snake_camera_translation = renderer->GetScene()->vT[16].cast<float>();
@@ -587,41 +587,39 @@ void mouse_move(GLFWwindow* window, double x, double y)
 
 	float xpos = static_cast<float>(x);
 	float ypos = static_cast<float>(y);
-	//if (firstMouse)
-	//{
-	//	lastX = xpos;
-	//	lastY = ypos;
-	//	firstMouse = false;
-	//}
-
+	if (firstMouse)
+	{
+		lastX = xpos;
+		lastY = ypos;
+		firstMouse = false;
+	}
 
 	float xoffset = xpos - lastX;
 	float yoffset = lastY - ypos; // reversed since y-coordinates go from bottom to top
 
 	//std::cout << "x y are " << xoffset << ", " << yoffset << std::endl;
 
-	if (rndr->IsPicked()) {
-		rndr->UpdatePosition(x, y);
-		if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT) == GLFW_PRESS)
-		{
-			rndr->MouseProcessing(GLFW_MOUSE_BUTTON_RIGHT);
-		}
-		else if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS)
-		{
-			rndr->MouseProcessing(GLFW_MOUSE_BUTTON_LEFT);
-		}
-	}
-	else {
-		rndr->UpdatePosition(-x, -y);
-		rndr->MouseProcessing(GLFW_MOUSE_BUTTON_RIGHT);
-	}
+	//if (rndr->IsPicked()) {
+	//	rndr->UpdatePosition(x, y);
+	//	if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT) == GLFW_PRESS)
+	//	{
+	//		rndr->MouseProcessing(GLFW_MOUSE_BUTTON_RIGHT);
+	//	}
+	//	else if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS)
+	//	{
+	//		rndr->MouseProcessing(GLFW_MOUSE_BUTTON_LEFT);
+	//	}
+	//}
+	//else {
+	//rndr->UpdatePosition(-x * 3, -y * 10);
+	//rndr->MouseProcessing(GLFW_MOUSE_BUTTON_RIGHT);
+	//}
 
 
+	lastX = xpos;
+	lastY = ypos;
 
-	//lastX = xpos;
-	//lastY = ypos;
-
-	//camera.ProcessMouseMovement(xoffset * 2, yoffset * 2);
+	camera.ProcessMouseMovement(xoffset, yoffset);
 
 }
 
