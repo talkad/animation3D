@@ -247,6 +247,8 @@ namespace igl
                 bool isFog;
                 bool isFP;
 
+                bool update_camera_rotation;
+
                 typedef
                     std::vector<Eigen::Quaterniond, Eigen::aligned_allocator<Eigen::Quaterniond> >
                     RotationList;

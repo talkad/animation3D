@@ -348,6 +348,8 @@ bool Display::launch_rendering(bool loop)
 
 
 	// Rendering loop
+	const int rot_offset = 5;
+	int acc_rot = 0;
 	const int num_extra_frames = 5;
 	int frame_counter = 0;
 	int windowWidth, windowHeight;
@@ -377,6 +379,32 @@ bool Display::launch_rendering(bool loop)
 
 		if (tic - last_explosion_time > 10) {
 			renderer->GetScene()->isFog = true;
+		}
+
+		// first position rotation
+		if (renderer->GetScene()->update_camera_rotation && renderer->GetScene()->isFP) {
+
+			if (acc_rot == 90) {
+				renderer->GetScene()->update_camera_rotation = false;
+				acc_rot = 0;
+			}
+
+			if (renderer->GetScene()->direction == 'r') {
+				camera.ProcessMouseMovement(-rot_offset, 0);
+				acc_rot += rot_offset;
+			}
+			else if (renderer->GetScene()->direction == 'l') {
+				camera.ProcessMouseMovement(rot_offset, 0);
+				acc_rot += rot_offset;
+			}
+			else if (renderer->GetScene()->direction == 'u') {
+				camera.ProcessMouseMovement(0, -rot_offset);
+				acc_rot += rot_offset;
+			}
+			else if (renderer->GetScene()->direction == 'd') {
+				camera.ProcessMouseMovement(0, rot_offset);
+				acc_rot += rot_offset;
+			}
 		}
 
 		// per-frame time logic
@@ -660,7 +688,7 @@ void mouse_callback(GLFWwindow* window, int button, int action, int modifier)
 					
 					scn->add_score(scn->data_list[i].type);
 
-					PlaySound(TEXT("C:/Users/pijon/OneDrive/Desktop/animation3D/tutorial/sounds/SHEESH.wav"), NULL, SND_NODEFAULT | SND_ASYNC);
+					PlaySound(TEXT("C:/Users/tal74/projects/animation/animation3D/tutorial/sounds/SHEESH.wav"), NULL, SND_NODEFAULT | SND_ASYNC);
 				}
 			}
 		}

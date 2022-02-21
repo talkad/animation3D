@@ -104,7 +104,8 @@ namespace igl
                 paused_time(0),
                 isFog(true),
                 isFP(false),
-                isLevelUp(false)
+                isLevelUp(false),
+                update_camera_rotation(false)
             {
                 jointBoxes.resize(joints_num);
                 data_list.front().id = 0;
@@ -626,7 +627,7 @@ namespace igl
                     a++;
                     std::this_thread::sleep_for(std::chrono::microseconds(5));
 
-                    load_mesh_from_file("C:/Users/pijon/OneDrive/Desktop/animation3D/tutorial/data/sphere.obj");
+                    load_mesh_from_file("C:/Users/tal74/projects/animation/animation3D/tutorial/data/sphere.obj");
                     if (data_list.size() > parents.size())
                     {
                         parents.push_back(-1);
@@ -707,7 +708,7 @@ namespace igl
                     score = 0;
                     timer = 0;
 
-                    PlaySound(TEXT("C:/Users/pijon/OneDrive/Desktop/animation3D/tutorial/sounds/nextLevel.wav"), NULL, SND_NODEFAULT | SND_ASYNC);
+                    PlaySound(TEXT("C:/Users/tal74/projects/animation/animation3D/tutorial/sounds/nextLevel.wav"), NULL, SND_NODEFAULT | SND_ASYNC);
                 }
                 
             }
