@@ -389,20 +389,24 @@ bool Display::launch_rendering(bool loop)
 				acc_rot = 0;
 			}
 
-			if (renderer->GetScene()->direction == 'r') {
+			if (renderer->GetScene()->target_pose(2) > 0) {
 				camera.ProcessMouseMovement(-rot_offset, 0);
+				std::cout << "r" << std::endl;
 				acc_rot += rot_offset;
 			}
-			else if (renderer->GetScene()->direction == 'l') {
+			else if (renderer->GetScene()->target_pose(2) < 0) {
 				camera.ProcessMouseMovement(rot_offset, 0);
+				std::cout << "l" << std::endl;
 				acc_rot += rot_offset;
 			}
-			else if (renderer->GetScene()->direction == 'u') {
+			else if (renderer->GetScene()->target_pose(1) > 0) {
 				camera.ProcessMouseMovement(0, -rot_offset);
+				std::cout << "u" << std::endl;
 				acc_rot += rot_offset;
 			}
-			else if (renderer->GetScene()->direction == 'd') {
+			else if (renderer->GetScene()->target_pose(1) < 0) {
 				camera.ProcessMouseMovement(0, rot_offset);
+				std::cout << "d" << std::endl;
 				acc_rot += rot_offset;
 			}
 		}
