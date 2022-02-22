@@ -47,13 +47,13 @@ IGL_INLINE igl::opengl::ViewerData::ViewerData()
     is_collided(false),
     creation_time(static_cast<float>(glfwGetTime())),
     isTerminated(false),
-    color(Eigen::Vector3d(0,0,0))
+    color(Eigen::Vector3d(0, 0, 0))
 {
     clear();
 };
 
 IGL_INLINE igl::opengl::ViewerData::~ViewerData() {
-// there is no inner dynamically allocated
+    // there is no inner dynamically allocated
 };
 
 IGL_INLINE void igl::opengl::ViewerData::init() {
@@ -102,43 +102,43 @@ IGL_INLINE void igl::opengl::ViewerData::drawAlignedBox(Eigen::AlignedBox<double
 
 IGL_INLINE void igl::opengl::ViewerData::move()
 {
-    
-      if (type == BEZIER) {
-          double vel = 0.5;
-          t += 0.05 * vel / 2;
 
-          if (t <= 1) {
-              calcT();
-              curr_pos = T * MG;
-              Eigen::Vector3d tangent = (curr_pos - last_pos).normalized();
-              LookAt(tangent);
-              SetTranslation(curr_pos);
-          }
-          else {
-              MyTranslate(final_dir * vel * 0.05, true);
-          }
-          last_pos = curr_pos;
-      }
-      if (type == BOUNCY){
-          MyTranslateInSystem(GetRotation(), speed);
-          
-          speed[1] -= g;
+    if (type == BEZIER) {
+        double vel = 0.5;
+        t += 0.05 * vel / 2;
 
-          if (Tout.matrix()(1, 3) < -5) {
-              PlaySound(TEXT("C:/Users/tal74/projects/animation/animation3D/tutorial/sounds/ballbounce.wav"), NULL, SND_NODEFAULT | SND_ASYNC);
-              speed[1] = -speed[1];
-          }
+        if (t <= 1) {
+            calcT();
+            curr_pos = T * MG;
+            Eigen::Vector3d tangent = (curr_pos - last_pos).normalized();
+            LookAt(tangent);
+            SetTranslation(curr_pos);
+        }
+        else {
+            MyTranslate(final_dir * vel * 0.05, true);
+        }
+        last_pos = curr_pos;
+    }
+    if (type == BOUNCY) {
+        MyTranslateInSystem(GetRotation(), speed);
 
-          // streching the ball
-          if (speed[1] < 0)
-              MyScale(Eigen::Vector3d(1, 1.05, 1));
-          else
-              MyScale(Eigen::Vector3d(1, 0.95, 1));
+        speed[1] -= g;
 
-      }
-      else {
-          MyTranslateInSystem(GetRotation(), speed);
-      }
+        if (Tout.matrix()(1, 3) < -5) {
+            PlaySound(TEXT("C:/Users/tal74/projects/animation/animation3D/tutorial/sounds/ballbounce.wav"), NULL, SND_NODEFAULT | SND_ASYNC);
+            speed[1] = -speed[1];
+        }
+
+        // streching the ball
+        if (speed[1] < 0)
+            MyScale(Eigen::Vector3d(1, 1.05, 1));
+        else
+            MyScale(Eigen::Vector3d(1, 0.95, 1));
+
+    }
+    else {
+        MyTranslateInSystem(GetRotation(), speed);
+    }
 
 }
 
@@ -156,11 +156,11 @@ IGL_INLINE void igl::opengl::ViewerData::calcT() {
 
 IGL_INLINE void igl::opengl::ViewerData::drawCurve() {
     Eigen::RowVector3d color = Eigen::RowVector3d(0, 1, 0);
-    
+
     add_edges(bezier_points.row(0) * 10, bezier_points.row(1) * 10, color);
     add_edges(bezier_points.row(1) * 10, bezier_points.row(2) * 10, color);
     add_edges(bezier_points.row(2) * 10, bezier_points.row(3) * 10, color);
-    
+
     line_width = 30;
     show_lines = true;
     show_overlay_depth = true;
@@ -169,8 +169,8 @@ IGL_INLINE void igl::opengl::ViewerData::drawCurve() {
 IGL_INLINE void igl::opengl::ViewerData::initiate_speed(int a)
 {
     std::random_device rd;
-    std::mt19937 gen(rd()); 
-    std::uniform_int_distribution<> distr(0, 50); 
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> distr(0, 50);
 
     double x = (distr(gen) - 25.0) / 50.0;
     double y = (distr(gen) - 25.0) / 50.0;
@@ -220,9 +220,9 @@ IGL_INLINE void igl::opengl::ViewerData::initiate_speed(int a)
         bezier_points = spline_points;
         Eigen::Matrix4d	M;					// Blending functions matrix
         M << -1, 3, -3, 1,
-              3, -6, 3, 0,
-             -3, 3, 0, 0,
-              1, 0, 0, 0;
+            3, -6, 3, 0,
+            -3, 3, 0, 0,
+            1, 0, 0, 0;
 
         MG = M * bezier_points;
         T << 0, 0, 0, 1;
@@ -240,7 +240,7 @@ IGL_INLINE void igl::opengl::ViewerData::initiate_speed(int a)
             MyTranslateInSystem(GetRotation(), Eigen::Vector3d(3, 0, 0));
     }
     else {
-        speed = Eigen::Vector3d(x / 20.0, y / 100.0, z/ 50.0);
+        speed = Eigen::Vector3d(x / 20.0, y / 100.0, z / 50.0);
 
         if (a == 0) {
             MyTranslateInSystem(GetRotation(), Eigen::Vector3d(-3, 0, 0));
@@ -331,7 +331,7 @@ IGL_INLINE void igl::opengl::ViewerData::set_mesh(
             Eigen::Vector3d(GOLD_AMBIENT[0], GOLD_AMBIENT[1], GOLD_AMBIENT[2]),
             Eigen::Vector3d(GOLD_DIFFUSE[0], GOLD_DIFFUSE[1], GOLD_DIFFUSE[2]),
             Eigen::Vector3d(GOLD_SPECULAR[0], GOLD_SPECULAR[1], GOLD_SPECULAR[2]));
-        image_texture("C:/Users/tal74/projects/animationp/animation3D/tutorial/textures/snake1.png");
+        image_texture("C:/Users/tal74/projects/animation/animation3D/tutorial/textures/snake1.png");
         //    grid_texture();
     }
     else
@@ -394,7 +394,7 @@ IGL_INLINE void igl::opengl::ViewerData::set_colors(const Eigen::MatrixXd& C)
     using namespace std;
     using namespace Eigen;
 
-    color = Eigen::Vector3d(C(0,0), C(0, 1), C(0, 2));
+    color = Eigen::Vector3d(C(0, 0), C(0, 1), C(0, 2));
 
     if (C.rows() > 0 && C.cols() == 1)
     {

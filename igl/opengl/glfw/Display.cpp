@@ -348,6 +348,8 @@ bool Display::launch_rendering(bool loop)
 
 
 	// Rendering loop
+	const int rot_offset = 5;
+	int acc_rot = 0;
 	const int num_extra_frames = 5;
 	int frame_counter = 0;
 	int windowWidth, windowHeight;
@@ -377,6 +379,36 @@ bool Display::launch_rendering(bool loop)
 
 		if (tic - last_explosion_time > 10) {
 			renderer->GetScene()->isFog = true;
+		}
+
+		// first position rotation
+		if (renderer->GetScene()->update_camera_rotation && renderer->GetScene()->isFP) {
+
+			if (acc_rot == 90) {
+				renderer->GetScene()->update_camera_rotation = false;
+				acc_rot = 0;
+			}
+
+			if (renderer->GetScene()->target_pose(2) > 0) {
+				camera.ProcessMouseMovement(-rot_offset, 0);
+				std::cout << "r" << std::endl;
+				acc_rot += rot_offset;
+			}
+			else if (renderer->GetScene()->target_pose(2) < 0) {
+				camera.ProcessMouseMovement(rot_offset, 0);
+				std::cout << "l" << std::endl;
+				acc_rot += rot_offset;
+			}
+			else if (renderer->GetScene()->target_pose(1) > 0) {
+				camera.ProcessMouseMovement(0, -rot_offset);
+				std::cout << "u" << std::endl;
+				acc_rot += rot_offset;
+			}
+			else if (renderer->GetScene()->target_pose(1) < 0) {
+				camera.ProcessMouseMovement(0, rot_offset);
+				std::cout << "d" << std::endl;
+				acc_rot += rot_offset;
+			}
 		}
 
 		// per-frame time logic

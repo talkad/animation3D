@@ -184,7 +184,7 @@ namespace igl
                 inline bool SetAnimation() {
                     if (isActive)
                         fixAxis();
-                    return isActive = !isActive; 
+                    return isActive = !isActive;
                 }
             public:
                 //////////////////////
@@ -227,7 +227,7 @@ namespace igl
                 int pause_time;
                 int resume_time;
                 int paused_time;
-                
+
                 int TTL;
                 unsigned int frames = 0;
                 int level;
@@ -246,7 +246,9 @@ namespace igl
 
                 bool isFog;
                 bool isFP;
-                
+
+                bool update_camera_rotation;
+
                 typedef
                     std::vector<Eigen::Quaterniond, Eigen::aligned_allocator<Eigen::Quaterniond> >
                     RotationList;

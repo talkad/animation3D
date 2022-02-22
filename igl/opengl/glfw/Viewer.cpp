@@ -104,7 +104,8 @@ namespace igl
                 paused_time(0),
                 isFog(true),
                 isFP(false),
-                isLevelUp(false)
+                isLevelUp(false),
+                update_camera_rotation(false)
             {
                 jointBoxes.resize(joints_num);
                 data_list.front().id = 0;
