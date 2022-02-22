@@ -30,7 +30,7 @@ void SandBox::Init(const std::string& config)
             data().set_visible(false, 1);
             if (selected_data_index == 0)
                 V = data().V;
-            data().image_texture("C:/Users/pijon/OneDrive/Desktop/animation3D/tutorial/textures/snake.jpg");
+            data().image_texture("C:/Users/tal74/projects/animation/animation3D/tutorial/textures/snake.jpg");
         }
         snakeFile.close();
     }
