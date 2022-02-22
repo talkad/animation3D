@@ -99,24 +99,24 @@ IGL_INLINE void Renderer::draw(GLFWwindow* window)
 			if (mesh.is_visible & core.id) {
 				{
 					if (scn->isFP) {
-						if(scn->target_pose(2) > 0) { // right
+						if(scn->position_offset(2) > 0) { // right
 							core.camera_translation = -scn->split_snake[scn->split_snake.size() - 1].GetTranslation().cast<float>();
-							core.camera_eye = scn->target_pose.cast<float>() + Eigen::Vector3f(-M_PI * 1.25, 0, M_PI / 2);
+							core.camera_eye = scn->position_offset.cast<float>() + Eigen::Vector3f(-M_PI * 1.25, 0, M_PI / 2);
 							core.camera_up = Eigen::Vector3f(M_PI / 2, 0, 0);
 						}
-						else if (scn->target_pose(2) < 0) { // left
+						else if (scn->position_offset(2) < 0) { // left
 							core.camera_translation = -scn->split_snake[scn->split_snake.size() - 1].GetTranslation().cast<float>();
-							core.camera_eye = scn->target_pose.cast<float>() + Eigen::Vector3f(M_PI * 1.25, 0, M_PI / 2);
+							core.camera_eye = scn->position_offset.cast<float>() + Eigen::Vector3f(M_PI * 1.25, 0, M_PI / 2);
 							core.camera_up = Eigen::Vector3f(-M_PI, 0, 0);
 						}
-						else if (scn->target_pose(1) > 0) { // up
+						else if (scn->position_offset(1) > 0) { // up
 							core.camera_translation = -scn->split_snake[scn->split_snake.size() - 1].GetTranslation().cast<float>();
-							core.camera_eye = scn->target_pose.cast<float>() + Eigen::Vector3f(0, -M_PI * 1.25, M_PI / 2);
+							core.camera_eye = scn->position_offset.cast<float>() + Eigen::Vector3f(0, -M_PI * 1.25, M_PI / 2);
 							core.camera_up = Eigen::Vector3f(0, M_PI, 0);
 						}
-						else if (scn->target_pose(1) < 0) { //down
+						else if (scn->position_offset(1) < 0) { //down
 							core.camera_translation = -scn->split_snake[scn->split_snake.size() - 1].GetTranslation().cast<float>();
-							core.camera_eye = scn->target_pose.cast<float>() + Eigen::Vector3f(0, M_PI * 1.25, M_PI / 2);
+							core.camera_eye = scn->position_offset.cast<float>() + Eigen::Vector3f(0, M_PI * 1.25, M_PI / 2);
 							core.camera_up = Eigen::Vector3f(0, -M_PI, 0);
 						}
 						else {
@@ -132,24 +132,24 @@ IGL_INLINE void Renderer::draw(GLFWwindow* window)
 
 					if(!mesh.isTerminated){
 
-						//if (GetScene()->isFog)
-						//{	
-						//	/*Eigen::Vector3d distanceVector = mesh.GetTranslation() - core.camera_translation.cast <double>();;
-						//	double dist = sqrt(distanceVector.dot(distanceVector));*/
+						if (GetScene()->isFog)
+						{	
+							/*Eigen::Vector3d distanceVector = mesh.GetTranslation() - core.camera_translation.cast <double>();;
+							double dist = sqrt(distanceVector.dot(distanceVector));*/
 
-						//	double dist = abs(mesh.GetTranslation()[2] - core.camera_translation.cast <double>()[2]); // according z axis
+							double dist = abs(mesh.GetTranslation()[2] - core.camera_translation.cast <double>()[2]); // according z axis
 
-						//	//std::cout << mesh.id << " visibility rate: " << visibility << std::endl;
+							//std::cout << mesh.id << " visibility rate: " << visibility << std::endl;
 
-						//	if (dist > FOG_START && mesh.speed(2) < 0) {
-						//		double visibility = -0.161 * dist + 1;
+							if (dist > FOG_START && mesh.speed(2) < 0 && mesh.type != BEZIER) {
+								double visibility = -0.161 * dist + 1;
 
-						//		//std::cout << visibility << std::endl;
+								//std::cout << visibility << std::endl;
 
-						//		if(visibility > -1)
-						//			mesh.set_colors(RowVector4d(mesh.color(0), mesh.color(1), mesh.color(2), visibility));
-						//	}
-						//}
+								if(visibility > -1)
+									mesh.set_colors(RowVector4d(mesh.color(0), mesh.color(1), mesh.color(2), visibility));
+							}
+						}
 
 						if (mesh.type == 4) {
 							color = distr_color(gen);

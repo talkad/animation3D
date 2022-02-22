@@ -106,8 +106,8 @@ Display::Display(int windowWidth, int windowHeight, const std::string& title): r
 	//			window = glfwCreateWindow(windowWidth, windowHeight, title.c_str(), nullptr, nullptr);
 	//		}
 	// 
-	//window = glfwCreateWindow(windowWidth, windowHeight, title.c_str(), glfwGetPrimaryMonitor(), nullptr);
-	window = glfwCreateWindow(windowWidth, windowHeight, title.c_str(), nullptr, nullptr);
+	window = glfwCreateWindow(windowWidth, windowHeight, title.c_str(), glfwGetPrimaryMonitor(), nullptr);
+	//window = glfwCreateWindow(windowWidth, windowHeight, title.c_str(), nullptr, nullptr);
 	if (!window)
 	{
 		glfwTerminate();
@@ -384,29 +384,25 @@ bool Display::launch_rendering(bool loop)
 		// first position rotation
 		if (renderer->GetScene()->update_camera_rotation && renderer->GetScene()->isFP) {
 
-			if (acc_rot == 90) {
+			if (acc_rot == 120) {
 				renderer->GetScene()->update_camera_rotation = false;
 				acc_rot = 0;
 			}
 
-			if (renderer->GetScene()->target_pose(2) > 0) {
-				camera.ProcessMouseMovement(-rot_offset, 0);
-				std::cout << "r" << std::endl;
-				acc_rot += rot_offset;
-			}
-			else if (renderer->GetScene()->target_pose(2) < 0) {
+			if (renderer->GetScene()->keyPressed == 'r') {
 				camera.ProcessMouseMovement(rot_offset, 0);
-				std::cout << "l" << std::endl;
 				acc_rot += rot_offset;
 			}
-			else if (renderer->GetScene()->target_pose(1) > 0) {
-				camera.ProcessMouseMovement(0, -rot_offset);
-				std::cout << "u" << std::endl;
+			else if (renderer->GetScene()->keyPressed == 'l') {
+				camera.ProcessMouseMovement(-rot_offset, 0);
 				acc_rot += rot_offset;
 			}
-			else if (renderer->GetScene()->target_pose(1) < 0) {
+			else if (renderer->GetScene()->keyPressed == 'u') {
 				camera.ProcessMouseMovement(0, rot_offset);
-				std::cout << "d" << std::endl;
+				acc_rot += rot_offset;
+			}
+			else if (renderer->GetScene()->keyPressed == 'd') {
+				camera.ProcessMouseMovement(0, -rot_offset);
 				acc_rot += rot_offset;
 			}
 		}

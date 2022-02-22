@@ -170,7 +170,7 @@ namespace igl
 
                 IGL_INLINE void move_snake();
 
-                IGL_INLINE void calc_all_weights();
+                IGL_INLINE void weights_calc();
 
                 IGL_INLINE Eigen::VectorXd create_weight_vec(double, double, double, double);
 
@@ -216,7 +216,7 @@ namespace igl
                 float prev_tic;
 
 
-                Eigen::Vector3d target_pose;
+                Eigen::Vector3d position_offset;
                 bool isGameOver;
                 bool isLevelUp;
                 bool start;
@@ -236,7 +236,7 @@ namespace igl
                 int start_time;
                 double p; // probability to generate target of type 1
                 int target2_creation;
-                int a = -1;
+                int level1_obj_amount;
                 int scale;
                 int joints_num;
                 std::vector<Eigen::Vector3d> skeleton;
@@ -248,6 +248,8 @@ namespace igl
                 bool isFP;
 
                 bool update_camera_rotation;
+                char keyPressed;
+                int creation_gap;
 
                 typedef
                     std::vector<Eigen::Quaterniond, Eigen::aligned_allocator<Eigen::Quaterniond> >

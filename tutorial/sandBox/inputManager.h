@@ -101,8 +101,12 @@ static void glfw_key_callback(GLFWwindow* window, int key, int scancode, int act
 		case GLFW_KEY_UP:
 			scn->isPaused = false;
 			scn->isActive = true;
-			if (scn->isFP)
+			scn->keyPressed = 'u';
+
+			if (scn->isFP){
 				scn->direction = 'r';
+				scn->update_camera_rotation = true;
+			}
 			else {
 				scn->previous_direction = 0;
 				scn->direction = 'u';
@@ -112,8 +116,12 @@ static void glfw_key_callback(GLFWwindow* window, int key, int scancode, int act
 		case GLFW_KEY_DOWN:
 			scn->isPaused = false;
 			scn->isActive = true;
-			if (scn->isFP)
+			scn->keyPressed = 'd';
+
+			if (scn->isFP){
 				scn->direction = 'l';
+				scn->update_camera_rotation = true;
+			}
 			else {
 				scn->previous_direction = 0;
 				scn->direction = 'd';
@@ -123,11 +131,15 @@ static void glfw_key_callback(GLFWwindow* window, int key, int scancode, int act
 		case GLFW_KEY_LEFT:
 			scn->isPaused = false;
 			scn->isActive = true;
+			scn->keyPressed = 'l';
+
 			if (scn->isFP) {
 				scn->direction == 'u' ? scn->direction = 'l' :
 					scn->direction == 'l' ? scn->direction = 'd' :
 					scn->direction == 'd' ? scn->direction = 'r' :
 					scn->direction = 'u';
+
+				scn->update_camera_rotation = true;
 			}
 			else {
 				scn->previous_direction = 0;
@@ -138,11 +150,15 @@ static void glfw_key_callback(GLFWwindow* window, int key, int scancode, int act
 		case GLFW_KEY_RIGHT:
 			scn->isPaused = false;
 			scn->isActive = true;
+			scn->keyPressed = 'r';
+
 			if (scn->isFP) {
 				scn->direction == 'd' ? scn->direction = 'l' :
 					scn->direction == 'l' ? scn->direction = 'u' :
 					scn->direction == 'u' ? scn->direction = 'r' :
 					scn->direction = 'd';
+
+				scn->update_camera_rotation = true;
 			}
 			else {
 				scn->previous_direction = 0;

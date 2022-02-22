@@ -166,7 +166,7 @@ IGL_INLINE void igl::opengl::ViewerData::drawCurve() {
     show_overlay_depth = true;
 }
 
-IGL_INLINE void igl::opengl::ViewerData::initiate_speed(int a)
+IGL_INLINE void igl::opengl::ViewerData::initiate_speed(int obj_amount)
 {
     std::random_device rd;
     std::mt19937 gen(rd());
@@ -174,15 +174,18 @@ IGL_INLINE void igl::opengl::ViewerData::initiate_speed(int a)
 
     double x = (distr(gen) - 25.0) / 50.0;
     double y = (distr(gen) - 25.0) / 50.0;
-    double z = (distr(gen) - 25.0) / 50.0;
+    double z = 0;
+
+    double prob = distr(gen);
+    prob < 10 ? z = 0.5 : z = 0;
 
     if (type == BEZIER) {
         srand((unsigned)time(0));
         Eigen::Vector3d spawner_positions[4];
-        spawner_positions[0] = Eigen::Vector3d(10, 0, 10);
-        spawner_positions[1] = Eigen::Vector3d(-10, 0, 10);
-        spawner_positions[2] = Eigen::Vector3d(-10, 0, -10);
-        spawner_positions[3] = Eigen::Vector3d(10, 0, -10);
+        spawner_positions[0] = Eigen::Vector3d(8, 0, 8);
+        spawner_positions[1] = Eigen::Vector3d(-8, 0, 8);
+        spawner_positions[2] = Eigen::Vector3d(-8, 0, -8);
+        spawner_positions[3] = Eigen::Vector3d(8, 0, -8);
 
         speed = Eigen::Vector3d::Zero();
         int iSpawner = (rand() % 4);
@@ -199,9 +202,9 @@ IGL_INLINE void igl::opengl::ViewerData::initiate_speed(int a)
         Eigen::Vector4d p3 = Eigen::Vector4d(0, 0, 0, 1);
 
         for (int i = 0; i < 3; i++) {
-            p1[i] = rand() % 20 - 2;
-            p2[i] = rand() % 20 - 2;
-            p3[i] = rand() % 20 - 2;
+            p1[i] = rand() % 15 - 2;
+            p2[i] = rand() % 15 - 2;
+            p3[i] = rand() % 15 - 2;
         }
 
         double deg2rad = 0.017453292;
@@ -232,66 +235,51 @@ IGL_INLINE void igl::opengl::ViewerData::initiate_speed(int a)
         drawCurve();
     }
     if (type == BOUNCY) {
-        speed = Eigen::Vector3d(x / 5, y / 20, z / 2);
+        speed = Eigen::Vector3d(x / 4.0, y / 20.0, -z);
 
         if (x > 0)
-            MyTranslateInSystem(GetRotation(), Eigen::Vector3d(-3, 0, 0));
+            MyTranslateInSystem(GetRotation(), Eigen::Vector3d(-6, 0, 0));
         else
-            MyTranslateInSystem(GetRotation(), Eigen::Vector3d(3, 0, 0));
+            MyTranslateInSystem(GetRotation(), Eigen::Vector3d(6, 0, 0));
     }
     else {
-        speed = Eigen::Vector3d(x / 20.0, y / 100.0, z / 50.0);
 
-        if (a == 0) {
-            MyTranslateInSystem(GetRotation(), Eigen::Vector3d(-3, 0, 0));
-            set_colors(Eigen::RowVector3d(0, 0, 1));
-        }
-        else if (a == 1) {
-            MyTranslateInSystem(GetRotation(), Eigen::Vector3d(3, 0, 0));
-            set_colors(Eigen::RowVector3d(0, 1, 0));
-        }
-        else if (a == 2) {
-            MyTranslateInSystem(GetRotation(), Eigen::Vector3d(0, -3, 0));
-            set_colors(Eigen::RowVector3d(1, 0, 0));
-        }
-        else if (a == 3) {
-            MyTranslateInSystem(GetRotation(), Eigen::Vector3d(0, 3, 0));
-            set_colors(Eigen::RowVector3d(1, 1, 0));
-        }
-        //else if (a == 4) {
-        //    MyTranslateInSystem(GetRotation(), Eigen::Vector3d(0, 0, 0));
-        //    set_colors(Eigen::RowVector3d(0, 0, 0));
-        //}
-        else if (a == 5) {
-            MyTranslateInSystem(GetRotation(), Eigen::Vector3d(3, 3, 0));
-            set_colors(Eigen::RowVector3d(1, 0, 1));
-        }
-        else if (a == 6) {
-            MyTranslateInSystem(GetRotation(), Eigen::Vector3d(-3, -3, 0));
-            set_colors(Eigen::RowVector3d(1, 0.5, 1));
-        }
-        else if (a == 7) {
-            MyTranslateInSystem(GetRotation(), Eigen::Vector3d(-3, 3, 0));
-            set_colors(Eigen::RowVector3d(0.5, 1, 1));
-        }
-        else if (a == 8) {
-            MyTranslateInSystem(GetRotation(), Eigen::Vector3d(3, -3, 0));
-            set_colors(Eigen::RowVector3d(1, 1, 0.5));
+        if(obj_amount < 4){
+            speed = Eigen::Vector3d(0, 0, 0);
+
+                if (obj_amount == 0) {
+                    MyTranslateInSystem(GetRotation(), Eigen::Vector3d(-3, -3, 0));
+                    set_colors(Eigen::RowVector3d(0.5, 1, 0.5));
+                }
+                else if (obj_amount == 1) {
+                    MyTranslateInSystem(GetRotation(), Eigen::Vector3d(-3, 3, 0));
+                    set_colors(Eigen::RowVector3d(0, 1, 1));
+                }
+                else if (obj_amount == 2) {
+                    MyTranslateInSystem(GetRotation(), Eigen::Vector3d(3, -3, 0));
+                    set_colors(Eigen::RowVector3d(1, 0, 1));
+                }
+                else  {
+                    MyTranslateInSystem(GetRotation(), Eigen::Vector3d(3, 3, 0));
+                    set_colors(Eigen::RowVector3d(1, 1, 0));
+                }
         }
         else {
-            MyTranslateInSystem(GetRotation(), Eigen::Vector3d(0, 0, -3));
-            set_colors(Eigen::RowVector3d(0, 1, 1));
+            speed = Eigen::Vector3d(x / 8.0, z != 0 ? 0.25 : y / 5.0, -z);
+            
+            std::random_device pos_rd;
+            std::mt19937 pos_gen(rd());
+            std::uniform_int_distribution<> pos_distr(0, 50);
+
+            double pos_x = (pos_distr(pos_gen) - 25.0) / 5.0;
+            double pos_y = (pos_distr(pos_gen) - 25.0) / 5.0;
+
+            if(z != 0)
+                MyTranslateInSystem(GetRotation(), Eigen::Vector3d(pos_x, -4, 0));
+            else
+                MyTranslateInSystem(GetRotation(), Eigen::Vector3d(pos_x, pos_y, 0));
         }
 
-        //if(x > 0)
-        //    MyTranslateInSystem(GetRotation(), Eigen::Vector3d(-3, 0, 0));
-        //else
-        //    MyTranslateInSystem(GetRotation(), Eigen::Vector3d(3, 0, 0));
-
-        //if(y > 0)
-        //    MyTranslateInSystem(GetRotation(), Eigen::Vector3d(0, -3, 0));
-        //else
-        //    MyTranslateInSystem(GetRotation(), Eigen::Vector3d(0, 3, 0));
     }
 }
 

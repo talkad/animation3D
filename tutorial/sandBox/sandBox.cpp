@@ -24,12 +24,10 @@ void SandBox::Init(const std::string& config)
         {
             load_mesh_from_file(snake_data);
             parents.push_back(-1);
-            data().show_overlay_depth = false;
-            data().point_size = 10;
-            data().line_width = 2;
             data().set_visible(false, 1);
             if (selected_data_index == 0)
                 V = data().V;
+            data().set_colors(Eigen::RowVector3d(1, 0.55, 0));
             data().image_texture("C:/Users/tal74/projects/animation/animation3D/tutorial/textures/snake.jpg");
         }
         snakeFile.close();
@@ -44,7 +42,7 @@ void SandBox::Init(const std::string& config)
         z += 0.1 * scale;
     }
 
-    calc_all_weights();
+    weights_calc();
 
     data().MyRotate(Eigen::Vector3d::UnitY(), M_PI / 2);
 
@@ -73,17 +71,9 @@ void SandBox::Animate()
 
     if (isActive) {
 
-        //if (frames < 50)
-        //    ++frames;
-        //else {
-        //    data_list[0].kd_tree.init(data_list[0].V, data_list[0].F);
-        //    check_collision();
-        //    frames = 0;
-        //}
-
         move_snake();
         generate_target();
-        //move_targets();
+        move_targets();
         clean_data_list();
         check_level_up();
 
