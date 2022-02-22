@@ -22,8 +22,6 @@
 #include "external/glfw/include/GLFW/glfw3.h"
 #include <random>
 
-//#include "external/stb/igl_stb_image.h"
-
 #define g 0.05
 
 IGL_INLINE igl::opengl::ViewerData::ViewerData()
@@ -104,8 +102,8 @@ IGL_INLINE void igl::opengl::ViewerData::move()
 {
 
     if (type == BEZIER) {
-        double vel = 0.5;
-        t += 0.05 * vel / 2;
+        double velocity = 0.5;
+        t += 0.05 * velocity / 2;
 
         if (t <= 1) {
             calcT();
@@ -114,31 +112,29 @@ IGL_INLINE void igl::opengl::ViewerData::move()
             LookAt(tangent);
             SetTranslation(curr_pos);
         }
-        else {
-            MyTranslate(final_dir * vel * 0.05, true);
-        }
+        else
+            MyTranslate(final_dir * velocity * 0.05, true);
+        
         last_pos = curr_pos;
     }
     if (type == BOUNCY) {
         MyTranslateInSystem(GetRotation(), speed);
 
-        speed[1] -= g;
+        speed.y() -= g;
 
-        if (Tout.matrix()(1, 3) < -5) {
-            PlaySound(TEXT("C:/Users/tal74/projects/animation/animation3D/tutorial/sounds/ballbounce.wav"), NULL, SND_NODEFAULT | SND_ASYNC);
-            speed[1] = -speed[1];
+        if (Tout.matrix()(1, 3) < -4) {
+            PlaySound(TEXT("C:/Users/pijon/OneDrive/Desktop/animation3D/tutorial/sounds/ballbounce.wav"), NULL, SND_NODEFAULT | SND_ASYNC);
+            speed.y() = -speed.y();
         }
 
         // streching the ball
-        if (speed[1] < 0)
-            MyScale(Eigen::Vector3d(1, 1.05, 1));
-        else
-            MyScale(Eigen::Vector3d(1, 0.95, 1));
+        speed.y() < 0 ? MyScale(Eigen::Vector3d(1, 1.05, 1)) :
+                        MyScale(Eigen::Vector3d(1, 0.95, 1));
 
     }
-    else {
+    else 
         MyTranslateInSystem(GetRotation(), speed);
-    }
+    
 
 }
 
@@ -148,22 +144,7 @@ IGL_INLINE void igl::opengl::ViewerData::update_movement_type(enum type new_type
 }
 
 IGL_INLINE void igl::opengl::ViewerData::calcT() {
-    T[0] = powf(t, 3);
-    T[1] = powf(t, 2);
-    T[2] = t;
-    T[3] = 1;
-}
-
-IGL_INLINE void igl::opengl::ViewerData::drawCurve() {
-    Eigen::RowVector3d color = Eigen::RowVector3d(0, 1, 0);
-
-    add_edges(bezier_points.row(0) * 10, bezier_points.row(1) * 10, color);
-    add_edges(bezier_points.row(1) * 10, bezier_points.row(2) * 10, color);
-    add_edges(bezier_points.row(2) * 10, bezier_points.row(3) * 10, color);
-
-    line_width = 30;
-    show_lines = true;
-    show_overlay_depth = true;
+    T << powf(t, 3), powf(t, 2), t, 1;
 }
 
 IGL_INLINE void igl::opengl::ViewerData::initiate_speed(int obj_amount)
@@ -189,26 +170,23 @@ IGL_INLINE void igl::opengl::ViewerData::initiate_speed(int obj_amount)
 
         speed = Eigen::Vector3d::Zero();
         int iSpawner = (rand() % 4);
-        double spawnerX = spawner_positions[iSpawner][0];
-        double spawnerZ = spawner_positions[iSpawner][2];
+        double spawnerX = spawner_positions[iSpawner].x();
+        double spawnerZ = spawner_positions[iSpawner].z();
 
         int angle = (rand() % 270) - 90;
 
         Eigen::Matrix <double, 4, 3> spline_points = Eigen::Matrix <double, 4, 3>::Zero();
 
-        Eigen::Vector4d p0 = Eigen::Vector4d(0, 0, 0, 1);
-        Eigen::Vector4d p1 = Eigen::Vector4d(0, 0, 0, 1);
-        Eigen::Vector4d p2 = Eigen::Vector4d(0, 0, 0, 1);
-        Eigen::Vector4d p3 = Eigen::Vector4d(0, 0, 0, 1);
+        Eigen::Vector4d p0, p1, p2, p3;
+        p0 = p1 = p2 = p3 = Eigen::Vector4d::UnitW();
 
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 3; ++i) {
             p1[i] = rand() % 15 - 2;
             p2[i] = rand() % 15 - 2;
             p3[i] = rand() % 15 - 2;
         }
 
-        double deg2rad = 0.017453292;
-        double angel_rad = angle * deg2rad;
+        double angel_rad = angle * M_PI / 180;
 
         Eigen::Matrix <double, 3, 4> trans;		//	x rotation and translation to spawner
         trans << cosf(angel_rad), 0, -sinf(angel_rad), spawnerX,
@@ -222,62 +200,45 @@ IGL_INLINE void igl::opengl::ViewerData::initiate_speed(int obj_amount)
 
         bezier_points = spline_points;
         Eigen::Matrix4d	M;					// Blending functions matrix
-        M << -1, 3, -3, 1,
-            3, -6, 3, 0,
-            -3, 3, 0, 0,
-            1, 0, 0, 0;
+        M << -1,  3, -3, 1,
+              3, -6,  3, 0,
+             -3,  3,  0, 0,
+              1,  0,  0, 0;
 
         MG = M * bezier_points;
         T << 0, 0, 0, 1;
 
         t = 0;
         final_dir = (bezier_points.row(3) - bezier_points.row(2)).normalized();
-        drawCurve();
     }
     if (type == BOUNCY) {
         speed = Eigen::Vector3d(x / 4.0, y / 20.0, -z);
 
-        if (x > 0)
-            MyTranslateInSystem(GetRotation(), Eigen::Vector3d(-6, 0, 0));
-        else
-            MyTranslateInSystem(GetRotation(), Eigen::Vector3d(6, 0, 0));
+        x > 0 ? MyTranslateInSystem(GetRotation(), Eigen::Vector3d(-6, 0, 0)):
+                MyTranslateInSystem(GetRotation(), Eigen::Vector3d(6, 0, 0));
     }
     else {
 
         if(obj_amount < 4){
-            speed = Eigen::Vector3d(0, 0, 0);
-
-                if (obj_amount == 0) {
-                    MyTranslateInSystem(GetRotation(), Eigen::Vector3d(-3, -3, 0));
-                    set_colors(Eigen::RowVector3d(0.5, 1, 0.5));
-                }
-                else if (obj_amount == 1) {
-                    MyTranslateInSystem(GetRotation(), Eigen::Vector3d(-3, 3, 0));
-                    set_colors(Eigen::RowVector3d(0, 1, 1));
-                }
-                else if (obj_amount == 2) {
-                    MyTranslateInSystem(GetRotation(), Eigen::Vector3d(3, -3, 0));
-                    set_colors(Eigen::RowVector3d(1, 0, 1));
-                }
-                else  {
-                    MyTranslateInSystem(GetRotation(), Eigen::Vector3d(3, 3, 0));
-                    set_colors(Eigen::RowVector3d(1, 1, 0));
-                }
+            speed = Eigen::Vector3d::Zero();
+            set_colors(Eigen::RowVector3d(rand() % 2, rand() % 2, rand() % 2));
+            obj_amount == 0 ? MyTranslateInSystem(GetRotation(), Eigen::Vector3d(-3, -3, 0)):
+            obj_amount == 1 ? MyTranslateInSystem(GetRotation(), Eigen::Vector3d(-3, 3, 0)) :
+            obj_amount == 2 ? MyTranslateInSystem(GetRotation(), Eigen::Vector3d(3, -3, 0)) :
+                              MyTranslateInSystem(GetRotation(), Eigen::Vector3d(3, 3, 0))  ;
         }
         else {
             speed = Eigen::Vector3d(x / 8.0, z != 0 ? 0.25 : y / 5.0, -z);
             
             std::random_device pos_rd;
-            std::mt19937 pos_gen(rd());
+            std::mt19937 pos_gen(pos_rd());
             std::uniform_int_distribution<> pos_distr(0, 50);
 
             double pos_x = (pos_distr(pos_gen) - 25.0) / 5.0;
             double pos_y = (pos_distr(pos_gen) - 25.0) / 5.0;
 
-            if(z != 0)
-                MyTranslateInSystem(GetRotation(), Eigen::Vector3d(pos_x, -4, 0));
-            else
-                MyTranslateInSystem(GetRotation(), Eigen::Vector3d(pos_x, pos_y, 0));
+            z != 0 ? MyTranslateInSystem(GetRotation(), Eigen::Vector3d(pos_x, -4, 0)):
+                     MyTranslateInSystem(GetRotation(), Eigen::Vector3d(pos_x, pos_y, 0));
         }
 
     }
@@ -319,7 +280,6 @@ IGL_INLINE void igl::opengl::ViewerData::set_mesh(
             Eigen::Vector3d(GOLD_AMBIENT[0], GOLD_AMBIENT[1], GOLD_AMBIENT[2]),
             Eigen::Vector3d(GOLD_DIFFUSE[0], GOLD_DIFFUSE[1], GOLD_DIFFUSE[2]),
             Eigen::Vector3d(GOLD_SPECULAR[0], GOLD_SPECULAR[1], GOLD_SPECULAR[2]));
-        image_texture("C:/Users/tal74/projects/animation/animation3D/tutorial/textures/snake1.png");
         //    grid_texture();
     }
     else

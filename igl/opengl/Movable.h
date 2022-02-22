@@ -3,7 +3,6 @@
 #include <Eigen/Geometry>
 #include <Eigen/dense>
 
-
 class Movable
 {
 public:

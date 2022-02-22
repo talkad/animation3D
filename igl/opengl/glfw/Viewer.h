@@ -136,11 +136,7 @@ namespace igl
 
                 IGL_INLINE Eigen::Matrix3d CalcParentsInverseRotation(int index);
 
-                IGL_INLINE bool boxes_collide(Eigen::AlignedBox<double, 3>&, Eigen::AlignedBox<double, 3>&);
-
                 IGL_INLINE void clean_data_list();
-
-                bool boxes_collide(Eigen::AlignedBox<double, 3>& box1, Eigen::AlignedBox<double, 3>& box2, int i);
 
                 bool boxes_collide(Eigen::AlignedBox<double, 3>& box1, Eigen::AlignedBox<double, 3>& box2, int i, int j);
 
@@ -148,13 +144,9 @@ namespace igl
 
                 IGL_INLINE void generate_target();
 
-                IGL_INLINE bool treeNodesCollide(AABB<Eigen::MatrixXd, 3>&, AABB<Eigen::MatrixXd, 3>&);
-
                 IGL_INLINE bool treeNodesCollide(AABB<Eigen::MatrixXd, 3>&, Eigen::AlignedBox<double, 3>&, int, int);
 
                 // check if two object in data_list are collided
-
-                IGL_INLINE bool treeNodesCollide(AABB<Eigen::MatrixXd, 3>* node1, Eigen::AlignedBox<double, 3>* node2, int i);
 
                 IGL_INLINE void check_collision();
 
@@ -178,7 +170,7 @@ namespace igl
 
                 IGL_INLINE void add_weights();
 
-                IGL_INLINE double calc_related_distance(int i);
+                IGL_INLINE double relative_to_segments_distance(int i);
 
 
                 inline bool SetAnimation() {
@@ -208,6 +200,8 @@ namespace igl
                 int link_num;
                 bool ikAnimation;
                 double link_length;
+                double snake_length;
+                double snake_tail_start;
                 double delta;
                 int current_picked;
 

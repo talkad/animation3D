@@ -99,30 +99,26 @@ IGL_INLINE void Renderer::draw(GLFWwindow* window)
 			if (mesh.is_visible & core.id) {
 				{
 					if (scn->isFP) {
-						if(scn->position_offset(2) > 0) { // right
-							core.camera_translation = -scn->split_snake[scn->split_snake.size() - 1].GetTranslation().cast<float>();
+						core.camera_translation = -scn->split_snake[scn->split_snake.size() - 1].GetTranslation().cast<float>();
+
+						if(scn->position_offset.z() > 0) { // right
 							core.camera_eye = scn->position_offset.cast<float>() + Eigen::Vector3f(-M_PI * 1.25, 0, M_PI / 2);
 							core.camera_up = Eigen::Vector3f(M_PI / 2, 0, 0);
 						}
-						else if (scn->position_offset(2) < 0) { // left
-							core.camera_translation = -scn->split_snake[scn->split_snake.size() - 1].GetTranslation().cast<float>();
+						else if (scn->position_offset.z() < 0) { // left
 							core.camera_eye = scn->position_offset.cast<float>() + Eigen::Vector3f(M_PI * 1.25, 0, M_PI / 2);
 							core.camera_up = Eigen::Vector3f(-M_PI, 0, 0);
 						}
-						else if (scn->position_offset(1) > 0) { // up
-							core.camera_translation = -scn->split_snake[scn->split_snake.size() - 1].GetTranslation().cast<float>();
+						else if (scn->position_offset.y() > 0) { // up
 							core.camera_eye = scn->position_offset.cast<float>() + Eigen::Vector3f(0, -M_PI * 1.25, M_PI / 2);
 							core.camera_up = Eigen::Vector3f(0, M_PI, 0);
 						}
-						else if (scn->position_offset(1) < 0) { //down
-							core.camera_translation = -scn->split_snake[scn->split_snake.size() - 1].GetTranslation().cast<float>();
+						else if (scn->position_offset.y() < 0) { //down
 							core.camera_eye = scn->position_offset.cast<float>() + Eigen::Vector3f(0, M_PI * 1.25, M_PI / 2);
 							core.camera_up = Eigen::Vector3f(0, -M_PI, 0);
 						}
-						else {
-							core.camera_translation = scn->split_snake[scn->split_snake.size() - 1].GetTranslation().cast<float>();
-							core.camera_eye = scn->split_snake[scn->split_snake.size() - 2].GetTranslation().cast<float>()- scn->split_snake[scn->split_snake.size() - 1].GetTranslation().cast<float>();
-						}			
+						else 
+							core.camera_eye = scn->split_snake[scn->split_snake.size() - 2].GetTranslation().cast<float>()- scn->split_snake[scn->split_snake.size() - 1].GetTranslation().cast<float>();							
 					}
 					else {
 						core.camera_eye = core.prev_camera_eye;
@@ -134,24 +130,17 @@ IGL_INLINE void Renderer::draw(GLFWwindow* window)
 
 						if (GetScene()->isFog)
 						{	
-							/*Eigen::Vector3d distanceVector = mesh.GetTranslation() - core.camera_translation.cast <double>();;
-							double dist = sqrt(distanceVector.dot(distanceVector));*/
-
-							double dist = abs(mesh.GetTranslation()[2] - core.camera_translation.cast <double>()[2]); // according z axis
-
-							//std::cout << mesh.id << " visibility rate: " << visibility << std::endl;
+							double dist = abs(mesh.GetTranslation().z() - core.camera_translation.cast <double>().z()); // according z axis
 
 							if (dist > FOG_START && mesh.speed(2) < 0 && mesh.type != BEZIER) {
 								double visibility = -0.161 * dist + 1;
-
-								//std::cout << visibility << std::endl;
 
 								if(visibility > -1)
 									mesh.set_colors(RowVector4d(mesh.color(0), mesh.color(1), mesh.color(2), visibility));
 							}
 						}
 
-						if (mesh.type == 4) {
+						if (mesh.type == BEZIER) {
 							color = distr_color(gen);
 							sign = distr_sign(gen);
 
@@ -168,7 +157,7 @@ IGL_INLINE void Renderer::draw(GLFWwindow* window)
 								colorVec = mesh.color + sign * Eigen::Vector3d(0, 0, 1) * 0.05;
 								break;
 							}
-							mesh.set_colors(Eigen::RowVector3d(colorVec(0), colorVec(1), colorVec(2)));
+							mesh.set_colors(colorVec.transpose());
 						}
 						core.draw(scn->MakeTransScale() * scn->CalcParentsTrans(indx).cast<float>(), mesh);
 					}
@@ -214,13 +203,8 @@ IGL_INLINE void Renderer::init(igl::opengl::glfw::Viewer* viewer, int coresNum, 
 			core().toggle(scn->data_list[i].show_lines);
 			core().toggle(scn->data_list[i].show_texture);
 		}
-		//Eigen::Vector3d v = -scn->GetCameraPosition();
-		//TranslateCamera(v.cast<float>());
-
 		core_index(left_view - 1);
 	}
-
-	//selected_core_index = 0;
 
 	if (menu)
 	{
@@ -299,28 +283,16 @@ void Renderer::MouseProcessing(int button)
 
 void Renderer::TranslateCamera(Eigen::Vector3f amt)
 {
-	core().snake_camera_translation += amt;
+	core().camera_translation += amt;
 }
 
-void Renderer::TranslateByDirectionVec(unsigned char dir) {
-	Eigen::Vector3f amt;
-	double snake_speed = 0.01;
-	dir == 'l' ? amt = Eigen::Vector3f(0, 0, -snake_speed) :
-	dir == 'r' ? amt = Eigen::Vector3f(0, 0, snake_speed)  :
-	dir == 'u' ? amt = Eigen::Vector3f(0, snake_speed, 0)  :
-	dir == 'd' ? amt = Eigen::Vector3f(0, -snake_speed, 0) :
-	dir == 'w' ? amt = Eigen::Vector3f(snake_speed, 0, 0 ) :
-	dir == 's' ? amt = Eigen::Vector3f(-snake_speed, 0, 0) :
-				 amt = Eigen::Vector3f::Zero();
-	TranslateCamera(amt);
-}
 
 void Renderer::RotateCamera(float amtX, float amtY)
 {
-	core().snake_camera_eye = core().snake_camera_eye + Eigen::Vector3f(0, amtY, 0);
+	core().camera_eye = core().camera_eye + Eigen::Vector3f(0, amtY, 0);
 	Eigen::Matrix3f Mat;
 	Mat << cos(amtY), 0, sin(amtY), 0, 1, 0, -sin(amtY), 0, cos(amtY);
-	core().snake_camera_eye = Mat * core().snake_camera_eye;
+	core().camera_eye = Mat * core().camera_eye;
 
 }
 
@@ -342,10 +314,8 @@ double Renderer::Picking(double newx, double newy)
 	Eigen::Matrix4f view = Eigen::Matrix4f::Identity();
 
 	igl::look_at(core().camera_eye, core().camera_center, core().camera_up, view);
-	//std::cout << "view matrix\n" << view << std::endl;
 	view = view * (core().trackball_angle * Eigen::Scaling(core().camera_zoom * core().camera_base_zoom)
 		* Eigen::Translation3f(core().camera_translation + core().camera_base_translation)).matrix() * scn->MakeTransScale() * scn->CalcParentsTrans(scn->selected_data_index).cast<float>() * scn->data().MakeTransScale();
-	std::cout << view << std::endl;
 	bool picked = igl::unproject_onto_mesh(Eigen::Vector2f(x, y), view,
 		core().proj, core().viewport, scn->data().V, scn->data().F, fid, bc);
 	scn->isPicked = scn->isPicked | picked;
@@ -361,7 +331,6 @@ double Renderer::Picking(double newx, double newy)
 
 		p << vertices.cast<float>() * bc, 1;
 		p = view * p;
-		//std::cout << scn->data().V.row(face(0)) << std::endl;
 		pp = core().proj * p;
 		//glReadPixels(x,  y, 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT, &depth);
 		z = pp(2);

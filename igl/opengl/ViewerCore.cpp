@@ -413,9 +413,6 @@ IGL_INLINE igl::opengl::ViewerCore::ViewerCore()
   prev_camera_up << 0, 1, 0;
   camera_up << 0, 1, 0;
   camera_center << 0, 0, 0;
-  snake_camera_eye << 0, 0, 10;
-  snake_camera_translation << 0, 0, 0;
-  snake_camera_up << 0, 1, 0;
   depth_test = true;
 
   is_animating = false;

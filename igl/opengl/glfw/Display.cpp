@@ -279,14 +279,6 @@ bool Display::launch_rendering(bool loop)
 	stbi_set_flip_vertically_on_load(true);
 	int width, height, nrChannels;
 	unsigned char* data = stbi_load("../../../tutorial/heightmaps/river_heightmap.png", &width, &height, &nrChannels, 0);
-	if (data)
-	{
-		std::cout << "Loaded heightmap of size " << height << " x " << width << std::endl;
-	}
-	else
-	{
-		std::cout << "Failed to load texture" << std::endl;
-	}
 
 	// set up vertex data (and buffer(s)) and configure vertex attributes
 	// ------------------------------------------------------------------
@@ -307,26 +299,17 @@ bool Display::launch_rendering(bool loop)
 			vertices.push_back(-width / 2.0f + width * j / (float)width);   // vz
 		}
 	}
-	std::cout << "Loaded " << vertices.size() / 3 << " vertices" << std::endl;
 	stbi_image_free(data);
 
 	std::vector<unsigned> indices;
-	for (unsigned i = 0; i < height - 1; i += rez)
-	{
-		for (unsigned j = 0; j < width; j += rez)
-		{
-			for (unsigned k = 0; k < 2; k++)
-			{
+	for (unsigned i = 0; i < height - 1; i += rez)	
+		for (unsigned j = 0; j < width; j += rez)		
+			for (unsigned k = 0; k < 2; k++)			
 				indices.push_back(j + width * (i + k * rez));
-			}
-		}
-	}
-	std::cout << "Loaded " << indices.size() << " indices" << std::endl;
-
+			
+		
 	const int numStrips = (height - 1) / rez;
 	const int numTrisPerStrip = (width / rez) * 2 - 2;
-	std::cout << "Created lattice of " << numStrips << " strips with " << numTrisPerStrip << " triangles each" << std::endl;
-	std::cout << "Created " << numStrips * numTrisPerStrip << " triangles total" << std::endl;
 
 	// first, configure the cube's VAO (and terrainVBO + terrainIBO)
 	unsigned int terrainVAO, terrainVBO, terrainIBO;
@@ -362,13 +345,8 @@ bool Display::launch_rendering(bool loop)
 
 	while (!glfwWindowShouldClose(window))
 	{
-
 		double tic = igl::get_seconds();
 		renderer->Animate();
-		//renderer->core().snake_camera_eye = renderer->GetScene()->split_snake[renderer->GetScene()->split_snake.size() - 1].GetTranslation().cast<float>();
-		//renderer->core().snake_camera_translation = renderer->GetScene()->split_snake[renderer->GetScene()->split_snake.size() - 1].GetTranslation().cast<float>();
-		//renderer->GetScene()->split_snake[16].MyTranslate(renderer->core().snake_camera_translation.cast<double>(), true);
-		//renderer->core().snake_camera_translation = renderer->GetScene()->vT[16].cast<float>();
 		renderer->draw(window);
 
 		// update explosion generator
@@ -377,9 +355,9 @@ bool Display::launch_rendering(bool loop)
 			explosion = nullptr;
 		}
 
-		if (tic - last_explosion_time > 10) {
+		if (tic - last_explosion_time > 10)
 			renderer->GetScene()->isFog = true;
-		}
+		
 
 		// first position rotation
 		if (renderer->GetScene()->update_camera_rotation && renderer->GetScene()->isFP) {
@@ -389,22 +367,13 @@ bool Display::launch_rendering(bool loop)
 				acc_rot = 0;
 			}
 
-			if (renderer->GetScene()->keyPressed == 'r') {
-				camera.ProcessMouseMovement(rot_offset, 0);
-				acc_rot += rot_offset;
-			}
-			else if (renderer->GetScene()->keyPressed == 'l') {
-				camera.ProcessMouseMovement(-rot_offset, 0);
-				acc_rot += rot_offset;
-			}
-			else if (renderer->GetScene()->keyPressed == 'u') {
-				camera.ProcessMouseMovement(0, rot_offset);
-				acc_rot += rot_offset;
-			}
-			else if (renderer->GetScene()->keyPressed == 'd') {
-				camera.ProcessMouseMovement(0, -rot_offset);
-				acc_rot += rot_offset;
-			}
+			acc_rot += rot_offset;
+
+			renderer->GetScene()->keyPressed == 'r' ? camera.ProcessMouseMovement(rot_offset, 0)  :
+			renderer->GetScene()->keyPressed == 'l' ? camera.ProcessMouseMovement(-rot_offset, 0) :
+			renderer->GetScene()->keyPressed == 'u' ? camera.ProcessMouseMovement(0, rot_offset)  :
+			renderer->GetScene()->keyPressed == 'd' ? camera.ProcessMouseMovement(0, -rot_offset) :
+													  camera.ProcessMouseMovement(0, 0);
 		}
 
 		// per-frame time logic
@@ -623,26 +592,7 @@ void mouse_move(GLFWwindow* window, double x, double y)
 	}
 
 	float xoffset = xpos - lastX;
-	float yoffset = lastY - ypos; // reversed since y-coordinates go from bottom to top
-
-	//std::cout << "x y are " << xoffset << ", " << yoffset << std::endl;
-
-	//if (rndr->IsPicked()) {
-	//	rndr->UpdatePosition(x, y);
-	//	if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT) == GLFW_PRESS)
-	//	{
-	//		rndr->MouseProcessing(GLFW_MOUSE_BUTTON_RIGHT);
-	//	}
-	//	else if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS)
-	//	{
-	//		rndr->MouseProcessing(GLFW_MOUSE_BUTTON_LEFT);
-	//	}
-	//}
-	//else {
-	//rndr->UpdatePosition(-x * 3, -y * 10);
-	//rndr->MouseProcessing(GLFW_MOUSE_BUTTON_RIGHT);
-	//}
-
+	float yoffset = lastY - ypos; 
 
 	lastX = xpos;
 	lastY = ypos;
@@ -677,7 +627,7 @@ void mouse_callback(GLFWwindow* window, int button, int action, int modifier)
 				scn->current_picked = i;
 				closestZ = depth;
 
-				if (scn->data_list[i].type > 1) {
+				if (scn->data_list[i].type != NONE && scn->data_list[i].type != BASIC) {
 
 					scn->data_list[i].is_visible = false;
 					last_explosion_time = igl::get_seconds();
@@ -688,7 +638,7 @@ void mouse_callback(GLFWwindow* window, int button, int action, int modifier)
 					
 					scn->add_score(scn->data_list[i].type);
 
-					PlaySound(TEXT("C:/Users/tal74/projects/animation/animation3D/tutorial/sounds/SHEESH.wav"), NULL, SND_NODEFAULT | SND_ASYNC);
+					PlaySound(TEXT("C:/Users/pijon/OneDrive/Desktop/animation3D/tutorial/sounds/SHEESH.wav"), NULL, SND_NODEFAULT | SND_ASYNC);
 				}
 			}
 		}
@@ -703,15 +653,12 @@ void mouse_callback(GLFWwindow* window, int button, int action, int modifier)
 // ----------------------------------------------------------------------
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 {
-	//std::cout << "scroll callback -" << yoffset  << std::endl;
-
 	Renderer* rndr = (Renderer*)glfwGetWindowUserPointer(window);
 	if (rndr->IsPicked())
 		if (rndr->GetScene()->selected_data_index == 0)
 			rndr->GetScene()->data().MyTranslateInSystem(rndr->GetScene()->GetRotation(), Eigen::Vector3d(0, 0, yoffset));
 		else
 			rndr->GetScene()->data_list[1].MyTranslateInSystem(rndr->GetScene()->GetRotation(), Eigen::Vector3d(0, 0, yoffset));
-	//rndr->GetScene()->data_list[1].MyScale(Eigen::Vector3d(1 + y * 0.01,1 + y * 0.01,1+y*0.01));
 	else {
 		rndr->GetScene()->MyTranslate(Eigen::Vector3d(0, 0, yoffset * 0.5), true);
 		camera.ProcessMouseScroll(static_cast<float>(yoffset * 0.5));

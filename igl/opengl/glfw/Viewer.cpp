@@ -79,6 +79,8 @@ namespace igl
                 destination(Eigen::Vector3d(5, 0, 0)),
                 ikAnimation(false),
                 link_length(1.6),
+                snake_length(1.6),
+                snake_tail_start(-0.8),
                 current_picked(-1),
                 delta(0.1),
                 snake_size(1),  // currently the head will be the circle
@@ -111,6 +113,9 @@ namespace igl
                 creation_gap(0)
             {
                 jointBoxes.resize(joints_num);
+                vT.resize(joints_num + 1);
+                vQ.resize(joints_num + 1);
+
                 data_list.front().id = 0;
 
                 // Temporary variables initialization
@@ -394,8 +399,6 @@ namespace igl
                 float tic = static_cast<float>(glfwGetTime());
                 for (auto& mesh : data_list) {
                     if (mesh.type != NONE && !mesh.isTerminated && tic - mesh.creation_time > TTL) {
-                        std::cout << "delete mesh " << mesh.id << std::endl;
-
                         mesh.is_visible = false;
                         mesh.update_movement_type(NONE);
                         mesh.isTerminated = true;
@@ -405,26 +408,26 @@ namespace igl
             }
 
             IGL_INLINE bool Viewer::boxes_collide(Eigen::AlignedBox<double, 3>& firstbox, Eigen::AlignedBox<double, 3>& secondbox, int i, int j) {
-                double a0 = firstbox.sizes()[0] / 2, a1 = firstbox.sizes()[1] / 2, a2 = firstbox.sizes()[2] / 2,
-                    b0 = secondbox.sizes()[0] / 2, b1 = secondbox.sizes()[1] / 2, b2 = secondbox.sizes()[2] / 2,
+                double a0 = firstbox.sizes().x() / 2, a1 = firstbox.sizes().y() / 2, a2 = firstbox.sizes().z() / 2,
+                    b0 = secondbox.sizes().x() / 2, b1 = secondbox.sizes().y() / 2, b2 = secondbox.sizes().z() / 2,
                     R0, R1, R;
                 Eigen::Matrix3d A, B, C;
                 Eigen::Vector3d D, C0, C1;
-                Eigen::RowVector3d  A0 = split_snake[j].GetRotation() * Eigen::Vector3d(1, 0, 0),
-                                    A1 = split_snake[j].GetRotation() * Eigen::Vector3d(0, 1, 0),
-                                    A2 = split_snake[j].GetRotation() * Eigen::Vector3d(0, 0, 1),
-                                    B0 = data_list[i].GetRotation() * Eigen::Vector3d(1, 0, 0),
-                                    B1 = data_list[i].GetRotation() * Eigen::Vector3d(0, 1, 0),
-                                    B2 = data_list[i].GetRotation() * Eigen::Vector3d(0, 0, 1);
-                A << Eigen::RowVector3d(A0[0], A1[0], A2[0]), Eigen::RowVector3d(A0[1], A1[1], A2[1]), Eigen::RowVector3d(A0[2], A1[2], A2[2]);
-                B << Eigen::RowVector3d(B0[0], B1[0], B2[0]), Eigen::RowVector3d(B0[1], B1[1], B2[1]), Eigen::RowVector3d(B0[2], B1[2], B2[2]);
+                Eigen::RowVector3d  A0 = split_snake[j].GetRotation().col(0),
+                                    A1 = split_snake[j].GetRotation().col(1),
+                                    A2 = split_snake[j].GetRotation().col(2),
+                                    B0 = data_list[i].GetRotation().col(0),
+                                    B1 = data_list[i].GetRotation().col(1),
+                                    B2 = data_list[i].GetRotation().col(2);
+                A << split_snake[j].GetRotation();
+                B << data_list[i].GetRotation();
                 C = A.transpose() * B;
 
-                Eigen::Vector4d C0_4cord = split_snake[j].MakeTransScaled() * Eigen::Vector4d(firstbox.center()[0], firstbox.center()[1], firstbox.center()[2], 1);
-                Eigen::Vector4d C1_4cord = data_list[i].MakeTransScaled() * Eigen::Vector4d(secondbox.center()[0], secondbox.center()[1], secondbox.center()[2], 1);
+                Eigen::Vector4d C0_4cord = split_snake[j].MakeTransScaled() * Eigen::Vector4d(firstbox.center().x(), firstbox.center().y(), firstbox.center().z(), 1);
+                Eigen::Vector4d C1_4cord = data_list[i].MakeTransScaled() * Eigen::Vector4d(secondbox.center().x(), secondbox.center().y(), secondbox.center().z(), 1);
 
-                C0 = Eigen::Vector3d(C0_4cord[0], C0_4cord[1], C0_4cord[2]);
-                C1 = Eigen::Vector3d(C1_4cord[0], C1_4cord[1], C1_4cord[2]);
+                C0 = C0_4cord.head(3);
+                C1 = C1_4cord.head(3);
 
                 D = C1 - C0;
 
@@ -538,9 +541,8 @@ namespace igl
 
             IGL_INLINE bool Viewer::treeNodesCollide(AABB<Eigen::MatrixXd, 3>& firstObjNode, Eigen::AlignedBox<double, 3>& secondObjNode, int i, int j) {
                 if (boxes_collide(firstObjNode.m_box, secondObjNode, i, j)) {
-                    if (firstObjNode.is_leaf()) {
-                        return true;
-                    }
+                    if (firstObjNode.is_leaf()) 
+                        return true;                    
                     else 
                          return treeNodesCollide(*firstObjNode.m_left, secondObjNode, i, j) ||
                                 treeNodesCollide(*firstObjNode.m_right, secondObjNode, i, j);
@@ -551,12 +553,10 @@ namespace igl
             // check if two object in data_list are collided
             // assume there are exactly two objects
             IGL_INLINE void Viewer::check_collision() {
-                //double epsilon = 0.8;
                 for(int i = 1; i < data_list.size(); ++i)
                     if (!data_list[i].is_collided && data_list[i].is_visible) {
                         for (int j = 0; j < jointBoxes.size(); ++j) {
                             if (treeNodesCollide(data_list[i].kd_tree, jointBoxes[j], i, j)) {
-
                                 add_score(data_list[i].type);
                                 data_list[i].is_visible = false;
                                 data_list[i].is_collided = true;
@@ -588,7 +588,7 @@ namespace igl
 
                     std::this_thread::sleep_for(std::chrono::microseconds(5));
 
-                    load_mesh_from_file("C:/Users/tal74/projects/animation/animation3D/tutorial/data/sphere.obj");
+                    load_mesh_from_file("C:/Users/pijon/OneDrive/Desktop/animation3D/tutorial/data/sphere.obj");
                     if (data_list.size() > parents.size())
                     {
                         parents.push_back(-1);
@@ -607,27 +607,18 @@ namespace igl
                     else {
                         double target_proba = (double)(rand() % 10) / 10;
                         
-                        //std::cout << target_proba << "<" << p << std::endl;
-
-                        if (target_proba < p)
-                            data().update_movement_type(BASIC);
-                        else
-                            data().update_movement_type(BOUNCY);
+                        target_proba < p ? data().update_movement_type(BASIC):
+                                           data().update_movement_type(BOUNCY);
 
                         target2_creation--;
                     }
                     
-                    if (data().type == BEZIER)
-                        data().set_colors(Eigen::RowVector3d(0, 0, 1));
-                    else if (data().type == BOUNCY)
-                        data().set_colors(Eigen::RowVector3d(1, 0, 0));
-                    else
-                        data().set_colors(Eigen::RowVector3d(0, 1, 0));
-
+                    data().type == BEZIER ? data().set_colors(Eigen::RowVector3d(0, 0, 1)):
+                    data().type == BOUNCY ? data().set_colors(Eigen::RowVector3d(1, 0, 0)):
+                                            data().set_colors(Eigen::RowVector3d(0, 1, 0));
 
                     data().initiate_speed(level1_obj_amount);
                     level1_obj_amount++;                        
-
                 }
             }
 
@@ -635,7 +626,7 @@ namespace igl
             // start a new level
             IGL_INLINE void Viewer::start_level() {
 
-                start_time = static_cast<int>(glfwGetTime()); // not accurate when mltiple levels
+                start_time = static_cast<int>(glfwGetTime());
                 prev_tic = static_cast<int>(glfwGetTime());
                 paused_time = 0;
 
@@ -652,7 +643,7 @@ namespace igl
 
                     creation_gap = 2;
 
-                    PlaySound(TEXT("C:/Users/tal74/projects/animation/animation3D/tutorial/sounds/nextLevel.wav"), NULL, SND_NODEFAULT | SND_ASYNC);
+                    PlaySound(TEXT("C:/Users/pijon/OneDrive/Desktop/animation3D/tutorial/sounds/nextLevel.wav"), NULL, SND_NODEFAULT | SND_ASYNC);
                 }
             }
 
@@ -660,10 +651,10 @@ namespace igl
                 type == BASIC  ? score += 10 :
                 type == BOUNCY ? score += 20 :
                 type == BEZIER ? score += 30 :
-                                 score += 0  ;
+                                 score += 0;
                     // activate special abilities
 
-                PlaySound(TEXT("C:/Users/tal74/projects/animation/animation3D/tutorial/sounds/collision.wav"), NULL, SND_NODEFAULT | SND_ASYNC);
+                PlaySound(TEXT("C:/Users/pijon/OneDrive/Desktop/animation3D/tutorial/sounds/collision.wav"), NULL, SND_NODEFAULT | SND_ASYNC);
             }
 
             IGL_INLINE void Viewer::update_timer() {
@@ -674,7 +665,7 @@ namespace igl
 
                 if (timer == 0 && !isLevelUp) {
                     isGameOver = true;
-                    PlaySound(TEXT("C:/Users/tal74/projects/animation/animation3D/tutorial/sounds/gameOver.wav"), NULL, SND_NODEFAULT | SND_ASYNC);
+                    PlaySound(TEXT("C:/Users/pijon/OneDrive/Desktop/animation3D/tutorial/sounds/gameOver.wav"), NULL, SND_NODEFAULT | SND_ASYNC);
                 }
             }
 
@@ -687,7 +678,7 @@ namespace igl
                 {
                     i == idx_w1 ? Wi[idx_w1] = w1 :
                     i == idx_w2 ? Wi[idx_w2] = w2 :
-                                  Wi[i] = 0       ;
+                                  Wi[i] = 0;
                 }
                 return Wi;
             }
@@ -696,18 +687,18 @@ namespace igl
             {
                 Eigen::MatrixXd V = data_list[0].V;
                 int vertexNum = V.rows();
-                W.resize(vertexNum, 17);
+                W.resize(vertexNum, joints_num + 1);
 
                 double z, w1, w2, lBound, uBound;
                 for (int i = 0; i < vertexNum; ++i) {
-                    z = V.row(i).z();
-                    lBound = (floor(z * 10)) / 10;
-                    uBound = (ceil(z * 10)) / 10;
+                    z = 10 * V.row(i).z();
+                    lBound = floor(z);
+                    uBound = ceil(z);
 
-                    w1 = abs(z - uBound) * 10;
+                    w1 = abs(z - uBound);
                     w2 = 1 - w1;
 
-                    W.row(i) = create_weight_vec(w1, lBound * 10 + 8, w2, uBound * 10 + 8);
+                    W.row(i) = create_weight_vec(w1, lBound + 8, w2, uBound + 8);
                 }
             }
 
@@ -730,21 +721,21 @@ namespace igl
                 W.resize(vertexNum, 17);
 
                 for (int i = 0; i < vertexNum; ++i) {
-                    double related_distance = calc_related_distance(i);
+                    double relative_distance = relative_to_segments_distance(i);
                     for (int j = 0; j < skeleton.size(); ++j) {
-                        distance = abs(skeleton[j].z() - V(i, 2));
-                        W(i, j) = pow((1 / distance), 4) / related_distance;
+                        distance = abs(skeleton[j].z() - V.row(i).z());
+                        W(i, j) = pow((1 / distance), 4) / relative_distance;
                     }
                     W.row(i).normalized();
                 }
             }
 
-            IGL_INLINE double Viewer::calc_related_distance(int i) {
+            IGL_INLINE double Viewer::relative_to_segments_distance(int i) {
                 double sum = 0, distance;
 
                 for (int j = 0; j < skeleton.size(); ++j) {
-                    distance = abs(skeleton[j].z() - data_list[0].V(i, 2));
-                    if (distance <= 0.1)
+                    distance = abs(skeleton[j].z() - V.row(i).z());
+                    if (distance <= delta)
                         sum += pow((1 / distance), 4);
                 }
                 return sum;
@@ -758,8 +749,7 @@ namespace igl
                     Eigen::Vector3d pos = skeleton[i - 1];
                     Eigen::Vector3d m = pos + Eigen::Vector3d(-epsilon, -epsilon, -epsilon);
                     Eigen::Vector3d M = pos + Eigen::Vector3d(epsilon, epsilon, epsilon);
-                    Eigen::AlignedBox<double, 3> boxforcurrJoint;
-                    boxforcurrJoint = Eigen::AlignedBox<double, 3>(m, M);
+                    Eigen::AlignedBox<double, 3> boxforcurrJoint(m, M);
                     jointBoxes[i - 1] = boxforcurrJoint;
                 }
             }
@@ -797,11 +787,10 @@ namespace igl
 
                     for (int i = 0; i < split_snake.size(); ++i){
                         Eigen::Vector3d pos_offset = vT[i] - skeleton[i];
+                        Eigen::Quaterniond quat = Eigen::Quaterniond::FromTwoVectors(pos_offset.reverse(), skeleton[i].reverse());
 
-                        split_snake[i].MyTranslate(Eigen::Vector3d(pos_offset(2), pos_offset(1), pos_offset(0)), true);
-
-                        Eigen::Quaterniond quat = Eigen::Quaterniond::FromTwoVectors(Eigen::Vector3d(position_offset(2), position_offset(1), position_offset(0)), Eigen::Vector3d(skeleton[i](2), skeleton[i](1), skeleton[i](0)));//vT is new tranlate and snake_skeleton still hold the old translate 
-                        split_snake.at(i).MyRotate(quat);
+                        split_snake[i].MyTranslate(pos_offset.reverse(), true);
+                        split_snake[i].MyRotate(quat);
                     }
 
                     for (int i = 0; i < skeleton.size(); ++i)

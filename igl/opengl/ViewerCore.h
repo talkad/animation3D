@@ -135,9 +135,6 @@ public:
   Eigen::Vector3f camera_eye;
   Eigen::Vector3f camera_up;
   Eigen::Vector3f camera_center;
-  Eigen::Vector3f snake_camera_eye;
-  Eigen::Vector3f snake_camera_translation;
-  Eigen::Vector3f snake_camera_up;
 
   float camera_view_angle;
   float camera_dnear;

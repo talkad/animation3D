@@ -64,8 +64,6 @@ namespace igl
 
             IGL_INLINE void calcT();
 
-            IGL_INLINE void drawCurve();
-
             IGL_INLINE void init();
 
             // Change the visualization mode, invalidating the cache if necessary
