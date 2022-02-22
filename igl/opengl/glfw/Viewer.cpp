@@ -669,7 +669,7 @@ namespace igl
                 }
             }
 
-            IGL_INLINE Eigen::VectorXd Viewer::create_weight_vec(double w1, double idx_w1, double w2, double idx_w2)
+            IGL_INLINE Eigen::VectorXd Viewer::create_weight_vec(double w1, int idx_w1, double w2, int idx_w2)
             {
                 Eigen::VectorXd Wi;
                 Wi.resize(joints_num + 1);

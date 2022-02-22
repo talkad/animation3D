@@ -1,6 +1,9 @@
-link to repo: https://github.com/talkad/animation3D
+Link to repo: https://github.com/talkad/animation3D
 
-about our project:
+Tal Kadosh 319126546
+Yonatan Pisman 316262997
+
+About our project:
 we did the snake skinning and motion in three dimentional space (by using the keys: up, down, left, right, w and s).
 we implemented two points of view - The first ome is a static top view and the other is from the snake point of view.
 we created an interactive menu showing the current level, score, timer and an option for the player to pause and resume the game.

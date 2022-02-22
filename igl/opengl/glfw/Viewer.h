@@ -164,7 +164,7 @@ namespace igl
 
                 IGL_INLINE void weights_calc();
 
-                IGL_INLINE Eigen::VectorXd create_weight_vec(double, double, double, double);
+                IGL_INLINE Eigen::VectorXd create_weight_vec(double, int, double, int);
 
                 IGL_INLINE void next_vertices_position();
 
